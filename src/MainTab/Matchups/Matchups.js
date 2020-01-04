@@ -37,7 +37,6 @@ export default class Matchups extends Component {
 
           <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
         </Content>
-
       </Container>
       
     );
