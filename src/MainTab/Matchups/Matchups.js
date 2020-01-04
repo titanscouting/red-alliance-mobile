@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, Header, Title, Accordion, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const dataArray = [
@@ -18,26 +18,24 @@ YellowBox.ignoreWarnings([
 export default class Matchups extends Component {
   render() {
     return (
-      <Container>
-
-
-        <Header>
-          <Body>
-            <Title>Matchups</Title>
-          </Body>
-        </Header>
-
-
-        <Content searchBar padder>
-
-          <Item>
-            <Icon name="search" />
-            <Input placeholder="Search" />
-          </Item>
-
-          <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
-        </Content>
-      </Container>
+        <Container>
+            <Header>
+                <Body>
+                    <Title>Matchups</Title>
+                </Body>
+            </Header>
+            <Content>
+                <Card>
+                    <CardItem>
+                    <Icon active name="logo-googleplus" />
+                    <Text>Google Plus</Text>
+                    <Right>
+                        <Icon name="arrow-forward" />
+                    </Right>
+                    </CardItem>
+                </Card>
+            </Content>
+        </Container>
       
     );
   }
