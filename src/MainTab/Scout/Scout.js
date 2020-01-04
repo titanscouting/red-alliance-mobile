@@ -23,6 +23,8 @@ const Scout = createStackNavigator({
     headerTitleStyle: {
       fontWeight: 'bold',
     },
+    headerMode: 'screen',
+    cardStyle: { backgroundColor: Globals.colors["dark-red"] },
   },
 });
 

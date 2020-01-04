@@ -11,6 +11,7 @@ import { createAppContainer } from 'react-navigation';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 import { Button, Text, Icon, Footer, FooterTab } from "native-base";
+import Globals from '../Globals'
 
 const TabControl = createBottomTabNavigator(
   {

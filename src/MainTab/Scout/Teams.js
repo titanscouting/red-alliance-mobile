@@ -6,11 +6,6 @@ export default class Teams extends React.Component {
     render () {
         return (
             <Container>
-                <Header>
-                    <Body>
-                        <Title>teams</Title>
-                    </Body>
-                </Header>
                 <Content>
                     <Card>
                         <CardItem>
