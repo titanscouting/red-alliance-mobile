@@ -7,6 +7,7 @@ YellowBox.ignoreWarnings([
   'VirtualizedLists should never be nested', // TODO: Remove when fixed. Maybe https://github.com/GeekyAnts/NativeBase/issues/2947 will help.
 ])
 
+import PropTypes from 'prop-types';
 import Matches from './Matches'
 import Teams from './Teams'
 
