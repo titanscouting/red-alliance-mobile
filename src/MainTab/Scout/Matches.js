@@ -1,47 +1,24 @@
 import React from 'react';
 import { Container, Header, Title, Accordion, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { FlatList } from 'react-native';
+import PropTypes from 'prop-types';
+import MatchCell from './MatchCell';
+
 
 export default class Matches extends React.Component {
+
+    static propTypes = {
+        matches: PropTypes.array.isRequired,
+    };
+
     render () {
         return (
             <Container>
                 <Content>
-                    <Card>
-                        <CardItem>
-                        <Icon active name="logo-googleplus" />
-                        <Text>Google Plus</Text>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem>
-                        <Icon active name="logo-googleplus" />
-                        <Text>Google Plus</Text>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem>
-                        <Icon active name="logo-googleplus" />
-                        <Text>Google Plus</Text>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
-                        </CardItem>
-                    </Card>
-                    <Card>
-                        <CardItem>
-                        <Icon active name="logo-googleplus" />
-                        <Text>Google Plus</Text>
-                        <Right>
-                            <Icon name="arrow-forward" />
-                        </Right>
-                        </CardItem>
-                    </Card>
+                    <FlatList>
+                        data = {this.props.matches}
+                        renderItem={({item})} => <MatchCell match={item}/>
+                    </FlatList>
                 </Content>
             </Container>
         );
