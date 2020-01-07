@@ -1,12 +1,10 @@
-const apiHost = 'https://api.myjson.com/bins/97ves'
+const apiHost = 'https://api.myjson.com/bins/hram8'
 
 export default {
     async fetchMatches(team, competition) {
         try {
             // let response = await fetch(apiHost + '/appBuilding/team-2022/competitions/');
             let response = await fetch(apiHost);
-            console.log("RESPONSE");
-            console.log(response);
             let responseJson = await response.json(response);
             console.log("RESPONSE JSON");
             console.log(responseJson);
