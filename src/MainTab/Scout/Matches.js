@@ -19,7 +19,7 @@ export default class Matches extends React.Component {
 
 
     async componentDidMount() {
-        const matches = await ajax.fetchMatches();
+        const matches = await ajax.fetchMatches('2022', 'Central 2019');
         this.setState({ matches })
 
         const pushAction = StackActions.push({
@@ -66,12 +66,10 @@ export default class Matches extends React.Component {
         return (
             <Container>
                 <Content>
-                    {/* <FlatList>
-                        data = {this.props.matches}
+                    <FlatList>
+                        data = {this.state.matches}
                         renderItem={({item})} => <MatchCell match={item}/>
-                    </FlatList> */}
-
-                    <Text>Hello</Text>
+                    </FlatList>
                 </Content>
             </Container>
         );
