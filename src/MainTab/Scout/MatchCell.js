@@ -1,29 +1,41 @@
 import React from 'react';
-import { Container, Header, Title, Accordion, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList } from 'react-native';
+import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
+
 
 export default class MatchCell extends React.Component {
 
     static propTypes = {
-        match: PropTypes.object.isRequired,
+        number: PropTypes.number.isRequired,
+        scouts: PropTypes.number.isRequired,
     };
+
 
     render () {
         return (
-            <Container>
-                <Content>
-                    <Card>
-                        <CardItem>
-                            <Icon active name="logo-googleplus" />
-                            <Text>Google Plus</Text>
-                            <Right>
-                                <Icon name="arrow-forward" />
-                            </Right>
-                        </CardItem>
-                    </Card>
-                </Content>
-            </Container>
+            
+            <ListItem>
+                <View style={styles.listItem}>
+                    <Text style={styles.match}>{"Match "+this.props.number}</Text>
+                    <Text style={styles.scouts}>{"Scouts: "+this.props.scouts+"/12"}</Text>
+                </View>
+            </ListItem>
+
         );
     }
 }
+
+const styles = StyleSheet.create({
+  match: {
+    color: 'black',
+  },
+  scouts: {
+    color: 'black',
+  },
+  listItem: {
+      alignContent: 'space-between',
+      flexDirection: 'row',
+      height: 40,
+  }
+});

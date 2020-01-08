@@ -28,7 +28,7 @@ export default class Matchups extends Component {
                 <Card>
                     <CardItem>
                     <Icon active name="logo-googleplus" />
-                    <Text>Google Plus</Text>
+                    <Text>Ur mom</Text>
                     <Right>
                         <Icon name="arrow-forward" />
                     </Right>

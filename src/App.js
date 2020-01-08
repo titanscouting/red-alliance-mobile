@@ -24,6 +24,8 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 
+import { setCustomText } from 'react-native-global-props';
+
 
 import TabControl from './MainTab/TabControl';
 

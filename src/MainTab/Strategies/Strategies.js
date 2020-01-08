@@ -23,7 +23,7 @@ export default class Strategies extends Component {
 
         <Header>
           <Body>
-            <Title>Strategies</Title>
+            <Title>Does this update?</Title>
           </Body>
         </Header>
 

@@ -10,7 +10,7 @@ export default class Teams extends React.Component {
                     <Card>
                         <CardItem>
                         <Icon active name="logo-googleplus" />
-                        <Text>Google Plus</Text>
+                        <Text>Ur Mom</Text>
                         <Right>
                             <Icon name="arrow-forward" />
                         </Right>
