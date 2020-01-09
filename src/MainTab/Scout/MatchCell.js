@@ -3,6 +3,7 @@ import { Container, Separator, Header, Title, Accordion, ListItem, Content, Foot
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
+import Globals from '../../Globals'
 
 export default class MatchCell extends React.Component {
 
@@ -18,8 +19,7 @@ export default class MatchCell extends React.Component {
             <ListItem>
                 <View style={styles.listItem}>
                     <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                    <Text style={styles.scouts}>{"Scouts"}</Text>
-                    <Circle progress={this.props.scouts / 12.0} formatText={() => this.props.scouts + "/12"} extStyle={styles.scouts} showsText={true}/>
+                    <Circle color={Globals["colors"]["dark-red"]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
                 </View>
             </ListItem>
 
@@ -34,15 +34,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   scouts: {
-    color: 'black',
-    fontFamily: "Proxima Nova",
-    fontSize: 20,
+    fontSize: 16,
   },
   listItem: {
     alignContent: 'space-between',
     justifyContent: 'space-between',
     flexDirection: 'row',
-    height: 60,
+    height: 30,
     alignItems: 'center',
   }
 });
