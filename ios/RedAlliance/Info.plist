@@ -81,6 +81,11 @@
 		<string>Proxima Nova-Light.otf</string>
 		<string>Proxima Nova-Regular.otf</string>
 		<string>Proxima Nova-Semibold.otf</string>
+		<string>Proxima Nova-Black.ttf</string>
+		<string>Proxima Nova-Bold.ttf</string>
+		<string>Proxima Nova-Light.ttf</string>
+		<string>Proxima Nova-Regular.ttf</string>
+		<string>Proxima Nova-Semibold.ttf</string>
 	</array>
 </dict>
 </plist>

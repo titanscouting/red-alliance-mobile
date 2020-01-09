@@ -36,3 +36,9 @@ export default class App extends React.Component {
     );
   }
 }
+
+const customTextProps = { 
+  style: { 
+    fontFamily: "Proxima Nova"
+  }
+}

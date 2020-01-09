@@ -29,9 +29,12 @@ export default class MatchCell extends React.Component {
 const styles = StyleSheet.create({
   match: {
     color: 'black',
+    fontFamily: "Proxima Nova",
   },
   scouts: {
     color: 'black',
+    fontFamily: "Proxima Nova",
+
   },
   listItem: {
       alignContent: 'space-between',
