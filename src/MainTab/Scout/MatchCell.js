@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flexDirection: 'row',
     height: 30,
+    flex: 1,
     alignItems: 'center',
   }
 });
