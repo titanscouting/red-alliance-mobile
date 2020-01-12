@@ -26,6 +26,16 @@ export default class Matches extends React.Component {
         if (this.state.matches.length === 0) {
             return (
             <Container>
+                <Header searchBar rounded>
+                    <Item>
+                        <Icon name="ios-search" />
+                        <Input placeholder="Search" />
+                        <Icon name="ios-people" />
+                    </Item>
+                    <Button transparent>
+                        <Text>Search</Text>
+                    </Button>
+                </Header>
                 <Content>
                     <ActivityIndicator size="large" color="#0000ff"/>
                 </Content>
