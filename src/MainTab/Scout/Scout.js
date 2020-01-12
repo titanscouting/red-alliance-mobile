@@ -18,14 +18,14 @@ const Scout = createStackNavigator({
   initialRouteName: 'Matches',
   defaultNavigationOptions: {
     headerStyle: {
-      backgroundColor: Globals.colors["navigation"],
+      backgroundColor: Globals["colors"][Globals["brand"]["primary"]],
     },
     headerTintColor: '#fff',
     headerTitleStyle: {
       fontWeight: 'bold',
     },
     headerMode: 'screen',
-    cardStyle: { backgroundColor: Globals.colors["navigation"] },
+    cardStyle: { backgroundColor: Globals["colors"][Globals["brand"]["primary"]]},
   },
 });
 

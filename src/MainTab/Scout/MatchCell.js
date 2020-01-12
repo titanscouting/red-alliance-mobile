@@ -19,7 +19,7 @@ export default class MatchCell extends React.Component {
             <ListItem>
                 <View style={styles.listItem}>
                     <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                    <Circle color={Globals["colors"]["dark-red"]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
+                    <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
                 </View>
             </ListItem>
 

@@ -123,13 +123,13 @@ export default {
   checkboxTickColor: '#fff',
 
   // Color
-  brandPrimary: Globals["colors"]["dark-red"],
-  brandInfo: Globals["colors"]["dark-blue"],
+  brandPrimary: Globals["colors"][Globals["brand"]["primary"]],
+  brandInfo: Globals["colors"][Globals["brand"]["secondary"]],
   brandSuccess: '#00e686', //#5cb85c
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
-  brandDark: Globals["colors"]["really-dark-red"],
-  brandLight: Globals["colors"]["light-red"],
+  brandDark: Globals["colors"][Globals["brand"]["primary-dark"]],
+  brandLight: Globals["colors"][Globals["brand"]["primary-light"]],
 
   // Container
   containerBgColor: '#fff',
@@ -138,12 +138,12 @@ export default {
   datePickerTextColor: '#000',
   datePickerBg: 'transparent',
 
-  // FAB
+  // FABs
   fabWidth: 56,
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: 'Roboto',
+  fontFamily: 'ProximaNova',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
