@@ -123,13 +123,13 @@ export default {
   checkboxTickColor: '#fff',
 
   // Color
-  brandPrimary: '#3F51B5',
-  brandInfo: '#62B1F6',
-  brandSuccess: '#5cb85c',
+  brandPrimary: Globals["colors"]["dark-red"],
+  brandInfo: Globals["colors"]["dark-blue"],
+  brandSuccess: '#00e686', //#5cb85c
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
-  brandDark: '#000',
-  brandLight: '#f4f4f4',
+  brandDark: Globals["colors"]["really-dark-red"],
+  brandLight: Globals["colors"]["light-red"],
 
   // Container
   containerBgColor: '#fff',

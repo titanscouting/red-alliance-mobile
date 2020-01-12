@@ -1,6 +1,9 @@
 import React from 'react';
-import { Container, Header, Title, Accordion, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, ActivityIndicator, StyleSheet, View } from 'react-native';
+import { Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import getTheme from '../../../native-base-theme/components';
+import material from '../../../native-base-theme/variables/material';
+
+import { FlatList, ActivityIndicator, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchCell';
 import ajax from '../../ajax'
@@ -22,20 +25,12 @@ export default class Matches extends React.Component {
         this.setState({ matches })
     }
 
+    
+
     render () {
         if (this.state.matches.length === 0) {
             return (
             <Container>
-                <Header searchBar rounded>
-                    <Item>
-                        <Icon name="ios-search" />
-                        <Input placeholder="Search" />
-                        <Icon name="ios-people" />
-                    </Item>
-                    <Button transparent>
-                        <Text>Search</Text>
-                    </Button>
-                </Header>
                 <Content>
                     <ActivityIndicator size="large" color="#0000ff"/>
                 </Content>
@@ -54,29 +49,29 @@ export default class Matches extends React.Component {
           });
           
         return (
-            <Container>
-                <Content>
-                    <FlatList
-                        data = {this.state.matches}
-                        renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
-                        keyExtractor= {item => String(item.number)}
-                    />
-                </Content>
-            </Container>
+            <StyleProvider style={getTheme(material)}>
+                <Container>
+
+                    <Header searchBar rounded>
+                        <Item>
+                            <Icon name="ios-search" />
+                            <Input placeholder="Search" />
+                            <Icon name="ios-people" />
+                        </Item>
+                        <Button transparent>
+                            <Text>Search</Text>
+                        </Button>
+                    </Header>
+                    <Content>
+                        <FlatList
+                            data = {this.state.matches}
+                            renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
+                            keyExtractor= {item => String(item.number)}
+                        />
+                    </Content>
+                </Container>
+            </StyleProvider>
         );
     }
     
 }
-
-const styles = StyleSheet.create({
-    item: {
-      backgroundColor: '#f9c2ff',
-      padding: 20,
-      marginVertical: 8,
-      marginHorizontal: 16,
-    },
-    title: {
-      fontSize: 32,
-    },
-  });
-  
