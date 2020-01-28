@@ -2,6 +2,7 @@
 
 import color from 'color';
 import { Platform, Dimensions, PixelRatio } from 'react-native';
+import Globals from '../../src/Globals'
 
 import { PLATFORM } from './commonColor';
 
@@ -133,13 +134,21 @@ export default {
   checkboxTextShadowRadius: 0,
 
   // Color
-  brandPrimary: platform === PLATFORM.IOS ? '#007aff' : '#3F51B5',
-  brandInfo: '#62B1F6',
-  brandSuccess: '#5cb85c',
+  // brandPrimary: platform === PLATFORM.IOS ? '#007aff' : '#3F51B5',
+  // brandInfo: '#62B1F6',
+  // brandSuccess: '#5cb85c',
+  // brandDanger: '#d9534f',
+  // brandWarning: '#f0ad4e',
+  // brandDark: '#000',
+  // brandLight: '#f4f4f4',
+
+  brandPrimary: Globals["colors"][Globals["brand"]["primary"]],
+  brandInfo: Globals["colors"][Globals["brand"]["secondary"]],
+  brandSuccess: '#00e686', //#5cb85c
   brandDanger: '#d9534f',
   brandWarning: '#f0ad4e',
-  brandDark: '#000',
-  brandLight: '#f4f4f4',
+  brandDark: Globals["colors"][Globals["brand"]["primary-dark"]],
+  brandLight: Globals["colors"][Globals["brand"]["primary-light"]],
 
   // Container
   containerBgColor: '#fff',
@@ -172,7 +181,7 @@ export default {
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: platform === PLATFORM.IOS ? 'System' : 'Roboto',
+  fontFamily: platform === PLATFORM.IOS ? 'Proxima Nova' : 'Roboto',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
@@ -186,7 +195,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : '#3F51B5',
+  footerDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : Globals["colors"][Globals["brand"]["primary"]],
   footerPaddingBottom: 0,
 
   // FooterTab
@@ -195,18 +204,18 @@ export default {
   activeTab: platform === PLATFORM.IOS ? '#007aff' : '#fff',
   sTabBarActiveTextColor: '#007aff',
   tabBarActiveTextColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  tabActiveBgColor: platform === PLATFORM.IOS ? '#cde1f9' : '#3F51B5',
+  tabActiveBgColor: platform === PLATFORM.IOS ? '#cde1f9' : Globals["colors"][Globals["brand"]["primary"]],
 
   // Header
   toolbarBtnColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  toolbarDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : '#3F51B5',
+  toolbarDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : Globals["colors"][Globals["brand"]["primary"]],
   toolbarHeight: platform === PLATFORM.IOS ? 64 : 56,
   toolbarSearchIconSize: platform === PLATFORM.IOS ? 20 : 23,
   toolbarInputColor: platform === PLATFORM.IOS ? '#CECDD2' : '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 30 : 50,
   toolbarBtnTextColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  toolbarDefaultBorder: platform === PLATFORM.IOS ? '#a7a6ab' : '#3F51B5',
+  toolbarDefaultBorder: platform === PLATFORM.IOS ? '#a7a6ab' : Globals["colors"][Globals["brand"]["primary"]],
   iosStatusbar: platform === PLATFORM.IOS ? 'dark-content' : 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg)
@@ -243,7 +252,7 @@ export default {
   lineHeightH2: 27,
   lineHeightH3: 22,
   lineHeight: platform === PLATFORM.IOS ? 20 : 24,
-  listItemSelected: platform === PLATFORM.IOS ? '#007aff' : '#3F51B5',
+  listItemSelected: platform === PLATFORM.IOS ? '#007aff' : Globals["colors"][Globals["brand"]["primary"]],
 
   // List
   listBg: 'transparent',
@@ -260,19 +269,19 @@ export default {
 
   // Radio Button
   radioBtnSize: platform === PLATFORM.IOS ? 25 : 23,
-  radioSelectedColorAndroid: '#3F51B5',
+  radioSelectedColorAndroid: Globals["colors"][Globals["brand"]["primary"]],
   radioBtnLineHeight: platform === PLATFORM.IOS ? 29 : 24,
   get radioColor() {
     return this.brandPrimary;
   },
 
   // Segment
-  segmentBackgroundColor: platform === PLATFORM.IOS ? '#F8F8F8' : '#3F51B5',
+  segmentBackgroundColor: platform === PLATFORM.IOS ? '#F8F8F8' : Globals["colors"][Globals["brand"]["primary"]],
   segmentActiveBackgroundColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
   segmentTextColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  segmentActiveTextColor: platform === PLATFORM.IOS ? '#fff' : '#3F51B5',
+  segmentActiveTextColor: platform === PLATFORM.IOS ? '#fff' : Globals["colors"][Globals["brand"]["primary"]],
   segmentBorderColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  segmentBorderColorMain: platform === PLATFORM.IOS ? '#a7a6ab' : '#3F51B5',
+  segmentBorderColorMain: platform === PLATFORM.IOS ? '#a7a6ab' : Globals["colors"][Globals["brand"]["primary"]],
 
   // Spinner
   defaultSpinnerColor: '#45D56E',
@@ -280,7 +289,7 @@ export default {
 
   // Tab
   tabBarDisabledTextColor: '#BDBDBD',
-  tabDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : '#3F51B5',
+  tabDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : Globals["colors"][Globals["brand"]["primary"]],
   topTabBarTextColor: platform === PLATFORM.IOS ? '#6b6b6b' : '#b3c7f9',
   topTabBarActiveTextColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
   topTabBarBorderColor: platform === PLATFORM.IOS ? '#a7a6ab' : '#fff',

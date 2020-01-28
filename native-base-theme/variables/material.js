@@ -157,7 +157,7 @@ export default {
 
   // Footer
   footerHeight: 55,
-  footerDefaultBg: '#3F51B5',
+  footerDefaultBg: Globals["colors"][Globals["brand"]["primary"]],
   footerPaddingBottom: 0,
 
   // FooterTab
@@ -166,18 +166,18 @@ export default {
   activeTab: '#fff',
   sTabBarActiveTextColor: '#007aff',
   tabBarActiveTextColor: '#fff',
-  tabActiveBgColor: '#3F51B5',
+  tabActiveBgColor: Globals["colors"][Globals["brand"]["primary"]],
 
   // Header
   toolbarBtnColor: '#fff',
-  toolbarDefaultBg: '#3F51B5',
+  toolbarDefaultBg: Globals["colors"][Globals["brand"]["primary"]],
   toolbarHeight: 56,
   toolbarSearchIconSize: 23,
   toolbarInputColor: '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 40 : 50,
   toolbarBtnTextColor: '#fff',
-  toolbarDefaultBorder: '#3F51B5',
+  toolbarDefaultBorder: Globals["colors"][Globals["brand"]["primary"]],
   iosStatusbar: 'light-content',
   get statusBarColor() {
     return color(this.toolbarDefaultBg)
@@ -223,7 +223,7 @@ export default {
   listItemPadding: 12,
   listNoteColor: '#808080',
   listNoteSize: 13,
-  listItemSelected: '#3F51B5',
+  listItemSelected: Globals["colors"][Globals["brand"]["primary"]],
 
   // Progress Bar
   defaultProgressColor: '#E4202D',
@@ -231,27 +231,27 @@ export default {
 
   // Radio Button
   radioBtnSize: 23,
-  radioSelectedColorAndroid: '#3F51B5',
+  radioSelectedColorAndroid: Globals["colors"][Globals["brand"]["primary"]],
   radioBtnLineHeight: 24,
   get radioColor() {
     return this.brandPrimary;
   },
 
   // Segment
-  segmentBackgroundColor: '#3F51B5',
+  segmentBackgroundColor: Globals["colors"][Globals["brand"]["primary"]],
   segmentActiveBackgroundColor: '#fff',
   segmentTextColor: '#fff',
-  segmentActiveTextColor: '#3F51B5',
+  segmentActiveTextColor: Globals["colors"][Globals["brand"]["primary"]],
   segmentBorderColor: '#fff',
-  segmentBorderColorMain: '#3F51B5',
+  segmentBorderColorMain: Globals["colors"][Globals["brand"]["primary"]],
 
   // Spinner
   defaultSpinnerColor: '#45D56E',
   inverseSpinnerColor: '#1A191B',
 
   // Tab
-  tabDefaultBg: '#3F51B5',
-  topTabBarTextColor: '#b3c7f9',
+  tabDefaultBg: Globals["colors"][Globals["brand"]["primary"]],
+  topTabBarTextColor: '#f9b4b4',
   topTabBarActiveTextColor: '#fff',
   topTabBarBorderColor: '#fff',
   topTabBarActiveBorderColor: '#fff',

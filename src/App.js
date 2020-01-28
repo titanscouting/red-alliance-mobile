@@ -7,32 +7,21 @@
  */
 
 import React from 'react';
-import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
-  View,
-  Text,
-  StatusBar,
-} from 'react-native';
 
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-import { setCustomText } from 'react-native-global-props';
-
+import StyleProvider, { Container } from 'native-base';
+import getTheme from '../native-base-theme/components';
+import material from '../native-base-theme/variables/material';
 
 import TabControl from './MainTab/TabControl';
 
 export default class App extends React.Component {
   render () {
     return (
-        <TabControl/>
+      // <StyleProvider style={getTheme(material)}>
+      //   <Container>
+          <TabControl/>
+      //  </Container>
+      //</StyleProvider>
     );
   }
 }

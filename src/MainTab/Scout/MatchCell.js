@@ -30,7 +30,7 @@ export default class MatchCell extends React.Component {
 const styles = StyleSheet.create({
   match: {
     color: 'black',
-    fontFamily: "Proxima Nova",
+    // fontFamily: "Proxima Nova",
     fontSize: 20,
   },
   scouts: {

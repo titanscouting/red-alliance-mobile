@@ -30,11 +30,13 @@ export default class Matches extends React.Component {
     render () {
         if (this.state.matches.length === 0) {
             return (
-            <Container>
-                <Content>
-                    <ActivityIndicator size="large" color="#0000ff"/>
-                </Content>
-            </Container>
+            <StyleProvider style={getTheme(material)}>
+                <Container>
+                    <Content>
+                        <ActivityIndicator size="large"/>
+                    </Content>
+                </Container>
+            </StyleProvider>
             )
         } else {
             console.log("MATCHES: ");
