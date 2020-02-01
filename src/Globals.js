@@ -6,7 +6,9 @@ export default {
 
         "dark-red":"#CC2232",
         "light-red":"#E62C41",
-        "really-dark-red":"ae1e2c",
+        "really-dark-red":"#ae1e2c",
+
+        "light-red-tint":"#f08f9d",
     },
     "brand":{
         "primary":"dark-red",
@@ -15,5 +17,6 @@ export default {
         "secondary":"dark-blue",
         "secondary-light":"light-blue",
         "secondary-dark":"really-dark-blue",
+        "tint":"light-red-tint",
     }
 };

@@ -161,9 +161,9 @@ export default {
   footerPaddingBottom: 0,
 
   // FooterTab
-  tabBarTextColor: '#bfc6ea',
+  tabBarTextColor: Globals["colors"][Globals["brand"]["tint"]],
   tabBarTextSize: 11,
-  activeTab: '#fff',
+  activeTab: Globals["colors"][Globals["brand"]["tint"]],
   sTabBarActiveTextColor: '#007aff',
   tabBarActiveTextColor: '#fff',
   tabActiveBgColor: Globals["colors"][Globals["brand"]["primary"]],
