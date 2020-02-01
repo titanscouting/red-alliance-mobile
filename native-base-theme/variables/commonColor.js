@@ -153,7 +153,7 @@ export default {
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: platform === PLATFORM.IOS ? 'System' : 'Roboto',
+  fontFamily: platform === PLATFORM.IOS ? 'Proxima Nova' : 'Proxima Nova',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;
@@ -173,20 +173,20 @@ export default {
   // FooterTab
   tabBarTextColor: platform === PLATFORM.IOS ? '#737373' : Globals["colors"][Globals["brand"]["tint"]],
   tabBarTextSize: platform === PLATFORM.IOS ? 14 : 11,
-  activeTab: platform === PLATFORM.IOS ? '#007aff' : '#fff',
+  activeTab: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["primary"]] : '#fff',
   sTabBarActiveTextColor: '#007aff',
-  tabBarActiveTextColor: platform === PLATFORM.IOS ? '#2874F0' : '#fff',
-  tabActiveBgColor: platform === PLATFORM.IOS ? '#cde1f9' : Globals["colors"][Globals["brand"]["primary"]],
+  tabBarActiveTextColor: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["primary"]] : '#fff',
+  tabActiveBgColor: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["tint"]] : Globals["colors"][Globals["brand"]["primary"]],
 
   // Header
-  toolbarBtnColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
-  toolbarDefaultBg: platform === PLATFORM.IOS ? '#F8F8F8' : Globals["colors"][Globals["brand"]["primary"]],
+  toolbarBtnColor: platform === '#fff', // PLATFORM.IOS ? '#007aff' : '#fff',
+  toolbarDefaultBg: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["primary"]] : Globals["colors"][Globals["brand"]["primary"]],
   toolbarHeight: platform === PLATFORM.IOS ? 64 : 56,
   toolbarSearchIconSize: platform === PLATFORM.IOS ? 20 : 23,
   toolbarInputColor: platform === PLATFORM.IOS ? '#CECDD2' : '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 30 : 50,
-  toolbarBtnTextColor: platform === PLATFORM.IOS ? '#007aff' : '#fff',
+  toolbarBtnTextColor: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["primary"]] : '#fff',
   iosStatusbar: 'dark-content',
   toolbarDefaultBorder: platform === PLATFORM.IOS ? '#a7a6ab' : Globals["colors"][Globals["brand"]["primary"]],
   get statusBarColor() {
@@ -233,7 +233,7 @@ export default {
   listItemPadding: platform === PLATFORM.IOS ? 10 : 12,
   listNoteColor: '#808080',
   listNoteSize: 13,
-  listItemSelected: platform === PLATFORM.IOS ? '#007aff' : Globals["colors"][Globals["brand"]["primary"]],
+  listItemSelected: platform === PLATFORM.IOS ? Globals["colors"][Globals["brand"]["primary"]] : Globals["colors"][Globals["brand"]["primary"]],
 
   // Progress Bar
   defaultProgressColor: '#E4202D',
@@ -279,7 +279,7 @@ export default {
   },
 
   // Title
-  titleFontfamily: platform === PLATFORM.IOS ? 'System' : 'Proxima Nova',
+  titleFontfamily: platform === PLATFORM.IOS ? 'Proxima Nova' : 'Proxima Nova',
   titleFontSize: platform === PLATFORM.IOS ? 17 : 19,
   subTitleFontSize: platform === PLATFORM.IOS ? 11 : 14,
   subtitleColor: platform === PLATFORM.IOS ? '#000' : '#fff',
