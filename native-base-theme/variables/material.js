@@ -52,7 +52,7 @@ export default {
   badgePadding: 0,
 
   // Button
-  buttonFontFamily: 'Roboto',
+  buttonFontFamily: 'Proxima Nova',
   buttonDisabledBg: '#b5b5b5',
   buttonPadding: 6,
   get buttonPrimaryBg() {

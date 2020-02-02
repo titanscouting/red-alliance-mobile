@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 
@@ -56,11 +56,10 @@ export default class Matches extends React.Component {
             <StyleProvider style={getTheme(material)}>
                 <Container>
 
-                    <Header searchBar rounded>
-                        <Item>
+                    <Header searchBar rounded >
+                        <Item >
                             <Icon name="ios-search" />
                             <Input placeholder="Search" />
-                            <Icon name="ios-people" />
                         </Item>
                         <Button transparent>
                             <Text>Search</Text>
