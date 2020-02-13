@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Matchups from "./Matchups/Matchups"
 import Pit from "./Pit/Pit"
-import Scout from "./Scout/Scout"
+import Matches from "./Scout/Matches"
 import Strategies from "./Strategies/Strategies"
 import Stats from "./Stats/Stats"
 
@@ -14,12 +14,11 @@ import { StyleProvider, Button, Text, Icon, Footer, FooterTab,Content} from "nat
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 
-import Globals from '../Globals'
 import Container from "../../native-base-theme/components/Container";
 
 const TabControl = createBottomTabNavigator(
   {
-    Teams: { screen: Scout },
+    Teams: { screen: Matches },
     Pit: { screen: Pit},
     Stats: { screen: Stats},
     Heats: { screen: Matchups},
