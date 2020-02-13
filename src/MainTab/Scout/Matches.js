@@ -11,34 +11,29 @@ import MatchList from './MatchList';
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
 
+import GLOBAL from '../../global'
 
 export default class Matches extends React.Component {
 
     
-    state = {
-        matches: [],
-        currentMatchID: null,
-        currentTeamID: null,
-        curentQualQuant: null,
-    };
 
     async componentDidMount() {
         const matches = await ajax.fetchMatches('2022', 'Central 2019');
-        this.setState({ matches: matches })
+        GLOBAL.setState({ matches: matches })
     }
 
     currentMatch = () => {
-        return this.state.matches.find((match) => match.key === this.state.currentMatchID);
+        return GLOBAL.state.matches.find((match) => match.key === this.state.currentMatchID);
     }
 
     setCurrentMatch = (matchId) => {
-        this.setState({
+        GLOBAL.currentMatchID.setState({
             currentMatchID: matchId,
         });
     }
 
     render () {
-        if (this.state.currentQualQuant) {
+        if (GLOBAL.state.currentShotTraditional) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -49,7 +44,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentTeamID) {
+        else if (GLOBAL.state.currentTeamID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -60,7 +55,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentMatchID) {
+        else if (GLOBAL.state.currentMatchID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -71,12 +66,12 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.matches.length > 0) {
+        else if (GLOBAL.state.matches.length > 0) {
             return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Content>
-                        <MatchList matches = {this.state.matchess} onItemPress={this.setCurrentMatch}/>
+                        <MatchList matches = {GLOBAL.state.matchess} onItemPress={GLOBAL.setCurrentMatch}/>
                     </Content>
                 </Container>
             </StyleProvider>

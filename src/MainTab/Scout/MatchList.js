@@ -10,7 +10,7 @@ import MatchCell from './MatchCell';
 
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
-
+import GLOBAL from '../../global';
 
 export default class MatchList extends React.Component {
 
@@ -25,7 +25,7 @@ export default class MatchList extends React.Component {
             <StyleProvider style={getTheme(material)}>
                 <Container>
 
-                    <Header searchBar rounded >
+                    {/* <Header searchBar rounded >
                         <Item >
                             <Icon name="ios-search" />
                             <Input placeholder="Search" />
@@ -33,10 +33,12 @@ export default class MatchList extends React.Component {
                         <Button transparent>
                             <Text>Search</Text>
                         </Button>
-                    </Header>
+                    </Header> */}
+
+                    <Header/>
                     <Content>
                         <FlatList
-                            data = {this.state.matches}
+                            data = {GLOBAL.state.matches}
                             renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
                             keyExtractor= {item => String(item.number)}
                         />
