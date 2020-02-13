@@ -22,11 +22,9 @@ export default class Matches extends React.Component {
         curentQualQuant: null,
     };
 
-    // this.props.navigation.dispatch(pushAction);
-
     async componentDidMount() {
         const matches = await ajax.fetchMatches('2022', 'Central 2019');
-        this.setState({ matches })
+        this.setState({ matches: matches })
     }
 
     currentMatch = () => {
@@ -74,12 +72,11 @@ export default class Matches extends React.Component {
                 );
         }
         else if (this.state.matches.length > 0) {
-            console.log(this.state.matches[0]);
             return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Content>
-                        <MatchList matches = {this.state.matches} onItemPress={this.setCurrentMatch}/>
+                        <MatchList matches = {this.state.matchess} onItemPress={this.setCurrentMatch}/>
                     </Content>
                 </Container>
             </StyleProvider>
