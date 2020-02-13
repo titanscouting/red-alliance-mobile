@@ -143,7 +143,7 @@ export default {
 
   // Font
   DefaultFontSize: 16,
-  fontFamily: 'ProximaNova',
+  fontFamily: 'System',
   fontSizeBase: 15,
   get fontSizeH1() {
     return this.fontSizeBase * 1.8;

@@ -19,21 +19,24 @@ export default class Matches extends React.Component {
 
     async componentDidMount() {
         const matches = await ajax.fetchMatches('2022', 'Central 2019');
-        GLOBAL.setState({ matches: matches })
+        // GLOBAL.setState({ matches: matches })
+        GLOBAL.matches = matches;
     }
 
     currentMatch = () => {
-        return GLOBAL.state.matches.find((match) => match.key === this.state.currentMatchID);
+        return GLOBAL.matches.find((match) => match.key === GLOBAL.currentMatchID);
     }
 
     setCurrentMatch = (matchId) => {
-        GLOBAL.currentMatchID.setState({
-            currentMatchID: matchId,
-        });
+        // GLOBAL.currentMatchID.setState({
+        //     currentMatchID: matchId,
+        // });
+        GLOBAL.currentMatchID = matchId;
     }
 
     render () {
-        if (GLOBAL.state.currentShotTraditional) {
+        if (GLOBAL.currentShotTraditional) {
+            console.log("Oh it did exist");
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -44,7 +47,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.state.currentTeamID) {
+        else if (GLOBAL.currentTeamID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -55,7 +58,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.state.currentMatchID) {
+        else if (GLOBAL.currentMatchID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -66,12 +69,12 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.state.matches.length > 0) {
+        else if (GLOBAL.matches.length > 0) {
             return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Content>
-                        <MatchList matches = {GLOBAL.state.matchess} onItemPress={GLOBAL.setCurrentMatch}/>
+                        <MatchList matches = {GLOBAL.matchess} onItemPress={GLOBAL.setCurrentMatch}/>
                     </Content>
                 </Container>
             </StyleProvider>

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
     matches: [],
     currentMatchID: null,
     currentTeamID: null,
