@@ -1,6 +1,6 @@
 
 // Have no idea where this is hosted currently
-const apiHost = 'https://api.dev.com/'
+const apiHost = 'https://scouting-api.herokuapp.com/'
 
 export default {
 
@@ -38,14 +38,15 @@ export default {
         }
     },
 
-    async submitMatchData() {
+    async submitMatchData(token) {
         let endpoint = apiHost + "/api/submitMatchData";
         try {
             fetch(endpoint, {
                 method: 'POST',
                 headers: {
-                    Accept: 'application/json',
+                    'Accept': 'application/json',
                     'Content-Type': 'application/json',
+                    'token': token
                 },
                 body: JSON.stringify({
                     firstParam: 'yourValue',
