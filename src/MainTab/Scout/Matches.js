@@ -69,7 +69,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.matches.length > 0) {
+        else if (GLOBAL.matches && (GLOBAL.matches.length > 0)) {
             return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
