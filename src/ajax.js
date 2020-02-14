@@ -15,7 +15,7 @@ export default {
 
 
     async fetchMatches(competition) {
-        let endpoint = apiHost + "/api/getMatchSchedule";
+        const endpoint = apiHost + "/api/getMatchSchedule";
         try {
             let extension = "competitions"
 
@@ -39,7 +39,7 @@ export default {
     },
 
     async submitMatchData(token) {
-        let endpoint = apiHost + "/api/submitMatchData";
+        const endpoint = apiHost + "/api/submitMatchData";
         try {
             fetch(endpoint, {
                 method: 'POST',
