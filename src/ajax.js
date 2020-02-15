@@ -16,27 +16,20 @@ export default {
 
     async fetchMatches(competition) {
         const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
-
-
+        
         try {
-            console.warn(endpoint);
-            let response = await fetch(endpoint, {
+            fetch(endpoint, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
                     'Content-Type': 'application/json',
                     'token': token
                 }
+            }).then((response) => {
+                return response.json();
+            }).then((myJson) => {
+                console.warn(myJson);
             });
-            console.warn(response);
-            if (this.isJSON(response)) {
-                let responseJson = await response.json(response);
-                console.warn(responseJson);
-                return schedule;
-            } else {
-                console.warn("Not valid JSON in endpoint "+endpoint)
-            }
-            
         } catch(error) {
             console.error(error);
         }
