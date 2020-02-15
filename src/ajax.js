@@ -35,7 +35,8 @@ export default {
         }
     },
 
-    async submitMatchData() {
+
+    async submitMatchData(competition, team, match, data) {
         const endpoint = apiHost + "api/submitMatchData";
         try {
             fetch(endpoint, {
@@ -46,10 +47,10 @@ export default {
                     'token': token
                 },
                 body: JSON.stringify({
-                    competition_id: 'Central2020',
-                    match_number: '12',
-                    team_scouted: '2042',
-                    data : '{"myfavoritecolor":"blue"}'
+                    competition_id: competition,
+                    match_number: match,
+                    team_scouted: team,
+                    data : data
                 }),
             }).then((response) => {
                 return response.json();
@@ -61,8 +62,30 @@ export default {
         } catch(error) {
             console.error(error);
         }
-    }
+    },
 
+    
+// STATS
+
+    async fetchMatchData(competition, matchNumber, team) {
+        const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
+        
+        try {
+            fetch(endpoint, {
+                method: 'GET',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            }).then((response) => {
+                return response.json();
+            }).then((myJson) => {
+                console.warn(myJson);
+            });
+        } catch(error) {
+            console.error(error);
+        }
+    },
 
 
 
