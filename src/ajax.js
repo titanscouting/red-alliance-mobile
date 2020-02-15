@@ -19,6 +19,7 @@ export default {
 
 
         try {
+            console.warn(endpoint);
             let response = await fetch(endpoint, {
                 method: 'GET',
                 headers: {
@@ -31,7 +32,6 @@ export default {
             if (this.isJSON(response)) {
                 let responseJson = await response.json(response);
                 console.warn(responseJson);
-                let schedule = responseJson['appBuilding']['team-' + team]['competitions'][competition]['scoutsAndSchedule'];
                 return schedule;
             } else {
                 console.warn("Not valid JSON in endpoint "+endpoint)
@@ -42,7 +42,7 @@ export default {
         }
     },
 
-    async submitMatchData(token) {
+    async submitMatchData() {
         const endpoint = apiHost + "api/submitMatchData";
         try {
             fetch(endpoint, {
@@ -53,10 +53,18 @@ export default {
                     'token': token
                 },
                 body: JSON.stringify({
-                    firstParam: 'yourValue',
-                    secondParam: 'yourOtherValue',
+                    competition_id: 'Central2020',
+                    match_number: '12',
+                    team_scouted: '2042',
+                    data : '{"myfavoritecolor":"blue"}'
                 }),
-            });
+            }).then((response) => {
+                return response.json();
+            }).then((myJson) => {
+                console.warn(myJson);
+            })
+            // let responseJson = await JSON.parse(response);
+            // console.warn("This is from dev: "+responseJson);
         } catch(error) {
             console.error(error);
         }
