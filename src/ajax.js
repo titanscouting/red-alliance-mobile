@@ -1,5 +1,3 @@
-
-// Have no idea where this is hosted currently
 const apiHost = 'https://scouting-api.herokuapp.com/'
 
 export default {
@@ -15,11 +13,9 @@ export default {
 
 
     async fetchMatches(competition) {
-        const endpoint = apiHost + "/api/getMatchSchedule";
+        const endpoint = apiHost + "api/getMatchSchedule";
         try {
             let extension = "competitions"
-
-
             let response = await fetch(endpoint);
             
             if (this.isJSON(response)) {
@@ -39,7 +35,7 @@ export default {
     },
 
     async submitMatchData(token) {
-        const endpoint = apiHost + "/api/submitMatchData";
+        const endpoint = apiHost + "api/submitMatchData";
         try {
             fetch(endpoint, {
                 method: 'POST',
