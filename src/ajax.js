@@ -7,7 +7,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Toast } from 'native-base';
 import { Alert } from "react-native";
 
-
 const AsyncAlert = async () => new Promise((resolve) => {
     Alert.alert(
       'Sign In',
@@ -25,6 +24,7 @@ const AsyncAlert = async () => new Promise((resolve) => {
   });
 
   
+var _this = this;
 
 export default {
 
@@ -84,7 +84,8 @@ export default {
                   console.error(error);
                 }
             }
-            return await this.getIDToken();
+
+            _this.getIDToken();
             
         } catch(error) {
             console.error(error);

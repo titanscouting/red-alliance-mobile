@@ -33,7 +33,7 @@ export default class Strategies extends Component {
 
           <Right>
             <Button hasText transparent onPress={ajax.signOut}>
-              <Text>Sign Out</Text>
+              <Text>Switch User</Text>
             </Button>
           </Right>
 
