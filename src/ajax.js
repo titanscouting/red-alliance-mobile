@@ -18,7 +18,7 @@ export default {
         const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
         
         try {
-            fetch(endpoint, {
+            return await fetch(endpoint, {
                 method: 'GET',
                 headers: {
                     'Accept': 'application/json',
@@ -26,12 +26,17 @@ export default {
                     'token': token
                 }
             }).then((response) => {
-                console.warn(response);
-
                 return response.json();
             }).then((myJson) => {
-                console.warn(myJson);
+                // console.warn(myJson);
+                matches = myJson["data"];
+                dict = {};
+                for (let i=0; i<matches.length; i++) {
+                    dict["Match "+(i+1)] = matches[i];
+                }
+                return dict;
             });
+
         } catch(error) {
             console.error(error);
         }
@@ -56,7 +61,6 @@ export default {
                     data : data
                 }),
             }).then((response) => {
-                console.warn(response);
                 return response.json();
             }).then((myJson) => {
                 console.warn(myJson);
