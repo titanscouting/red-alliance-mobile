@@ -14,27 +14,12 @@ import GLOBAL from '../../global';
 
 export default class MatchList extends React.Component {
 
-    static propTypes = {
-        matches: PropTypes.array.isRequired,
-        onItemPress: PropTypes.func.isRequired,
-    };
     
     render () {
           
         return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
-
-                    <Header searchBar rounded >
-                        <Item >
-                            <Icon name="ios-search" />
-                            <Input placeholder="Search" />
-                        </Item>
-                        <Button transparent>
-                            <Text>Search</Text>
-                        </Button>
-                    </Header>
-
                     <Content>
                         <FlatList
                             data = {GLOBAL.matches}

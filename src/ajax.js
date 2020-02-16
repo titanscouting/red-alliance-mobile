@@ -54,11 +54,14 @@ export default {
             }).then((myJson) => {
                 // console.warn(myJson);
                 matches = myJson["data"];
-                dict = {};
+                arr = [];
                 for (let i=0; i<matches.length; i++) {
-                    dict["Match "+(i+1)] = matches[i];
+                    dict = {};
+                    dict["number"] = i+1;
+                    dict["scouts"] = matches[i];
+                    arr.push(dict);
                 }
-                return dict;
+                return arr;
             });
 
         } catch(error) {

@@ -18,8 +18,11 @@ export default class Matches extends React.Component {
     
 
     async componentDidMount() {
+        console.log("Component did mount")
         const matches = await ajax.fetchMatches('Central2020');
         GLOBAL.matches = matches;
+        console.log("Matches: "+GLOBAL.matches);
+        this.forceUpdate();
     }
 
     currentMatch = () => {
@@ -68,17 +71,19 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.matches && (GLOBAL.matches.length > 0)) {
+        else if (GLOBAL.matches) {
+            console.log("Has matches");
             return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Content>
-                        <MatchList matches = {GLOBAL.matchess} onItemPress={GLOBAL.setCurrentMatch}/>
+                        <MatchList matches = {GLOBAL.matches} onItemPress={GLOBAL.setCurrentMatch}/>
                     </Content>
                 </Container>
             </StyleProvider>
             );
         } else {
+            console.log("Does not have matches");
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
