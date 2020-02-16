@@ -18,10 +18,10 @@ export default class Matches extends React.Component {
     
 
     async componentDidMount() {
-        console.log("Component did mount")
+        // console.log("Component did mount")
         const matches = await ajax.fetchMatches('Central2020');
         GLOBAL.matches = matches;
-        console.log("Matches: "+GLOBAL.matches);
+        // console.log("Matches: "+GLOBAL.matches);
         this.forceUpdate();
     }
 
