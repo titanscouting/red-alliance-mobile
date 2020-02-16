@@ -18,9 +18,9 @@ export default class Matches extends React.Component {
     
 
     async componentDidMount() {
-        // const matches = await ajax.fetchMatches('Central2020');
+        // const asdf = await ajax.fetchMatches('Central2020');
         const matches = await ajax.fetchMatchData('Central2020', '2042', '12');
-        const submitTest = await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
+        // const submitTest = await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
         // GLOBAL.setState({ matches: matches })
         GLOBAL.matches = matches;
     }
