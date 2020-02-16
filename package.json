@@ -13,6 +13,7 @@
   "dependencies": {
     "@react-native-community/art": "^1.1.2",
     "@react-native-community/masked-view": "^0.1.5",
+    "add": "^2.0.6",
     "global": "^4.4.0",
     "native-base": "^2.13.8",
     "prop-types": "^15.7.2",
@@ -28,7 +29,8 @@
     "react-native-screens": "^2.0.0-alpha.22",
     "react-navigation": "^4.0.10",
     "react-navigation-stack": "^2.0.4",
-    "react-navigation-tabs": "^2.6.2"
+    "react-navigation-tabs": "^2.6.2",
+    "yarn": "^1.22.0"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",

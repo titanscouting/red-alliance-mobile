@@ -42,7 +42,7 @@ export default {
         }
     },
 
-
+    // await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
     async submitMatchData(competition, team, match, data) {
 
         const endpoint = apiHost + "api/submitMatchData";
@@ -75,6 +75,7 @@ export default {
     
 // STATS
 
+    // await ajax.fetchMatchData('Central2020', '2042', '12');
     async fetchMatchData(competition, matchNumber, team) {
         const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
         
