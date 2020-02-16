@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
-import StyleProvider, { Container } from 'native-base';
+import StyleProvider, { Container, Root } from 'native-base';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
@@ -46,7 +46,9 @@ ajax.getIDToken();
 export default class App extends React.Component {
   render() {
     return (
-      <TabControl/>
+      <Root>
+        <TabControl/>
+      </Root>
     );
   }
 }

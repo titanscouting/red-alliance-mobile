@@ -4,9 +4,31 @@ const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2Y
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import { Toast } from 'native-base';
+import { Alert } from "react-native";
 
+
+const AsyncAlert = async () => new Promise((resolve) => {
+    Alert.alert(
+      'Sign In',
+      'You must be signed in with an IMSA Google account to use the app.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => {
+            resolve('YES');
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  });
+
+  
 
 export default {
+
+          
 
     isJSON(str) {
         try {
@@ -32,6 +54,7 @@ export default {
                 } catch (error) {
                     if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                         console.log("Cancelled");
+                        await AsyncAlert();
                         return await this.getIDToken();
 
                     } else if (error.code === statusCodes.IN_PROGRESS) {
