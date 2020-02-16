@@ -14,10 +14,10 @@ import material from '../native-base-theme/variables/material';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import TabControl from './MainTab/TabControl';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   ActivityIndicator,
-  AsyncStorage,
   StatusBar,
   StyleSheet,
   View,
@@ -34,7 +34,7 @@ class SignInScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <Button title="Sign in!" onPress={this._signInAsync} />
       </View>
     );
@@ -46,11 +46,53 @@ class SignInScreen extends React.Component {
   };
 }
 
-const AuthStack = createStackNavigator({ SignIn: SignInScreen });
+class HomeScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Welcome to the app!',
+  };
 
+  render() {
+    return (
+      <View style={styles.container}>
+        <Button title="Show me more of the app" onPress={this._showMoreApp}/>
+        <Button title="Actually, sign me out :)" onPress={this._signOutAsync} />
+      </View>
+    );
+  }
+
+  _showMoreApp = () => {
+    this.props.navigation.navigate('Other');
+  };
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
+}
+
+class OtherScreen extends React.Component {
+  static navigationOptions = {
+    title: 'Lots of features here',
+  };
+
+  render() {
+    return (
+      <View style={styles.container}>
+        <Button title="I'm done, sign me out" onPress={this._signOutAsync} />
+        <StatusBar barStyle="default" />
+      </View>
+    );
+  }
+
+  _signOutAsync = async () => {
+    await AsyncStorage.clear();
+    this.props.navigation.navigate('Auth');
+  };
+}
 
 class AuthLoadingScreen extends React.Component {
-  componentDidMount() {
+  constructor() {
+    super();
     this._bootstrapAsync();
   }
 
@@ -66,7 +108,7 @@ class AuthLoadingScreen extends React.Component {
   // Render any loading content that you like here
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <ActivityIndicator />
         <StatusBar barStyle="default" />
       </View>
@@ -74,26 +116,24 @@ class AuthLoadingScreen extends React.Component {
   }
 }
 
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 
-export default createAppContainer(
-  createSwitchNavigator(
-    {
-      AuthLoading: AuthLoadingScreen,
-      App: TabControl,
-      Auth: AuthStack,
-    },
-    {
-      initialRouteName: 'AuthLoading',
-    }
-  )
-);
+const AppStack = createStackNavigator({ Home: HomeScreen, Other: OtherScreen });
+const AuthStack = createStackNavigator({ SignIn: SignInScreen });
 
-
-
-// export default class App extends React.Component {
-//   render () {
-//     return (
-//        <TabControl/>
-//     );
-//   }
-// }
+export default createAppContainer(createSwitchNavigator(
+  {
+    AuthLoading: AuthLoadingScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  },
+  {
+    initialRouteName: 'AuthLoading',
+  }
+));
