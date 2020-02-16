@@ -57,11 +57,32 @@ class SignInScreen extends React.Component {
           style={{ width: 192, height: 48 }}
           size={GoogleSigninButton.Size.Wide}
           color={GoogleSigninButton.Color.Dark}
-          onPress={this._signInAsync}
+          onPress={this._googleSignIn}
           disabled={this.state.isSigninInProgress} />
       </View>
     );
   }
+
+  _googleSignIn = async () => {
+    try {
+      console.warn("Dummy");
+      // await GoogleSignin.hasPlayServices();
+      const userInfo = GoogleSignin.signIn();
+      this.setState({ userInfo });
+      console.warn(userInfo);
+      console.log(userInfo);
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        // user cancelled the login flow
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        // operation (f.e. sign in) is in progress already
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        // play services not available or outdated
+      } else {
+        // some other error happened
+      }
+    }
+  };
 
   _signInAsync = async () => {
     await AsyncStorage.setItem('userToken', 'abc');
