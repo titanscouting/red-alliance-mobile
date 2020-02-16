@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-
+import { GoogleSignin, GoogleSigninButton, statusCodes } from 'react-native-google-signin';
 import StyleProvider, { Container } from 'native-base';
 import getTheme from '../native-base-theme/components';
 import material from '../native-base-theme/variables/material';
@@ -24,6 +24,7 @@ import {
   Button,
 } from 'react-native';
 
+
 // Implementation of HomeScreen, OtherScreen, SignInScreen, AuthLoadingScreen
 // goes here.
 
@@ -32,10 +33,20 @@ class SignInScreen extends React.Component {
     title: 'Please sign in',
   };
 
+  state = {
+    isSignInProgress: true,
+  };
+
   render() {
     return (
       <View style={styles.container}>
         <Button title="Sign in!" onPress={this._signInAsync} />
+        <GoogleSigninButton
+    style={{ width: 192, height: 48 }}
+    size={GoogleSigninButton.Size.Wide}
+    color={GoogleSigninButton.Color.Dark}
+    onPress={this._signInAsync}
+    disabled={this.state.isSigninInProgress} />
       </View>
     );
   }
