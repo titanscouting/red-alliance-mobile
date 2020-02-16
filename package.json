@@ -12,7 +12,6 @@
   },
   "dependencies": {
     "@react-native-community/art": "^1.1.2",
-    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "^0.1.5",
     "add": "^2.0.6",
     "global": "^4.4.0",
