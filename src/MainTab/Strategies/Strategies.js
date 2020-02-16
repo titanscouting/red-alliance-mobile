@@ -9,6 +9,7 @@ const dataArray = [
 ];
 
 import { YellowBox } from 'react-native'
+import ajax from '../../ajax'
 
 YellowBox.ignoreWarnings([
   'VirtualizedLists should never be nested', // TODO: Remove when fixed. Maybe https://github.com/GeekyAnts/NativeBase/issues/2947 will help.
@@ -16,15 +17,26 @@ YellowBox.ignoreWarnings([
 
 
 export default class Strategies extends Component {
+
+
+
   render() {
     return (
       <Container>
 
-
         <Header>
+          <Left/>
+          
           <Body>
-            <Title>Does this update?</Title>
+            <Title>Strategies</Title>
           </Body>
+
+          <Right>
+            <Button hasText transparent onPress={ajax.signOut}>
+              <Text>Sign Out</Text>
+            </Button>
+          </Right>
+
         </Header>
 
 

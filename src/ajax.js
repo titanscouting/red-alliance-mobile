@@ -19,20 +19,50 @@ export default {
 
     async getIDToken() {
         try {
-            const isSignedIn = await GoogleSignin.isSignedIn();
-
             try {
                 const tokens = await GoogleSignin.getTokens();
                 return tokens.idToken;
             } catch (error) {
                 await GoogleSignin.hasPlayServices();
-                const userInfo = await GoogleSignin.signIn();
-                if (userInfo) {
-                    await AsyncStorage.setItem('name', userInfo.user.name);
+                try {
+                    const userInfo = await GoogleSignin.signIn();
+                    if (userInfo) {
+                        await AsyncStorage.setItem('name', userInfo.user.name);
+                    }
+                } catch (error) {
+                    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                        console.log("Cancelled");
+                        return await this.getIDToken();
+
+                    } else if (error.code === statusCodes.IN_PROGRESS) {
+                        console.log("In progress");
+                    } else {
+                        // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+                        console.error(error);
+                    }
                 }
-                return this.getIDToken()
             }
 
+        } catch(error) {
+            console.error(error);
+        }
+
+    },
+
+    async signOut() {
+        try {
+            const isSignedIn = await GoogleSignin.isSignedIn();
+            if (isSignedIn) {
+                try {
+                    await GoogleSignin.revokeAccess();
+                    await GoogleSignin.signOut();
+                    await AsyncStorage.removeItem('name');
+                } catch (error) {
+                  console.error(error);
+                }
+            }
+            return await this.getIDToken();
+            
         } catch(error) {
             console.error(error);
         }
