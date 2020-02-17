@@ -15,12 +15,15 @@ import GLOBAL from '../../global'
 
 export default class Matches extends React.Component {
 
+    _isMounted = false;
+
     state = {
         matches: [],
 
     }
 
     async componentDidMount() {
+        this._isMounted = true;
         this.refreshMatches();
         
     }
@@ -28,12 +31,20 @@ export default class Matches extends React.Component {
     refreshMatches = async () => {
         console.log("Requested to refresh");
         const matches = await ajax.fetchMatches('Central2020');
-        this.setState({matches: matches});
+
+        if (this._isMounted) {
+            this.setState({matches: matches});
+        }
         console.log("The refresh should be over by now");
     }
 
     currentMatch = () => {
         return GLOBAL.matches.find((match) => match.key === GLOBAL.currentMatchID);
+    }
+
+    async componentDidUnmount() {
+        console.log("Unmount")
+        this._isMounted = false;
     }
 
     setCurrentMatch = (matchId) => {
