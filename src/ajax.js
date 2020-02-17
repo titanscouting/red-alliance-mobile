@@ -7,7 +7,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Toast } from 'native-base';
 import { Alert } from "react-native";
 
-const AsyncAlert = async () => new Promise((resolve) => {
+exports.AsyncAlert = async () => new Promise((resolve) => {
     Alert.alert(
       'Sign In',
       'You must be signed in with an IMSA Google account to use the app.',
@@ -23,16 +23,13 @@ const AsyncAlert = async () => new Promise((resolve) => {
     );
   });
 
-
-
-
 exports.isJSON = (str) => {
-        try {
-            JSON.parse(str);
-        } catch (e) {
-            return false;
-        }
-        return true;
+    try {
+        JSON.parse(str);
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 
 exports.getIDToken = async () => {
@@ -50,8 +47,8 @@ exports.getIDToken = async () => {
             } catch (error) {
                 if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                     console.log("Cancelled");
-                    await AsyncAlert();
-                    return await this.getIDToken();
+                    await exports.AsyncAlert();
+                    return await exports.getIDToken();
 
                 } else if (error.code === statusCodes.IN_PROGRESS) {
                     console.log("In progress");
