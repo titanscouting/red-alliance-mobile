@@ -1,5 +1,4 @@
 const apiHost = 'https://scouting-api.herokuapp.com/';
-const token = 'eyJhbGciOiJSUzI1NiIsImtpZCI6Ijc2MmZhNjM3YWY5NTM1OTBkYjhiYjhhNjM2YmYxMWQ0MzYwYWJjOTgiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJhY2NvdW50cy5nb29nbGUuY29tIiwiYXpwIjoiMjkxODYzNjk4MjQzLWVnNWk0ZmgwMDFuN3NsMjhiMGJxZ3A0aDJ2YWU5Z24yLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwiYXVkIjoiMjkxODYzNjk4MjQzLWVnNWk0ZmgwMDFuN3NsMjhiMGJxZ3A0aDJ2YWU5Z24yLmFwcHMuZ29vZ2xldXNlcmNvbnRlbnQuY29tIiwic3ViIjoiMTEzNTE1NzM0ODQ3MDM4MTA0MjA5IiwiaGQiOiJpbXNhLmVkdSIsImVtYWlsIjoiaWZvd2xlckBpbXNhLmVkdSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJhdF9oYXNoIjoib1RjaGxfdHhHSUh2LW9Ua3NxbTllZyIsIm5hbWUiOiJJYW4gRm93bGVyIiwicGljdHVyZSI6Imh0dHBzOi8vbGgzLmdvb2dsZXVzZXJjb250ZW50LmNvbS8tMTNWdHN4SXZFRjQvQUFBQUFBQUFBQUkvQUFBQUFBQUFBQUEvQUNIaTNyY2t4QkswN1ExdGNaaVdxQnlTeUQycGR1ODFSdy9zOTYtYy9waG90by5qcGciLCJnaXZlbl9uYW1lIjoiSWFuIiwiZmFtaWx5X25hbWUiOiJGb3dsZXIiLCJsb2NhbGUiOiJlbiIsImlhdCI6MTU4MTgwNzAyNSwiZXhwIjoxNTgxODEwNjI1LCJqdGkiOiIzZWZiNWU1MzJlOTEyOWQ3ZWQ1Yzk1ODczNjg0MDA2NDU3NmE1ZTAwIn0.kQUaasaTxliUk9cUEpOJ2qKyaUwPsNMsy85gUxnADtwtiHQ0f5QGyRgoUg9RdW5gxXmv-HD34_g_0fAsGkKq2gCSqXBTukKd-mJ0saAFoK-a5JnfkCYFm4nGGTBiiRGFDxOgu7NLaC-KXJOQW2cIBi4RYNa3bF2JHcHgKe48Uf28cLfSqgVWXDk9yNVLUmcKlIW-lVLa20BR-n78_yahyxg66omZoC0gRgULZwdmV9bblQ15PkDLP8X5BjquruB9kt2q7B8DO-KH3Jdm7zGVNJ0lU8pQdDPdxmgSdzAP7vfDIfBUi74xk_pC-gZ_WJG6whYA0SSdtP0cEFu8F8T9bA';
 
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import AsyncStorage from '@react-native-community/async-storage';
@@ -32,12 +31,20 @@ exports.isJSON = (str) => {
     return true;
 }
 
+
+
 exports.getIDToken = async () => {
     try {
         try {
+            console.log(await exports.isSignedIn());
+            await GoogleSignin.hasPlayServices();
             const tokens = await GoogleSignin.getTokens();
+            GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
         } catch (error) {
+            console.log("There was an error with getting the tokens");
+            console.log(await exports.isSignedIn());
+            console.log(error);
             await GoogleSignin.hasPlayServices();
             try {
                 const userInfo = await GoogleSignin.signIn();
@@ -46,15 +53,14 @@ exports.getIDToken = async () => {
                 }
             } catch (error) {
                 if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                    console.log("Cancelled");
                     await exports.AsyncAlert();
                     return await exports.getIDToken();
-
                 } else if (error.code === statusCodes.IN_PROGRESS) {
                     console.log("In progress");
                 } else {
                     // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE
                     console.error(error);
+                    return await exports.getIDToken();
                 }
             }
         }
@@ -65,9 +71,18 @@ exports.getIDToken = async () => {
 
 }
 
-exports.signOut = async () => {
+exports.isSignedIn = async () => {
     try {
         const isSignedIn = await GoogleSignin.isSignedIn();
+        return isSignedIn;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+exports.signOut = async () => {
+    try {
+        const isSignedIn = await exports.isSignedIn();
         if (isSignedIn) {
             try {
                 await GoogleSignin.revokeAccess();
@@ -86,15 +101,20 @@ exports.signOut = async () => {
 },
 
 exports.fetchMatches = async (competition) => {
+
     const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
     
+    if (await !exports.isSignedIn()) {
+        return null;
+    }
+
     try {
         return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': token
+                'token': exports.getIDToken()
             }
         }).then((response) => {
             return response.json();
@@ -126,7 +146,7 @@ exports.submitMatchData = async (competition, team, match, data) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': token
+                'token': exports.getIDToken()
             },
             body: JSON.stringify({
                 competition_id: competition,

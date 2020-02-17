@@ -19,7 +19,13 @@ export default class MatchList extends React.Component {
           
         return (
             <StyleProvider style={getTheme(material)}>
+               
                 <Container>
+                    <Header>
+                        <Body>
+                            <Title>Matches</Title>
+                        </Body>
+                    </Header>
                     <Content>
                         <FlatList
                             data = {GLOBAL.matches}
