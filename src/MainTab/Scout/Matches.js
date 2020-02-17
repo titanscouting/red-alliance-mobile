@@ -22,7 +22,7 @@ export default class Matches extends React.Component {
         const matches = await ajax.fetchMatches('Central2020');
         GLOBAL.matches = matches;
         // console.log("Matches: "+GLOBAL.matches);
-        // this.forceUpdate();
+        this.forceUpdate();
     }
 
     currentMatch = () => {

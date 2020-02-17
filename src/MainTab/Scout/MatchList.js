@@ -18,15 +18,20 @@ function wait(timeout) {
     });
 }
 
-const [refreshing, setRefreshing] = React.useState(false);
 
 export default class MatchList extends React.Component {
 
-    onRefresh = React.useCallback(() => {
-        setRefreshing(true);
+
+    state = {
+        refreshing: false,
+    }
+
+    onRefresh = () => {
+        
+        this.state.refreshing = true;
     
-        wait(2000).then(() => setRefreshing(false));
-    }, [refreshing]);
+        wait(2000).then(() => this.state.refreshing = false);
+    }
 
     
     
@@ -40,16 +45,14 @@ export default class MatchList extends React.Component {
                             <Title>Matches</Title>
                         </Body>
                     </Header>
-                    <Content>
                         <FlatList
                             data = {GLOBAL.matches}
                             renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
                             keyExtractor= {item => String(item.number)}
                             refreshControl={
-                                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                               }
                         />
-                    </Content>
                 </Container>
             </StyleProvider>
         );
