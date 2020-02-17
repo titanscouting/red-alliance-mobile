@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Foot
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, View } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchCell';
 
@@ -12,8 +12,23 @@ import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
 import GLOBAL from '../../global';
 
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
+const [refreshing, setRefreshing] = React.useState(false);
+
 export default class MatchList extends React.Component {
 
+    onRefresh = React.useCallback(() => {
+        setRefreshing(true);
+    
+        wait(2000).then(() => setRefreshing(false));
+    }, [refreshing]);
+
+    
     
     render () {
           
@@ -30,6 +45,9 @@ export default class MatchList extends React.Component {
                             data = {GLOBAL.matches}
                             renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
                             keyExtractor= {item => String(item.number)}
+                            refreshControl={
+                                <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+                              }
                         />
                     </Content>
                 </Container>
