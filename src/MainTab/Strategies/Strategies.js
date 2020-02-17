@@ -28,13 +28,6 @@ export default class Strategies extends Component {
             <Title>Strategies</Title>
           </Body>
         </Header>
-        <Content searchBar padder>
-          <Item>
-            <Icon name="search" />
-            <Input placeholder="Search" />
-          </Item>
-          <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
-        </Content>
       </Container>
       </StyleProvider>
     );

@@ -18,17 +18,7 @@ export default class Matchups extends Component {
                     <Title>Matchups</Title>
                 </Body>
             </Header>
-            <Content>
-                <Card>
-                    <CardItem>
-                    <Icon active name="logo-googleplus" />
-                    <Text>Ur mom</Text>
-                    <Right>
-                        <Icon name="arrow-forward" />
-                    </Right>
-                    </CardItem>
-                </Card>
-            </Content>
+            
         </Container>
       
     );

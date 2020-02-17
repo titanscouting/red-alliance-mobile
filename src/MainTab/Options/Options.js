@@ -20,38 +20,26 @@ export default class Strategies extends Component {
   render() {
     return (
       <StyleProvider style={getTheme(material)}>
-      {/* <Container>
-        <Header>
-          <Body>
-            <Title>Options</Title>
-          </Body>
-        </Header>
-        <Content>
-          <Button hasText transparent onPress={ajax.signOut}>
-              <Text>Switch User</Text>
-          </Button>
-        </Content>
-      </Container> */}
 
-    <Container>
-    <Header>
-        <Body>
-            <Title>Options</Title>
-        </Body>
-    </Header>
-    <Content>
-        <Card>
-            <CardItem>
-              <Text>Google Account</Text>
-              <Right>
-                <Button hasText onPress={ajax.signOut}>
-                  <Text>Switch User</Text>
-                </Button>
-              </Right>
-            </CardItem>
-        </Card>
-    </Content>
-    </Container>
+        <Container>
+          <Header>
+            <Body>
+              <Title>Options</Title>
+            </Body>
+          </Header>
+          <Content>
+            <Card>
+              <CardItem>
+                <Text>Google Account</Text>
+                <Right>
+                  <Button hasText onPress={ajax.signOut}>
+                    <Text>Switch User</Text>
+                  </Button>
+                </Right>
+              </CardItem>
+            </Card>
+          </Content>
+        </Container>
 
       </StyleProvider>
     );

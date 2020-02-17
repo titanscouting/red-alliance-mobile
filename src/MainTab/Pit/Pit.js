@@ -22,17 +22,6 @@ export default class Pit extends Component {
           </Body>
         </Header>
 
-
-        <Content searchBar padder>
-
-          <Item>
-            <Icon name="search" />
-            <Input placeholder="Search" />
-          </Item>
-
-          <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
-        </Content>
-
       </Container>
       
     );
