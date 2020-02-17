@@ -22,7 +22,7 @@ export default class Matches extends React.Component {
         const matches = await ajax.fetchMatches('Central2020');
         GLOBAL.matches = matches;
         // console.log("Matches: "+GLOBAL.matches);
-        this.forceUpdate();
+        // this.forceUpdate();
     }
 
     currentMatch = () => {
@@ -74,13 +74,9 @@ export default class Matches extends React.Component {
         else if (GLOBAL.matches) {
             console.log("Has matches");
             return (
-            <StyleProvider style={getTheme(material)}>
-                <Container>
-                    <Content>
-                        <MatchList matches = {GLOBAL.matches} onItemPress={GLOBAL.setCurrentMatch}/>
-                    </Content>
-                </Container>
-            </StyleProvider>
+                <StyleProvider style={getTheme(material)}>
+                    <MatchList matches = {GLOBAL.matches} onItemPress={GLOBAL.setCurrentMatch}/>
+                </StyleProvider>
             );
         } else {
             console.log("Does not have matches");

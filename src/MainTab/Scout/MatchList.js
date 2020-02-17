@@ -19,7 +19,6 @@ export default class MatchList extends React.Component {
           
         return (
             <StyleProvider style={getTheme(material)}>
-               
                 <Container>
                     <Header>
                         <Body>
