@@ -257,7 +257,7 @@ export default {
   topTabBarActiveBorderColor: '#fff',
 
   // Tabs
-  tabBgColor: '#F8F8F8',
+  tabBgColor: Globals["colors"][Globals["brand"]["primary"]],
   tabFontSize: 15,
 
   // Text

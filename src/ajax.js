@@ -36,15 +36,13 @@ exports.isJSON = (str) => {
 exports.getIDToken = async () => {
     try {
         try {
-            console.log(await exports.isSignedIn());
+            console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
             const tokens = await GoogleSignin.getTokens();
             GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
         } catch (error) {
-            console.log("There was an error with getting the tokens");
-            console.log(await exports.isSignedIn());
-            console.log(error);
+            console.log("There was an error with getting the tokens: " + error);
             await GoogleSignin.hasPlayServices();
             try {
                 const userInfo = await GoogleSignin.signIn();
