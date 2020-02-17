@@ -9,13 +9,6 @@ const dataArray = [
   { title: "Third Element", content: "Lorem ipsum dolor sit amet " }
 ];
 
-import { YellowBox } from 'react-native'
-
-YellowBox.ignoreWarnings([
-  'VirtualizedLists should never be nested', // TODO: Remove when fixed. Maybe https://github.com/GeekyAnts/NativeBase/issues/2947 will help.
-])
-
-
 export default class Stats extends Component {
   render() {
     return (
