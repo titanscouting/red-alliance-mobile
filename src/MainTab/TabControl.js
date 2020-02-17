@@ -4,6 +4,7 @@ import Pit from "./Pit/Pit"
 import Matches from "./Scout/Matches"
 import Strategies from "./Strategies/Strategies"
 import Stats from "./Stats/Stats"
+import Options from "./Options/Options"
 
 
 import { createAppContainer } from 'react-navigation';
@@ -22,7 +23,8 @@ const TabControl = createBottomTabNavigator(
     Pit: { screen: Pit},
     Stats: { screen: Stats},
     Heats: { screen: Matchups},
-    Strat: { screen: Strategies}
+    Strat: { screen: Strategies},
+    Options: {screen: Options}
   }, {
     tabBarPosition: "bottom",
 
@@ -36,27 +38,24 @@ const TabControl = createBottomTabNavigator(
                         <FooterTab>
                             <Button vertical active={routeName === 'Teams'} onPress={() => navigation.navigate("Teams")}>
                                 <Icon name="clipboard" />
-                                <Text style={{fontSize: 10}}>Scout</Text>
                             </Button>
                             
                             <Button vertical active={routeName === 'Pit'} onPress={() => navigation.navigate("Pit")}>
                                 <Icon name="hammer" />
-                                <Text style={{fontSize: 10}}>Pit</Text>
                             </Button>
-                            
                             <Button vertical active={routeName === 'Stats'} onPress={() => navigation.navigate("Stats")}>
-                                <Icon name="pie" />
-                                <Text style={{fontSize: 10}}>Stats</Text>
+                                <Icon name="md-stats" />
                             </Button>
                             
                             <Button vertical active={routeName === 'Heats'} onPress={() => navigation.navigate("Heats")}>
-                                <Icon name="podium" />
-                                <Text style={{fontSize: 10}}>Heats</Text> 
+                                <Icon name="eye" />
                             </Button>
                             
                             <Button vertical active={routeName === 'Strat'} onPress={() => navigation.navigate("Strat")}>
                                 <Icon name="git-pull-request" />
-                                <Text style={{fontSize: 10}}>Strat</Text>
+                            </Button>
+                            <Button vertical active={routeName === 'Options'} onPress={() => navigation.navigate("Options")}>
+                                <Icon name="ios-cog" />
                             </Button>
                         </FooterTab>
                     </Footer>

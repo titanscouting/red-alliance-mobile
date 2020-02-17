@@ -29,15 +29,13 @@ export default class Strategies extends Component {
       <Container>
         <Header>
           <Body>
-            <Title>Strategies</Title>
+            <Title>Options</Title>
           </Body>
         </Header>
-        <Content searchBar padder>
-          <Item>
-            <Icon name="search" />
-            <Input placeholder="Search" />
-          </Item>
-          <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
+        <Content>
+          <Button hasText transparent onPress={ajax.signOut}>
+              <Text>Switch User</Text>
+          </Button>
         </Content>
       </Container>
       </StyleProvider>
