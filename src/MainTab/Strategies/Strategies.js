@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, StyleProvider, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import getTheme from '../../../native-base-theme/components';
+import material from '../../../native-base-theme/variables/material';
+
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const dataArray = [
@@ -22,37 +25,27 @@ export default class Strategies extends Component {
 
   render() {
     return (
+      <StyleProvider style={getTheme(material)}>
       <Container>
-
         <Header>
-          <Left/>
-          
           <Body>
             <Title>Strategies</Title>
           </Body>
-
           <Right>
             <Button hasText transparent onPress={ajax.signOut}>
               <Text>Switch User</Text>
             </Button>
           </Right>
-
         </Header>
-
-
         <Content searchBar padder>
-
           <Item>
             <Icon name="search" />
             <Input placeholder="Search" />
           </Item>
-
           <Accordion dataArray={dataArray} icon="add" expandedIcon="remove" />
         </Content>
-
       </Container>
-      
+      </StyleProvider>
     );
   }
 }
-
