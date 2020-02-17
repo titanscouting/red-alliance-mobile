@@ -35,7 +35,7 @@ exports.isJSON = (str) => {
 exports.getIDToken = async () => {
     try {
         try {
-            console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
+            // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
             const tokens = await GoogleSignin.getTokens();
             GoogleSignin.clearCachedToken(tokens.idToken);
@@ -53,7 +53,7 @@ exports.getIDToken = async () => {
                     await exports.AsyncAlert();
                     return await exports.getIDToken();
                 } else if (error.code === statusCodes.IN_PROGRESS) {
-                    console.log("In progress");
+                    console.log("Woah! Sign in is in progress");
                 } else {
                     // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE
                     console.error(error);
