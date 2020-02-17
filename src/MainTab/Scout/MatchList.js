@@ -23,8 +23,9 @@ export default class MatchList extends React.Component {
 
     static propTypes = {
         matches: PropTypes.array.isRequired,
+        refreshMatches: PropTypes.func.isRequired,
     }
-    
+
     state = {
         refreshing: false,
     }
@@ -32,8 +33,8 @@ export default class MatchList extends React.Component {
     onRefresh = () => {
         
         this.state.refreshing = true;
-    
-        wait(2000).then(() => this.state.refreshing = false);
+
+        this.props.refreshMatches().then(() => this.state.refreshing = false);
     }
 
     
