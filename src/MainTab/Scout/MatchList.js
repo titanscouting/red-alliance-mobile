@@ -10,7 +10,6 @@ import MatchCell from './MatchCell';
 
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
-import GLOBAL from '../../global';
 
 function wait(timeout) {
     return new Promise(resolve => {
@@ -24,6 +23,7 @@ export default class MatchList extends React.Component {
     static propTypes = {
         matches: PropTypes.array.isRequired,
         refreshMatches: PropTypes.func.isRequired,
+        onItemPress: PropTypes.func.isRequired,
     }
 
     state = {
@@ -57,6 +57,8 @@ export default class MatchList extends React.Component {
                             refreshControl={
                                 <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                               }
+                            showsVerticalScrollIndicator={false}
+
                         />
                 </Container>
             </StyleProvider>

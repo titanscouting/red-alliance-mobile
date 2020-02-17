@@ -11,7 +11,6 @@ import MatchList from './MatchList';
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
 
-import GLOBAL from '../../global'
 
 export default class Matches extends React.Component {
 
@@ -19,6 +18,9 @@ export default class Matches extends React.Component {
 
     state = {
         matches: [],
+        currentMatchID: null,
+        currentTeamID: null,
+        currentShotTraditional: null,
 
     }
 
@@ -30,7 +32,7 @@ export default class Matches extends React.Component {
 
     refreshMatches = async () => {
         const matches = await ajax.fetchMatches('Central2020'); // TODO: FIX HARDCODING
-        
+
 
         if (this._isMounted) {
             this.setState({matches: matches});
@@ -38,7 +40,7 @@ export default class Matches extends React.Component {
     }
 
     currentMatch = () => {
-        return GLOBAL.matches.find((match) => match.key === GLOBAL.currentMatchID);
+        return this.matches.find((match) => match.key === this.currentMatchID);
     }
 
     async componentWillUnmount() {
@@ -47,14 +49,13 @@ export default class Matches extends React.Component {
     }
 
     setCurrentMatch = (matchId) => {
-        // GLOBAL.currentMatchID.setState({
-        //     currentMatchID: matchId,
-        // });
-        GLOBAL.currentMatchID = matchId;
+        this.setState({
+            currentMatchID: matchId,
+        });
     }
 
     render () {
-        if (GLOBAL.currentShotTraditional) {
+        if (this.currentShotTraditional) {
             console.log("Oh it did exist");
             return (
                 <StyleProvider style={getTheme(material)}>
@@ -66,7 +67,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.currentTeamID) {
+        else if (this.currentTeamID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -77,7 +78,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (GLOBAL.currentMatchID) {
+        else if (this.currentMatchID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -91,7 +92,7 @@ export default class Matches extends React.Component {
         else {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <MatchList matches = {this.state.matches} onItemPress={GLOBAL.setCurrentMatch} refreshMatches={this.refreshMatches}/>
+                    <MatchList matches = {this.state.matches} onItemPress={this.setCurrentMatch} refreshMatches={this.refreshMatches}/>
                 </StyleProvider>
             );
         }
