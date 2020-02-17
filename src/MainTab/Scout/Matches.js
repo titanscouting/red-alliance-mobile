@@ -15,7 +15,10 @@ import GLOBAL from '../../global'
 
 export default class Matches extends React.Component {
 
-    
+    state = {
+        matches: [],
+        
+    }
 
     async componentDidMount() {
         // console.log("Component did mount")

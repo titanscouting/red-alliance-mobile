@@ -21,7 +21,10 @@ function wait(timeout) {
 
 export default class MatchList extends React.Component {
 
-
+    static propTypes = {
+        matches: PropTypes.array.isRequired,
+    }
+    
     state = {
         refreshing: false,
     }
@@ -46,7 +49,7 @@ export default class MatchList extends React.Component {
                         </Body>
                     </Header>
                         <FlatList
-                            data = {GLOBAL.matches}
+                            data = {this.props.matches}
                             renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
                             keyExtractor= {item => String(item.number)}
                             refreshControl={
