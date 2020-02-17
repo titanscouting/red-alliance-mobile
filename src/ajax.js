@@ -23,161 +23,152 @@ const AsyncAlert = async () => new Promise((resolve) => {
     );
   });
 
-  
-var _this = this;
 
-export default {
 
-          
 
-    isJSON(str) {
+exports.isJSON = (str) => {
         try {
             JSON.parse(str);
         } catch (e) {
             return false;
         }
         return true;
-    },
+}
 
-    async getIDToken() {
+exports.getIDToken = async () => {
+    try {
         try {
+            const tokens = await GoogleSignin.getTokens();
+            return tokens.idToken;
+        } catch (error) {
+            await GoogleSignin.hasPlayServices();
             try {
-                const tokens = await GoogleSignin.getTokens();
-                return tokens.idToken;
+                const userInfo = await GoogleSignin.signIn();
+                if (userInfo) {
+                    await AsyncStorage.setItem('name', userInfo.user.name);
+                }
             } catch (error) {
-                await GoogleSignin.hasPlayServices();
-                try {
-                    const userInfo = await GoogleSignin.signIn();
-                    if (userInfo) {
-                        await AsyncStorage.setItem('name', userInfo.user.name);
-                    }
-                } catch (error) {
-                    if (error.code === statusCodes.SIGN_IN_CANCELLED) {
-                        console.log("Cancelled");
-                        await AsyncAlert();
-                        return await this.getIDToken();
+                if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+                    console.log("Cancelled");
+                    await AsyncAlert();
+                    return await this.getIDToken();
 
-                    } else if (error.code === statusCodes.IN_PROGRESS) {
-                        console.log("In progress");
-                    } else {
-                        // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE
-                        console.error(error);
-                    }
+                } else if (error.code === statusCodes.IN_PROGRESS) {
+                    console.log("In progress");
+                } else {
+                    // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE
+                    console.error(error);
                 }
             }
-
-        } catch(error) {
-            console.error(error);
         }
 
-    },
+    } catch(error) {
+        console.error(error);
+    }
 
-    async signOut() {
-        try {
-            const isSignedIn = await GoogleSignin.isSignedIn();
-            if (isSignedIn) {
-                try {
-                    await GoogleSignin.revokeAccess();
-                    await GoogleSignin.signOut();
-                    await AsyncStorage.removeItem('name');
-                } catch (error) {
-                  console.error(error);
-                }
+}
+
+exports.signOut = async () => {
+    try {
+        const isSignedIn = await GoogleSignin.isSignedIn();
+        if (isSignedIn) {
+            try {
+                await GoogleSignin.revokeAccess();
+                await GoogleSignin.signOut();
+                await AsyncStorage.removeItem('name');
+            } catch (error) {
+                console.error(error);
             }
-
-            _this.getIDToken();
-            
-        } catch(error) {
-            console.error(error);
         }
-    },
 
-    async fetchMatches(competition) {
-        const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
+        exports.getIDToken();
         
-        try {
-            return await fetch(endpoint, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'token': token
-                }
-            }).then((response) => {
-                return response.json();
-            }).then((myJson) => {
-                // console.warn(myJson);
-                matches = myJson["data"];
-                arr = [];
-                for (let i=0; i<matches.length; i++) {
-                    dict = {};
-                    dict["number"] = i+1;
-                    dict["scouts"] = matches[i];
-                    arr.push(dict);
-                }
-                return arr;
-            });
+    } catch(error) {
+        console.error(error);
+    }
+},
 
-        } catch(error) {
-            console.error(error);
-        }
-    },
-
-    // await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
-    async submitMatchData(competition, team, match, data) {
-
-        const endpoint = apiHost + "api/submitMatchData";
-        try {
-            fetch(endpoint, {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'token': token
-                },
-                body: JSON.stringify({
-                    competition_id: competition,
-                    match_number: match,
-                    team_scouted: team,
-                    data : data
-                }),
-            }).then((response) => {
-                return response.json();
-            }).then((myJson) => {
-                console.warn(myJson);
-            })
-            // let responseJson = await JSON.parse(response);
-            // console.warn("This is from dev: "+responseJson);
-        } catch(error) {
-            console.error(error);
-        }
-    },
-
+exports.fetchMatches = async (competition) => {
+    const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
     
+    try {
+        return await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': token
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            // console.warn(myJson);
+            matches = myJson["data"];
+            arr = [];
+            for (let i=0; i<matches.length; i++) {
+                dict = {};
+                dict["number"] = i+1;
+                dict["scouts"] = matches[i];
+                arr.push(dict);
+            }
+            return arr;
+        });
+
+    } catch(error) {
+        console.error(error);
+    }
+},
+
+// await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
+exports.submitMatchData = async (competition, team, match, data) => {
+
+    const endpoint = apiHost + "api/submitMatchData";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': token
+            },
+            body: JSON.stringify({
+                competition_id: competition,
+                match_number: match,
+                team_scouted: team,
+                data : data
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+},
+
+
 // STATS
 
-    // await ajax.fetchMatchData('Central2020', '2042', '12');
-    async fetchMatchData(competition, matchNumber, team) {
-        const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
-        
-        try {
-            fetch(endpoint, {
-                method: 'GET',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            }).then((response) => {
-                return response.json();
-            }).then((myJson) => {
-                console.warn(myJson);
-            });
-        } catch(error) {
-            console.error(error);
-        }
-    },
-
-
-
-
-};
+// await ajax.fetchMatchData('Central2020', '2042', '12');
+exports.fetchMatchData = async (competition, matchNumber, team) => {
+    const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
+    
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        });
+    } catch(error) {
+        console.error(error);
+    }
+}
