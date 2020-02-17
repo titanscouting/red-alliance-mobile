@@ -31,15 +31,11 @@ export default class MatchList extends React.Component {
     }
 
     onRefresh = async () => {
-        
         this.setState({refreshing: true});
         await this.props.refreshMatches();
         this.setState({refreshing: false});
-        
     }
 
-    
-    
     render () {
           
         return (
@@ -52,13 +48,14 @@ export default class MatchList extends React.Component {
                     </Header>
                         <FlatList
                             data = {this.props.matches}
-                            renderItem={({item}) => <MatchCell number={item.number} scouts={item.scouts}/>}
+                            renderItem={({item}) => 
+                                <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress}/>
+                            }
                             keyExtractor= {item => String(item.number)}
                             refreshControl={
                                 <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
-                              }
+                            }
                             showsVerticalScrollIndicator={false}
-
                         />
                 </Container>
             </StyleProvider>

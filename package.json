@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "android": "react-native run-android",
-    "android-release" : "react-native run-android --variant=release",
+    "android-release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
     "clean-ios": "npm react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios/assets",
     "start": "react-native start",

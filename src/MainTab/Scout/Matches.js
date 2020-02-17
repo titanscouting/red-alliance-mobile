@@ -49,6 +49,7 @@ export default class Matches extends React.Component {
     }
 
     setCurrentMatch = (matchId) => {
+        console.log("Match: " +  matchId);
         this.setState({
             currentMatchID: matchId,
         });
@@ -78,7 +79,8 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.currentMatchID) {
+        else if (this.currentMatchID != null) {
+            console.log("Current Match ID: " + this.currentMatchID)
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>

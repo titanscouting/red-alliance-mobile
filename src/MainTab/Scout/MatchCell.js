@@ -4,24 +4,33 @@ import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
 import Globals from '../../GlobalColors'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class MatchCell extends React.Component {
 
     static propTypes = {
         number: PropTypes.number.isRequired,
         scouts: PropTypes.number.isRequired,
+        onPress: PropTypes.func.isRequired,
+    };
+
+
+    handlePress = () => {
+        this.props.onPress(this.props.number);
     };
 
     // TODO: FIX HARDCODED 12 SCOUTS
     render () {
         return (
             
-            <ListItem>
-                <View style={styles.listItem}>
-                    <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                    <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
-                </View>
+            <TouchableOpacity onPress={this.handlePress}>
+                <ListItem>
+                    <View style={styles.listItem}>
+                        <Text style={styles.match}>{"Match "+this.props.number}</Text>
+                        <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
+                    </View>
             </ListItem>
+            </TouchableOpacity>
 
         );
     }
