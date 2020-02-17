@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, StyleProvider, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, Card, CardItem, StyleProvider, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 
@@ -26,7 +26,7 @@ export default class Strategies extends Component {
   render() {
     return (
       <StyleProvider style={getTheme(material)}>
-      <Container>
+      {/* <Container>
         <Header>
           <Body>
             <Title>Options</Title>
@@ -37,7 +37,28 @@ export default class Strategies extends Component {
               <Text>Switch User</Text>
           </Button>
         </Content>
-      </Container>
+      </Container> */}
+
+    <Container>
+    <Header>
+        <Body>
+            <Title>Options</Title>
+        </Body>
+    </Header>
+    <Content>
+        <Card>
+            <CardItem>
+              <Text>Google Account</Text>
+              <Right>
+                <Button hasText onPress={ajax.signOut}>
+                  <Text>Switch User</Text>
+                </Button>
+              </Right>
+            </CardItem>
+        </Card>
+    </Content>
+    </Container>
+
       </StyleProvider>
     );
   }

@@ -30,11 +30,13 @@ export default class MatchList extends React.Component {
         refreshing: false,
     }
 
-    onRefresh = () => {
+    onRefresh = async () => {
         
         this.state.refreshing = true;
 
-        this.props.refreshMatches().then(() => this.state.refreshing = false);
+        await this.props.refreshMatches();
+        this.state.refreshing = false;
+        
     }
 
     

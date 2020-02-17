@@ -22,6 +22,7 @@ export default class Matches extends React.Component {
 
     async componentDidMount() {
         this.refreshMatches();
+        
     }
 
     refreshMatches = async () => {
@@ -77,20 +78,10 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.matches) {
+        else {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <MatchList matches = {this.state.matches} onItemPress={GLOBAL.setCurrentMatch} refreshMatches={this.refreshMatches}/>
-                </StyleProvider>
-            );
-        } else {
-            return (
-                <StyleProvider style={getTheme(material)}>
-                    <Container>
-                        <Content>
-                            <ActivityIndicator size="large"/>
-                        </Content>
-                    </Container>
                 </StyleProvider>
             );
         }
