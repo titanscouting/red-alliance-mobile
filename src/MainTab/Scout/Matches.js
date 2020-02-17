@@ -29,21 +29,20 @@ export default class Matches extends React.Component {
     }
 
     refreshMatches = async () => {
-        console.log("Requested to refresh");
-        const matches = await ajax.fetchMatches('Central2020');
+        const matches = await ajax.fetchMatches('Central2020'); // TODO: FIX HARDCODING
+        
 
         if (this._isMounted) {
             this.setState({matches: matches});
         }
-        console.log("The refresh should be over by now");
     }
 
     currentMatch = () => {
         return GLOBAL.matches.find((match) => match.key === GLOBAL.currentMatchID);
     }
 
-    async componentDidUnmount() {
-        console.log("Unmount")
+    async componentWillUnmount() {
+        console.log("Unmount");
         this._isMounted = false;
     }
 

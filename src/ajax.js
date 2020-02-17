@@ -3,7 +3,6 @@ const apiHost = 'https://scouting-api.herokuapp.com/';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import { Toast } from 'native-base';
 import { Alert } from "react-native";
 
 exports.AsyncAlert = async () => new Promise((resolve) => {
@@ -101,18 +100,15 @@ exports.signOut = async () => {
 exports.fetchMatches = async (competition) => {
 
     const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
+    const token = await exports.getIDToken();
     
-    if (await !exports.isSignedIn()) {
-        return null;
-    }
-
     try {
         return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': exports.getIDToken()
+                'token': token 
             }
         }).then((response) => {
             return response.json();
