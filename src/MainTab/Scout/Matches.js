@@ -5,8 +5,8 @@ import material from '../../../native-base-theme/variables/material';
 
 import { FlatList, ActivityIndicator, View } from 'react-native';
 import PropTypes from 'prop-types';
-import MatchCell from './MatchCell';
-import MatchList from './MatchList';
+import MatchCell from './MatchList/MatchCell';
+import MatchList from './MatchList/MatchList';
 
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
