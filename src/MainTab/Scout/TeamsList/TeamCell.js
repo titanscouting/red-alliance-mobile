@@ -3,10 +3,10 @@ import { Container, Separator, Header, Title, Accordion, ListItem, Content, Foot
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
-import Globals from '../../GlobalColors'
+import Globals from '../../../GlobalColors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
-export default class MatchCell extends React.Component {
+export default class TeamCell extends React.Component {
 
     static propTypes = {
         number: PropTypes.number.isRequired,
@@ -19,7 +19,6 @@ export default class MatchCell extends React.Component {
         this.props.onPress(this.props.number);
     };
 
-    // TODO: FIX HARDCODED 12 SCOUTS
     render () {
         return (
             

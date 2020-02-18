@@ -1,24 +1,13 @@
 import React from 'react';
 import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import getTheme from '../../../native-base-theme/components';
-import material from '../../../native-base-theme/variables/material';
+import getTheme from '../../../../native-base-theme/components';
+import material from '../../../../native-base-theme/variables/material';
 
 import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchCell';
 
-
-import ajax from '../../ajax'
-import { StackActions } from 'react-navigation';
-
-function wait(timeout) {
-    return new Promise(resolve => {
-        setTimeout(resolve, timeout);
-    });
-}
-
-
-export default class MatchList extends React.Component {
+export default class TeamList extends React.Component {
 
     static propTypes = {
         matches: PropTypes.array.isRequired,
