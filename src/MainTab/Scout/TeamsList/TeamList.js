@@ -5,13 +5,13 @@ import material from '../../../../native-base-theme/variables/material';
 
 import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
-import MatchCell from './MatchCell';
+import TeamCell from './TeamCell';
 
 export default class TeamList extends React.Component {
 
     static propTypes = {
-        matches: PropTypes.array.isRequired,
-        refreshMatches: PropTypes.func.isRequired,
+        teams: PropTypes.array.isRequired,
+        refreshTeams: PropTypes.func.isRequired,
         onItemPress: PropTypes.func.isRequired,
     }
 
@@ -21,7 +21,7 @@ export default class TeamList extends React.Component {
 
     onRefresh = async () => {
         this.setState({refreshing: true});
-        await this.props.refreshMatches();
+        await this.props.refreshTeams();
         this.setState({refreshing: false});
     }
 
@@ -32,13 +32,13 @@ export default class TeamList extends React.Component {
                 <Container>
                     <Header>
                         <Body>
-                            <Title>Matches</Title>
+                            <Title>Teams</Title>
                         </Body>
                     </Header>
                         <FlatList
-                            data = {this.props.matches}
+                            data = {this.props.teams}
                             renderItem={({item}) => 
-                                <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress}/>
+                                <TeamCell number={item.number} isBlue={item.isBlue} scouterDescription={scouterDescription} onPress={this.props.onItemPress}/>
                             }
                             keyExtractor= {item => String(item.number)}
                             refreshControl={

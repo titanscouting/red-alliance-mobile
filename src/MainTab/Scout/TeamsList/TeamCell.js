@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
-import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
 import Globals from '../../../GlobalColors'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
@@ -10,10 +9,10 @@ export default class TeamCell extends React.Component {
 
     static propTypes = {
         number: PropTypes.number.isRequired,
-        scouts: PropTypes.number.isRequired,
+        isBlue: PropTypes.bool.isRequired,
+        scouterDescription: PropTypes.string.isRequired,
         onPress: PropTypes.func.isRequired,
     };
-
 
     handlePress = () => {
         this.props.onPress(this.props.number);
@@ -25,10 +24,13 @@ export default class TeamCell extends React.Component {
             <TouchableOpacity onPress={this.handlePress}>
                 <ListItem>
                     <View style={styles.listItem}>
-                        <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                        <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
+                        <View color={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
+                        <View style={styles.row}>
+                            <Text style={styles.match} flex={1}>{"Team "+this.props.number}</Text>
+                            <Text style={styles.match} flex={1}>{"Covered by "+this.props.scouterDescription}</Text>
+                        </View>
                     </View>
-            </ListItem>
+               </ListItem>
             </TouchableOpacity>
 
         );
@@ -38,16 +40,19 @@ export default class TeamCell extends React.Component {
 const styles = StyleSheet.create({
   match: {
     color: 'black',
-    // fontFamily: "Proxima Nova",
     fontSize: 20,
+    flex: 1,
   },
-  scouts: {
-    fontSize: 16,
+  ribbon: {
+    width: 10,
+  },
+  row: {
+    flexDirection: 'row'
   },
   listItem: {
     alignContent: 'space-between',
     justifyContent: 'space-between',
-    flexDirection: 'row',
+    flexDirection: 'column',
     height: 30,
     flex: 1,
     alignItems: 'center',
