@@ -7,35 +7,40 @@ import { FlatList, ActivityIndicator, View } from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchList/MatchCell';
 import MatchList from './MatchList/MatchList';
-
+import TeamList from './TeamsList/TeamList';
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
-
+import GLOBAL from '../../GlobalDefinitions'
 
 export default class Matches extends React.Component {
 
     _isMounted = false;
-
     state = {
         matches: [],
         currentMatchID: null,
-        currentTeamID: null,
-        currentShotTraditional: null,
+
+        teams: null,
+        currentTeamNumber: null,
+        currentIsTraditional: null,
 
     }
 
     async componentDidMount() {
         this._isMounted = true;
         this.refreshMatches();
-        
     }
 
     refreshMatches = async () => {
-        const matches = await ajax.fetchMatches('Central2020'); // TODO: FIX HARDCODING
-
-
+        const matches = await ajax.fetchMatches(GLOBAL.data.competition);
         if (this._isMounted) {
             this.setState({matches: matches});
+        }
+    }
+
+    refreshTeams = async () => {
+        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition);
+        if (this._isMounted) {
+            this.setState({teams: teams});
         }
     }
 
@@ -44,19 +49,30 @@ export default class Matches extends React.Component {
     }
 
     async componentWillUnmount() {
-        console.log("Unmount");
         this._isMounted = false;
     }
 
+    setCurrentScoutingPosition = (team, isTraditional) => {
+        console.log(team, isTraditional);
+        if (this._isMounted) {
+            this.setState({
+                currentTeamNumber: team,
+                currentIsTraditional: isTraditional,
+            });
+        }
+    }
+
     setCurrentMatch = (matchId) => {
-        console.log("Match: " +  matchId);
-        this.setState({
-            currentMatchID: matchId,
-        });
+        if (this._isMounted) {
+            this.setState({
+                currentMatchID: matchId,
+                teams: [],
+            });
+        }
     }
 
     render () {
-        if (this.currentShotTraditional) {
+        if (this.state.currentShotTraditional) {
             console.log("Oh it did exist");
             return (
                 <StyleProvider style={getTheme(material)}>
@@ -68,7 +84,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.currentTeamID) {
+        else if (this.state.currentTeamID) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -79,15 +95,10 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.currentMatchID != null) {
-            console.log("Current Match ID: " + this.currentMatchID)
+        else if (this.state.currentMatchID != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <Container>
-                        <Content>
-                            <Text>This is currentMatchID</Text>
-                        </Content>
-                    </Container>
+                    <TeamList teams={this.state.teams} refreshItems={this.refreshTeams} onItemPress={this.setCurrentScoutingPosition}/>
                 </StyleProvider>
                 );
         }

@@ -18,5 +18,8 @@ export default {
         "secondary-light":"light-blue",
         "secondary-dark":"really-dark-blue",
         "tint":"light-red-tint",
+    },
+    "data":{
+        "competition":"Central2020"
     }
 };

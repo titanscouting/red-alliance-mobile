@@ -5,6 +5,13 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 import { Alert } from "react-native";
 
+function wait(timeout) {
+    return new Promise(resolve => {
+        setTimeout(resolve, timeout);
+    });
+}
+
+  
 exports.AsyncAlert = async () => new Promise((resolve) => {
     Alert.alert(
       'Sign In',
@@ -66,6 +73,84 @@ exports.getIDToken = async () => {
         console.error(error);
     }
 
+}
+
+exports.fetchTeamsForMatch= async (competition, match)  => {
+    await wait(2000);
+    return [
+        {
+            "team":2022,
+            "isBlue":true,
+            "isTraditional":true,
+            "scouterDescription":"Ian Fowler"
+        },
+        {
+            "team":2022,
+            "isBlue":true,
+            "isTraditional":false,
+            "scouterDescription":null
+        },
+        {
+            "team":128,
+            "isBlue":true,
+            "isTraditional":true,
+            "scouterDescription":null
+        },
+        {
+            "team":128,
+            "isBlue":true,
+            "isTraditional":false,
+            "scouterDescription":null
+        },
+        {
+            "team":246,
+            "isBlue":true,
+            "isTraditional":true,
+            "scouterDescription":null
+        },
+        {
+            "team":246,
+            "isBlue":true,
+            "isTraditional":false,
+            "scouterDescription":"Tatiana Michel"
+        },
+        {
+            "team":1024,
+            "isBlue":false,
+            "isTraditional":true,
+            "scouterDescription":null
+        },
+        {
+            "team":1024,
+            "isBlue":false,
+            "isTraditional":false,
+            "scouterDescription":null
+        },
+        {
+            "team":7543,
+            "isBlue":false,
+            "isTraditional":true,
+            "scouterDescription":null
+        },
+        {
+            "team":7543,
+            "isBlue":false,
+            "isTraditional":false,
+            "scouterDescription":"Xander Wells"
+        },
+        {
+            "team":8192,
+            "isBlue":false,
+            "isTraditional":true,
+            "scouterDescription":null
+        },
+        {
+            "team":8192,
+            "isBlue":false,
+            "isTraditional":false,
+            "scouterDescription":null
+        }
+    ]
 }
 
 exports.isSignedIn = async () => {

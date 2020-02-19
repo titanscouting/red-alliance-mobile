@@ -26,29 +26,44 @@ export default class TeamList extends React.Component {
     }
 
     render () {
-          
-        return (
-            <StyleProvider style={getTheme(material)}>
-                <Container>
-                    <Header>
-                        <Body>
-                            <Title>Teams</Title>
-                        </Body>
-                    </Header>
-                        <FlatList
-                            data = {this.props.teams}
-                            renderItem={({item}) => 
-                                <TeamCell number={item.number} isBlue={item.isBlue} scouterDescription={scouterDescription} onPress={this.props.onItemPress}/>
-                            }
-                            keyExtractor= {item => String(item.number)}
-                            refreshControl={
-                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
-                            }
-                            showsVerticalScrollIndicator={false}
-                        />
-                </Container>
-            </StyleProvider>
-        );
+        if (this.props.teams.count > 0) {
+            return (
+                <StyleProvider style={getTheme(material)}>
+                    <Container>
+                        <Header>
+                            <Body>
+                                <Title>Teams</Title>
+                            </Body>
+                        </Header>
+                        <ActivityIndicator animating={true}/>
+                    </Container>
+                </StyleProvider>
+            );
+        } else {
+            return (
+                <StyleProvider style={getTheme(material)}>
+                    <Container>
+                        <Header>
+                            <Body>
+                                <Title>Teams</Title>
+                            </Body>
+                        </Header>
+                            <FlatList
+                                data = {this.props.teams}
+                                renderItem={({item}) => 
+                                    <TeamCell number={item.number} isBlue={item.isBlue} scouterDescription={scouterDescription} onPress={this.props.onItemPress}/>
+                                }
+                                keyExtractor= {item => String(item.number)}
+                                refreshControl={
+                                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                                }
+                                showsVerticalScrollIndicator={false}
+                            />
+                    </Container>
+                </StyleProvider>
+            );
+        }
+        
     }
     
 }
