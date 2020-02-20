@@ -81,73 +81,31 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
         {
             "team":2022,
             "isBlue":true,
-            "isTraditional":true,
             "scouterDescription":"Ian Fowler"
         },
         {
-            "team":2022,
-            "isBlue":true,
-            "isTraditional":false,
-            "scouterDescription":null
-        },
-        {
             "team":128,
             "isBlue":true,
-            "isTraditional":true,
-            "scouterDescription":null
-        },
-        {
-            "team":128,
-            "isBlue":true,
-            "isTraditional":false,
             "scouterDescription":null
         },
         {
             "team":246,
             "isBlue":true,
-            "isTraditional":true,
-            "scouterDescription":null
-        },
-        {
-            "team":246,
-            "isBlue":true,
-            "isTraditional":false,
             "scouterDescription":"Tatiana Michel"
         },
         {
             "team":1024,
             "isBlue":false,
-            "isTraditional":true,
-            "scouterDescription":null
-        },
-        {
-            "team":1024,
-            "isBlue":false,
-            "isTraditional":false,
             "scouterDescription":null
         },
         {
             "team":7543,
             "isBlue":false,
-            "isTraditional":true,
-            "scouterDescription":null
-        },
-        {
-            "team":7543,
-            "isBlue":false,
-            "isTraditional":false,
             "scouterDescription":"Xander Wells"
         },
         {
             "team":8192,
             "isBlue":false,
-            "isTraditional":true,
-            "scouterDescription":null
-        },
-        {
-            "team":8192,
-            "isBlue":false,
-            "isTraditional":false,
             "scouterDescription":null
         }
     ]

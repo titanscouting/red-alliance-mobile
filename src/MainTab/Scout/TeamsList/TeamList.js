@@ -26,7 +26,9 @@ export default class TeamList extends React.Component {
     }
 
     render () {
-        if (this.props.teams.count > 0) {
+        if (this.props.teams.length === 0) {
+            
+            console.warn(this.props.teams.length);
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
@@ -40,10 +42,16 @@ export default class TeamList extends React.Component {
                 </StyleProvider>
             );
         } else {
+            console.warn(this.props.teams.length);
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
+                            <Left>
+                                <Button hasText transparent>
+                                    <Text>Back</Text>
+                                </Button>
+                            </Left>
                             <Body>
                                 <Title>Teams</Title>
                             </Body>

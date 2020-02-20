@@ -10,10 +10,10 @@ export default class TeamCell extends React.Component {
     static propTypes = {
         number: PropTypes.number.isRequired,
         isBlue: PropTypes.bool.isRequired,
-        isTraditional: PropTypes.bool.isRequired,
         scouterDescription: PropTypes.string.isRequired,
         onPress: PropTypes.func.isRequired,
     };
+
 
     handlePress = () => {
         this.props.onPress(this.props.number);
@@ -23,13 +23,14 @@ export default class TeamCell extends React.Component {
         return (
             
             <TouchableOpacity onPress={this.handlePress}>
-                <ListItem>
-                    <View style={styles.listItem}>
-                        <View color={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
-                        <View style={styles.row}>
-                            <Text style={styles.match} flex={1}>{"Team "+this.props.number}</Text>
-                            <Text style={styles.match} flex={1}>{"Covered by "+this.props.scouterDescription}</Text>
+                <ListItem style={styles.cell}>
+                    <View backgroundColor={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
+                    <View width={10}/>
+                    <View style={styles.scouter}>
+                        <View>
+                            <Text style={styles.team}>{"Team "+this.props.number}</Text>
                         </View>
+                        <Text style={styles.scouter}>{"Covered by "+this.props.scouterDescription}</Text>
                     </View>
                </ListItem>
             </TouchableOpacity>
@@ -39,23 +40,25 @@ export default class TeamCell extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  match: {
-    color: 'black',
-    fontSize: 20,
-    flex: 1,
-  },
-  ribbon: {
-    width: 10,
-  },
-  row: {
-    flexDirection: 'row'
-  },
-  listItem: {
-    alignContent: 'space-between',
-    justifyContent: 'space-between',
-    flexDirection: 'column',
-    height: 30,
-    flex: 1,
-    alignItems: 'center',
-  }
+    ribbon: {
+        width: 15,
+        height: 40,
+    },
+    team: {
+      color: 'black',
+      fontSize: 18,
+      flex: 1,
+    },
+    type: {
+      color: 'black',
+      fontSize: 16,
+      flex: 1,
+    },
+    scouter: {
+        flexDirection: 'column',
+        justifyContent: 'space-between',
+    },
+    cell: {
+        flexDirection: 'row'
+    }
 });
