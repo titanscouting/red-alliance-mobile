@@ -38,7 +38,7 @@ export default class Matches extends React.Component {
     }
 
     refreshTeams = async () => {
-        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition);
+        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchID);
         if (this._isMounted) {
             this.setState({teams: teams});
         }
@@ -63,12 +63,14 @@ export default class Matches extends React.Component {
     }
 
     setCurrentMatch = (matchId) => {
+        console.log(matchId);
         if (this._isMounted) {
             this.setState({
                 currentMatchID: matchId,
                 teams: [],
             });
         }
+        this.refreshTeams();
     }
 
     render () {

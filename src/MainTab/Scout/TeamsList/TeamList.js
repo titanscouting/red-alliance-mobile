@@ -51,7 +51,7 @@ export default class TeamList extends React.Component {
                             <FlatList
                                 data = {this.props.teams}
                                 renderItem={({item}) => 
-                                    <TeamCell number={item.number} isBlue={item.isBlue} scouterDescription={scouterDescription} onPress={this.props.onItemPress}/>
+                                    <TeamCell number={item.team} isBlue={item.isBlue} scouterDescription={item.scouterDescription} isTraditional={item.isTraditional} onPress={this.props.onItemPress}/>
                                 }
                                 keyExtractor= {item => String(item.number)}
                                 refreshControl={

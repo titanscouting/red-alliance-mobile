@@ -2,7 +2,7 @@
 
 import color from 'color';
 import { Platform, Dimensions, PixelRatio } from 'react-native';
-import Globals from '../../src/GlobalColors'
+import Globals from '../../src/GlobalDefinitions'
 import { PLATFORM } from './commonColor';
 
 const deviceHeight = Dimensions.get('window').height;
