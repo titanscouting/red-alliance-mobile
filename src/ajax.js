@@ -309,3 +309,26 @@ exports.fetchCompetitionSchedule = async (competition) => {
         console.error(error);
     }
 }
+
+exports.fetch2022Schedule = async (competition) => {
+
+    const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+            // ADD FUNCTIONALITY HERE AS NEEDED
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
