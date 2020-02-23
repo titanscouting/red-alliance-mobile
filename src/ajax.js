@@ -79,42 +79,142 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
     await wait(2000);
     return [
         {
-            "key":1,
-            "team":2022,
+            "teamNumber":2022,
             "isBlue":true,
             "scouterDescription":"Ian Fowler"
         },
         {
-            "key":2,
-            "team":128,
+            "teamNumber":128,
             "isBlue":true,
             "scouterDescription":null
         },
         {
-            "key":3,
-            "team":246,
+            "teamNumber":246,
             "isBlue":true,
             "scouterDescription":"Tatiana Michel"
         },
         {
-            "key":4,
-            "team":1024,
+            "teamNumber":1024,
             "isBlue":false,
             "scouterDescription":null
         },
         {
-            "key":5,
-            "team":7543,
+            "teamNumber":7543,
             "isBlue":false,
             "scouterDescription":"Xander Wells"
         },
         {
-            "key":6,
-            "team":8192,
+            "teamNumber":8192,
             "isBlue":false,
             "scouterDescription":null
         }
-    ]
+    ];
+    
+}
+
+
+exports.fetchConfiguration = async (competition) => {
+    await wait(2000);
+    return [
+        {
+            "Auto":[
+                {
+                    "name":"Passed Auto Line?",
+                    "key":"pass-line",
+                    "widget":"segment",
+                    "options":["idk","Yes","No"]
+                },
+                {
+                    "name":"Initial Balls Stored",
+                    "key":"balls-started",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Extra Balls Collected",
+                    "key":"balls-collected",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Balls Scored Upper",
+                    "key":"balls-upper",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Balls Scored Lower",
+                    "key":"balls-lower",
+                    "widget":"stepper"
+                }
+            ]
+        },
+        {
+            "Teleop":[
+                {
+                    "name":"Spun Wheel?",
+                    "key":"spun-wheel",
+                    "widget":"segment",
+                    "options":["idk","Yes","No"]
+                },
+                {
+                    "name":"Color Control?",
+                    "key":"color-control",
+                    "widget":"segment",
+                    "options":["idk","Yes","No"]
+                },
+                {
+                    "name":"Initial Balls Stored",
+                    "key":"balls-started",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Extra Balls Collected",
+                    "key":"balls-collected",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Balls Scored Upper",
+                    "key":"balls-upper",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Balls Scored Lower",
+                    "key":"balls-lower",
+                    "widget":"stepper"
+                },
+                {
+                    "name":"Balls Blocked",
+                    "key":"balls-blocked",
+                    "widget":"stepper"
+                }
+            ]
+        },
+        {
+            "Notes":[
+                {
+                    "name":"Overall Competency",
+                    "key":"competency",
+                    "widget":"segment",
+                    "options":["idk","Awful","Meh","Good","Best"]
+                },
+                {
+                    "name":"Speed",
+                    "key":"speed",
+                    "widget":"segment",
+                    "options":["idk","Slow","Med.","Fast","Ludicrous"]
+                },
+                {
+                    "name":"Strategic Focus",
+                    "key":"strategic-focus",
+                    "widget":"segment",
+                    "options":["idk","Offense","Defense","Hybrid"]
+                },
+                {
+                    "name":"Strategy Notes",
+                    "key":"strategy-notes",
+                    "widget":"text-area"
+                }
+            ]
+        }
+    ];
 }
 
 exports.isSignedIn = async () => {

@@ -30,7 +30,7 @@ export default class TeamCell extends React.Component {
                         <View>
                             <Text style={styles.team}>{"Team "+this.props.number}</Text>
                         </View>
-                        <Text style={styles.scouter}>{"Covered by "+this.props.scouterDescription}</Text>
+                        <Text style={styles.scouter}>{this.props.scouterDescription ? "Covered by "+this.props.scouterDescription : "Open"}</Text>
                     </View>
                </ListItem>
             </TouchableOpacity>
