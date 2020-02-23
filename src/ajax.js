@@ -76,40 +76,40 @@ exports.getIDToken = async () => {
 }
 
 exports.fetchTeamsForMatch= async (competition, match)  => {
-    await wait(2000);
-    return [
-        {
-            "teamNumber":2022,
-            "isBlue":true,
-            "scouterDescription":"Ian Fowler"
-        },
-        {
-            "teamNumber":128,
-            "isBlue":true,
-            "scouterDescription":null
-        },
-        {
-            "teamNumber":246,
-            "isBlue":true,
-            "scouterDescription":"Tatiana Michel"
-        },
-        {
-            "teamNumber":1024,
-            "isBlue":false,
-            "scouterDescription":null
-        },
-        {
-            "teamNumber":7543,
-            "isBlue":false,
-            "scouterDescription":"Xander Wells"
-        },
-        {
-            "teamNumber":8192,
-            "isBlue":false,
-            "scouterDescription":null
-        }
-    ];
+    const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number="+match);
     
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+            let data = []
+            let is_blue;
+            let desc;
+            for (let i = 0; i<myJson.scouters.length; i++) {
+                if (i < 3) {
+                    is_blue = true;
+                } else {
+                    is_blue = false;
+                }
+                try {
+                    desc = myJson.scouters[i].name;
+                } catch (e) {
+                    desc = null;
+                }
+                data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
+            }
+            return data;
+        });
+    } catch(error) {
+        console.error(error);
+    }
 }
 
 
