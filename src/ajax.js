@@ -79,31 +79,37 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
     await wait(2000);
     return [
         {
+            "key":1,
             "team":2022,
             "isBlue":true,
             "scouterDescription":"Ian Fowler"
         },
         {
+            "key":2,
             "team":128,
             "isBlue":true,
             "scouterDescription":null
         },
         {
+            "key":3,
             "team":246,
             "isBlue":true,
             "scouterDescription":"Tatiana Michel"
         },
         {
+            "key":4,
             "team":1024,
             "isBlue":false,
             "scouterDescription":null
         },
         {
+            "key":5,
             "team":7543,
             "isBlue":false,
             "scouterDescription":"Xander Wells"
         },
         {
+            "key":6,
             "team":8192,
             "isBlue":false,
             "scouterDescription":null

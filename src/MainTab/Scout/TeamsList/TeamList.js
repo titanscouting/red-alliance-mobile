@@ -13,6 +13,8 @@ export default class TeamList extends React.Component {
         teams: PropTypes.array.isRequired,
         refreshTeams: PropTypes.func.isRequired,
         onItemPress: PropTypes.func.isRequired,
+        onBack: PropTypes.func.isRequired,
+        matchNumber: PropTypes.string.isRequired,
     }
 
     state = {
@@ -25,16 +27,22 @@ export default class TeamList extends React.Component {
         this.setState({refreshing: false});
     }
 
+    onBack = () => {
+        this.props.onBack(); 
+    }
+
+    doNothing = () => {
+        console.log("Do nothing!");
+    }
+
     render () {
         if (this.props.teams.length === 0) {
-            
-            console.warn(this.props.teams.length);
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
                             <Body>
-                                <Title>Teams</Title>
+                                <Title>Match {this.props.matchNumber}</Title>
                             </Body>
                         </Header>
                         <ActivityIndicator animating={true}/>
@@ -42,24 +50,23 @@ export default class TeamList extends React.Component {
                 </StyleProvider>
             );
         } else {
-            console.warn(this.props.teams.length);
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
                             <Left>
-                                <Button hasText transparent>
-                                    <Text>Back</Text>
+                                <Button transparent onPress={this.onBack}>
+                                     <Icon name='arrow-back' />
                                 </Button>
                             </Left>
                             <Body>
-                                <Title>Teams</Title>
+                                <Title>Match {this.props.matchNumber}</Title>
                             </Body>
                         </Header>
                             <FlatList
                                 data = {this.props.teams}
                                 renderItem={({item}) => 
-                                    <TeamCell number={item.team} isBlue={item.isBlue} scouterDescription={item.scouterDescription} isTraditional={item.isTraditional} onPress={this.props.onItemPress}/>
+                                    <TeamCell number={item.team} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress}/>
                                 }
                                 keyExtractor= {item => String(item.number)}
                                 refreshControl={

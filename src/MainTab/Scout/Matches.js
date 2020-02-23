@@ -17,11 +17,10 @@ export default class Matches extends React.Component {
     _isMounted = false;
     state = {
         matches: [],
-        currentMatchID: null,
+        currentMatchNumber: null,
 
         teams: null,
         currentTeamNumber: null,
-        currentIsTraditional: null,
 
     }
 
@@ -38,39 +37,43 @@ export default class Matches extends React.Component {
     }
 
     refreshTeams = async () => {
-        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchID);
+        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
         if (this._isMounted) {
             this.setState({teams: teams});
         }
     }
 
     currentMatch = () => {
-        return this.matches.find((match) => match.key === this.currentMatchID);
+        return this.matches.find((match) => match.key === this.currentMatchNumber);
     }
 
     async componentWillUnmount() {
         this._isMounted = false;
     }
 
-    setCurrentScoutingPosition = (team, isTraditional) => {
-        console.log(team, isTraditional);
+    setCurrentScoutingPosition = (team) => {
         if (this._isMounted) {
             this.setState({
                 currentTeamNumber: team,
-                currentIsTraditional: isTraditional,
             });
         }
     }
 
     setCurrentMatch = (matchId) => {
-        console.log(matchId);
         if (this._isMounted) {
             this.setState({
-                currentMatchID: matchId,
+                currentMatchNumber: matchId,
                 teams: [],
             });
         }
         this.refreshTeams();
+    }
+
+    unsetCurrentMatch = () => {
+        this.setState({
+            currentMatchNumber: null,
+            teams: null,
+        });
     }
 
     render () {
@@ -97,10 +100,10 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentMatchID != null) {
+        else if (this.state.currentMatchNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <TeamList teams={this.state.teams} refreshItems={this.refreshTeams} onItemPress={this.setCurrentScoutingPosition}/>
+                    <TeamList teams={this.state.teams} refreshTeams={this.refreshTeams} matchNumber={this.state.currentMatchNumber} onBack={this.unsetCurrentMatch} onItemPress={this.setCurrentScoutingPosition}/>
                 </StyleProvider>
                 );
         }
