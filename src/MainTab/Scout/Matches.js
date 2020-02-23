@@ -89,7 +89,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentTeamID) {
+        else if (this.state.currentTeamID != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>

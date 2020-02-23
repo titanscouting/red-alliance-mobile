@@ -10,7 +10,7 @@ export default class TeamCell extends React.Component {
     static propTypes = {
         number: PropTypes.number.isRequired,
         isBlue: PropTypes.bool.isRequired,
-        scouterDescription: PropTypes.string.isRequired,
+        scouterDescription: PropTypes.string,
         onPress: PropTypes.func.isRequired,
     };
 
