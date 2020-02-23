@@ -332,3 +332,32 @@ exports.fetch2022Schedule = async (competition) => {
         console.error(error);
     }
 }
+
+exports.submitStrategy = async (competition, match, team, data) => {
+
+    const endpoint = apiHost + "api/submitStrategy";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': exports.getIDToken()
+            },
+            body: JSON.stringify({
+                competition: competition, 
+                match: match, 
+                team: team, 
+                data: data
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
