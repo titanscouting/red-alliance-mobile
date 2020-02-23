@@ -232,3 +232,30 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
         console.error(error);
     }
 }
+
+exports.addScouterToMatch = async (competition, team, match, data) => {
+
+    const endpoint = apiHost + "api/addScouterToMatch";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': exports.getIDToken()
+            },
+            body: JSON.stringify({
+                match: match,
+                team_scouting: team,
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
