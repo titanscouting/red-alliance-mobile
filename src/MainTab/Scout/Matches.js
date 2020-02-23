@@ -76,6 +76,23 @@ export default class Matches extends React.Component {
         });
     }
 
+    setCurrentTeam = (teamNumber) => {
+        if (this._isMounted) {
+            this.setState({
+                currentTeamNumber: teamNumber,
+                configuration: [],
+            });
+        }
+        this.pullConfiguration();
+    }
+    unsetCurrentTeam = () => {
+        this.setState({
+            currentTeamNumber: null,
+        });
+    }
+
+
+
     render () {
         if (this.state.currentShotTraditional) {
             console.log("Oh it did exist");
@@ -89,7 +106,7 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentTeamID != null) {
+        else if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
