@@ -332,3 +332,132 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
         console.error(error);
     }
 }
+
+exports.addScouterToMatch = async (team, match) => {
+
+    const endpoint = apiHost + "api/addScouterToMatch";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': exports.getIDToken()
+            },
+            body: JSON.stringify({
+                match: match,
+                team_scouting: team,
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.removeScouterFromMatch = async (team, match) => {
+
+    const endpoint = apiHost + "api/removeScouterFromMatch";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': exports.getIDToken()
+            },
+            body: JSON.stringify({
+                match: match,
+                team_scouting: team,
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.fetchCompetitionSchedule = async (competition) => {
+
+    const endpoint = apiHost + "api/fetchCompetitionSchedule?competition="+competition;
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+            // ADD FUNCTIONALITY HERE AS NEEDED
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.fetch2022Schedule = async (competition) => {
+
+    const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+            // ADD FUNCTIONALITY HERE AS NEEDED
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.submitStrategy = async (competition, match, team, data) => {
+
+    const endpoint = apiHost + "api/submitStrategy";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': exports.getIDToken()
+            },
+            body: JSON.stringify({
+                competition: competition, 
+                match: match, 
+                team: team, 
+                data: data
+            }),
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            console.warn(myJson);
+        })
+        // let responseJson = await JSON.parse(response);
+        // console.warn("This is from dev: "+responseJson);
+    } catch(error) {
+        console.error(error);
+    }
+}
