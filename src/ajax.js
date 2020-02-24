@@ -75,8 +75,8 @@ exports.getIDToken = async () => {
 
 }
 
-exports.fetchTeamsForMatch= async (competition, match)  => {
-    const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number="+match);
+exports.fetchTeamsForMatch = async (competition, match)  => {
+    const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number=1");
     
     try {
         fetch(endpoint, {
@@ -88,7 +88,6 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
         }).then((response) => {
             return response.json();
         }).then((myJson) => {
-            console.warn(myJson);
             let data = []
             let is_blue;
             let desc;
