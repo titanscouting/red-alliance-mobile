@@ -3,7 +3,7 @@ import { Container, Separator, Header, Title, Accordion, ListItem, Content, Foot
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity } from 'react-native';
 
 export default class TeamCell extends React.Component {
 
@@ -16,6 +16,7 @@ export default class TeamCell extends React.Component {
 
 
     handlePress = () => {
+        console.log("handling press")
         this.props.onPress(this.props.number);
     };
 
