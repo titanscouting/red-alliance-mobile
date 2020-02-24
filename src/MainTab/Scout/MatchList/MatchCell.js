@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon, List} from 'native-base';
+import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
@@ -21,15 +21,14 @@ export default class MatchCell extends React.Component {
 
     render () {
         return (
-            <View>
-              <ListItem>
-                <View style={styles.listItem}>
-                  <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                  <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
-                </View>
-                <TouchableOpacity onPress={this.handlePress}></TouchableOpacity>
-              </ListItem>
-            </View>
+            <TouchableOpacity onPress={this.handlePress}>
+                <ListItem>
+                    <View style={styles.listItem}>
+                        <Text style={styles.match}>{"Match "+this.props.number}</Text>
+                        <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
+                    </View>
+            </ListItem>
+            </TouchableOpacity>
 
         );
     }
