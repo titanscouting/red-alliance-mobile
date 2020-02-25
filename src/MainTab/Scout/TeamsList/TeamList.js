@@ -41,6 +41,11 @@ export default class TeamList extends React.Component {
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
+                            <Left>
+                                <Button transparent onPress={this.onBack}>
+                                     <Icon name='arrow-back' />
+                                </Button>
+                            </Left>
                             <Body>
                                 <Title>Match {this.props.matchNumber}</Title>
                             </Body>
