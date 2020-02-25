@@ -107,11 +107,7 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
                 }
                 data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
             }
-<<<<<<< HEAD
             console.warn(data)
-=======
-            console.log(data);
->>>>>>> 06e9402526a2ee44e12df805f3bac6afb4cbaac8
             return data;
         });
     } catch(error) {
