@@ -14,7 +14,6 @@ export default class MatchCell extends React.Component {
         onPress: PropTypes.func.isRequired,
     };
 
-
     handlePress = () => {
         this.props.onPress(this.props.number);
     };

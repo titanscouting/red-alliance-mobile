@@ -43,13 +43,3 @@ target 'RedAlliance' do
 
   use_native_modules!
 end
-
-target 'RedAlliance-tvOS' do
-  # Pods for RedAlliance-tvOS
-
-  target 'RedAlliance-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
-
-end

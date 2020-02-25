@@ -285,7 +285,7 @@ DEPENDENCIES:
   - "ReactNativeART (from `../node_modules/@react-native-community/art`)"
   - "RNCAsyncStorage (from `../node_modules/@react-native-community/async-storage`)"
   - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
-  - RNGestureHandler (from `../node_modules/react-native`)
+  - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNGoogleSignin (from `../node_modules/react-native-google-signin`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
@@ -357,7 +357,7 @@ EXTERNAL SOURCES:
   RNCMaskedView:
     :path: "../node_modules/@react-native-community/masked-view"
   RNGestureHandler:
-    :path: "../node_modules/react-native"
+    :path: "../node_modules/react-native-gesture-handler"
   RNGoogleSignin:
     :path: "../node_modules/react-native-google-signin"
   RNReanimated:
@@ -407,6 +407,6 @@ SPEC CHECKSUMS:
   RNScreens: 6053a007667bea81a69087caadf103bba04c032e
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: e2807d3752a3e035127794413fbfca206babddea
+PODFILE CHECKSUM: b5b6f08be0a2bb1fa795dbea4d4d6b29a2b16e37
 
 COCOAPODS: 1.8.4

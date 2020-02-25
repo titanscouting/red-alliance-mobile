@@ -75,19 +75,22 @@ exports.getIDToken = async () => {
 
 }
 
-exports.fetchTeamsForMatch = async (competition, match)  => {
-    const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number=1");
-    
+exports.fetchTeamsForMatch= async (competition, match)  => {
+    const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number="+match);
+    console.log("Fetch teams for match: Competition: "+competition+", match: "+match);
     try {
-        fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
+            console.log("Getting response");
             return response.json();
         }).then((myJson) => {
+            console.log("Getting json. Here it is:");
+            console.log(myJson);
             let data = []
             let is_blue;
             let desc = null;
@@ -104,7 +107,11 @@ exports.fetchTeamsForMatch = async (competition, match)  => {
                 }
                 data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
             }
+<<<<<<< HEAD
             console.warn(data)
+=======
+            console.log(data);
+>>>>>>> 06e9402526a2ee44e12df805f3bac6afb4cbaac8
             return data;
         });
     } catch(error) {
