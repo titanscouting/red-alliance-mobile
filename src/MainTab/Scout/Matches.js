@@ -31,16 +31,18 @@ export default class Matches extends React.Component {
 
     refreshMatches = async () => {
         const matches = await ajax.fetchMatches(GLOBAL.data.competition);
-        if (this._isMounted) {
-            this.setState({matches: matches});
-        }
+        this.setState({matches: matches});
     }
 
     refreshTeams = async () => {
-        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
-        if (this._isMounted) {
+        if (this.state.currentMatchNumber != null) {
+            const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
             this.setState({teams: teams});
+        } else {
+            console.warn("Null match number")
         }
+        
+        
     }
 
     currentMatch = () => {
@@ -52,20 +54,18 @@ export default class Matches extends React.Component {
     }
 
     setCurrentScoutingPosition = (team) => {
-        if (this._isMounted) {
-            this.setState({
-                currentTeamNumber: team,
-            });
-        }
+        this.setState({
+            currentTeamNumber: team,
+        });
     }
 
-    setCurrentMatch = (matchId) => {
-        if (this._isMounted) {
-            this.setState({
-                currentMatchNumber: matchId,
-                teams: [],
-            });
-        }
+    setCurrentMatch = (number) => {
+        console.log(number);
+        this.setState({
+            currentMatchNumber: number,
+            teams: [],
+        });
+        console.log(this.state.currentMatchNumber);
         this.refreshTeams();
     }
 
@@ -77,12 +77,10 @@ export default class Matches extends React.Component {
     }
 
     setCurrentTeam = (teamNumber) => {
-        if (this._isMounted) {
-            this.setState({
-                currentTeamNumber: teamNumber,
-                configuration: [],
-            });
-        }
+        this.setState({
+            currentTeamNumber: teamNumber,
+            configuration: [],
+        });
         this.pullConfiguration();
     }
     unsetCurrentTeam = () => {
