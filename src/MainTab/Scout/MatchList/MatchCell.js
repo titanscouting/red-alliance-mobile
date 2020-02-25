@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import { Bar, Pie, Circle, CircleSnail} from 'react-native-progress';
 import Globals from '../../../GlobalDefinitions'
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native';
 
 export default class MatchCell extends React.Component {
 
@@ -14,22 +14,20 @@ export default class MatchCell extends React.Component {
         onPress: PropTypes.func.isRequired,
     };
 
-
     handlePress = () => {
         this.props.onPress(this.props.number);
     };
 
     render () {
         return (
-            
-            <TouchableOpacity onPress={this.handlePress}>
+            <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem>
                     <View style={styles.listItem}>
                         <Text style={styles.match}>{"Match "+this.props.number}</Text>
-                        <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 12.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
+                        <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
                     </View>
             </ListItem>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
 
         );
     }
