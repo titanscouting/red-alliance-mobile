@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Foot
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 import TeamCell from './TeamCell';
 
@@ -33,6 +33,12 @@ export default class TeamList extends React.Component {
 
     doNothing = () => {
         console.log("Do nothing!");
+    }
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
+    }
+    componentWillUnmount() {
+        this.backHandler.remove()
     }
 
     render () {
