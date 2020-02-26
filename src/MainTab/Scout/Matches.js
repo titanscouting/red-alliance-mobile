@@ -31,8 +31,8 @@ export default class Matches extends React.Component {
 
     refreshMatches = async () => {
         const matches = await ajax.fetchMatches(GLOBAL.data.competition);
-        this.setState({matches: matches});
         this.state.matches = matches
+        this.forceUpdate()
     }
 
     refreshTeams = async () => {
@@ -50,45 +50,32 @@ export default class Matches extends React.Component {
     }
 
     setCurrentScoutingPosition = (team) => {
-        this.setState({
-            currentTeamNumber: team,
-        });
         this.state.currentTeamNumber = team;
+        this.forceUpdate()
     }
 
     setCurrentMatch = (number) => {
-        this.setState({
-            currentMatchNumber: number,
-            teams: [],
-        });
         this.state.currentMatchNumber = number;
         this.state.teams = []
+        this.forceUpdate()
         this.refreshTeams();
     }
 
     unsetCurrentMatch = () => {
-        this.setState({
-            currentMatchNumber: null,
-            teams: null,
-        });
         this.state.currentMatchNumber = null;
         this.state.teams = null;
+        this.forceUpdate()
     }
 
     setCurrentTeam = (teamNumber) => {
-        this.setState({
-            currentTeamNumber: teamNumber,
-            configuration: [],
-        });
         this.state.currentTeamNumber = teamNumber;
-        this.state.configuration = []
+        this.state.configuration = [];
+        this.forceUpdate();
         this.pullConfiguration();
     }
     unsetCurrentTeam = () => {
-        this.setState({
-            currentTeamNumber: null,
-        });
         this.state.currentTeamNumber = null;
+        this.forceUpdate()
     }
 
 
