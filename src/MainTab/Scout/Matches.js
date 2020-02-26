@@ -13,6 +13,9 @@ import { StackActions } from 'react-navigation';
 import GLOBAL from '../../GlobalDefinitions'
 
 export default class Matches extends React.Component {
+    static propTypes = {
+        onBack: PropTypes.func.isRequired,
+    }
 
     _isMounted = false;
     state = {
@@ -77,8 +80,9 @@ export default class Matches extends React.Component {
         this.state.currentTeamNumber = null;
         this.forceUpdate()
     }
-
-
+    onBack = () => {
+        this.props.onBack(); 
+    }
 
     render () {
         if (this.state.currentShotTraditional) {
@@ -96,8 +100,18 @@ export default class Matches extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
+                        <Header>
+                            <Left>
+                                <Button transparent onPress={this.onBack}>
+                                     <Icon name='arrow-back' />
+                                </Button>
+                            </Left>
+                            <Body>
+                                <Title>Team {this.state.currentTeamNumber}</Title>
+                            </Body>
+                        </Header>
                         <Content>
-                            <Text>This is currentTeamID</Text>
+                            <Text>IDK Go do some scouting I guess</Text>
                         </Content>
                     </Container>
                 </StyleProvider>
