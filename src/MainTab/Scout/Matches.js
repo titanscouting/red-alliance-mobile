@@ -36,10 +36,9 @@ export default class Matches extends React.Component {
     }
 
     refreshTeams = async () => {
-        console.error(this.state.currentMatchNumber)
-            const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
-            this.state.teams = teams;        
-            this.forceUpdate()
+        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
+        this.state.teams = teams;        
+        this.forceUpdate()
     }
 
     currentMatch = () => {
@@ -58,14 +57,12 @@ export default class Matches extends React.Component {
     }
 
     setCurrentMatch = (number) => {
-        console.log(number);
         this.setState({
             currentMatchNumber: number,
             teams: [],
         });
         this.state.currentMatchNumber = number;
         this.state.teams = []
-        console.log(this.state.currentMatchNumber);
         this.refreshTeams();
     }
 
@@ -98,7 +95,6 @@ export default class Matches extends React.Component {
 
     render () {
         if (this.state.currentShotTraditional) {
-            console.log("Oh it did exist");
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
