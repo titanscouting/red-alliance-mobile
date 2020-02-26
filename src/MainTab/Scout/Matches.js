@@ -32,17 +32,14 @@ export default class Matches extends React.Component {
     refreshMatches = async () => {
         const matches = await ajax.fetchMatches(GLOBAL.data.competition);
         this.setState({matches: matches});
+        this.state.matches = matches
     }
 
     refreshTeams = async () => {
-        if (this.state.currentMatchNumber != null) {
+        console.error(this.state.currentMatchNumber)
             const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
-            this.setState({teams: teams});
-        } else {
-            console.warn("Null match number")
-        }
-        
-        
+            this.state.teams = teams;        
+            this.forceUpdate()
     }
 
     currentMatch = () => {
@@ -57,6 +54,7 @@ export default class Matches extends React.Component {
         this.setState({
             currentTeamNumber: team,
         });
+        this.state.currentTeamNumber = team;
     }
 
     setCurrentMatch = (number) => {
@@ -65,6 +63,8 @@ export default class Matches extends React.Component {
             currentMatchNumber: number,
             teams: [],
         });
+        this.state.currentMatchNumber = number;
+        this.state.teams = []
         console.log(this.state.currentMatchNumber);
         this.refreshTeams();
     }
@@ -74,6 +74,8 @@ export default class Matches extends React.Component {
             currentMatchNumber: null,
             teams: null,
         });
+        this.state.currentMatchNumber = null;
+        this.state.teams = null;
     }
 
     setCurrentTeam = (teamNumber) => {
@@ -81,12 +83,15 @@ export default class Matches extends React.Component {
             currentTeamNumber: teamNumber,
             configuration: [],
         });
+        this.state.currentTeamNumber = teamNumber;
+        this.state.configuration = []
         this.pullConfiguration();
     }
     unsetCurrentTeam = () => {
         this.setState({
             currentTeamNumber: null,
         });
+        this.state.currentTeamNumber = null;
     }
 
 
