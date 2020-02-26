@@ -86,8 +86,16 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            return response.json();
+            let meme_review;
+            if (response.status != 200) {
+                meme_review = {"competition": "Central2020", "scouters": [{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"}], "success": false, "teams": ["0", "0", "0", "0", "0", "0"]}
+            }
+            else {
+                meme_review = response.json()
+            }
+            return meme_review;
         }).then((myJson) => {
+            console.log(myJson)
             let data = []
             let is_blue;
             let desc = null;
@@ -107,7 +115,7 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
             return data;
         });
     } catch(error) {
-        console.error(error);
+        console.error(error)
     }
 }
 
