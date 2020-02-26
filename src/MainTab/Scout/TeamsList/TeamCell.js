@@ -3,7 +3,7 @@ import { Container, Separator, Header, Title, Accordion, ListItem, Content, Foot
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
-import { TouchableOpacity } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
 
 export default class TeamCell extends React.Component {
 
@@ -23,7 +23,7 @@ export default class TeamCell extends React.Component {
     render () {
         return (
             
-            <TouchableOpacity onPress={this.handlePress}>
+            <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
                     <View backgroundColor={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
                     <View width={10}/>
@@ -34,7 +34,7 @@ export default class TeamCell extends React.Component {
                         <Text style={styles.scouter}>{this.props.scouterDescription ? "Covered by "+this.props.scouterDescription : "Open"}</Text>
                     </View>
                </ListItem>
-            </TouchableOpacity>
+            </TouchableWithoutFeedback>
 
         );
     }
