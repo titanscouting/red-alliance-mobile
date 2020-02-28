@@ -120,7 +120,7 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
 }
 
 
-exports.fetchConfiguration = async () => {
+exports.fetchMatchConfig = async () => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchConfig");
     try {
         return await fetch(endpoint, {
