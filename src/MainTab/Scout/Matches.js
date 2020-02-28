@@ -11,11 +11,9 @@ import TeamList from './TeamsList/TeamList';
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
 import GLOBAL from '../../GlobalDefinitions'
+import Eval from './Evaluation/Eval.js'
 
 export default class Matches extends React.Component {
-    static propTypes = {
-        onBack: PropTypes.func.isRequired,
-    }
 
     _isMounted = false;
     state = {
@@ -25,11 +23,13 @@ export default class Matches extends React.Component {
         teams: null,
         currentTeamNumber: null,
 
+        configuration: {}
     }
 
     async componentDidMount() {
         this._isMounted = true;
         this.refreshMatches();
+        this.pullConfiguration();
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
     }
 
@@ -82,8 +82,11 @@ export default class Matches extends React.Component {
         this.state.currentTeamNumber = null;
         this.forceUpdate()
     }
-    onBack = () => {
-        this.props.onBack(); 
+    
+    pullConfiguration = () => {
+        if (!this.state.configuration || this.state.configuration.length === 0) {
+            const config = await ajax.fetchMatchConfig();
+        }
     }
 
     render () {
@@ -101,21 +104,7 @@ export default class Matches extends React.Component {
         else if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <Container>
-                        <Header>
-                            <Left>
-                                <Button transparent onPress={this.onBack}>
-                                     <Icon name='arrow-back' />
-                                </Button>
-                            </Left>
-                            <Body>
-                                <Title>Team {this.state.currentTeamNumber}</Title>
-                            </Body>
-                        </Header>
-                        <Content>
-                            <Text>IDK Go do some scouting I guess</Text>
-                        </Content>
-                    </Container>
+                    <Eval/>
                 </StyleProvider>
                 );
         }
