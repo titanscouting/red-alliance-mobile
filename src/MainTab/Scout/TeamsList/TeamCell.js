@@ -17,7 +17,7 @@ export default class TeamCell extends React.Component {
 
     handlePress = () => {
         console.log("handling press")
-        this.props.onPress(this.props.number);
+        this.props.onPress(this.props.number, this.props.isBlue);
     };
 
     render () {

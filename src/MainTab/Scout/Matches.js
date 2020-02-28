@@ -22,6 +22,7 @@ export default class Matches extends React.Component {
 
         teams: null,
         currentTeamNumber: null,
+        isBlue: null,
 
         configuration: {}
     }
@@ -54,11 +55,6 @@ export default class Matches extends React.Component {
         this.backHandler.remove()
     }
 
-    setCurrentScoutingPosition = (team) => {
-        this.state.currentTeamNumber = team;
-        this.forceUpdate()
-    }
-
     setCurrentMatch = (number) => {
         this.state.currentMatchNumber = number;
         this.state.teams = []
@@ -72,8 +68,9 @@ export default class Matches extends React.Component {
         this.forceUpdate()
     }
 
-    setCurrentTeam = (teamNumber) => {
+    setCurrentTeam = (teamNumber, isBlue) => {
         this.state.currentTeamNumber = teamNumber;
+        this.state.isBlue = isBlue;
         this.forceUpdate();
         this.pullConfiguration();
     }
@@ -83,40 +80,34 @@ export default class Matches extends React.Component {
     }
     
     pullConfiguration = async () => {
-        if (!this.state.configuration || this.state.configuration.length === 0) {
-            const config = await ajax.fetchConfiguration();
-            console.warn(config);
+        if (!this.state.configuration || Object.keys(this.state.configuration).length === 0) {
+            const config = await ajax.fetchMatchConfig();
             this.setState({configuration: config})
-        } else {
-            console.warn(!this.state.configuration);
-            console.warn(this.state.configuration.length);
-        }
-        
+        } 
+    }
+
+    popEval = () => {
+        this.state.currentTeamNumber = null;
+        this.forceUpdate();
+    }
+
+    saveScouting = (vals) => {
+        console.warn("Saving!")
+        console.log(vals);
     }
 
     render () {
-        if (this.state.currentShotTraditional) {
+        if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <Container>
-                        <Content>
-                            <Text>This is currentQualQuant</Text>
-                        </Content>
-                    </Container>
-                </StyleProvider>
-                );
-        }
-        else if (this.state.currentTeamNumber != null) {
-            return (
-                <StyleProvider style={getTheme(material)}>
-                    <Eval/>
+                    <Eval configuration={this.state.configuration} onBack={this.popEval} onSave={this.saveScouting} matchNumber={this.state.currentMatchNumber} teamNumber={this.state.currentTeamNumber}/>
                 </StyleProvider>
                 );
         }
         else if (this.state.currentMatchNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <TeamList teams={this.state.teams} refreshTeams={this.refreshTeams} matchNumber={this.state.currentMatchNumber} onBack={this.unsetCurrentMatch} onItemPress={this.setCurrentScoutingPosition}/>
+                    <TeamList teams={this.state.teams} refreshTeams={this.refreshTeams} matchNumber={this.state.currentMatchNumber} onBack={this.unsetCurrentMatch} onItemPress={this.setCurrentTeam}/>
                 </StyleProvider>
                 );
         }

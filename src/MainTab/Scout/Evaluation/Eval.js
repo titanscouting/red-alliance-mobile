@@ -22,7 +22,7 @@ export default class Eval extends React.Component {
     }
 
     state = {
-        refreshing: false,
+        vals: {},
     }
 
     onRefresh = async () => {
@@ -33,6 +33,10 @@ export default class Eval extends React.Component {
 
     onBack = () => {
         this.props.onBack(); 
+    }
+
+    onSave = () => {
+        this.props.onSave(this.state.vals); 
     }
 
     doNothing = () => {}
@@ -62,20 +66,15 @@ export default class Eval extends React.Component {
                                 </Button>
                             </Left>
                             <Body>
-                                <Title>Match {this.props.matchNumber}</Title>
+                                <Title>Team {this.props.teamNumber}</Title>
                             </Body>
+
+                            <Right>
+                                <Button transparent onPress={this.onSave}>
+                                     <Icon name='save' />
+                                </Button>
+                            </Right>
                         </Header>
-                            <FlatList
-                                data = {this.props.teams}
-                                renderItem={({item}) => 
-                                    <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress}/>
-                                }
-                                keyExtractor= {item => String(item.teamNumber)}
-                                refreshControl={
-                                    <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
-                                }
-                                showsVerticalScrollIndicator={false}
-                            />
                     </Container>
                 </StyleProvider>
             );
