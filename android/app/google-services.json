@@ -8,12 +8,20 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:291863698243:android:8486f9dfbbb38618aa6df6",
+        "mobilesdk_app_id": "1:291863698243:android:ad1ce275432800e1aa6df6",
         "android_client_info": {
           "package_name": "com.redalliance"
         }
       },
       "oauth_client": [
+        {
+          "client_id": "291863698243-0dsmvs8uetpd9odms7aqn63iknroi4op.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redalliance",
+            "certificate_hash": "2a7cb50c275e38a9178b6c515e5fb3f7b93da45a"
+          }
+        },
         {
           "client_id": "291863698243-mminu202rckd08oed4dl804soffpq8h9.apps.googleusercontent.com",
           "client_type": 1,
