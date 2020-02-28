@@ -83,7 +83,7 @@ export default class Matches extends React.Component {
         this.forceUpdate()
     }
     
-    pullConfiguration = () => {
+    pullConfiguration = async () => {
         if (!this.state.configuration || this.state.configuration.length === 0) {
             const config = await ajax.fetchMatchConfig();
         }
