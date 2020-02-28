@@ -74,7 +74,6 @@ export default class Matches extends React.Component {
 
     setCurrentTeam = (teamNumber) => {
         this.state.currentTeamNumber = teamNumber;
-        this.state.configuration = [];
         this.forceUpdate();
         this.pullConfiguration();
     }
@@ -83,10 +82,16 @@ export default class Matches extends React.Component {
         this.forceUpdate()
     }
     
-    pullConfiguration = () => {
+    pullConfiguration = async () => {
         if (!this.state.configuration || this.state.configuration.length === 0) {
-            const config = await ajax.fetchMatchConfig();
+            const config = await ajax.fetchConfiguration();
+            console.warn(config);
+            this.setState({configuration: config})
+        } else {
+            console.warn(!this.state.configuration);
+            console.warn(this.state.configuration.length);
         }
+        
     }
 
     render () {
