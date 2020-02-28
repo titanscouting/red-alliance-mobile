@@ -120,108 +120,44 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
 }
 
 
-exports.fetchConfiguration = async (competition) => {
-    await wait(2000);
-    return [
-        {
-            "Auto":[
-                {
-                    "name":"Passed Auto Line?",
-                    "key":"pass-line",
-                    "widget":"segment",
-                    "options":["idk","Yes","No"]
-                },
-                {
-                    "name":"Initial Balls Stored",
-                    "key":"balls-started",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Extra Balls Collected",
-                    "key":"balls-collected",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Balls Scored Upper",
-                    "key":"balls-upper",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Balls Scored Lower",
-                    "key":"balls-lower",
-                    "widget":"stepper"
-                }
-            ]
-        },
-        {
-            "Teleop":[
-                {
-                    "name":"Spun Wheel?",
-                    "key":"spun-wheel",
-                    "widget":"segment",
-                    "options":["idk","Yes","No"]
-                },
-                {
-                    "name":"Color Control?",
-                    "key":"color-control",
-                    "widget":"segment",
-                    "options":["idk","Yes","No"]
-                },
-                {
-                    "name":"Initial Balls Stored",
-                    "key":"balls-started",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Extra Balls Collected",
-                    "key":"balls-collected",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Balls Scored Upper",
-                    "key":"balls-upper",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Balls Scored Lower",
-                    "key":"balls-lower",
-                    "widget":"stepper"
-                },
-                {
-                    "name":"Balls Blocked",
-                    "key":"balls-blocked",
-                    "widget":"stepper"
-                }
-            ]
-        },
-        {
-            "Notes":[
-                {
-                    "name":"Overall Competency",
-                    "key":"competency",
-                    "widget":"segment",
-                    "options":["idk","Awful","Meh","Good","Best"]
-                },
-                {
-                    "name":"Speed",
-                    "key":"speed",
-                    "widget":"segment",
-                    "options":["idk","Slow","Med.","Fast","Ludicrous"]
-                },
-                {
-                    "name":"Strategic Focus",
-                    "key":"strategic-focus",
-                    "widget":"segment",
-                    "options":["idk","Offense","Defense","Hybrid"]
-                },
-                {
-                    "name":"Strategy Notes",
-                    "key":"strategy-notes",
-                    "widget":"text-area"
-                }
-            ]
-        }
-    ];
+exports.fetchConfiguration = async () => {
+    const endpoint = encodeURI(apiHost + "api/fetchMatchConfig");
+    try {
+        return await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            return myJson
+        });
+
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.fetchPitConfiguration = async () => {
+    const endpoint = encodeURI(apiHost + "api/fetchPitConfig");
+    try {
+        return await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+            }
+        }).then((response) => {
+            return response.json();
+        }).then((myJson) => {
+            return myJson
+        });
+
+    } catch(error) {
+        console.error(error);
+    }
 }
 
 exports.isSignedIn = async () => {
