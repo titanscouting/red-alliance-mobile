@@ -60,7 +60,7 @@ exports.getIDToken = async () => {
                     await exports.AsyncAlert();
                     return await exports.getIDToken();
                 } else if (error.code === statusCodes.IN_PROGRESS) {
-                    console.log("Woah! Sign in is in progress");
+                    console.log("Signing user in")
                 } else {
                     // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE]
                     console.error(error);
@@ -77,7 +77,6 @@ exports.getIDToken = async () => {
 
 exports.fetchTeamsForMatch= async (competition, match)  => {
     const endpoint = encodeURI(apiHost + "api/fetchScouterUIDs?competition="+competition+"&match_number=" + match);
-    console.log("Getting data for " + competition + " and match " + match)
     try {
         return await fetch(endpoint, {
             method: 'GET',
@@ -95,7 +94,6 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
             }
             return meme_review;
         }).then((myJson) => {
-            console.log(myJson)
             let data = []
             let is_blue;
             let desc = null;

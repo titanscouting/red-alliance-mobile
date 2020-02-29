@@ -27,11 +27,10 @@ export default class Matches extends React.Component {
         configuration: {}
     }
 
-    async componentDidMount() {
+    componentDidMount() {
         this._isMounted = true;
         this.refreshMatches();
         this.pullConfiguration();
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
     }
 
     refreshMatches = async () => {
@@ -52,7 +51,6 @@ export default class Matches extends React.Component {
 
     async componentWillUnmount() {
         this._isMounted = false;
-        this.backHandler.remove()
     }
 
     setCurrentMatch = (number) => {

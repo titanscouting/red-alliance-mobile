@@ -34,13 +34,6 @@ export default class TeamList extends React.Component {
     doNothing = () => {
         console.log("Do nothing!");
     }
-    
-    componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
-    }
-    componentWillUnmount() {
-        this.backHandler.remove()
-    }
 
     render () {
         if (this.props.teams.length === 0) {
