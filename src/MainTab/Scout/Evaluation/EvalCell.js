@@ -23,7 +23,7 @@ export default class EvalCell extends React.Component {
         switch (this.widget()) {
             case 'segment': 
                 return (
-                    <Text>{"Widget: "+this.widget()}</Text>
+                    <Text>{this.name()}</Text>
                 );
             default:
                 // TODO: Switch this to error.
