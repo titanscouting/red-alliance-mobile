@@ -16,13 +16,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import TabControl from './MainTab/TabControl';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {
-  ActivityIndicator,
-  StatusBar,
-  StyleSheet,
-  View,
-  Button,
-} from 'react-native';
+import View from 'native-base';
 import ajax from './ajax';
 import Tab from '../native-base-theme/components/Tab';
 
@@ -46,7 +40,9 @@ ajax.getIDToken();
 export default class App extends React.Component {
   render() {
     return (
+      <View>
         <TabControl/>
+      </View>
     );
   }
 }

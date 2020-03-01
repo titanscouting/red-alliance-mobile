@@ -50,7 +50,10 @@ export default class EvalCell extends React.Component {
                     </View>
                 );
 
-            
+            case 'stepper':
+                return (
+                    <Text>Step, bitch</Text>
+                )
             default:
                 // TODO: Switch this to error.
                 console.log("Widget not found: " + this.widget());

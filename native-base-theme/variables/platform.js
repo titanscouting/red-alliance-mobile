@@ -2,6 +2,7 @@
 
 import color from 'color';
 import { Platform, Dimensions, PixelRatio } from 'react-native';
+// import Globals from '../../src/Globals'
 
 import { PLATFORM } from './commonColor';
 

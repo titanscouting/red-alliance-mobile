@@ -8,7 +8,7 @@ import { PLATFORM } from './commonColor';
 const deviceHeight = Dimensions.get('window').height;
 const deviceWidth = Dimensions.get('window').width;
 const platform = Platform.OS;
-const platformStyle = PLATFORM.MATERIAL;
+const platformStyle = platform === 'ios' ? PLATFORM.IOS : PLATFORM.MATERIAL;
 const isIphoneX =
   platform === PLATFORM.IOS &&
   (deviceHeight === 812 ||
@@ -171,8 +171,8 @@ export default {
   // Header
   toolbarBtnColor: '#fff',
   toolbarDefaultBg: Globals["colors"][Globals["brand"]["primary"]],
-  toolbarHeight: 56,
-  toolbarSearchIconSize: 23,
+  toolbarHeight: (Platform.OS === 'ios' ) ? 64 : 56,
+  toolbarIconSize: (Platform.OS === 'ios' ) ? 20 : 22,
   toolbarInputColor: '#fff',
   searchBarHeight: platform === PLATFORM.IOS ? 30 : 40,
   searchBarInputHeight: platform === PLATFORM.IOS ? 40 : 50,

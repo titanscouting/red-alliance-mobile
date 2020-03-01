@@ -41,7 +41,7 @@ export default class MatchList extends React.Component {
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Header>
-                        <Body>
+                        <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
                             <Title>Matches</Title>
                         </Body>
                     </Header>

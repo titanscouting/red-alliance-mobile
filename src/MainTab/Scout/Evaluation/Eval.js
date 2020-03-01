@@ -87,7 +87,7 @@ export default class Eval extends React.Component {
                     <Container>
                         <Header color={"#A0A0A0"}>
                             <Body>
-                                <Title>Team {this.props.teamNumber}</Title>
+                                <Title>{"Team "+this.props.teamNumber+(this.props.isBlue ? " (Blue)" : " (Red)")}</Title>
                             </Body>
                         </Header>
                         <ActivityIndicator animating={true}/>
@@ -105,7 +105,7 @@ export default class Eval extends React.Component {
                                 </Button>
                             </Left>
                             <Body>
-                                <Title>Team {this.props.teamNumber}</Title>
+                                <Title>{"Team "+this.props.teamNumber+(this.props.isBlue ? " (Blue)" : " (Red)")}</Title>
                             </Body>
 
                             <Right>
@@ -120,10 +120,10 @@ export default class Eval extends React.Component {
                                 <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
                             </Tab>
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
-                                
+                                <EvalTab tabConfig={this.getTabBody(1)} onUpdate={this.onUpdate}/>
                             </Tab>
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(2)}</Text></TabHeading>}>
-                                
+                                <EvalTab tabConfig={this.getTabBody(2)} onUpdate={this.onUpdate}/>
                             </Tab>
                         </Tabs>
                     </Container>
