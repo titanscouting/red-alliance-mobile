@@ -27,6 +27,7 @@ export default class EvalCell extends React.Component {
         this.setState({
             selectedIndex: index
         });
+        this.props.cellUpdate(this.key(), this.options()[index]);
     };
     
     
@@ -37,14 +38,11 @@ export default class EvalCell extends React.Component {
                 return (
                     <View style={styles.container}>
                         <Text>{this.name()}</Text>
+                        <View style={styles.separator}/>
                         <SegmentedControlTab 
-                            tabsContainerStyle={styles.tabsContainerStyle}
                             tabStyle={styles.tabStyle}
-                            firstTabStyle={styles.firstTabStyle}
-                            lastTabStyle={styles.lastTabStyle}
                             tabTextStyle={styles.tabTextStyle}
                             activeTabStyle={styles.activeTabStyle}
-                            activeTabTextStyle={styles.activeTabTextStyle}
                             values={this.options()}
                             selectedIndex={this.state.selectedIndex} 
                             onTabPress={this.handleIndexChange}
@@ -52,7 +50,7 @@ export default class EvalCell extends React.Component {
                     </View>
                 );
 
-                
+            
             default:
                 // TODO: Switch this to error.
                 console.log("Widget not found: " + this.widget());
@@ -68,36 +66,9 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'flex-start',
         backgroundColor: 'white',
-        justifyContent: 'space-around',
       },
-      tabViewText: {
-        color: '#444444',
-        fontWeight: 'bold',
-        marginTop: 50,
-        fontSize: 18,
-      },
-      titleText: {
-        color: '#444444',
-        padding: 20,
-        fontSize: 14,
-        fontWeight: '500',
-      },
-      headerText: {
-        padding: 8,
-        fontSize: 14,
-        color: '#444444',
-      },
-      tabContent: {
-        color: '#444444',
-        fontSize: 18,
-        margin: 24,
-      },
-      Seperator: {
-        marginHorizontal: -10,
-        alignSelf: 'stretch',
-        borderTopWidth: 1,
-        borderTopColor: '#888888',
-        marginTop: 24,
+      separator: {
+        height:4,
       },
       tabStyle: {
         borderColor: Globals.colors[Globals.brand.primary],
@@ -106,6 +77,6 @@ const styles = StyleSheet.create({
         backgroundColor: Globals.colors[Globals.brand.primary],
       },
       tabTextStyle: {
-        color: '#D52C43',
+        color: Globals.colors[Globals.brand.primary],
       },
   });
