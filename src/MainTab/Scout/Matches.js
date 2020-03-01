@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Foot
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, View , BackHandler} from 'react-native';
+import { FlatList, ActivityIndicator, View} from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchList/MatchCell';
 import MatchList from './MatchList/MatchList';

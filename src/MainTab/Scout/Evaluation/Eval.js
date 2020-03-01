@@ -4,7 +4,7 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View, BackHandler } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Alert } from "react-native";
@@ -56,7 +56,18 @@ export default class Eval extends React.Component {
         this.props.onSave(this.state.vals); 
         this.getTab(0);
     }
-
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+    
+    componentWillUnmount() {
+        this.backHandler.remove()
+    }
+    
+    handleBackPress = () => {
+        this.onBack()
+        return true;
+    }
     doNothing = () => {}
 
     getTab = (tabNumber) => {
