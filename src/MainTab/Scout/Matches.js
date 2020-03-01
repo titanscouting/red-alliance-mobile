@@ -90,7 +90,6 @@ export default class Matches extends React.Component {
     }
 
     saveScouting = (vals) => {
-        console.warn("Saving!")
         console.log(vals);
     }
 

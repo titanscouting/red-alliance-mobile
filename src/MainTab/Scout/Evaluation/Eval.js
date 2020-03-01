@@ -1,5 +1,5 @@
 import React from 'react';
-import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
+import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
 
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
@@ -7,7 +7,7 @@ import material from '../../../../native-base-theme/variables/material';
 import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
 
-
+import { Alert } from "react-native";
 
 
 export default class Eval extends React.Component {
@@ -32,14 +32,37 @@ export default class Eval extends React.Component {
     }
 
     onBack = () => {
-        this.props.onBack(); 
+        Alert.alert(
+            'Continue without saving?',
+            'If you go back, the fields will not be saved.',
+            [
+                {
+                  text: 'Cancel',
+                  style: 'cancel',
+                },
+                {
+                  text: 'Continue',
+                  onPress: () => {
+                      this.props.onBack(); 
+                  },
+                },
+            ],
+            { cancelable: true },
+          );
+        
     }
 
     onSave = () => {
         this.props.onSave(this.state.vals); 
+        this.getTab(0);
     }
 
     doNothing = () => {}
+
+    getTab = (tabNumber) => {
+        let tab = this.props.configuration[tabNumber];
+        console.log(tab);
+    }
 
     render () {
         if (this.props.configuration.length === 0) {
@@ -75,6 +98,17 @@ export default class Eval extends React.Component {
                                 </Button>
                             </Right>
                         </Header>
+                        <Tabs>
+                            <Tab heading={ <TabHeading><Icon name="camera" /><Text>Camera</Text></TabHeading>}>
+                                
+                            </Tab>
+                            <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
+                                
+                            </Tab>
+                            <Tab heading={ <TabHeading><Icon name="apps" /></TabHeading>}>
+                                
+                            </Tab>
+                        </Tabs>
                     </Container>
                 </StyleProvider>
             );
