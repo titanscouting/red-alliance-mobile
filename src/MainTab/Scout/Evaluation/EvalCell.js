@@ -31,7 +31,10 @@ export default class EvalCell extends React.Component {
         this.props.cellUpdate(this.key(), this.options()[index]);
     };
     
-    
+    handleStepChange = (num) => {
+        this.props.cellUpdate(this.key(), num);
+    };
+
     render () {
 
         switch (this.widget()) {
@@ -53,6 +56,7 @@ export default class EvalCell extends React.Component {
                         style={styles.container}
                         labelBackgroundColor={Globals.colors[Globals.brand["primary"]]}
                         buttonsBackgroundColor={Globals.colors[Globals.brand["primary-dark"]]}
+                        onChange={this.handleStepChange}
                     />
                 )
             default:
@@ -72,9 +76,6 @@ const styles = StyleSheet.create({
       },
       stepper: {
         flex: 1,
-      },
-      separator: {
-        height:4,
       },
       tabStyle: {
         borderColor: Globals.colors[Globals.brand.primary],
