@@ -73,7 +73,7 @@ export default class Eval extends React.Component {
         this.vals[key] = value
     }
     componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
       }
     
       componentWillUnmount() {
@@ -105,7 +105,7 @@ export default class Eval extends React.Component {
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
-                            <Left>
+                            <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                                 <Button transparent onPress={this.onBack}>
                                      <Icon name='arrow-back' />
                                 </Button>

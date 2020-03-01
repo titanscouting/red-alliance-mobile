@@ -7,6 +7,8 @@ import { FlatList, ActivityIndicator, RefreshControl, View, StyleSheet, Touchabl
 import PropTypes from 'prop-types';
 import ajax from '../../ajax'
 import GLOBAL from '../../GlobalDefinitions'
+import StatsTeamCell from './StatsTeamCell'
+import TeamController from './TeamController'
 
 export default class Stats extends React.Component {
 
@@ -43,7 +45,7 @@ export default class Stats extends React.Component {
         if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <Text>{this.state.currentTeamNumber}</Text>
+                    <TeamController team={this.state.currentTeamNumber} onBack={this.removeCurrentTeam}/>
                 </StyleProvider>
                 );
         } else if (this.state.teams != null) {
@@ -58,11 +60,7 @@ export default class Stats extends React.Component {
                   <FlatList
                       data = {this.state.teams}
                       renderItem={({item}) => 
-                        <TouchableWithoutFeedback onPress={this.setCurrentTeam}>
-                          <ListItem style={styles.cell}>
-                              <Text style={styles.team}>{"Team "+item}</Text>
-                          </ListItem>
-                        </TouchableWithoutFeedback>
+                        <StatsTeamCell team={item} onItemPress={this.setCurrentTeam}/>
                       }
                       keyExtractor= {item => String(item)}
                       refreshControl={
