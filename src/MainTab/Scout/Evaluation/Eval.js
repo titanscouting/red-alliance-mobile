@@ -60,7 +60,10 @@ export default class Eval extends React.Component {
     doNothing = () => {}
 
     getTab = (tabNumber) => {
-        let tab = this.props.configuration[tabNumber];
+        let tabDict = this.props.configuration[tabNumber];
+        let title = Object.keys(tabDict)[0];
+        let tab = tabDict[title];
+
         console.log(tab);
     }
 
