@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 import ajax from '../../ajax'
 import GLOBAL from '../../GlobalDefinitions'
 import StatsTeamCell from './StatsTeamCell'
-import TeamController from './TeamController'
-
+import StatsTeamController from './StatsTeamController'
+import StatsPit from './StatsPit'
+import StatsMatches from './StatsMatches'
 export default class Stats extends React.Component {
 
     _isMounted = false;
@@ -45,7 +46,7 @@ export default class Stats extends React.Component {
         if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <TeamController team={this.state.currentTeamNumber} onBack={this.removeCurrentTeam}/>
+                    <StatsTeamController team={this.state.currentTeamNumber} onBack={this.removeCurrentTeam}/>
                 </StyleProvider>
                 );
         } else if (this.state.teams != null) {

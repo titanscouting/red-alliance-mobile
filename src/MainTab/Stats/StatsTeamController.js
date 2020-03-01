@@ -1,11 +1,13 @@
 import React from 'react';
-import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, ListItem, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
 
 
 import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
 import PropTypes from 'prop-types';
+import StatsPit from './StatsPit'
+import StatsMatches from './StatsMatches'
 
-export default class TeamController extends React.Component {
+export default class StatsTeamController extends React.Component {
 
     static propTypes = {
         team: PropTypes.number.isRequired,
@@ -50,7 +52,14 @@ export default class TeamController extends React.Component {
                     </Body>
                     <Right style={{  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
                   </Header>
-                
+                  <Tabs>
+                        <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
+                            <StatsPit team={this.props.team}/>
+                        </Tab>
+                        <Tab heading={ <TabHeading><Text>Matches</Text></TabHeading>}>
+                            <StatsMatches team={this.props.team}/>
+                        </Tab>
+                    </Tabs>
             </Container>
         );
         
