@@ -4,7 +4,7 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View, BackHandler } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
 
 import { Alert } from "react-native";
@@ -56,26 +56,24 @@ export default class Eval extends React.Component {
         this.props.onSave(this.state.vals); 
         this.getTab(0);
     }
-    componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-    }
-    
-    componentWillUnmount() {
-        this.backHandler.remove()
-    }
-    
-    handleBackPress = () => {
-        this.onBack()
-        return true;
-    }
+
     doNothing = () => {}
 
     getTab = (tabNumber) => {
         let tabDict = this.props.configuration[tabNumber];
         let title = Object.keys(tabDict)[0];
         let tab = tabDict[title];
+        return [title, tab]
+    }
 
-        console.log(tab);
+    getTabTitle = (tabNumber) => {
+        let [title, tab] = this.getTab(tabNumber);
+        return title;
+    }
+
+    getTabBody = (tabNumber) => {
+        let [title, tab] = this.getTab(tabNumber);
+        return tab;
     }
 
     render () {
@@ -113,13 +111,14 @@ export default class Eval extends React.Component {
                             </Right>
                         </Header>
                         <Tabs>
-                            <Tab heading={ <TabHeading><Icon name="camera" /><Text>Camera</Text></TabHeading>}>
+                            {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
+                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
                                 
                             </Tab>
-                            <Tab heading={ <TabHeading><Text>No Icon</Text></TabHeading>}>
+                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
                                 
                             </Tab>
-                            <Tab heading={ <TabHeading><Icon name="apps" /></TabHeading>}>
+                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(2)}</Text></TabHeading>}>
                                 
                             </Tab>
                         </Tabs>
