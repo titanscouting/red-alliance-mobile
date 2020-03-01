@@ -202,7 +202,6 @@ exports.fetchMatches = async (competition) => {
         }).then((response) => {
             return response.json();
         }).then((myJson) => {
-            // console.warn(myJson);
             matches = myJson["data"];
             arr = [];
             for (let i=0; i<matches.length; i++) {
@@ -239,11 +238,8 @@ exports.submitMatchData = async (competition, team, match, data) => {
             }),
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
@@ -265,9 +261,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
             }
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
-        });
+        })
     } catch(error) {
         console.error(error);
     }
@@ -292,7 +286,6 @@ exports.addScouterToMatch = async (team, match) => {
             return response.json();
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
@@ -315,11 +308,8 @@ exports.removeScouterFromMatch = async (team, match) => {
             }),
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
@@ -337,12 +327,8 @@ exports.fetchCompetitionSchedule = async (competition) => {
             }
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
-            // ADD FUNCTIONALITY HERE AS NEEDED
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
@@ -360,12 +346,8 @@ exports.fetch2022Schedule = async (competition) => {
             }
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
-            // ADD FUNCTIONALITY HERE AS NEEDED
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
@@ -390,11 +372,8 @@ exports.submitStrategy = async (competition, match, team, data) => {
             }),
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
         })
         // let responseJson = await JSON.parse(response);
-        // console.warn("This is from dev: "+responseJson);
     } catch(error) {
         console.error(error);
     }
