@@ -31,7 +31,7 @@ export default class EvalCell extends React.Component {
         this.props.cellUpdate(this.key(), this.options()[index]);
     };
     
-    handleStepChange = (num) => {
+    handleGeneralChange = (num) => {
         this.props.cellUpdate(this.key(), num);
     };
 
@@ -56,16 +56,16 @@ export default class EvalCell extends React.Component {
                         style={styles.container}
                         labelBackgroundColor={Globals.colors[Globals.brand["primary"]]}
                         buttonsBackgroundColor={Globals.colors[Globals.brand["primary-dark"]]}
-                        onChange={this.handleStepChange}
+                        onChange={this.handleGeneralChange}
                     />
                 );
 
             case 'text-area':
                 return (
-                    <Form>
+                    <Form style={styles.textarea}>
                        
-                        <Item>
-                         <Textarea rowSpan={3} bordered placeholder={this.options()} />
+                        <Item style={styles.textarea}>
+                         <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
                         </Item>
                     </Form>
                 );
@@ -96,4 +96,9 @@ const styles = StyleSheet.create({
       tabTextStyle: {
         color: Globals.colors[Globals.brand.primary],
       },
+      textarea: {
+          flex: 1,
+          flexDirection: 'row',
+          
+      }
   });

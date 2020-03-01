@@ -11,7 +11,7 @@ import TeamList from './TeamsList/TeamList';
 import ajax from '../../ajax'
 import { StackActions } from 'react-navigation';
 import GLOBAL from '../../GlobalDefinitions'
-import Eval from './Evaluation/Eval.js'
+import Eval from './Evaluation/Eval'
 
 export default class Matches extends React.Component {
 
@@ -103,7 +103,7 @@ export default class Matches extends React.Component {
     }
 
     saveScouting = (vals) => {
-        console.log(vals);
+        console.log("Save scouting: "+vals);
     }
 
     render () {
@@ -115,7 +115,6 @@ export default class Matches extends React.Component {
                 );
         }
         else if (this.state.currentMatchNumber != null && this.state.teams != null) {
-            console.log(this.state.teams)
             return (
                 <StyleProvider style={getTheme(material)}>
                     <TeamList teams={this.state.teams} refreshTeams={this.refreshTeams} matchNumber={this.state.currentMatchNumber} onBack={this.unsetCurrentMatch} onItemPress={this.setCurrentTeam}/>
