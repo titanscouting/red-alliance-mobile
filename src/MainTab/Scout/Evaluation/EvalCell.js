@@ -5,35 +5,23 @@ import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
 
-export default class Tab extends React.Component {
+export default class EvalCell extends React.Component {
 
     static propTypes = {
-        tabConfig: PropTypes.array.isRequired,
-        onSave: PropTypes.func.isRequired,
-        matchNumber: PropTypes.number.isRequired,
-        teamNumber: PropTypes.number.isRequired,
-        isBlue: PropTypes.bool.isRequired,
-    }
-
-
-    handlePress = () => {
-        
-        this.props.onPress(this.props.number, this.props.isBlue);
+        key: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        widget: PropTypes.string.isRequired,
+        options: PropTypes.string,
+        cellUpdate: PropTypes.func.isRequired,
     };
 
+    
     render () {
         return (
             
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
-                    <View backgroundColor={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
-                    <View width={10}/>
-                    <View style={styles.scouter}>
-                        <View>
-                            <Text style={styles.team}>{"Team "+this.props.number}</Text>
-                        </View>
-                        <Text style={styles.scouter}>{this.props.scouterDescription ? "Covered by "+this.props.scouterDescription : "Open"}</Text>
-                    </View>
+                    <Text>{"Key: "+this.state.key}</Text>
                </ListItem>
             </TouchableWithoutFeedback>
 

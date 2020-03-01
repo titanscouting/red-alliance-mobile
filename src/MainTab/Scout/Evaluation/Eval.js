@@ -6,7 +6,7 @@ import material from '../../../../native-base-theme/variables/material';
 
 import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
-
+import EvalTab from './EvalTab';
 import { Alert } from "react-native";
 
 
@@ -76,6 +76,10 @@ export default class Eval extends React.Component {
         return tab;
     }
 
+    onUpdate = (key, value) => {
+        console.log("Update " + key + " to value: " + value);
+    }
+
     render () {
         if (this.props.configuration.length === 0) {
             return (
@@ -113,7 +117,7 @@ export default class Eval extends React.Component {
                         <Tabs>
                             {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
-                                <Text>Auto</Text>
+                                <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
                             </Tab>
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
                                 
