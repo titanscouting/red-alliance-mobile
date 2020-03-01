@@ -275,7 +275,6 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
 }
 
 exports.addScouterToMatch = async (team, match) => {
-
     const endpoint = apiHost + "api/addScouterToMatch";
     try {
         fetch(endpoint, {
