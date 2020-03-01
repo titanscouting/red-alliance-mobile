@@ -41,7 +41,7 @@ export default class EvalTab extends React.Component {
 
 const styles = StyleSheet.create({
     cell: {
-        flexDirection: 'column',
+        flexDirection: 'row',
         alignItems: 'flex-start'
     }
 });
