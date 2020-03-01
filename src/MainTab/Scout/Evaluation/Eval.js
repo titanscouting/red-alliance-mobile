@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
+import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, BackHandler, View } from 'react-native';
 import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
 import { Alert } from "react-native";
@@ -72,6 +72,18 @@ export default class Eval extends React.Component {
     onUpdate = (key, value) => {
         this.vals[key] = value
     }
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+      }
+    
+      componentWillUnmount() {
+        this.backHandler.remove()
+      }
+    
+      handleBackPress = () => {
+        this.props.onBack()
+        return true;
+      }
 
     render () {
         if (this.props.configuration.length === 0) {
