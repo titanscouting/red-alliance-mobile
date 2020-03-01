@@ -6,6 +6,7 @@ import Globals from '../../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import Segment from '../../../../native-base-theme/components/Segment';
+import Stepper from './Stepper.js'
 
 export default class EvalCell extends React.Component {
 
@@ -36,23 +37,23 @@ export default class EvalCell extends React.Component {
         switch (this.widget()) {
             case 'segment': 
                 return (
-                    <View style={styles.container}>
-                        <Text>{this.name()}</Text>
-                        <View style={styles.separator}/>
-                        <SegmentedControlTab 
-                            tabStyle={styles.tabStyle}
-                            tabTextStyle={styles.tabTextStyle}
-                            activeTabStyle={styles.activeTabStyle}
-                            values={this.options()}
-                            selectedIndex={this.state.selectedIndex} 
-                            onTabPress={this.handleIndexChange}
-                        />
-                    </View>
+                    <SegmentedControlTab 
+                        tabStyle={styles.tabStyle}
+                        tabTextStyle={styles.tabTextStyle}
+                        activeTabStyle={styles.activeTabStyle}
+                        values={this.options()}
+                        selectedIndex={this.state.selectedIndex} 
+                        onTabPress={this.handleIndexChange}
+                    />
                 );
 
             case 'stepper':
                 return (
-                    <Text>Step, bitch</Text>
+                    <Stepper
+                        style={styles.container}
+                        labelBackgroundColor={Globals.colors[Globals.brand["primary"]]}
+                        buttonsBackgroundColor={Globals.colors[Globals.brand["primary-dark"]]}
+                    />
                 )
             default:
                 // TODO: Switch this to error.
@@ -68,7 +69,9 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'flex-start',
-        backgroundColor: 'white',
+      },
+      stepper: {
+        flex: 1,
       },
       separator: {
         height:4,

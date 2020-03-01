@@ -2,7 +2,7 @@
 
 export default () => {
   const bodyTheme = {
-    flex: 1,
+    flex: 4,
     alignItems: 'center',
     alignSelf: 'center'
   };

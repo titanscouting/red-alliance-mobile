@@ -3,11 +3,11 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
+import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
 import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
 import { Alert } from "react-native";
+import Globals from '../../../GlobalDefinitions'
 
 
 export default class Eval extends React.Component {
@@ -87,6 +87,7 @@ export default class Eval extends React.Component {
                     <Container>
                         <Header color={"#A0A0A0"}>
                             <Body>
+
                                 <Title>{"Team "+this.props.teamNumber+(this.props.isBlue ? " (Blue)" : " (Red)")}</Title>
                             </Body>
                         </Header>
@@ -104,8 +105,9 @@ export default class Eval extends React.Component {
                                      <Icon name='arrow-back' />
                                 </Button>
                             </Left>
-                            <Body>
-                                <Title>{"Team "+this.props.teamNumber+(this.props.isBlue ? " (Blue)" : " (Red)")}</Title>
+                            <Body style={styles.body}>
+                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
+                                <Title>Team {this.props.teamNumber}</Title>
                             </Body>
 
                             <Right>
@@ -134,3 +136,25 @@ export default class Eval extends React.Component {
     }
     
 }
+
+const styles = StyleSheet.create({
+    circleRed: {
+        width: 12,
+        height: 12,
+        borderRadius: 12/2,
+        backgroundColor: Globals.colors.red,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    circleBlue: {
+        width: 12,
+        height: 12,
+        borderRadius: 12/2,
+        backgroundColor: Globals.colors.blue,
+        borderWidth: 1,
+        borderColor: 'white'
+    },
+    body: {
+        flexDirection: 'row',
+    },
+});

@@ -26,6 +26,8 @@ export default class EvalTab extends React.Component {
                     data = {this.props.tabConfig}
                     renderItem={({item}) => 
                         <ListItem style={styles.cell}>
+                            <Text>{item.name}</Text>
+                            <View style={styles.separator}/>
                             <EvalCell config={item} cellUpdate={this.cellUpdate}/>
                         </ListItem>
                     }
@@ -40,8 +42,12 @@ export default class EvalTab extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    separator: {
+      height:4,
+    },
     cell: {
-        flexDirection: 'row',
+        flex: 1,
+        flexDirection: 'column',
         alignItems: 'flex-start'
     }
 });
