@@ -110,7 +110,7 @@ export default class Matches extends React.Component {
         if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <Eval configuration={this.state.configuration} onBack={this.popEval} onSave={this.saveScouting} matchNumber={this.state.currentMatchNumber} teamNumber={this.state.currentTeamNumber}/>
+                    <Eval configuration={this.state.configuration} onBack={this.popEval} onSave={this.saveScouting} matchNumber={this.state.currentMatchNumber} teamNumber={this.state.currentTeamNumber} isBlue={this.state.isBlue}/>
                 </StyleProvider>
                 );
         }
