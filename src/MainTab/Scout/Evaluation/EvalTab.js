@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
 import EvalCell from './EvalCell.js';
+import {KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
 
 export default class EvalTab extends React.Component {
 
@@ -22,7 +23,7 @@ export default class EvalTab extends React.Component {
     render () {
         if (this.props.tabConfig != null) {
             return (
-                <FlatList
+                <KeyboardAwareFlatList
                     data = {this.props.tabConfig}
                     renderItem={({item}) => 
                         <ListItem style={styles.cell}>
@@ -33,6 +34,7 @@ export default class EvalTab extends React.Component {
                     }
                     keyExtractor= {item => String(item.key)}
                     showsVerticalScrollIndicator={false}
+                    extraScrollHeight={Platform.OS === "ios" ? 70 : -53}
                 />
     
             );
@@ -42,9 +44,6 @@ export default class EvalTab extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    separator: {
-      height:4,
-    },
     cell: {
         flex: 1,
         flexDirection: 'column',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, Form, Textarea, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import { FlatList, StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
@@ -58,7 +58,17 @@ export default class EvalCell extends React.Component {
                         buttonsBackgroundColor={Globals.colors[Globals.brand["primary-dark"]]}
                         onChange={this.handleStepChange}
                     />
-                )
+                );
+
+            case 'text-area':
+                return (
+                    <Form>
+                       
+                        <Item>
+                         <Textarea rowSpan={3} bordered placeholder={this.options()} />
+                        </Item>
+                    </Form>
+                );
             default:
                 // TODO: Switch this to error.
                 console.log("Widget not found: " + this.widget());
