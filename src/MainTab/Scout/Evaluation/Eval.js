@@ -8,7 +8,7 @@ import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
 import { Alert } from "react-native";
 import Globals from '../../../GlobalDefinitions'
-
+import ajax from '../../../ajax'
 
 export default class Eval extends React.Component {
 
@@ -21,15 +21,7 @@ export default class Eval extends React.Component {
         isBlue: PropTypes.bool.isRequired,
     }
 
-    state = {
-        vals: {},
-    }
-
-    onRefresh = async () => {
-        this.setState({refreshing: true});
-        await this.props.refreshTeams();
-        this.setState({refreshing: false});
-    }
+    vals = {}
 
     onBack = () => {
         Alert.alert(
@@ -43,6 +35,7 @@ export default class Eval extends React.Component {
                 {
                   text: 'Continue',
                   onPress: () => {
+                      ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
                       this.props.onBack(); 
                   },
                 },
@@ -52,9 +45,9 @@ export default class Eval extends React.Component {
         
     }
 
+
     onSave = () => {
-        this.props.onSave(this.state.vals); 
-        console.log(this.getTabBody(0));
+        this.props.onSave(this.vals); 
     }
 
     doNothing = () => {}
@@ -77,7 +70,7 @@ export default class Eval extends React.Component {
     }
 
     onUpdate = (key, value) => {
-        console.log("Update " + key + " to value: " + value);
+        this.vals[key] = value
     }
 
     render () {

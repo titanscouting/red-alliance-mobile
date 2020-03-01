@@ -80,6 +80,7 @@ export default class Matches extends React.Component {
                 return;
             }
         }
+        ajax.addScouterToMatch(teamNumber, this.state.matchNumber);
         this.state.currentTeamNumber = teamNumber;
         this.state.isBlue = isBlue;
         this.forceUpdate();
@@ -103,7 +104,15 @@ export default class Matches extends React.Component {
     }
 
     saveScouting = (vals) => {
-        console.log("Save scouting: "+vals);
+        ajax.submitMatchData(GLOBAL.data.competition, this.state.currentTeamNumber, this.state.currentMatchNumber, vals);
+        this.setState({
+            currentMatchNumber: null,
+            teams: null,
+            currentTeamNumber: null,
+            isBlue: null,
+        })
+        this.forceUpdate();
+        console.log("Save scouting: "+JSON.stringify(vals));
     }
 
     render () {
