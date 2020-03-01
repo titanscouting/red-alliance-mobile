@@ -190,7 +190,6 @@ exports.signOut = async () => {
 exports.fetchMatches = async (competition) => {
 
     const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
-    const token = await exports.getIDToken();
     
     try {
         return await fetch(endpoint, {
@@ -198,7 +197,7 @@ exports.fetchMatches = async (competition) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': token 
+                'token': await exports.getIDToken()
             }
         }).then((response) => {
             return response.json();
@@ -230,7 +229,7 @@ exports.submitMatchData = async (competition, team, match, data) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': exports.getIDToken()
+                'token': await exports.getIDToken()
             },
             body: JSON.stringify({
                 competition_id: competition,
@@ -276,13 +275,14 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
 
 exports.addScouterToMatch = async (team, match) => {
     const endpoint = apiHost + "api/addScouterToMatch";
+    const token = await exports.getIDToken()
     try {
         fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': exports.getIDToken()
+                'token': String(token)
             },
             body: JSON.stringify({
                 match: match,
@@ -290,8 +290,6 @@ exports.addScouterToMatch = async (team, match) => {
             }),
         }).then((response) => {
             return response.json();
-        }).then((myJson) => {
-            console.warn(myJson);
         })
         // let responseJson = await JSON.parse(response);
         // console.warn("This is from dev: "+responseJson);
@@ -309,7 +307,7 @@ exports.removeScouterFromMatch = async (team, match) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': exports.getIDToken()
+                'token': await exports.getIDToken()
             },
             body: JSON.stringify({
                 match: match,
@@ -382,7 +380,7 @@ exports.submitStrategy = async (competition, match, team, data) => {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'token': exports.getIDToken()
+                'token': await exports.getIDToken()
             },
             body: JSON.stringify({
                 competition: competition, 
