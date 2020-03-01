@@ -54,7 +54,7 @@ export default class Eval extends React.Component {
 
     onSave = () => {
         this.props.onSave(this.state.vals); 
-        this.getTab(0);
+        console.log(this.getTabBody(0));
     }
 
     doNothing = () => {}
@@ -113,7 +113,7 @@ export default class Eval extends React.Component {
                         <Tabs>
                             {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
-                                
+                                <Text>Auto</Text>
                             </Tab>
                             <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
                                 

@@ -12,12 +12,26 @@ export default class TeamCell extends React.Component {
         isBlue: PropTypes.bool.isRequired,
         scouterDescription: PropTypes.string,
         onPress: PropTypes.func.isRequired,
+        showRefresh: PropTypes.func.isRequired,
     };
 
+    _isMounted = false;
 
-    handlePress = () => {
-        console.log("handling press")
-        this.props.onPress(this.props.number, this.props.isBlue);
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
+    handlePress = async () => {
+        this.props.showRefresh(true);
+        await this.props.onPress(this.props.number, this.props.isBlue);
+        if (this._isMounted) {
+            this.props.showRefresh(false);
+        }
+        
     };
 
     render () {

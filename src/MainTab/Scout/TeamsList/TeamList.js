@@ -31,9 +31,8 @@ export default class TeamList extends React.Component {
         this.props.onBack(); 
     }
 
-    doNothing = () => {
-        console.log("Do nothing!");
-    }
+    doNothing = () => { }
+
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
@@ -46,6 +45,11 @@ export default class TeamList extends React.Component {
         this.onBack()
         return true;
     }
+
+    showRefresh = (serious) => {
+        this.setState({refreshing: serious});
+    }
+
     render () {
         if (this.props.teams.length === 0) {
             return (
@@ -82,7 +86,7 @@ export default class TeamList extends React.Component {
                             <FlatList
                                 data = {this.props.teams}
                                 renderItem={({item}) => 
-                                    <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress}/>
+                                    <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress} showRefresh={this.showRefresh}/>
                                 }
                                 keyExtractor= {item => String(item.teamNumber)}
                                 refreshControl={

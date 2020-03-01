@@ -39,11 +39,6 @@ export default class Matches extends React.Component {
         this.forceUpdate()
     }
 
-    refreshTeams = async () => {
-        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
-        this.state.teams = teams;        
-        this.forceUpdate()
-    }
 
     currentMatch = () => {
         return this.matches.find((match) => match.key === this.currentMatchNumber);
@@ -66,7 +61,25 @@ export default class Matches extends React.Component {
         this.forceUpdate()
     }
 
-    setCurrentTeam = (teamNumber, isBlue) => {
+    getTeams = async () => {
+        const teams = await ajax.fetchTeamsForMatch(GLOBAL.data.competition, this.state.currentMatchNumber);
+        return teams;
+    }
+    refreshTeams = async () => {
+        let teams = await this.getTeams();
+        this.state.teams = teams;        
+        this.forceUpdate()
+    }
+
+    setCurrentTeam = async (teamNumber, isBlue) => {
+        let teams = await this.getTeams();
+        for (var team in teams) {
+            let number = teams[team].teamNumber;
+            if (number === teamNumber && teams[team].scouterDescription != null) {
+                this.refreshTeams();
+                return;
+            }
+        }
         this.state.currentTeamNumber = teamNumber;
         this.state.isBlue = isBlue;
         this.forceUpdate();
@@ -101,7 +114,8 @@ export default class Matches extends React.Component {
                 </StyleProvider>
                 );
         }
-        else if (this.state.currentMatchNumber != null) {
+        else if (this.state.currentMatchNumber != null && this.state.teams != null) {
+            console.log(this.state.teams)
             return (
                 <StyleProvider style={getTheme(material)}>
                     <TeamList teams={this.state.teams} refreshTeams={this.refreshTeams} matchNumber={this.state.currentMatchNumber} onBack={this.unsetCurrentMatch} onItemPress={this.setCurrentTeam}/>
