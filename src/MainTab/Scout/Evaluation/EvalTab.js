@@ -17,42 +17,31 @@ export default class EvalTab extends React.Component {
         this.props.onUpdate(key, value);
     }
 
-    render () {
-        return (
-            
-            <FlatList
-                data = {this.props.tabConfig}
-                renderItem={({item}) => 
-                    <EvalCell key={item.key} name={item.name} widget={item.widget} options={item.options} onUpdate={this.cellUpdate}/>
-                }
-                keyExtractor= {item => String(item.key)}
-                showsVerticalScrollIndicator={false}
-            />
+     
 
-        );
+    render () {
+        if (this.props.tabConfig != null) {
+            return (
+                <FlatList
+                    data = {this.props.tabConfig}
+                    renderItem={({item}) => 
+                        <ListItem style={styles.cell}>
+                            <EvalCell config={item} cellUpdate={this.cellUpdate}/>
+                        </ListItem>
+                    }
+                    keyExtractor= {item => String(item.key)}
+                    showsVerticalScrollIndicator={false}
+                />
+    
+            );
+        }
+        
     }
 }
 
 const styles = StyleSheet.create({
-    ribbon: {
-        width: 15,
-        height: 40,
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    scouter: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
     cell: {
-        flexDirection: 'row'
+        flexDirection: 'column',
+        alignItems: 'flex-start'
     }
 });

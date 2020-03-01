@@ -8,47 +8,36 @@ import { TouchableWithoutFeedback } from 'react-native';
 export default class EvalCell extends React.Component {
 
     static propTypes = {
-        key: PropTypes.string.isRequired,
-        name: PropTypes.string.isRequired,
-        widget: PropTypes.string.isRequired,
-        options: PropTypes.string,
+        config: PropTypes.object.isRequired,
         cellUpdate: PropTypes.func.isRequired,
     };
 
+    key = (() => this.props.config.key);
+    name = (() => this.props.config.name);
+    widget = (() => this.props.config.widget);
+    options = (() => this.props.config.options);
+ 
     
     render () {
-        return (
-            
-            <TouchableWithoutFeedback onPress={this.handlePress}>
-                <ListItem style={styles.cell}>
-                    <Text>{"Key: "+this.state.key}</Text>
-               </ListItem>
-            </TouchableWithoutFeedback>
 
-        );
+        switch (this.widget()) {
+            case 'segment': 
+                return (
+                    <Text>{"Widget: "+this.widget()}</Text>
+                );
+            default:
+                // TODO: Switch this to error.
+                console.log("Widget not found: " + this.widget());
+                return (
+                    <Text>{"Nothing for widget named: " + this.widget()}</Text>
+                )
+        }
     }
 }
 
 const styles = StyleSheet.create({
-    ribbon: {
-        width: 15,
-        height: 40,
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    scouter: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
     cell: {
-        flexDirection: 'row'
+        flexDirection: 'column',
+        alignItems: 'flex-start'
     }
 });
