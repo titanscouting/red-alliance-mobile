@@ -319,21 +319,40 @@ exports.fetchCompetitionSchedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetchCompetitionSchedule?competition="+competition;
     try {
-        await fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            let respJson = response.json();
-            console.log(respJson);
-            return respJson;
-        })
-        // let responseJson = await JSON.parse(response);
+            if (response.status != 200) {
+                console.warn("Error fetching competition schedule for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
     } catch(error) {
         console.error(error);
     }
+}
+
+exports.fetchTeamsInCompetition = async (competition) => {
+    let compSchedlule = await exports.fetchCompetitionSchedule(competition);
+    var teams = [];
+    for (let i in compSchedlule) {
+        match = compSchedlule[i];
+        teamsForMatch = match.teams
+        for (let j in teamsForMatch) {
+            let t = parseInt(teamsForMatch[j]);
+            if (!teams.includes(t)) {
+                teams.push(t);
+            }
+        }
+    }
+    return teams.sort(function (a, b) {return a - b; });
 }
 
 exports.fetch2022Schedule = async (competition) => {
