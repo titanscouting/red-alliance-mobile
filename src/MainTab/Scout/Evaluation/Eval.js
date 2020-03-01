@@ -90,10 +90,10 @@ export default class Eval extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <Header color={"#A0A0A0"}>
-                            <Body>
-
-                                <Title>{"Team "+this.props.teamNumber+(this.props.isBlue ? " (Blue)" : " (Red)")}</Title>
+                        <Header>
+                             <Body style={styles.body}>
+                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
+                                <Title>Team {this.props.teamNumber}</Title>
                             </Body>
                         </Header>
                         <ActivityIndicator animating={true}/>

@@ -319,14 +319,16 @@ exports.fetchCompetitionSchedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetchCompetitionSchedule?competition="+competition;
     try {
-        fetch(endpoint, {
+        await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            return response.json();
+            let respJson = response.json();
+            console.log(respJson);
+            return respJson;
         })
         // let responseJson = await JSON.parse(response);
     } catch(error) {
