@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Foot
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View } from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View, BackHandler} from 'react-native';
 import PropTypes from 'prop-types';
 import MatchCell from './MatchCell';
 
@@ -24,7 +24,17 @@ export default class MatchList extends React.Component {
         await this.props.refreshMatches();
         this.setState({refreshing: false});
     }
-
+    componentDidMount() {
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+      }
+    
+      componentWillUnmount() {
+        this.backHandler.remove()
+      }
+    
+      handleBackPress = () => {
+        return true;
+      }
     render () {
           
         return (
