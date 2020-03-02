@@ -81,7 +81,7 @@ export default class Eval extends React.Component {
       }
     
       handleBackPress = () => {
-        this.props.onBack()
+        this.onBack()
         return true;
       }
 
