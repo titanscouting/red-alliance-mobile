@@ -87,7 +87,7 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
         }).then((response) => {
             let meme_review;
             if (response.status != 200) {
-                meme_review = {"competition": "Central2020", "scouters": [{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"}], "success": false, "teams": ["0", "0", "0", "0", "0", "0"]}
+                meme_review = {"competition": Globals.competition, "scouters": [{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"},{"id": "0", "name": "ERROR: MATCH NOT IN DB"}], "success": false, "teams": ["0", "0", "0", "0", "0", "0"]}
             }
             else {
                 meme_review = response.json()
@@ -218,7 +218,6 @@ exports.fetchMatches = async (competition) => {
     }
 },
 
-// await ajax.submitMatchData('Central2020', '2042', '12', '{"myfavoritecolor":"red"}');
 exports.submitMatchData = async (competition, team, match, data) => {
 
     const endpoint = apiHost + "api/submitMatchData";
@@ -247,8 +246,6 @@ exports.submitMatchData = async (competition, team, match, data) => {
 
 
 // STATS
-
-// await ajax.fetchMatchData('Central2020', '2042', '12');
 exports.fetchMatchData = async (competition, matchNumber, team) => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
     

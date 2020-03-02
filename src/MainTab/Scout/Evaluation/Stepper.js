@@ -141,13 +141,13 @@ export default class Stepper extends React.Component {
 
   _renderLabelContainer() {
     let { labelBackgroundColor, labelTextColor, size } = this.props
-    let { value } = this.state
+    let { value } = this.state === -1 ? "Not Scouted" : this.state
 
     return <Animatable.View ref={ref => {
           ref && (this.labelContainerRef = ref);
         }} style={[styles.labelContainer, { backgroundColor: labelBackgroundColor }]} useNativeDriver={true}>
         <Text style={[styles.valueStyle, { color: labelTextColor }]} adjustsFontSizeToFit={true} numberOfLines={1}>
-          {value.toString()}
+          {value.toString() === "-1" ?  "Not Scouted" : value.toString()}
         </Text>
       </Animatable.View>;
   }
