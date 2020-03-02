@@ -6,7 +6,7 @@ import material from '../../../../../native-base-theme/variables/material';
 import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, BackHandler, View } from 'react-native';
 import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
-import { Alert } from "react-native";
+
 import Globals from '../../../../GlobalDefinitions'
 import ajax from '../../../../ajax'
 
