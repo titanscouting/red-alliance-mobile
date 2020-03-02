@@ -501,22 +501,9 @@ exports.fetch2022Schedule = async (competition) => {
             }
         }).then((myJson) => {
             let data = []
-            let is_blue;
-            let desc = null;
             for (match of myJson["data"]) {
-                for (let i = 0; i<match.teams.length; i++) {
-                    if (i<3) {
-                        is_blue = true;
-                    } else {
-                        is_blue = false
-                    }
-                    try {
-                        desc = myJson.scouters[i].name;
-                    } catch (e) {
-                        desc = null;
-                    }
-                    data.push({teamNumber: parseInt(match.teams[i]), isBlue: is_blue, scouterDescription: desc})
-                }
+                console.log(match)
+                data.push({match: match.match, teams: [{team: match.teams[0], isBlue: true}, {team: match.teams[1], isBlue: true}, {team: match.teams[2], isBlue: true}, {team: match.teams[3], isBlue: false}, {team: match.teams[4], isBlue: false}, {team: match.teams[5], isBlue: false}]})
             }
             return data;
         });
