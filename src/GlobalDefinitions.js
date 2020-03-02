@@ -21,6 +21,6 @@ export default {
         "tint":"light-red-tint",
     },
     "data":{
-        "competition":"Central2020"
+        "competition":"2020ilch"
     }
 };
