@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Matchups from "./Matchups/Matchups"
 import Matches from "./Scout/Matches"
 import Strategies from "./Strategies/Strategies"
 import Stats from "./Stats/Stats"
@@ -20,7 +19,6 @@ const TabControl = createBottomTabNavigator(
   {
     Teams: { screen: Matches },
     Stats: { screen: Stats},
-    Heats: { screen: Matchups},
     Strat: { screen: Strategies},
     Options: {screen: Options}
   }, {
@@ -40,10 +38,6 @@ const TabControl = createBottomTabNavigator(
                             
                             <Button vertical active={routeName === 'Stats'} onPress={() => navigation.navigate("Stats")}>
                                 <Icon name="md-stats" />
-                            </Button>
-                            
-                            <Button vertical active={routeName === 'Heats'} onPress={() => navigation.navigate("Heats")}>
-                                <Icon name="eye" />
                             </Button>
                             
                             <Button vertical active={routeName === 'Strat'} onPress={() => navigation.navigate("Strat")}>
