@@ -24,7 +24,6 @@ export default class Matches extends React.Component {
 
     refreshTeam = async () => {
        let d = await ajax.fetchMatchDataForTeamInCompetition(Globals.data.competition, this.props.team);
-       console.log(d);
        this.setState({statsData: d});
     }
 

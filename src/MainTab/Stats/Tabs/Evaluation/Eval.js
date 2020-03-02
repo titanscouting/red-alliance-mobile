@@ -18,6 +18,7 @@ export default class Eval extends React.Component {
         defaultData: PropTypes.object.isRequired,
         onSave: PropTypes.func.isRequired,
         onBack: PropTypes.func.isRequired,
+        makeAware: PropTypes.func.isRequired,
         teamNumber: PropTypes.number.isRequired,
     }
 
@@ -69,8 +70,13 @@ export default class Eval extends React.Component {
         return tab;
     }
 
+    hasMadeAware = false
+    
     onUpdate = (key, value) => {
         this.vals[key] = value
+        if (!hasMadeAware) {
+            this.props.makeAware
+        }
     }
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
@@ -90,12 +96,6 @@ export default class Eval extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <Header>
-                             <Body style={styles.body}>
-                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
-                                <Title>Team {this.props.teamNumber}</Title>
-                            </Body>
-                        </Header>
                         <ActivityIndicator animating={true}/>
                     </Container>
                 </StyleProvider>
@@ -104,35 +104,7 @@ export default class Eval extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <Header>
-                            <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
-                                <Button transparent onPress={this.onBack}>
-                                     <Icon name='arrow-back' />
-                                </Button>
-                            </Left>
-                            <Body style={styles.body}>
-                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
-                                <Title>Team {this.props.teamNumber}</Title>
-                            </Body>
-
-                            <Right>
-                                <Button transparent onPress={this.onSave}>
-                                     <Icon name='save' />
-                                </Button>
-                            </Right>
-                        </Header>
-                        <Tabs>
-                            {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
-                            </Tab>
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(1)} onUpdate={this.onUpdate}/>
-                            </Tab>
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(2)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(2)} onUpdate={this.onUpdate}/>
-                            </Tab>
-                        </Tabs>
+                        <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
                     </Container>
                 </StyleProvider>
             );

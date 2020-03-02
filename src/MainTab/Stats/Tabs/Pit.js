@@ -13,6 +13,7 @@ export default class Pit extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onBack: PropTypes.func.isRequired,
+        acknowledgeChanges: PropTypes.func.isRequired,
     }
 
     componentDidMount() {
@@ -49,7 +50,6 @@ export default class Pit extends React.Component {
             isBlue: null,
         })
         this.forceUpdate();
-        console.log("Save scouting: "+JSON.stringify(vals));
     }
 
     render() {
@@ -66,7 +66,8 @@ export default class Pit extends React.Component {
                             defaultData={this.state.defaultData} 
                             onBack={this.props.onBack} 
                             onSave={this.saveScouting} 
-                            teamNumber={this.state.currentTeamNumber} />
+                            teamNumber={this.state.currentTeamNumber} 
+                            makeAware={this.props.acknowledgeChanges}/>
             </Container>
             );
         }

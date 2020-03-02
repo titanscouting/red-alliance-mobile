@@ -112,7 +112,6 @@ export default class Matches extends React.Component {
             isBlue: null,
         })
         this.forceUpdate();
-        console.log("Save scouting: "+JSON.stringify(vals));
     }
 
     render () {
