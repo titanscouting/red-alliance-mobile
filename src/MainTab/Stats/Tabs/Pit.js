@@ -13,7 +13,6 @@ export default class Pit extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onBack: PropTypes.func.isRequired,
-        onSave: PropTypes.func.isRequired,
         acknowledgeChanges: PropTypes.func.isRequired,
     }
 
@@ -30,6 +29,7 @@ export default class Pit extends React.Component {
 
     refreshTeam = async () => {
        let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
+       console.log(d);
         let c = await ajax.fetchPitConfiguration();
        this.setState({defaultData: d, configuration: c});
     }
@@ -56,7 +56,6 @@ export default class Pit extends React.Component {
                     <Eval configuration={this.state.configuration} 
                             defaultData={this.state.defaultData} 
                             onBack={this.props.onBack} 
-                            onSave={this.props.onSave} 
                             teamNumber={this.state.currentTeamNumber} 
                             makeAware={this.props.acknowledgeChanges}/>
             </Container>
