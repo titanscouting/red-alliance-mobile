@@ -243,11 +243,53 @@ exports.submitMatchData = async (competition, team, match, data) => {
         console.error(error);
     }
 },
+exports.submitPitData = async (competition, team, match, data) => {
 
+    const endpoint = apiHost + "api/submitPitData";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': await exports.getIDToken()
+            },
+            body: JSON.stringify({
+                competition_id: competition,
+                match_number: match,
+                team_scouted: team,
+                data : data
+            }),
+        }).then((response) => {
+            return response.json();
+        })
+        // let responseJson = await JSON.parse(response);
+    } catch(error) {
+        console.error(error);
+    }
+},
 
 // STATS
 exports.fetchMatchData = async (competition, matchNumber, team) => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
+    
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            return response.json();
+        })
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.fetchPitData = async (competition, matchNumber, team) => {
+    const endpoint = encodeURI(apiHost + "api/fetchPitData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
     
     try {
         fetch(endpoint, {
