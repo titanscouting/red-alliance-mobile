@@ -106,6 +106,7 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
                 }
                 data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
             }
+            console.log(data)
             return data;
         });
     } catch(error) {
@@ -496,7 +497,26 @@ exports.fetch2022Schedule = async (competition) => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson["data"];
+            let data = []
+            let is_blue;
+            let desc = null;
+            for (match in myJson) {
+                for (let i = 0; i<match.teams.length; i++) {
+                    if (i<3) {
+                        is_blue = true;
+                    } else {
+                        is_blue = false
+                    }
+                    try {
+                        desc = myJson.scouters[i].name;
+                    } catch (e) {
+                        desc = null;
+                    }
+                    data.push({teamNumber: parseInt(match.teams[i]), isBlue: is_blue, scouterDescription: desc})
+                }
+            }
+            console.log(data)
+            return data;
         });
         // let responseJson = await JSON.parse(response);
     } catch(error) {
