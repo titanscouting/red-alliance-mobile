@@ -252,8 +252,8 @@ exports.submitMatchData = async (competition, team, match, data) => {
     }
 },
 
-exports.submitPitData = async (competition, team, match, data) => {
-
+exports.submitPitData = async (competition, team, data) => {
+    let match = 0; // TODO: REMOVE MATCH FROM THE API
     const endpoint = apiHost + "api/submitPitData";
     try {
         fetch(endpoint, {
@@ -460,7 +460,7 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
                    for (i in matchDataArr) {
                       let match = matches[i];
                       let matchObj = matchDataArr[i];
-                      let val = null;
+                      let val = "Not Scouted";
                       if (matchObj["data"] != null && matchObj["data"][key] != null) {
                           val = matchObj["data"][key];
                       }
@@ -472,7 +472,6 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
                    let response = {
                        "category":category,
                        "name":name,
-                       "key":key,
                        "data":d
                    }
                    stuffToReturn.push(response);

@@ -4,8 +4,8 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 
 import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
 import PropTypes from 'prop-types';
-import Pit from './Tabs/Pit'
 import Matches from './Tabs/Matches'
+import Pit from './Tabs/Pit'
 
 export default class StatsTeamController extends React.Component {
 
@@ -53,11 +53,11 @@ export default class StatsTeamController extends React.Component {
                     <Right style={{  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
                   </Header>
                   <Tabs>
-                        <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
-                            <Pit team={this.props.team}/>
-                        </Tab>
                         <Tab heading={ <TabHeading><Text>Matches</Text></TabHeading>}>
                             <Matches team={this.props.team}/>
+                        </Tab>
+                        <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
+                            <Pit team={this.props.team}/>
                         </Tab>
                     </Tabs>
             </Container>
