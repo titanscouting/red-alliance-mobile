@@ -25,7 +25,7 @@ export default class MatchList extends React.Component {
         this.setState({refreshing: false});
     }
     componentDidMount() {
-        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
 
     componentWillUnmount() {
