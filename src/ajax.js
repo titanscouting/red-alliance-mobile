@@ -421,6 +421,29 @@ exports.fetchTeamsInCompetition = async (competition) => {
     return teams.sort(function (a, b) {return a - b; });
 }
 
+
+exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
+    let compSchedlule = await exports.fetchCompetitionSchedule(competition);
+    var matches = [];
+    for (let i in compSchedlule) {
+        match = compSchedlule[i];
+        teamsForMatch = match.teams
+        for (let j in teamsForMatch) {
+            let t = parseInt(teamsForMatch[j]);
+            if (team === t) {
+                matches.push(t);
+            }
+        }
+    }
+    return matches.sort(function (a, b) {return a - b; });
+}
+
+exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
+    let matches = await exports.fetchMatchesForTeamInCompetition(competition, team);
+    console.log(matches)
+}
+
+
 exports.fetch2022Schedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
