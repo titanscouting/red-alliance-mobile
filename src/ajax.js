@@ -134,7 +134,7 @@ exports.fetchMatchConfig = async () => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson["data"];
+            return myJson;
         });
 
     } catch(error) {
@@ -289,7 +289,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
     
     try {
-        fetch(endpoint, {
+        return fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -302,7 +302,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson["data"];
+            return myJson;
         });
     } catch(error) {
         console.error(error);
@@ -431,7 +431,7 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
         for (let j in teamsForMatch) {
             let t = parseInt(teamsForMatch[j]);
             if (team === t) {
-                matches.push(t);
+                matches.push(match.match);
             }
         }
     }
@@ -440,7 +440,48 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
 
 exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
     let matches = await exports.fetchMatchesForTeamInCompetition(competition, team);
-    console.log(matches)
+    let matchDataArr = [];
+    for (let i in matches) {
+        let match = matches[i];
+        let matchData = await exports.fetchMatchData(competition, match, team);
+        matchDataArr.push(matchData);
+    }
+    let config = await exports.fetchMatchConfig();
+    let stuffToReturn = [];
+    for (var k in config) {
+        if (config.hasOwnProperty(k)) {
+            
+           for (var l in config[k]) {
+               let category = l; // Auto, Teleop, Notes
+               for (var m in config[k][l]) {
+                   let name = config[k][l][m].name;
+                   let key = config[k][l][m].key;
+                   let d = [];
+                   for (i in matchDataArr) {
+                      let match = matches[i];
+                      let matchObj = matchDataArr[i];
+                      let val = null;
+                      if (matchObj["data"] != null && matchObj["data"][key] != null) {
+                          val = matchObj["data"][key];
+                      }
+                      d.push({
+                          "match":match,
+                          "val":val
+                      })
+                   }
+                   let response = {
+                       "category":category,
+                       "name":name,
+                       "key":key,
+                       "data":d
+                   }
+                   stuffToReturn.push(response);
+               }
+           }
+           
+        }
+    }
+    return stuffToReturn;
 }
 
 

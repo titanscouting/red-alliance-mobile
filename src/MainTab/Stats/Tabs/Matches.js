@@ -5,7 +5,7 @@ import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, C
 import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
 import PropTypes from 'prop-types';
 import ajax from '../../../ajax';
-
+import Globals from '../../../GlobalDefinitions';
 
 export default class Matches extends React.Component {
 
@@ -14,7 +14,7 @@ export default class Matches extends React.Component {
     }
 
     componentDidMount() {
-        ajax.fetchMatchDataForTeamInCompetition()
+       this.refreshTeam();
     }
 
 
@@ -24,7 +24,8 @@ export default class Matches extends React.Component {
     }
 
     refreshTeam = async () => {
-
+       let d = await ajax.fetchMatchDataForTeamInCompetition(Globals.data.competition, this.props.team);
+       this.setState({statsData: d});
     }
 
     onRefresh = async () => {
@@ -33,15 +34,32 @@ export default class Matches extends React.Component {
         this.setState({refreshing: false});
     }
 
-
-
     render() {
-      return (
-        <Container>
-            <Text>Matches</Text>
-        </Container>
-        
-      );
+        if (this.state.statsData === null) {
+            return (
+                <StyleProvider style={getTheme(material)}>
+                    <Container>
+                        <ActivityIndicator animating={true}/>
+                    </Container>
+                </StyleProvider>
+            );
+        } else {
+            return (
+                    <Container>
+                        <FlatList
+                            data = {this.props.teams}
+                            renderItem={({item}) => 
+                                <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress} showRefresh={this.showRefresh}/>
+                            }
+                            keyExtractor= {item => String(item.teamNumber)}
+                            refreshControl={
+                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                            }
+                            showsVerticalScrollIndicator={false}
+                        />
+                    </Container>
+            );
+        }
     }
   }
   
