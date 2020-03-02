@@ -51,11 +51,11 @@ export default class Stats extends React.Component {
           return (
             <StyleProvider style={getTheme(material)}>
               <Container>
-                  <Header>
-                      <Body>
+                <Header>
+                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
                         <Title>Stats</Title>
-                      </Body>
-                  </Header>
+                    </Body>
+                </Header>
                   <FlatList
                       data = {this.state.teams}
                       renderItem={({item}) => 

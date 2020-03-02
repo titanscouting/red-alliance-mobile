@@ -61,7 +61,7 @@ export default class TeamList extends React.Component {
                                      <Icon name='arrow-back' />
                                 </Button>
                             </Left>
-                            <Body>
+                            <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
                                 <Title>Match {this.props.matchNumber}</Title>
                             </Body>
                             <Right style={{ flex: 1,  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>

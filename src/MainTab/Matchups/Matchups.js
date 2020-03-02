@@ -7,11 +7,11 @@ export default class Matchups extends Component {
   render() {
     return (
         <Container>
-            <Header>
-                <Body>
-                    <Title>Matchups</Title>
-                </Body>
-            </Header>
+                <Header>
+                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                        <Title>Matchups</Title>
+                    </Body>
+                </Header>
             
         </Container>
       

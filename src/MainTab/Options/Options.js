@@ -22,11 +22,11 @@ export default class Strategies extends Component {
       <StyleProvider style={getTheme(material)}>
 
         <Container>
-          <Header>
-            <Body>
-              <Title>Options</Title>
-            </Body>
-          </Header>
+        <Header>
+                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                        <Title>Options</Title>
+                    </Body>
+                </Header>
           <Content>
             <Card>
               <CardItem>
