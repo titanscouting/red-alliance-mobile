@@ -74,7 +74,7 @@ export default class Eval extends React.Component {
     
     onUpdate = (key, value) => {
         this.vals[key] = value
-        if (!hasMadeAware) {
+        if (!this.hasMadeAware) {
             this.props.makeAware
         }
     }

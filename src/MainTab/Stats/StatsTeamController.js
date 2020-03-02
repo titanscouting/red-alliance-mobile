@@ -60,6 +60,8 @@ export default class StatsTeamController extends React.Component {
                 { cancelable: true },
               );
             
+        } else {
+            this.props.onBack(); 
         }
         
     }
