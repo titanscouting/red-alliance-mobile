@@ -481,12 +481,13 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
     return stuffToReturn;
 }
 
+// Strategies 
 
 exports.fetch2022Schedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
     try {
-        fetch(endpoint, {
+        let schedule = await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -502,7 +503,7 @@ exports.fetch2022Schedule = async (competition) => {
             let data = []
             let is_blue;
             let desc = null;
-            for (match in myJson) {
+            for (match of myJson["data"]) {
                 for (let i = 0; i<match.teams.length; i++) {
                     if (i<3) {
                         is_blue = true;
@@ -517,10 +518,9 @@ exports.fetch2022Schedule = async (competition) => {
                     data.push({teamNumber: parseInt(match.teams[i]), isBlue: is_blue, scouterDescription: desc})
                 }
             }
-            console.log(data)
             return data;
         });
-        // let responseJson = await JSON.parse(response);
+        return schedule;
     } catch(error) {
         console.error(error);
     }

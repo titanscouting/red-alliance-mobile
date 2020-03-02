@@ -12,12 +12,19 @@ const dataArray = [
 ];
 
 import ajax from '../../ajax'
-
+import Globals from '../../GlobalDefinitions'
 
 
 export default class Strategies extends Component {
 
+  componentDidMount() {
+    this.refreshSchedule();
+  }
 
+  refreshSchedule = async () => {
+    let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
+    console.log(schedule);
+  }
 
   render() {
     return (
