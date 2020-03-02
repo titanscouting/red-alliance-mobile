@@ -43,17 +43,21 @@ export default class Matches extends React.Component {
         } else {
             return (
                     <Container>
+                        <Card>
                         <SectionList 
                             // ItemSeparatorComponent={<Separator/>} 
                             sections={this.state.statsData} 
-                            renderSectionHeader={({ section }) => <Text>{section.name}</Text>} 
-                            renderItem={({ item }) => <Text>{"Match "+item.match + ": "+item.val}</Text>} 
+                            renderSectionHeader={({ section }) => <CardItem header><Text>{section.name}</Text></CardItem>} 
+                            renderItem={({ item }) => <View style={styles.container}>
+                                                        <Text style={styles.match}>{"Match "+item.match}</Text>
+                                                        <Text style={styles.value}>{item.val}</Text>
+                                                      </View>} 
                             showsVerticalScrollIndicator={false}
                             refreshControl={
                                 <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                             }
                             keyExtractor={(item, index) => index} 
-                        />
+                        /></Card>
                     </Container>
             );
         }
@@ -61,3 +65,17 @@ export default class Matches extends React.Component {
   }
   
   
+const styles = StyleSheet.create({
+    match: {
+        
+    },
+    value: {
+        
+    },
+    container: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        paddingRight: 20,
+        paddingLeft: 20,
+    },
+});
