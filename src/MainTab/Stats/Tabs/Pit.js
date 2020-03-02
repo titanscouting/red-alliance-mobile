@@ -64,7 +64,7 @@ export default class Pit extends React.Component {
             <Container>
                     <Eval configuration={this.state.configuration} 
                             defaultData={this.state.defaultData} 
-                            onBack={this.propTypes.onBack} 
+                            onBack={this.props.onBack} 
                             onSave={this.saveScouting} 
                             teamNumber={this.state.currentTeamNumber} />
             </Container>

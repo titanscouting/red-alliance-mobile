@@ -154,7 +154,6 @@ exports.fetchPitConfiguration = async () => {
                 return response.json();
             }
         }).then((myJson) => {
-            console.log("PIT CONFIGURATION "+JSON.stringify(myJson))
             return myJson;
         });
 
