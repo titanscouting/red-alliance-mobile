@@ -7,17 +7,12 @@ import PropTypes from 'prop-types';
 
 
 
-export default class StatsMatches extends React.Component {
+export default class Matches extends React.Component {
     render() {
       return (
-          <Container>
-              <Header>
-                  <Body>
-                      <Title>Matchups</Title>
-                  </Body>
-              </Header>
-              
-          </Container>
+        <Container>
+            <Text>Matches</Text>
+        </Container>
         
       );
     }

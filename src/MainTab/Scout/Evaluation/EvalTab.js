@@ -4,7 +4,7 @@ import { FlatList, StyleSheet, RefreshControl, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
 import Globals from '../../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
-import EvalCell from './EvalCell.js';
+import EvalCell from './EvalCell';
 import {KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view'
 
 export default class EvalTab extends React.Component {

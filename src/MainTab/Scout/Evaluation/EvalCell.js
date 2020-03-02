@@ -6,7 +6,7 @@ import Globals from '../../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
 import SegmentedControlTab from "react-native-segmented-control-tab";
 import Segment from '../../../../native-base-theme/components/Segment';
-import Stepper from './Stepper.js'
+import Stepper from './Stepper'
 
 export default class EvalCell extends React.Component {
 

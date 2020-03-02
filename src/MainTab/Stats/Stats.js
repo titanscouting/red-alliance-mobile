@@ -9,8 +9,6 @@ import ajax from '../../ajax'
 import GLOBAL from '../../GlobalDefinitions'
 import StatsTeamCell from './StatsTeamCell'
 import StatsTeamController from './StatsTeamController'
-import StatsPit from './StatsPit'
-import StatsMatches from './StatsMatches'
 export default class Stats extends React.Component {
 
     _isMounted = false;

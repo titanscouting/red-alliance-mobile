@@ -56,7 +56,7 @@ export default class TeamList extends React.Component {
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
-                            <Left>
+                            <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                                 <Button transparent onPress={this.onBack}>
                                      <Icon name='arrow-back' />
                                 </Button>
@@ -64,6 +64,7 @@ export default class TeamList extends React.Component {
                             <Body>
                                 <Title>Match {this.props.matchNumber}</Title>
                             </Body>
+                            <Right style={{ flex: 1,  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
                         </Header>
                         <ActivityIndicator animating={true}/>
                     </Container>
@@ -74,7 +75,7 @@ export default class TeamList extends React.Component {
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
-                            <Left style={{ flex: 1,  justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                                 <Button transparent onPress={this.onBack}>
                                      <Icon name='arrow-back' />
                                 </Button>

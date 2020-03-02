@@ -7,16 +7,11 @@ import PropTypes from 'prop-types';
 
 
 
-export default class StatsPit extends React.Component {
+export default class Pit extends React.Component {
     render() {
       return (
           <Container>
-              <Header>
-                  <Body>
-                      <Title>Matchups</Title>
-                  </Body>
-              </Header>
-              
+              <Text>Pit</Text>
           </Container>
         
       );
