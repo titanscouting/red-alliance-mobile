@@ -91,7 +91,7 @@ export default class StatsTeamController extends React.Component {
     vals = {}
 
     onSave = async () => {
-        await ajax.submitPitData(GLOBAL.data.competition, this.state.currentTeamNumber, this.vals);
+        await ajax.submitPitData(GLOBAL.data.competition, this.props.team, this.vals);
         this.setState({
             currentMatchNumber: null,
             teams: null,
