@@ -6,6 +6,8 @@ import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, 
 import PropTypes from 'prop-types';
 import Matches from './Tabs/Matches'
 import Pit from './Tabs/Pit'
+import ajax from '../../ajax'
+import GLOBAL from '../../GlobalDefinitions'
 
 export default class StatsTeamController extends React.Component {
 
@@ -35,7 +37,7 @@ export default class StatsTeamController extends React.Component {
     }
     
     acknowledgeChanges = (key, value) => {
-        vals[key] = value;
+        this.vals[key] = value;
         if (!this.state.madeChanges) {
             this.setState({madeChanges: true});
         }
@@ -88,9 +90,8 @@ export default class StatsTeamController extends React.Component {
 
     vals = {}
 
-    onSave = () => {
-        console.warn("Save")
-        ajax.submitPitData(GLOBAL.data.competition, this.state.currentTeamNumber, this.vals);
+    onSave = async () => {
+        await ajax.submitPitData(GLOBAL.data.competition, this.props.team, this.vals);
         this.setState({
             currentMatchNumber: null,
             teams: null,

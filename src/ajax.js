@@ -249,6 +249,8 @@ exports.submitMatchData = async (competition, team, match, data) => {
 },
 
 exports.submitPitData = async (competition, team, data) => {
+    console.log(competition, team , data);
+    console.log(competition)
     let match = 0; // TODO: REMOVE MATCH FROM THE API
     const endpoint = apiHost + "api/submitPitData";
     try {

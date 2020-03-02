@@ -16,34 +16,11 @@ export default class Eval extends React.Component {
     static propTypes = {
         configuration: PropTypes.array.isRequired,
         defaultData: PropTypes.object.isRequired,
-        onBack: PropTypes.func.isRequired,
         makeAware: PropTypes.func.isRequired,
-        teamNumber: PropTypes.number.isRequired,
     }
 
     hasMadeAware = false
 
-    onBack = () => {
-        Alert.alert(
-            'Continue without saving?',
-            'If you go back, the fields will not be saved.',
-            [
-                {
-                  text: 'Cancel',
-                  style: 'cancel',
-                },
-                {
-                  text: 'Continue',
-                  onPress: () => {
-                      ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
-                      this.props.onBack(); 
-                  },
-                },
-            ],
-            { cancelable: true },
-          );
-        
-    }
 
 
     doNothing = () => {}
@@ -80,11 +57,6 @@ export default class Eval extends React.Component {
         this.backHandler.remove()
       }
     
-      handleBackPress = () => {
-        this.onBack()
-        return true;
-      }
-
     render () {
         if (this.props.configuration.length === 0) {
             return (
