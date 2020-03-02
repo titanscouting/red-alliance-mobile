@@ -128,9 +128,13 @@ exports.fetchMatchConfig = async () => {
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            return response.json();
+            if (response.status != 200) {
+                console.warn("Error fetching match config");
+            } else {
+                return response.json();
+            }
         }).then((myJson) => {
-            return myJson
+            return myJson["data"];
         });
 
     } catch(error) {
@@ -148,9 +152,13 @@ exports.fetchPitConfiguration = async () => {
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            return response.json();
+            if (response.status != 200) {
+                console.warn("Error fetching pit config");
+            } else {
+                return response.json();
+            }
         }).then((myJson) => {
-            return myJson
+            return myJson["data"];
         });
 
     } catch(error) {
@@ -244,6 +252,37 @@ exports.submitMatchData = async (competition, team, match, data) => {
     }
 },
 
+exports.submitPitData = async (competition, team, match, data) => {
+
+    const endpoint = apiHost + "api/submitPitData";
+    try {
+        fetch(endpoint, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': await exports.getIDToken()
+            },
+            body: JSON.stringify({
+                competition_id: competition,
+                match_number: match,
+                team_scouted: team,
+                data : data
+            }),
+        }).then((response) => {
+            if (response.status != 200) {
+                console.warn("Error fetching competition schedule for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
+        // let responseJson = await JSON.parse(response);
+    } catch(error) {
+        console.error(error);
+    }
+},
 
 // STATS
 exports.fetchMatchData = async (competition, matchNumber, team) => {
@@ -257,8 +296,38 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
                 'Content-Type': 'application/json'
             }
         }).then((response) => {
-            return response.json();
-        })
+            if (response.status != 200) {
+                console.warn("Error fetching match data for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+exports.fetchPitData = async (competition, matchNumber, team) => {
+    const endpoint = encodeURI(apiHost + "api/fetchPitData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
+    
+    try {
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if (response.status != 200) {
+                console.warn("Error fetching pit data for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
     } catch(error) {
         console.error(error);
     }
@@ -352,23 +421,6 @@ exports.fetchTeamsInCompetition = async (competition) => {
     return teams.sort(function (a, b) {return a - b; });
 }
 
-
-exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
-    let compSchedlule = await exports.fetchCompetitionSchedule(competition);
-    var matches = [];
-    for (let i in compSchedlule) {
-        match = compSchedlule[i];
-        teamsForMatch = match.teams
-        for (let j in teamsForMatch) {
-            let t = parseInt(teamsForMatch[j]);
-            if (team === t) {
-                matches.push(t);
-            }
-        }
-    }
-    return matches.sort(function (a, b) {return a - b; });
-}
-
 exports.fetch2022Schedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
@@ -380,8 +432,14 @@ exports.fetch2022Schedule = async (competition) => {
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            return response.json();
-        })
+            if (response.status != 200) {
+                console.warn("Error fetching 2022 competition schedule for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
         // let responseJson = await JSON.parse(response);
     } catch(error) {
         console.error(error);
