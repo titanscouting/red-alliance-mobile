@@ -128,13 +128,9 @@ exports.fetchMatchConfig = async () => {
                 'Content-Type': 'application/json',
             }
         }).then((response) => {
-            if (response.status != 200) {
-                console.warn("Error fetching match config");
-            } else {
-                return response.json();
-            }
+            return response.json();
         }).then((myJson) => {
-            return myJson["data"];
+            return myJson
         });
 
     } catch(error) {
@@ -153,14 +149,13 @@ exports.fetchPitConfiguration = async () => {
             }
         }).then((response) => {
             if (response.status != 200) {
-                console.warn("Error fetching pit config");
+                console.warn("Error fetching competition schedule for "+competition);
             } else {
                 return response.json();
             }
         }).then((myJson) => {
             return myJson["data"];
         });
-
     } catch(error) {
         console.error(error);
     }
@@ -208,7 +203,11 @@ exports.fetchMatches = async (competition) => {
                 'token': await exports.getIDToken()
             }
         }).then((response) => {
-            return response.json();
+            if (response.status != 200) {
+                console.warn("Error fetching competition schedule for "+competition);
+            } else {
+                return response.json();
+            }
         }).then((myJson) => {
             matches = myJson["data"];
             arr = [];
@@ -270,14 +269,8 @@ exports.submitPitData = async (competition, team, match, data) => {
                 data : data
             }),
         }).then((response) => {
-            if (response.status != 200) {
-                console.warn("Error fetching competition schedule for "+competition);
-            } else {
-                return response.json();
-            }
-        }).then((myJson) => {
-            return myJson["data"];
-        });
+            return response.json();
+        })
         // let responseJson = await JSON.parse(response);
     } catch(error) {
         console.error(error);
@@ -297,7 +290,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
             }
         }).then((response) => {
             if (response.status != 200) {
-                console.warn("Error fetching match data for "+competition);
+                console.warn("Error fetching competition schedule for "+competition);
             } else {
                 return response.json();
             }
@@ -321,17 +314,13 @@ exports.fetchPitData = async (competition, matchNumber, team) => {
             }
         }).then((response) => {
             if (response.status != 200) {
-                console.warn("Error fetching pit data for "+competition);
+                console.warn("Error fetching competition schedule for "+competition);
             } else {
                 return response.json();
             }
         }).then((myJson) => {
             return myJson["data"];
         });
-    } catch(error) {
-        console.error(error);
-    }
-}
 
 exports.addScouterToMatch = async (team, match) => {
     const endpoint = apiHost + "api/addScouterToMatch";
@@ -421,6 +410,23 @@ exports.fetchTeamsInCompetition = async (competition) => {
     return teams.sort(function (a, b) {return a - b; });
 }
 
+
+exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
+    let compSchedlule = await exports.fetchCompetitionSchedule(competition);
+    var matches = [];
+    for (let i in compSchedlule) {
+        match = compSchedlule[i];
+        teamsForMatch = match.teams
+        for (let j in teamsForMatch) {
+            let t = parseInt(teamsForMatch[j]);
+            if (team === t) {
+                matches.push(t);
+            }
+        }
+    }
+    return matches.sort(function (a, b) {return a - b; });
+}
+
 exports.fetch2022Schedule = async (competition) => {
 
     const endpoint = apiHost + "api/fetch2022Schedule?competition="+competition;
@@ -433,7 +439,7 @@ exports.fetch2022Schedule = async (competition) => {
             }
         }).then((response) => {
             if (response.status != 200) {
-                console.warn("Error fetching 2022 competition schedule for "+competition);
+                console.warn("Error fetching competition schedule for "+competition);
             } else {
                 return response.json();
             }
