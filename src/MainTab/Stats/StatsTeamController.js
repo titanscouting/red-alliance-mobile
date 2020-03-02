@@ -57,7 +57,7 @@ export default class StatsTeamController extends React.Component {
                             <Pit team={this.props.team}/>
                         </Tab>
                         <Tab heading={ <TabHeading><Text>Matches</Text></TabHeading>}>
-                            <Pit team={this.props.team}/>
+                            <Matches team={this.props.team}/>
                         </Tab>
                     </Tabs>
             </Container>
