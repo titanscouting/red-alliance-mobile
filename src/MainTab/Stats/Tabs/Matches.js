@@ -43,9 +43,8 @@ export default class Matches extends React.Component {
         } else {
             return (
                     <Container>
-                        <Card>
                         <SectionList 
-                            // ItemSeparatorComponent={<Separator/>} 
+                            // TODO: https://www.npmjs.com/package/react-native-expandable-section-list
                             sections={this.state.statsData} 
                             renderSectionHeader={({ section }) => <CardItem header><Text>{section.name}</Text></CardItem>} 
                             renderItem={({ item }) => <View style={styles.container}>
@@ -57,7 +56,7 @@ export default class Matches extends React.Component {
                                 <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                             }
                             keyExtractor={(item, index) => index} 
-                        /></Card>
+                        />
                     </Container>
             );
         }
