@@ -6,6 +6,7 @@ import { FlatList, StyleSheet, SectionList, ActivityIndicator, RefreshControl, S
 import PropTypes from 'prop-types';
 import ajax from '../../../ajax';
 import Globals from '../../../GlobalDefinitions';
+import Eval from './Evaluation/Eval'
 
 export default class Pit extends React.Component {
 
@@ -26,10 +27,12 @@ export default class Pit extends React.Component {
     }
 
     refreshTeam = async () => {
-       let d = await ajax.fetchMatchDataForTeamInCompetition(Globals.data.competition, this.props.team);
-       console.log(d);
-       this.setState({statsData: d});
+       let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
+        let c = await ajax.fetchPitConfiguration();
+       this.setState({defaultData: d, configuration: c});
     }
+
+
 
     onRefresh = async () => {
         this.setState({refreshing: true});
@@ -52,15 +55,19 @@ export default class Pit extends React.Component {
     render() {
         if (this.state.defaultData === null || this.state.configuration === null) {
             return (
-                    <Container>
-                        <ActivityIndicator animating={true}/>
-                    </Container>
+            <Container>
+                <ActivityIndicator animating={true}/>
+            </Container>
             );
         } else {
             return (
-                    <Container>
-                        <Eval configuration={this.state.configuration} defaultData={this.state.defaultData} onBack={this.propTypes.onBack} onSave={this.saveScouting} matchNumber={this.state.currentMatchNumber} teamNumber={this.state.currentTeamNumber} isBlue={this.state.isBlue}/>
-                    </Container>
+            <Container>
+                    <Eval configuration={this.state.configuration} 
+                            defaultData={this.state.defaultData} 
+                            onBack={this.propTypes.onBack} 
+                            onSave={this.saveScouting} 
+                            teamNumber={this.state.currentTeamNumber} />
+            </Container>
             );
         }
     }

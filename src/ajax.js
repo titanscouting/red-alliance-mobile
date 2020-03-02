@@ -1,7 +1,6 @@
 const apiHost = 'https://scouting-api.herokuapp.com/';
 
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import { Alert } from "react-native";
 
@@ -52,9 +51,6 @@ exports.getIDToken = async () => {
             await GoogleSignin.hasPlayServices();
             try {
                 const userInfo = await GoogleSignin.signIn();
-                if (userInfo) {
-                    await AsyncStorage.setItem('name', userInfo.user.name);
-                }
             } catch (error) {
                 if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                     await exports.AsyncAlert();
@@ -158,7 +154,8 @@ exports.fetchPitConfiguration = async () => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson["data"];
+            console.log("PIT CONFIGURATION "+JSON.stringify(myJson))
+            return myJson;
         });
 
     } catch(error) {
@@ -182,7 +179,6 @@ exports.signOut = async () => {
             try {
                 await GoogleSignin.revokeAccess();
                 await GoogleSignin.signOut();
-                await AsyncStorage.removeItem('name');
             } catch (error) {
                 console.error(error);
             }
@@ -309,9 +305,9 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
     }
 }
 
-exports.fetchPitData = async (competition, matchNumber, team) => {
+exports.fetchPitData = async (competition, team) => {
+    let matchNumber = 0;
     const endpoint = encodeURI(apiHost + "api/fetchPitData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
-    
     try {
         fetch(endpoint, {
             method: 'GET',

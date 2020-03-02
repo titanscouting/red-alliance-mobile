@@ -14,7 +14,6 @@ import material from '../native-base-theme/variables/material';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import TabControl from './MainTab/TabControl';
-import AsyncStorage from '@react-native-community/async-storage';
 
 import { View } from 'native-base';
 import ajax from './ajax';

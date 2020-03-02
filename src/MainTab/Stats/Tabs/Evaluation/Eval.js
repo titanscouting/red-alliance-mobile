@@ -1,24 +1,24 @@
 import React from 'react';
 import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
 
-import getTheme from '../../../../native-base-theme/components';
-import material from '../../../../native-base-theme/variables/material';
+import getTheme from '../../../../../native-base-theme/components';
+import material from '../../../../../native-base-theme/variables/material';
 import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, BackHandler, View } from 'react-native';
 import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
 import { Alert } from "react-native";
-import Globals from '../../../GlobalDefinitions'
-import ajax from '../../../ajax'
+import Globals from '../../../../GlobalDefinitions'
+import ajax from '../../../../ajax'
 
 export default class Eval extends React.Component {
 
+
     static propTypes = {
         configuration: PropTypes.array.isRequired,
+        defaultData: PropTypes.object.isRequired,
         onSave: PropTypes.func.isRequired,
         onBack: PropTypes.func.isRequired,
-        matchNumber: PropTypes.number.isRequired,
         teamNumber: PropTypes.number.isRequired,
-        isBlue: PropTypes.bool.isRequired,
     }
 
     vals = {}

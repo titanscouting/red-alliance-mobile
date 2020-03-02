@@ -16,6 +16,7 @@ export default class StatsTeamController extends React.Component {
 
     state = {
         refreshing: false,
+        madeChanges: false,
     }
 
     onRefresh = async () => {
@@ -24,9 +25,6 @@ export default class StatsTeamController extends React.Component {
         this.setState({refreshing: false});
     }
 
-    onBack = () => {
-        this.props.onBack(); 
-    }
 
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
@@ -36,6 +34,36 @@ export default class StatsTeamController extends React.Component {
         this.backHandler.remove()
     }
     
+    acknowledgeChanges() {
+        this.setState({madeChanges: true})
+    }
+
+
+    onBack = () => {
+        if(this.state.madeChanges) {
+            Alert.alert(
+                'Continue without saving?',
+                'If you go back, the fields will not be saved.',
+                [
+                    {
+                      text: 'Cancel',
+                      style: 'cancel',
+                    },
+                    {
+                      text: 'Continue',
+                      onPress: () => {
+                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
+                          this.props.onBack(); 
+                      },
+                    },
+                ],
+                { cancelable: true },
+              );
+            
+        }
+        
+    }
+
 
     render () {
         return (
@@ -57,7 +85,7 @@ export default class StatsTeamController extends React.Component {
                             <Matches team={this.props.team}/>
                         </Tab>
                         <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
-                            <Pit team={this.props.team}/>
+                            <Pit team={this.props.team} />
                         </Tab>
                     </Tabs>
             </Container>

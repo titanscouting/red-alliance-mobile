@@ -6,15 +6,15 @@
     "android": "react-native run-android",
     "android-release": "react-native run-android --variant=release",
     "ios": "react-native run-ios",
-    "clean-ios": "npm react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios/assets",
+    "clean-ios": "npx react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios/assets",
     "start": "react-native start",
     "dev-tools": "react-devtools",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "clear": "npm cache clean --force"
   },
   "dependencies": {
     "@react-native-community/art": "^1.1.2",
-    "@react-native-community/async-storage": "^1.7.1",
     "@react-native-community/masked-view": "^0.1.5",
     "add": "^2.0.6",
     "global": "^4.4.0",
