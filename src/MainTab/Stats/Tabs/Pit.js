@@ -13,6 +13,7 @@ export default class Pit extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onBack: PropTypes.func.isRequired,
+        onSave: PropTypes.func.isRequired,
         acknowledgeChanges: PropTypes.func.isRequired,
     }
 
@@ -41,17 +42,7 @@ export default class Pit extends React.Component {
         this.setState({refreshing: false});
     }
 
-    saveScouting = (vals) => {
-        ajax.submitPitData(GLOBAL.data.competition, this.state.currentTeamNumber, vals);
-        this.setState({
-            currentMatchNumber: null,
-            teams: null,
-            currentTeamNumber: null,
-            isBlue: null,
-        })
-        this.forceUpdate();
-    }
-
+    
     render() {
         if (this.state.defaultData === null || this.state.configuration === null) {
             return (
@@ -65,7 +56,7 @@ export default class Pit extends React.Component {
                     <Eval configuration={this.state.configuration} 
                             defaultData={this.state.defaultData} 
                             onBack={this.props.onBack} 
-                            onSave={this.saveScouting} 
+                            onSave={this.props.onSave} 
                             teamNumber={this.state.currentTeamNumber} 
                             makeAware={this.props.acknowledgeChanges}/>
             </Container>

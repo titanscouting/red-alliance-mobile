@@ -271,7 +271,7 @@ exports.submitPitData = async (competition, team, data) => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson["data"];
+            return myJson;
         });
         // let responseJson = await JSON.parse(response);
     } catch(error) {

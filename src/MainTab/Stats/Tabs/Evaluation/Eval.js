@@ -16,13 +16,12 @@ export default class Eval extends React.Component {
     static propTypes = {
         configuration: PropTypes.array.isRequired,
         defaultData: PropTypes.object.isRequired,
-        onSave: PropTypes.func.isRequired,
         onBack: PropTypes.func.isRequired,
         makeAware: PropTypes.func.isRequired,
         teamNumber: PropTypes.number.isRequired,
     }
 
-    vals = {}
+    hasMadeAware = false
 
     onBack = () => {
         Alert.alert(
@@ -47,10 +46,6 @@ export default class Eval extends React.Component {
     }
 
 
-    onSave = () => {
-        this.props.onSave(this.vals); 
-    }
-
     doNothing = () => {}
 
     getTab = (tabNumber) => {
@@ -70,12 +65,11 @@ export default class Eval extends React.Component {
         return tab;
     }
 
-    hasMadeAware = false
     
     onUpdate = (key, value) => {
-        this.vals[key] = value
+        this.props.makeAware(key, value)
         if (!this.hasMadeAware) {
-            this.props.makeAware
+            this.hasMadeAware = true
         }
     }
     componentDidMount() {
@@ -113,25 +107,3 @@ export default class Eval extends React.Component {
     }
     
 }
-
-const styles = StyleSheet.create({
-    circleRed: {
-        width: 12,
-        height: 12,
-        borderRadius: 12/2,
-        backgroundColor: Globals.colors.red,
-        borderWidth: 1,
-        borderColor: 'white'
-    },
-    circleBlue: {
-        width: 12,
-        height: 12,
-        borderRadius: 12/2,
-        backgroundColor: Globals.colors.blue,
-        borderWidth: 1,
-        borderColor: 'white'
-    },
-    body: {
-        flexDirection: 'row',
-    },
-});

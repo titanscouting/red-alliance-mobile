@@ -34,8 +34,11 @@ export default class StatsTeamController extends React.Component {
         this.backHandler.remove()
     }
     
-    acknowledgeChanges() {
-        this.setState({madeChanges: true})
+    acknowledgeChanges = (key, value) => {
+        vals[key] = value;
+        if (!this.state.madeChanges) {
+            this.setState({madeChanges: true});
+        }
     }
 
 
@@ -66,6 +69,38 @@ export default class StatsTeamController extends React.Component {
         
     }
 
+    rightButton = () => {
+        if (this.state.madeChanges) {
+            return (
+                <Right>
+                    <Button transparent onPress={this.onSave}>
+                            <Icon name='save' />
+                    </Button>
+                </Right>
+            );
+        } else {
+            return (
+                <Right style={{  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
+            );
+        }
+    }
+
+
+    vals = {}
+
+    onSave = () => {
+        console.warn("Save")
+        ajax.submitPitData(GLOBAL.data.competition, this.state.currentTeamNumber, this.vals);
+        this.setState({
+            currentMatchNumber: null,
+            teams: null,
+            currentTeamNumber: null,
+            isBlue: null,
+        })
+        this.forceUpdate();
+    }
+
+
 
     render () {
         return (
@@ -80,14 +115,14 @@ export default class StatsTeamController extends React.Component {
                     <Body>
                         <Title>Team {this.props.team}</Title>
                     </Body>
-                    <Right style={{  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
+                    {this.rightButton()}
                   </Header>
                   <Tabs>
                         <Tab heading={ <TabHeading><Text>Matches</Text></TabHeading>}>
                             <Matches team={this.props.team}/>
                         </Tab>
                         <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
-                            <Pit team={this.props.team} onBack={this.onBack} acknowledgeChanges={this.acknowledgeChanges}/>
+                            <Pit team={this.props.team} onSave={this.saveScouting} onBack={this.onBack} acknowledgeChanges={this.acknowledgeChanges}/>
                         </Tab>
                     </Tabs>
             </Container>
