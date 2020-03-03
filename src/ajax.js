@@ -43,7 +43,7 @@ exports.getIDToken = async () => {
         try {
             // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
-            GoogleSignin.signInSilently()
+            GoogleSignin.signIn()
             const tokens = await GoogleSignin.getTokens();
             await GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
@@ -51,7 +51,7 @@ exports.getIDToken = async () => {
             console.log("There was an error with getting the tokens: " + error);
             await GoogleSignin.hasPlayServices();
             try {
-                const userInfo = await GoogleSignin.signInSilently();
+                const userInfo = await GoogleSignin.signIn()
             } catch (error) {
                 if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                     await exports.AsyncAlert();
