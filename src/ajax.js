@@ -561,7 +561,7 @@ exports.fetch2022Schedule = async (competition) => {
 }
 
 
-exports.getStrategiesForMatch = async (competition, match) => {
+exports.getStrategiesForMatch = async (competition, matchNumber) => {
   const endpoint = encodeURI(apiHost + "api/fetchScouterSuggestions?competition="+competition+"&match_number="+matchNumber);
   try {
       fetch(endpoint, {
@@ -584,8 +584,8 @@ exports.getStrategiesForMatch = async (competition, match) => {
   }
 }
 
-exports.submitStrategy = async (competition, match, team, data) => {
-
+exports.submitStrategy = async (competition, match, data) => {
+    let team = '2022';
     const endpoint = apiHost + "api/submitStrategy";
     try {
         fetch(endpoint, {

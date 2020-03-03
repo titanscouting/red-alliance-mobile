@@ -26,13 +26,18 @@ export default class Strategies extends Component {
   }
 
   componentDidMount() {
+
     this.refreshSchedule();
   }
 
   refreshSchedule = async () => {
-    let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
-    
-    this.setState({schedule: schedule, refreshing:false});
+    // let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
+
+
+    let strats = await ajax.getStrategiesForMatch(Globals.data.competition, 2);
+    console.warn(strats)
+
+    // this.setState({schedule: schedule, refreshing:false});
   }
 
   handlePress = (match) => {
