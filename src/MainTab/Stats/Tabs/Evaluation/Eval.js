@@ -15,7 +15,7 @@ export default class Eval extends React.Component {
 
     static propTypes = {
         configuration: PropTypes.array.isRequired,
-        defaultData: PropTypes.object.isRequired,
+        defaultData: PropTypes.object, // TODO: Implement for editing
         makeAware: PropTypes.func.isRequired,
     }
 
