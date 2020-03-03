@@ -563,7 +563,8 @@ exports.fetch2022Schedule = async (competition) => {
 
 
 exports.getStrategiesForMatch = async (competition, matchNumber) => {
-  const endpoint = encodeURI(apiHost + "api/fetchStrategy?competition="+competition+"&match_number="+matchNumber);
+  const endpoint = encodeURI(apiHost + "api/fetchStrategy?competition="+competition+"&match="+matchNumber);
+  console.log(endpoint)
   try {
       return fetch(endpoint, {
           method: 'GET',
@@ -578,6 +579,7 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
               return response.json();
           }
       }).then((myJson) => {
+          console.log(myJson)
           return myJson.data;
       });
   } catch(error) {
