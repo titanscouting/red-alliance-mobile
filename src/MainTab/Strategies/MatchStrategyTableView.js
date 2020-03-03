@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, StyleProvider, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import { RefreshControl, FlatList } from 'react-native'
@@ -54,9 +54,16 @@ export default class MatchStrategyTableView extends Component {
       <StyleProvider style={getTheme(material)}>
         <Container>
          <Header>
-            <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+            <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
+                <Button transparent onPress={this.onBack}>
+                      <Icon name='arrow-back' />
+                </Button>
+            </Left>
+            <Body >
                 <Title>{"Match "+this.props.match}</Title>
             </Body>
+
+            <Right></Right>
           </Header>
           <FlatList
               data = {this.state.strats}
@@ -65,7 +72,7 @@ export default class MatchStrategyTableView extends Component {
               }
               keyExtractor= {(item, index) => String(index)}
               refreshControl={
-                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
+                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />
               }
               showsVerticalScrollIndicator={false}
           />
@@ -76,3 +83,4 @@ export default class MatchStrategyTableView extends Component {
     
   } 
 }
+
