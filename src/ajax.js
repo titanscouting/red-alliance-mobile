@@ -503,7 +503,7 @@ exports.fetch2022Schedule = async (competition) => {
             let data = []
             for (match of myJson["data"]) {
                 console.log(match)
-                data.push({match: match.match, teams: [{team: match.teams[0], isBlue: true}, {team: match.teams[1], isBlue: true}, {team: match.teams[2], isBlue: true}, {team: match.teams[3], isBlue: false}, {team: match.teams[4], isBlue: false}, {team: match.teams[5], isBlue: false}]})
+                data.push({match: match.match, teams: [match.teams[0],match.teams[1],match.teams[2],match.teams[3],match.teams[4],match.teams[5], ]})
             }
             return data;
         });
