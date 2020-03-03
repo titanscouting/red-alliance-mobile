@@ -15,34 +15,38 @@ const dataArray = [
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
 import PropTypes from 'prop-types';
-
+import SubmittedStrategyCell from './SubmittedStrategyCell'
 
 export default class MatchStrategyTableView extends Component {
 
 
   static propTypes = {
     match: PropTypes.number.isRequired,
-    ideas: PropTypes.array.isRequired,
-    onSave: PropTypes.func.isRequired,
   };
   
   state = {
-    schedule: null,
+    strats: null,
     refreshing: true,
+    ideas: null,
   }
 
   componentDidMount() {
-    this.refreshSchedule();
+    this.refrshStrats();
   }
 
-  refreshSchedule = async () => {
-    let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
-    this.setState({schedule: schedule, refreshing:false});
+  refrshStrats = async () => {
+    let strats = await ajax.getStrategiesForMatch(Globals.data.competition, this.props.match);
+    this.setState({strats: strats, refreshing:false});
   }
 
   handlePress = (match) => {
     console.warn("Match "+match)
   };
+
+
+  onSave = async (idea) => {
+    await ajax.submitStrategy(Globals.data.competition, this.props.match, idea);
+  }
 
 
   render() {
@@ -55,9 +59,9 @@ export default class MatchStrategyTableView extends Component {
             </Body>
           </Header>
           <FlatList
-              data = {this.state.schedule}
+              data = {this.state.strats}
               renderItem={({item}) => 
-                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
+                  <SubmittedStrategyCell scouter={item.scouter} strategy={item.strategy}/>
               }
               keyExtractor= {(item, index) => String(index)}
               refreshControl={

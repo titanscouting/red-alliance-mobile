@@ -2,13 +2,14 @@ const apiHost = 'https://scouting-api.herokuapp.com/';
 
 import { GoogleSignin, statusCodes, signInSilently } from 'react-native-google-signin';
 
-import { Alert } from "react-native";
+import { Alert, Platform } from "react-native";
 
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);
     });
 }
+import {} from 'react-native';
 
 
 exports.AsyncAlert = async () => new Promise((resolve) => {
@@ -43,7 +44,7 @@ exports.getIDToken = async () => {
         try {
             // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
-            await GoogleSignin.signInSilently() // Used to be GoogleSignin.signIn(). Added await and Silently
+            Platform.OS === 'ios' ? await GoogleSignin.signInSilently() : await GoogleSignin.signIn(); // Used to be GoogleSignin.signIn(). Added await and Silently
             const tokens = await GoogleSignin.getTokens();
             await GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
@@ -586,7 +587,7 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
 }
 
 exports.submitStrategy = async (competition, match, data) => {
-    let team = '2022';
+    let team='2022';
     const endpoint = apiHost + "api/submitStrategy";
     try {
         fetch(endpoint, {
