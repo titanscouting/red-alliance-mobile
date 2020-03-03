@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Container, Header, Separator, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
 
 
-import { FlatList, StyleSheet, SectionList, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
+import { FlatList, StyleSheet, SectionList, ActivityIndicator, RefreshControl, SafeAreaView, View, TouchableWithoutFeedback} from 'react-native';
 import PropTypes from 'prop-types';
 import ajax from '../../../ajax';
 import Globals from '../../../GlobalDefinitions';
@@ -17,10 +17,8 @@ export default class Pit extends React.Component {
     }
 
     componentDidMount() {
-       this.refreshTeam();
+        this.refreshTeam();
     }
-
-
     state = {
         refreshing: false,
         configuration: null,
