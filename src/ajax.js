@@ -10,7 +10,7 @@ function wait(timeout) {
     });
 }
 
-  
+
 exports.AsyncAlert = async () => new Promise((resolve) => {
     Alert.alert(
       'Sign In',
@@ -186,7 +186,7 @@ exports.signOut = async () => {
         }
 
         exports.getIDToken();
-        
+
     } catch(error) {
         console.error(error);
     }
@@ -195,7 +195,7 @@ exports.signOut = async () => {
 exports.fetchMatches = async (competition) => {
 
     const endpoint = encodeURI(apiHost + "api/fetchMatches?competition="+competition);
-    
+
     try {
         return await fetch(endpoint, {
             method: 'GET',
@@ -285,7 +285,7 @@ exports.submitPitData = async (competition, team, data) => {
 // STATS
 exports.fetchMatchData = async (competition, matchNumber, team) => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
-    
+
     try {
         return fetch(endpoint, {
             method: 'GET',
@@ -328,6 +328,54 @@ exports.fetchPitData = async (competition, team) => {
         });
     } catch(error) {
         console.error(error);
+    }
+}
+
+exports.fetchAllTeamNicknamesAtCompetition = async(competition) =>{
+    const endpoint = encodeURI(apiHost + "api/fetchAllTeamNicknamesAtCompetition?competition=" + competition);
+    try{
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            if(response.status==200){
+                return response.json();
+            }else{
+                console.warn("Error fetching nicknames for "+competition);
+            }
+        }).then((myJson) => {
+            return myJson["data"];
+        });
+    }catch(e){
+        console.error(e)
+    }
+}
+
+exports.findTeamNickname = async(team_num) => {
+    const endpoint = encodeURI(apiHost + "api/findTeamNickname?team_number=" + team_num);
+    try{
+        fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        }).then((response) => {
+            let meme_review;
+            if (response.status == 200){
+                meme_review = response.json();
+            }else {
+                meme_review = {"success": false, "team_num" : team_num, "nickname" : "ERR: TEAM NOT IN DB"};
+            }
+            return meme_review;
+        }).then((myJson) => {
+            return myJson["data"];
+        });
+    }catch(e){
+        console.error(e)
     }
 }
 
@@ -448,7 +496,7 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
     let stuffToReturn = [];
     for (var k in config) {
         if (config.hasOwnProperty(k)) {
-            
+
            for (var l in config[k]) {
                let category = l; // Auto, Teleop, Notes
                for (var m in config[k][l]) {
@@ -475,13 +523,13 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
                    stuffToReturn.push(response);
                }
            }
-           
+
         }
     }
     return stuffToReturn;
 }
 
-// Strategies 
+// Strategies
 
 exports.fetch2022Schedule = async (competition) => {
 
@@ -525,9 +573,9 @@ exports.submitStrategy = async (competition, match, team, data) => {
                 'token': await exports.getIDToken()
             },
             body: JSON.stringify({
-                competition: competition, 
-                match: match, 
-                team: team, 
+                competition: competition,
+                match: match,
+                team: team,
                 data: data
             }),
         }).then((response) => {
