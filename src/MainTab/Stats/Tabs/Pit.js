@@ -27,7 +27,6 @@ export default class Pit extends React.Component {
 
     refreshTeam = async () => {
        let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
-       console.log(d);
         let c = await ajax.fetchPitConfiguration();
        this.setState({defaultData: d, configuration: c});
     }

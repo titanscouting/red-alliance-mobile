@@ -502,10 +502,9 @@ exports.fetch2022Schedule = async (competition) => {
         }).then((myJson) => {
             let data = []
             for (match of myJson["data"]) {
-                console.log(match)
                 data.push({match: match.match, teams: [match.teams[0],match.teams[1],match.teams[2],match.teams[3],match.teams[4],match.teams[5], ]})
             }
-            return data;
+            return data.sort(function (a, b) {return a.match - b.match; });
         });
         return schedule;
     } catch(error) {
