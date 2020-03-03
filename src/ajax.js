@@ -223,7 +223,6 @@ exports.fetchMatches = async (competition) => {
 },
 
 exports.submitMatchData = async (competition, team, match, data) => {
-
     const endpoint = apiHost + "api/submitMatchData";
     try {
         fetch(endpoint, {
