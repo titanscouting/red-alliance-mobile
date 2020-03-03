@@ -14,7 +14,7 @@ const dataArray = [
 
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
-
+import MatchTableView from './MatchTableView'
 
 export default class Strategies extends Component {
 
@@ -22,6 +22,7 @@ export default class Strategies extends Component {
   state = {
     schedule: null,
     refreshing: true,
+    currentMatch: null,
   }
 
   componentDidMount() {
@@ -34,33 +35,41 @@ export default class Strategies extends Component {
   }
 
   handlePress = (match) => {
-    console.warn("Match "+match)
+    this.setState({currentMatch:match})
   };
 
 
   render() {
+    if (this.state.currentMatch == null) {
       return (
-      <StyleProvider style={getTheme(material)}>
-      <Container>
-      <Header>
-                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
-                        <Title>Strategies</Title>
-                    </Body>
-                </Header>
-                <FlatList
-                            data = {this.state.schedule}
-                            renderItem={({item}) => 
-                                <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
-                            }
-                            keyExtractor= {(item, index) => String(index)}
-                            refreshControl={
-                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
-                            }
-                            showsVerticalScrollIndicator={false}
-                        />
-      </Container>
-      </StyleProvider>
-    );
+        <StyleProvider style={getTheme(material)}>
+        <Container>
+        <Header>
+                      <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                          <Title>Strategies</Title>
+                      </Body>
+                  </Header>
+                  <FlatList
+                              data = {this.state.schedule}
+                              renderItem={({item}) => 
+                                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
+                              }
+                              keyExtractor= {(item, index) => String(index)}
+                              refreshControl={
+                                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
+                              }
+                              showsVerticalScrollIndicator={false}
+                          />
+        </Container>
+        </StyleProvider>
+      );
+    } else {
+      return (
+        <MatchTableView/>
+      )
+      
+    }
+      
     
     
   } 
