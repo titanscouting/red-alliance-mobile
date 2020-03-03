@@ -562,9 +562,27 @@ exports.fetch2022Schedule = async (competition) => {
 }
 
 
-exports.getStrategiesForMatch = async (competition, match) => {
-    wait(2000);
-    return [{"scouter":"Archan Das", "strategy":"Go after 5389, leave 423 alone."}, {"scouter":"Manny Favela", "strategy":"Take credit for building the robot"}];
+exports.getStrategiesForMatch = async (competition, matchNumber) => {
+  const endpoint = encodeURI(apiHost + "api/fetchScouterSuggestions?competition="+competition+"&match_number="+matchNumber);
+  try {
+      return fetch(endpoint, {
+          method: 'GET',
+          headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+          }
+      }).then((response) => {
+          if (response.status != 200) {
+              console.warn("Status " + response.status + " Error fetching scouting suggestions data for "+competition);
+          } else {
+              return response.json();
+          }
+      }).then((myJson) => {
+          return myJson.data;
+      });
+  } catch(error) {
+      console.error(error);
+  }
 }
 
 exports.submitStrategy = async (competition, match, data) => {
