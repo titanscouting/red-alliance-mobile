@@ -44,7 +44,7 @@ export default class MatchTableView extends Component {
       <Container>
       <Header>
                     <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
-                        <Title>hehe</Title>
+                        <Title>Strategies</Title>
                     </Body>
                 </Header>
                 <FlatList
