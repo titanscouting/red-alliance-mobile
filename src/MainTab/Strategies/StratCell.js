@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Globals from '../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
 
-export default class TeamCell extends React.Component {
+export default class StratCell extends React.Component {
 
     static propTypes = {
         match: PropTypes.number.isRequired,
