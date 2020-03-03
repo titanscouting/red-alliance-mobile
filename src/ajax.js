@@ -572,12 +572,13 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
           }
       }).then((response) => {
           if (response.status != 200) {
-              console.warn("Error fetching scouting suggestions data for "+competition);
+              console.warn("Status " + response.status + " Error fetching scouting suggestions data for "+competition);
           } else {
               return response.json();
           }
       }).then((myJson) => {
-          return myJson["data"];
+        console.warn(JSON.stringify(myJson))
+          return myJson;
       });
   } catch(error) {
       console.error(error);
