@@ -1,6 +1,6 @@
 const apiHost = 'https://scouting-api.herokuapp.com/';
 
-import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import { GoogleSignin, statusCodes, signInSilently } from 'react-native-google-signin';
 
 import { Alert } from "react-native";
 
@@ -43,7 +43,7 @@ exports.getIDToken = async () => {
         try {
             // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
-            GoogleSignin.signIn()
+            await GoogleSignin.signInSilently()
             const tokens = await GoogleSignin.getTokens();
             await GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
