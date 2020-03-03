@@ -560,6 +560,13 @@ exports.fetch2022Schedule = async (competition) => {
     }
 }
 
+
+exports.getStrategiesForMatch = async (competition, match) => {
+    wait(2000);
+    console.warn("fetching strategies for "+competition+", match "+match);
+    return [{"scouter":"Archan Das", "strategy":"Go after 5389, leave 423 alone."}, {"scouter":"Manny Favela", "strategy":"Take credit for building the robot"}];
+}
+
 exports.submitStrategy = async (competition, match, team, data) => {
 
     const endpoint = apiHost + "api/submitStrategy";

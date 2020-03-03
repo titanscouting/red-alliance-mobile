@@ -14,11 +14,18 @@ const dataArray = [
 
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
+import PropTypes from 'prop-types';
 
 
-export default class MatchTableView extends Component {
+export default class MatchStrategyTableView extends Component {
 
 
+  static propTypes = {
+    match: PropTypes.number.isRequired,
+    ideas: PropTypes.array.isRequired,
+    onSave: PropTypes.func.isRequired,
+  };
+  
   state = {
     schedule: null,
     refreshing: true,
@@ -41,24 +48,24 @@ export default class MatchTableView extends Component {
   render() {
       return (
       <StyleProvider style={getTheme(material)}>
-      <Container>
-      <Header>
-                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
-                        <Title>Strategies</Title>
-                    </Body>
-                </Header>
-                <FlatList
-                            data = {this.state.schedule}
-                            renderItem={({item}) => 
-                                <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
-                            }
-                            keyExtractor= {(item, index) => String(index)}
-                            refreshControl={
-                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
-                            }
-                            showsVerticalScrollIndicator={false}
-                        />
-      </Container>
+        <Container>
+         <Header>
+            <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                <Title>{"Match "+this.props.match}</Title>
+            </Body>
+          </Header>
+          <FlatList
+              data = {this.state.schedule}
+              renderItem={({item}) => 
+                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
+              }
+              keyExtractor= {(item, index) => String(index)}
+              refreshControl={
+                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
+              }
+              showsVerticalScrollIndicator={false}
+          />
+        </Container>
       </StyleProvider>
     );
     

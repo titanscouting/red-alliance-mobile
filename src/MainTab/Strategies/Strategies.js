@@ -14,7 +14,7 @@ const dataArray = [
 
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
-import MatchTableView from './MatchTableView'
+import MatchStrategyTableView from './MatchStrategyTableView'
 
 export default class Strategies extends Component {
 
@@ -31,13 +31,22 @@ export default class Strategies extends Component {
 
   refreshSchedule = async () => {
     let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
+    
     this.setState({schedule: schedule, refreshing:false});
   }
 
   handlePress = (match) => {
-    this.setState({currentMatch:match})
-  };
+    this.setState({currentMatch:match});
+    this.refreshStrats();
+  }
 
+  refreshStrats = async () => {
+    let match = this.state.currentMatch;
+  }
+
+  onSave = (idea) => {
+    ajax.submi
+  }
 
   render() {
     if (this.state.currentMatch == null) {
@@ -65,7 +74,7 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchTableView/>
+        <MatchStrategyTableView match={this.state.currentMatch}/>
       )
       
     }
