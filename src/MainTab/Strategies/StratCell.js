@@ -10,6 +10,7 @@ export default class TeamCell extends React.Component {
     static propTypes = {
         match: PropTypes.number.isRequired,
         teams: PropTypes.array.isRequired,
+        handlePress: PropTypes.func.isRequired,
     };
 
     _isMounted = false;
@@ -23,11 +24,7 @@ export default class TeamCell extends React.Component {
     }
 
     handlePress = async () => {
-        this.props.showRefresh(true);
-        await this.props.onPress(this.props.number, this.props.isBlue);
-        if (this._isMounted) {
-            this.props.showRefresh(false);
-        }
+        this.props.handlePress(this.props.match);
         
     };
 

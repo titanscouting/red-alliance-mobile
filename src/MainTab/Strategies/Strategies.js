@@ -18,20 +18,25 @@ import Globals from '../../GlobalDefinitions'
 
 export default class Strategies extends Component {
 
+
+  state = {
+    schedule: null,
+    refreshing: true,
+  }
+
   componentDidMount() {
     this.refreshSchedule();
   }
 
-  state = {
-    schedule: null,
-  }
-
   refreshSchedule = async () => {
     let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
-    this.setState({schedule: schedule});
-    console.log("SCHEDULE");
-    console.log(schedule);
+    this.setState({schedule: schedule, refreshing:false});
   }
+
+  handlePress = (match) => {
+    console.warn("Match "+match)
+  };
+
 
   render() {
       return (
@@ -45,7 +50,7 @@ export default class Strategies extends Component {
                 <FlatList
                             data = {this.state.schedule}
                             renderItem={({item}) => 
-                                <StratCell match={item.match} teams={item.teams}/>
+                                <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
                             }
                             keyExtractor= {(item, index) => String(index)}
                             refreshControl={
