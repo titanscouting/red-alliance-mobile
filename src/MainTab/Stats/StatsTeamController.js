@@ -43,12 +43,11 @@ export default class StatsTeamController extends React.Component {
         }
     }
 
-
     onBack = () => {
         if(this.state.madeChanges) {
             Alert.alert(
                 'Continue without saving?',
-                'If you go back, the fields will not be saved.',
+                'If you go back, additional changes to the fields will not be saved.',
                 [
                     {
                       text: 'Cancel',
@@ -97,6 +96,7 @@ export default class StatsTeamController extends React.Component {
             teams: null,
             currentTeamNumber: null,
             isBlue: null,
+            madeChanges: false
         })
         this.forceUpdate();
     }
