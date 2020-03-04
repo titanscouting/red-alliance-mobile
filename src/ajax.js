@@ -1,6 +1,6 @@
 const apiHost = 'https://scouting-api.herokuapp.com/';
 
-import { GoogleSignin, statusCodes, signInSilently } from 'react-native-google-signin';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 
 import { Alert, Platform } from "react-native";
 
@@ -9,8 +9,6 @@ function wait(timeout) {
         setTimeout(resolve, timeout);
     });
 }
-import {} from 'react-native';
-
 
 exports.AsyncAlert = async () => new Promise((resolve) => {
     Alert.alert(
