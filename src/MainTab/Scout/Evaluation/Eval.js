@@ -37,7 +37,7 @@ export default class Eval extends React.Component {
                   onPress: () => {
                       ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
                       this.props.onBack(); 
-                      ajax.fetchMatches(GLOBAL.data.competition)
+                      ajax.fetchMatches(Globals.data.competition);
                   },
                 },
             ],
