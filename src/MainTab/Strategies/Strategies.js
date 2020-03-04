@@ -23,6 +23,7 @@ export default class Strategies extends Component {
     schedule: null,
     refreshing: true,
     currentMatch: null,
+    currentTeams: null,
   }
 
   componentDidMount() {
@@ -36,8 +37,8 @@ export default class Strategies extends Component {
     this.setState({schedule: schedule, refreshing:false});
   }
 
-  handlePress = (match) => {
-    this.setState({currentMatch:match});
+  handlePress = (match, teams) => {
+    this.setState({currentMatch:match, currentTeams: teams});
     this.refreshStrats();
   }
 
@@ -75,7 +76,7 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchStrategyTableView match={this.state.currentMatch} onBack={this.popMatch}/>
+        <MatchStrategyTableView match={this.state.currentMatch} teams={this.state.currentTeams} onBack={this.popMatch}/>
       )
       
     }

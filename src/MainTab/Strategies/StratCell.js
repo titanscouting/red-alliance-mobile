@@ -24,7 +24,7 @@ export default class StratCell extends React.Component {
     }
 
     handlePress = async () => {
-        this.props.handlePress(this.props.match);
+        this.props.handlePress(this.props.match, this.props.teams);
         
     };
 
