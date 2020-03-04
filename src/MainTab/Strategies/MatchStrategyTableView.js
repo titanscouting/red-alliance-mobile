@@ -89,8 +89,11 @@ export default class MatchStrategyTableView extends Component {
             <Body >
                 <Title>{"Match "+this.props.match}</Title>
             </Body>
-
-            <Right></Right>
+            <Right>
+                <Button transparent onPress={this.onSave}>
+                        <Icon name='save' />
+                </Button>
+            </Right>
           </Header>
           <MatchStrategyHeader teams={this.props.teams}/>
           <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleGeneralChange} />
@@ -127,6 +130,8 @@ const styles = StyleSheet.create({
   },
   textarea: {
     height: 120,
-      flexDirection: 'row',
+    flexDirection: 'row',
+    paddingLeft: 10,
+    paddingRight: 10,
   }
 });

@@ -335,7 +335,7 @@ exports.fetchPitData = async (competition, team) => {
 exports.fetchAllTeamNicknamesAtCompetition = async(competition) =>{
     const endpoint = encodeURI(apiHost + "api/fetchAllTeamNicknamesAtCompetition?competition=" + competition);
     try{
-        fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -358,7 +358,7 @@ exports.fetchAllTeamNicknamesAtCompetition = async(competition) =>{
 exports.findTeamNickname = async(team_num) => {
     const endpoint = encodeURI(apiHost + "api/findTeamNickname?team_number=" + team_num);
     try{
-        fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -565,7 +565,7 @@ exports.fetch2022Schedule = async (competition) => {
 exports.getStrategiesForMatch = async (competition, matchNumber) => {
   const endpoint = encodeURI(apiHost + "api/fetchStrategy?competition="+competition+"&match="+matchNumber);
   try {
-      return fetch(endpoint, {
+      return await fetch(endpoint, {
           method: 'GET',
           headers: {
               'Accept': 'application/json',
@@ -588,7 +588,7 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
 exports.submitStrategy = async (competition, match, data) => {
     const endpoint = apiHost + "api/submitStrategy";
     try {
-        fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
