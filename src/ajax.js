@@ -564,7 +564,6 @@ exports.fetch2022Schedule = async (competition) => {
 
 exports.getStrategiesForMatch = async (competition, matchNumber) => {
   const endpoint = encodeURI(apiHost + "api/fetchStrategy?competition="+competition+"&match="+matchNumber);
-  console.log(endpoint)
   try {
       return fetch(endpoint, {
           method: 'GET',

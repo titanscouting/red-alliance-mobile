@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Form, Textarea, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import { RefreshControl, FlatList, StyleSheet} from 'react-native'
+import { RefreshControl, FlatList, StyleSheet, ScrollView} from 'react-native'
 import StratCell from './StratCell'
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -15,13 +15,15 @@ const dataArray = [
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
 import PropTypes from 'prop-types';
-import SubmittedStrategyCell from './SubmittedStrategyCell'
+import SubmittedStrategyCell from './SubmittedStrategyCell';
+import MatchStrategyHeader from './MatchStrategyHeader';
 
 export default class MatchStrategyTableView extends Component {
 
 
   static propTypes = {
     match: PropTypes.number.isRequired,
+    teams: PropTypes.array.isRequired,
     onBack: PropTypes.func.isRequired,
   };
   
@@ -62,7 +64,14 @@ export default class MatchStrategyTableView extends Component {
     if (this.state.strats == null) {
       return this.theList();
     } else if (this.state.strats.length === 0){
-      return <View style={styles.noStrats}><Text>No submitted strategies</Text></View>
+
+      return (
+        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />}>
+          <View style={styles.noStrats}>
+            <Text>No submitted strategies</Text>
+          </View>
+        </ScrollView>
+      );
     }
     return this.theList();
   }
@@ -83,11 +92,9 @@ export default class MatchStrategyTableView extends Component {
 
             <Right></Right>
           </Header>
-          <Form style={styles.textarea}>
-              <Item style={styles.textarea}>
-                <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. What should we do with each of the teams?"} onChangeText={this.handleGeneralChange} />
-              </Item>
-          </Form>
+          <MatchStrategyHeader teams={this.props.teams}/>
+          <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleGeneralChange} />
+              
           {this.renderStrategyList()}
         </Container>
       </StyleProvider>
@@ -99,6 +106,7 @@ export default class MatchStrategyTableView extends Component {
 
 const styles = StyleSheet.create({
   noStrats: {
+    paddingTop: 10,
     alignItems: 'center',
   },
   container: {
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
     color: Globals.colors[Globals.brand.primary],
   },
   textarea: {
-      flex: 1,
+    height: 120,
       flexDirection: 'row',
   }
 });
