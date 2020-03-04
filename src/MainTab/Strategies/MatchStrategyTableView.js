@@ -12,6 +12,12 @@ const dataArray = [
   { title: "Third Element", content: "Lorem ipsum dolor sit amet " }
 ];
 
+function wait(timeout) {
+  return new Promise(resolve => {
+      setTimeout(resolve, timeout);
+  });
+}
+
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
 import PropTypes from 'prop-types';
@@ -34,17 +40,19 @@ export default class MatchStrategyTableView extends Component {
   }
 
   componentDidMount() {
-    this.refrshStrats();
+    this.refreshStrats();
   }
 
-  refrshStrats = async () => {
+  refreshStrats = async () => {
     let strats = await ajax.getStrategiesForMatch(Globals.data.competition, this.props.match);
     this.setState({strats: strats, refreshing:false});
   }
 
 
-  onSave = async (idea) => {
-    await ajax.submitStrategy(Globals.data.competition, this.props.match, idea);
+  onSave = async () => {
+    await ajax.submitStrategy(Globals.data.competition, this.props.match, this.state.ideas);
+    await wait(2000);
+    this.refreshStrats();
   }
 
   theList = () => {
@@ -55,7 +63,7 @@ export default class MatchStrategyTableView extends Component {
       }
       keyExtractor= {(item, index) => String(index)}
       refreshControl={
-          <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />
+          <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />
       }
       showsVerticalScrollIndicator={false}
   />);
@@ -66,7 +74,7 @@ export default class MatchStrategyTableView extends Component {
     } else if (this.state.strats.length === 0){
 
       return (
-        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />}>
+        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />}>
           <View style={styles.noStrats}>
             <Text>No submitted strategies</Text>
           </View>
@@ -74,6 +82,10 @@ export default class MatchStrategyTableView extends Component {
       );
     }
     return this.theList();
+  }
+
+  handleText = (text) => {
+    this.state.ideas = text;
   }
 
   render() {
@@ -96,7 +108,7 @@ export default class MatchStrategyTableView extends Component {
             </Right>
           </Header>
           <MatchStrategyHeader teams={this.props.teams}/>
-          <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleGeneralChange} />
+          <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
               
           {this.renderStrategyList()}
         </Container>

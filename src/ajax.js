@@ -600,7 +600,9 @@ exports.submitStrategy = async (competition, match, data) => {
                 data: data
             }),
         }).then((response) => {
-            return response.json();
+            const resp = response.json();
+            console.log(JSON.stringify(resp));
+            return resp;
         })
         // let responseJson = await JSON.parse(response);
     } catch(error) {
