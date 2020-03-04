@@ -44,7 +44,8 @@ exports.getIDToken = async () => {
         try {
             // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
-            Platform.OS === 'ios' ? await GoogleSignin.signInSilently() : await GoogleSignin.signIn(); // Used to be GoogleSignin.signIn(). Added await and Silently
+            Platform.OS === 'ios' ? await GoogleSignin.signInSilently() : await GoogleSignin.signInSilently(); // Used to be GoogleSignin.signIn(). Added await and Silently
+            // WARNING: THE APP BREAKS IF THE ABOVE IS SIMPLIFIED TO signInSilently(). Don't ask why. 
             const tokens = await GoogleSignin.getTokens();
             await GoogleSignin.clearCachedToken(tokens.idToken);
             return tokens.idToken;
