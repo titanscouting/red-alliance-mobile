@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import { RefreshControl, FlatList } from 'react-native'
+import { RefreshControl, FlatList, StyleSheet} from 'react-native'
 import StratCell from './StratCell'
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -22,6 +22,7 @@ export default class MatchStrategyTableView extends Component {
 
   static propTypes = {
     match: PropTypes.number.isRequired,
+    onBack: PropTypes.func.isRequired,
   };
   
   state = {
@@ -39,15 +40,32 @@ export default class MatchStrategyTableView extends Component {
     this.setState({strats: strats, refreshing:false});
   }
 
-  handlePress = (match) => {
-    console.warn("Match "+match)
-  };
-
 
   onSave = async (idea) => {
     await ajax.submitStrategy(Globals.data.competition, this.props.match, idea);
   }
 
+  theList = () => {
+    return (<FlatList
+      data = {this.state.strats}
+      renderItem={({item}) => 
+          <SubmittedStrategyCell scouter={item.scouter} strategy={item.data}/>
+      }
+      keyExtractor= {(item, index) => String(index)}
+      refreshControl={
+          <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />
+      }
+      showsVerticalScrollIndicator={false}
+  />);
+  }
+  renderStrategyList = () => {
+    if (this.state.strats == null) {
+      return this.theList();
+    } else if (this.state.strats.length === 0){
+      return <View style={styles.noStrats}><Text>No submitted strategies</Text></View>
+    }
+    return this.theList();
+  }
 
   render() {
       return (
@@ -55,7 +73,7 @@ export default class MatchStrategyTableView extends Component {
         <Container>
          <Header>
             <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
-                <Button transparent onPress={this.onBack}>
+                <Button transparent onPress={this.props.onBack}>
                       <Icon name='arrow-back' />
                 </Button>
             </Left>
@@ -65,17 +83,7 @@ export default class MatchStrategyTableView extends Component {
 
             <Right></Right>
           </Header>
-          <FlatList
-              data = {this.state.strats}
-              renderItem={({item}) => 
-                  <SubmittedStrategyCell scouter={item.scouter} strategy={item.strategy}/>
-              }
-              keyExtractor= {(item, index) => String(index)}
-              refreshControl={
-                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refrshStrats} />
-              }
-              showsVerticalScrollIndicator={false}
-          />
+          {this.renderStrategyList()}
         </Container>
       </StyleProvider>
     );
@@ -84,3 +92,8 @@ export default class MatchStrategyTableView extends Component {
   } 
 }
 
+const styles = StyleSheet.create({
+  noStrats: {
+    alignItems: 'center',
+  }
+});

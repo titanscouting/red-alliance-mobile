@@ -1,6 +1,6 @@
 import React from 'react';
-import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, StyleSheet, View, Text} from 'react-native';
+import { Container, Separator, Text, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { FlatList, StyleSheet, View} from 'react-native';
 import PropTypes from 'prop-types';
 import Globals from '../../GlobalDefinitions'
 import { TouchableWithoutFeedback } from 'react-native';
@@ -15,7 +15,12 @@ export default class SubmittedStrategyCell extends React.Component {
     render () {
         return (
             <Card>
-                <Text>{this.props.strategy}</Text>
+                <CardItem header>
+                    <Text bolded>{this.props.scouter}</Text>
+                </CardItem>
+                <CardItem>
+                    <Text>{this.props.strategy}</Text>
+                </CardItem>
             </Card>
         );
     }

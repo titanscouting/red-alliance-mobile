@@ -45,6 +45,9 @@ export default class Strategies extends Component {
     let match = this.state.currentMatch;
   }
 
+  popMatch = () => {
+    this.setState({currentMatch: null});
+  }
 
   render() {
     if (this.state.currentMatch == null) {
@@ -72,7 +75,7 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchStrategyTableView match={this.state.currentMatch}/>
+        <MatchStrategyTableView match={this.state.currentMatch} onBack={this.popMatch}/>
       )
       
     }

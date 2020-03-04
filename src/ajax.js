@@ -579,7 +579,6 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
               return response.json();
           }
       }).then((myJson) => {
-          console.log(myJson)
           return myJson.data;
       });
   } catch(error) {
@@ -588,7 +587,6 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
 }
 
 exports.submitStrategy = async (competition, match, data) => {
-    let team='2022';
     const endpoint = apiHost + "api/submitStrategy";
     try {
         fetch(endpoint, {
