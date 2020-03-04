@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, Form, Textarea, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import { RefreshControl, FlatList, StyleSheet} from 'react-native'
@@ -83,6 +83,11 @@ export default class MatchStrategyTableView extends Component {
 
             <Right></Right>
           </Header>
+          <Form style={styles.textarea}>
+              <Item style={styles.textarea}>
+                <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. What should we do with each of the teams?"} onChangeText={this.handleGeneralChange} />
+              </Item>
+          </Form>
           {this.renderStrategyList()}
         </Container>
       </StyleProvider>
@@ -95,5 +100,25 @@ export default class MatchStrategyTableView extends Component {
 const styles = StyleSheet.create({
   noStrats: {
     alignItems: 'center',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'flex-start',
+  },
+  stepper: {
+    flex: 1,
+  },
+  tabStyle: {
+    borderColor: Globals.colors[Globals.brand.primary],
+  },
+  activeTabStyle: {
+    backgroundColor: Globals.colors[Globals.brand.primary],
+  },
+  tabTextStyle: {
+    color: Globals.colors[Globals.brand.primary],
+  },
+  textarea: {
+      flex: 1,
+      flexDirection: 'row',
   }
 });
