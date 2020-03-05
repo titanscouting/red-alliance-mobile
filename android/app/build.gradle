@@ -133,7 +133,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 17
-        versionName "3.3.1"
+        versionName "3.3-hf2"
     }
     splits {
         abi {

@@ -2,15 +2,9 @@ import React, { Component } from 'react';
 import { Container, Form, Textarea, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import { RefreshControl, FlatList, StyleSheet, ScrollView} from 'react-native'
+import { RefreshControl, FlatList, StyleSheet, ScrollView, BackHandler} from 'react-native'
 import StratCell from './StratCell'
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
-
-const dataArray = [
-  { title: "First Element", content: "Lorem ipsum dolor sit amet" },
-  { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
-  { title: "Third Element", content: "Lorem ipsum dolor sit amet " }
-];
 
 function wait(timeout) {
   return new Promise(resolve => {
@@ -44,6 +38,8 @@ export default class MatchStrategyTableView extends Component {
   componentDidMount() {
     this.getSubmittedStrategy();
     this.refreshStrats();
+    this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+
   }
 
   getSubmittedStrategy = async () => {
@@ -65,7 +61,14 @@ export default class MatchStrategyTableView extends Component {
     await wait(2000);
     this.refreshStrats();
   }
+  componentWillUnmount() {
+    this.backHandler.remove()
+  }
 
+  handleBackPress = () => {
+    this.props.onBack()
+    return true;
+  }
   theList = () => {
     return (<FlatList
       data = {this.state.strats}
