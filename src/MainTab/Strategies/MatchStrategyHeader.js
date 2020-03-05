@@ -9,7 +9,7 @@ export default class MatchStrategyHeader extends React.Component {
 
     static propTypes = {
         teams: PropTypes.array.isRequired,
-        nicknames: PropTypes.object.isRequired,
+        nicknames: PropTypes.object,
     };
 
     _isMounted = false;

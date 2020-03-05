@@ -10,7 +10,7 @@ export default class StatsTeamCell extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onItemPress: PropTypes.func.isRequired,
-        nickname: PropTypes.string.isRequired,
+        nickname: PropTypes.string,
     }
 
     state = {

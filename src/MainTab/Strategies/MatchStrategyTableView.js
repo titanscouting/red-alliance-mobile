@@ -31,7 +31,7 @@ export default class MatchStrategyTableView extends Component {
     match: PropTypes.number.isRequired,
     teams: PropTypes.array.isRequired,
     onBack: PropTypes.func.isRequired,
-    nicknames: PropTypes.object.isRequired,
+    nicknames: PropTypes.object,
   };
   
   state = {
