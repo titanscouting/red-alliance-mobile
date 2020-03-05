@@ -35,7 +35,6 @@ export default class EvalCell extends React.Component {
         switch (this.widget()) {
             case 'segment': 
                 if (this.options().includes(d)) {
-                    console.log(d);
                     return this.options().indexOf(d);
                 } else { return null; }
             case 'stepper':

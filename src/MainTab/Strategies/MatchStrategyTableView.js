@@ -38,6 +38,7 @@ export default class MatchStrategyTableView extends Component {
     strats: null,
     refreshing: true,
     ideas: null,
+    submittedStrat: null,
   }
 
   componentDidMount() {
@@ -47,6 +48,10 @@ export default class MatchStrategyTableView extends Component {
 
   getSubmittedStrategy = async () => {
     let submittedStrat = await ajax.getUserStrategy(Globals.data.competition, this.props.match);
+    console.log("SUBMITTED STRAT~~~~~~~~~")
+    console.log(submittedStrat);
+    console.log("~~~~~~~~~~~~~~~~~~~~~~~~")
+    this.setState({submittedStrat: submittedStrat[0]})
   }
 
   refreshStrats = async () => {
@@ -114,7 +119,7 @@ export default class MatchStrategyTableView extends Component {
             </Right>
           </Header>
           <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames}/>
-          <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
+          <Textarea defaultValue={this.state.submittedStrat} style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
             {this.renderStrategyList()}
         </Container>
       </StyleProvider>

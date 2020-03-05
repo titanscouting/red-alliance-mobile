@@ -635,7 +635,7 @@ exports.getUserStrategy = async (competition, matchNumber) => {
                 return response.json();
             }
         }).then((myJson) => {
-            return myJson;
+            return myJson.data;
         });
     } catch(error) {
         console.error(error);
