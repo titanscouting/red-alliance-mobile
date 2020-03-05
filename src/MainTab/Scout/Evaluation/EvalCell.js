@@ -65,7 +65,7 @@ export default class EvalCell extends React.Component {
                     <Form style={styles.textarea}>
                        
                         <Item style={styles.textarea}>
-                         <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
+                         <Textarea maxLength={650} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
                         </Item>
                     </Form>
                 );

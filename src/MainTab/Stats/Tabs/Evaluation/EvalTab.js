@@ -12,6 +12,7 @@ export default class EvalTab extends React.Component {
     static propTypes = {
         tabConfig: PropTypes.array.isRequired,
         onUpdate: PropTypes.func.isRequired,
+        defaultData: PropTypes.object,
     }
 
     cellUpdate = (key, value) => {
@@ -29,7 +30,7 @@ export default class EvalTab extends React.Component {
                         <ListItem style={styles.cell}>
                             <Text>{item.name}</Text>
                             <View style={styles.separator}/>
-                            <EvalCell config={item} cellUpdate={this.cellUpdate}/>
+                            <EvalCell defaultData={this.props.defaultData} config={item} cellUpdate={this.cellUpdate}/>
                         </ListItem>
                     }
                     keyExtractor= {item => String(item.key)}

@@ -227,7 +227,7 @@ exports.fetchMatches = async (competition) => {
 exports.submitMatchData = async (competition, team, match, data) => {
     const endpoint = apiHost + "api/submitMatchData";
     try {
-        return await fetch(endpoint, {
+        fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -255,7 +255,7 @@ exports.submitPitData = async (competition, team, data) => {
     let match = 0; // TODO: REMOVE MATCH FROM THE API
     const endpoint = apiHost + "api/submitPitData";
     try {
-        return await fetch(endpoint, {
+        fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -288,7 +288,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
     const endpoint = encodeURI(apiHost + "api/fetchMatchData?competition="+competition+"&match_number="+matchNumber+"&team_scouted="+team);
 
     try {
-        return fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -588,7 +588,7 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
 exports.submitStrategy = async (competition, match, data) => {
     const endpoint = apiHost + "api/submitStrategy";
     try {
-        return await fetch(endpoint, {
+        fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

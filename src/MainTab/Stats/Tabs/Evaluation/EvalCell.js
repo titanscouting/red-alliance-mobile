@@ -13,6 +13,7 @@ export default class EvalCell extends React.Component {
     static propTypes = {
         config: PropTypes.object.isRequired,
         cellUpdate: PropTypes.func.isRequired,
+        defaultData: PropTypes.object,
     };
 
     key = (() => this.props.config.key);
@@ -20,8 +21,34 @@ export default class EvalCell extends React.Component {
     widget = (() => this.props.config.widget);
     options = (() => this.props.config.options);
  
+    default = () => {
+        let d = null
+        if (this.key() in this.props.defaultData) {
+            d = this.props.defaultData[this.key()];
+        } else { return null; }
+
+        switch (this.widget()) {
+            case 'segment': 
+                if (this.options().includes(d)) {
+                    console.log(d);
+                    return this.options().indexOf(d);
+                } else { return null; }
+            case 'stepper':
+                return d;
+
+            case 'text-area':
+                return d;
+            default:
+                console.error("Widget not found: " + this.widget());
+                return null;
+        }
+
+    }
+
+    
+
     state = {
-        selectedIndex: 0
+        selectedIndex:  this.default() ? this.default() : 0
     };
 
     handleIndexChange = (index) => {
@@ -57,6 +84,7 @@ export default class EvalCell extends React.Component {
                         labelBackgroundColor={Globals.colors[Globals.brand["primary"]]}
                         buttonsBackgroundColor={Globals.colors[Globals.brand["primary-dark"]]}
                         onChange={this.handleGeneralChange}
+                        value={this.default() ? this.default() : -1}
                     />
                 );
 
@@ -65,13 +93,12 @@ export default class EvalCell extends React.Component {
                     <Form style={styles.textarea}>
                        
                         <Item style={styles.textarea}>
-                         <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
+                         <Textarea maxLength={650} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
                         </Item>
                     </Form>
                 );
             default:
-                // TODO: Switch this to error.
-                console.log("Widget not found: " + this.widget());
+                console.error("Widget not found: " + this.widget());
                 return (
                     <Text>{"Nothing for widget named: " + this.widget()}</Text>
                 )

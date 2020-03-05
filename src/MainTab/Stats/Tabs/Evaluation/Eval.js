@@ -15,7 +15,7 @@ export default class Eval extends React.Component {
 
     static propTypes = {
         configuration: PropTypes.array.isRequired,
-        defaultData: PropTypes.object.isRequired,
+        defaultData: PropTypes.object,
         makeAware: PropTypes.func.isRequired,
     }
 
@@ -48,6 +48,7 @@ export default class Eval extends React.Component {
     }
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        console.log(this.props.defaultData);
     }
     
     componentWillUnmount() {
@@ -76,7 +77,7 @@ export default class Eval extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
+                        <EvalTab defaultData={this.props.defaultData} tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
                     </Container>
                 </StyleProvider>
             );
