@@ -31,6 +31,7 @@ export default class MatchStrategyTableView extends Component {
     match: PropTypes.number.isRequired,
     teams: PropTypes.array.isRequired,
     onBack: PropTypes.func.isRequired,
+    nicknames: PropTypes.object.isRequired,
   };
   
   state = {
@@ -107,7 +108,7 @@ export default class MatchStrategyTableView extends Component {
                 </Button>
             </Right>
           </Header>
-          <MatchStrategyHeader teams={this.props.teams}/>
+          <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames}/>
           <Textarea style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
               
           {this.renderStrategyList()}

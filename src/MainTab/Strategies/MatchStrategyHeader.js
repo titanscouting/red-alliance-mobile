@@ -9,6 +9,7 @@ export default class MatchStrategyHeader extends React.Component {
 
     static propTypes = {
         teams: PropTypes.array.isRequired,
+        nicknames: PropTypes.object.isRequired,
     };
 
     _isMounted = false;
@@ -21,6 +22,15 @@ export default class MatchStrategyHeader extends React.Component {
         this._isMounted = false;
     }
 
+    getCellText = (index) => {
+        const nick = this.props.nicknames[this.props.teams[index]];
+        const team = this.props.teams[index];
+        if (nick) {
+            return team + " - " + nick;
+        }
+        return team;
+    } 
+
     render () {
         return (
             
@@ -29,18 +39,18 @@ export default class MatchStrategyHeader extends React.Component {
                 <View backgroundColor={Globals.colors.blue} style={styles.ribbon}/>
                 <View width={5}/>
                 <View style={styles.blue}>
-                    <Text style={styles.type}>{"Team "+this.props.teams[0]}</Text>
-                    <Text style={styles.type}>{"Team "+this.props.teams[1]}</Text>
-                    <Text style={styles.type}>{"Team "+this.props.teams[2]}</Text>
+                    <Text style={styles.type}>{this.getCellText(0)}</Text>
+                    <Text style={styles.type}>{this.getCellText(1)}</Text>
+                    <Text style={styles.type}>{this.getCellText(2)}</Text>
                 </View>
             </View>
             <View style={styles.right}>
                 <View backgroundColor={Globals.colors.red} style={styles.ribbon}/>
                 <View width={5}/>
                 <View style={styles.blue}>
-                    <Text style={styles.type}>{"Team "+this.props.teams[3]}</Text>
-                    <Text style={styles.type}>{"Team "+this.props.teams[4]}</Text>
-                    <Text style={styles.type}>{"Team "+this.props.teams[5]}</Text>
+                    <Text style={styles.type}>{this.getCellText(3)}</Text>
+                    <Text style={styles.type}>{this.getCellText(4)}</Text>
+                    <Text style={styles.type}>{this.getCellText(5)}</Text>
                 </View>
             </View>
             </ListItem>
@@ -70,16 +80,18 @@ const styles = StyleSheet.create({
     },
     blue: {
         flexDirection: 'column',
-        justifyContent: 'space-between',
     },
     cell: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-start',
     },
     left: {
         flexDirection: 'row',
     },
     right: {
-        flexDirection: 'row-reverse'
+        paddingTop: 10,
+        flexDirection: 'row',
+        textAlign: 'right',
     }
 });

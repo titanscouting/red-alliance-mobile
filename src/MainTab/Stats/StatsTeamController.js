@@ -14,6 +14,7 @@ export default class StatsTeamController extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onBack: PropTypes.func.isRequired,
+        nickname: PropTypes.string.isRequired,
     }
 
     state = {
@@ -114,7 +115,8 @@ export default class StatsTeamController extends React.Component {
                         </Button>
                     </Left>
                     <Body>
-                        <Title>Team {this.props.team}</Title>
+                        <Title>{"Team "+this.props.team}</Title>
+                        <Title style={styles.subtitle}>{this.props.nickname}</Title>
                     </Body>
                     {this.rightButton()}
                   </Header>
@@ -157,6 +159,9 @@ const styles = StyleSheet.create({
     },
     cell: {
         flexDirection: 'row'
+    },
+    subtitle: {
+        fontSize: 14,
     }
   });
   

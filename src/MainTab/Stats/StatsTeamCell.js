@@ -10,6 +10,7 @@ export default class StatsTeamCell extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onItemPress: PropTypes.func.isRequired,
+        nickname: PropTypes.string.isRequired,
     }
 
     state = {
@@ -35,6 +36,7 @@ export default class StatsTeamCell extends React.Component {
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
                     <Text style={styles.team}>{"Team "+this.props.team}</Text>
+                    <Text style={styles.nickname}>{this.props.nickname}</Text>
                 </ListItem>
             </TouchableWithoutFeedback>
         );

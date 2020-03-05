@@ -24,6 +24,7 @@ export default class Strategies extends Component {
     refreshing: true,
     currentMatch: null,
     currentTeams: null,
+    nicknames: null,
   }
 
   componentDidMount() {
@@ -33,8 +34,8 @@ export default class Strategies extends Component {
 
   refreshSchedule = async () => {
     let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
-    
-    this.setState({schedule: schedule, refreshing:false});
+    let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(Globals.data.competition);
+    this.setState({schedule: schedule, refreshing:false, nicknames: nicknames});
   }
 
   handlePress = (match, teams) => {
@@ -76,7 +77,7 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchStrategyTableView match={this.state.currentMatch} teams={this.state.currentTeams} onBack={this.popMatch}/>
+        <MatchStrategyTableView match={this.state.currentMatch} nicknames={this.state.nicknames} teams={this.state.currentTeams} onBack={this.popMatch}/>
       )
       
     }

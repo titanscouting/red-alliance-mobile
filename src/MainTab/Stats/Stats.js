@@ -15,6 +15,7 @@ export default class Stats extends React.Component {
     state = {
         teams: null,
         currentTeamNumber: null,
+        nicknames: null,
         isBlue: null,
         data: {}
     }
@@ -26,7 +27,8 @@ export default class Stats extends React.Component {
 
     pullTeams = async () => {
         const teams = await ajax.fetchTeamsInCompetition(GLOBAL.data.competition);
-        this.setState({teams: teams});
+        const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(GLOBAL.data.competition);
+        this.setState({teams: teams, nicknames: nicknames});
     }
 
     async componentWillUnmount() {
@@ -44,7 +46,7 @@ export default class Stats extends React.Component {
         if (this.state.currentTeamNumber != null) {
             return (
                 <StyleProvider style={getTheme(material)}>
-                    <StatsTeamController team={this.state.currentTeamNumber} onBack={this.removeCurrentTeam}/>
+                    <StatsTeamController team={this.state.currentTeamNumber} nickname={this.state.nicknames[this.state.currentTeamNumber]} onBack={this.removeCurrentTeam}/>
                 </StyleProvider>
                 );
         } else if (this.state.teams != null) {
@@ -59,7 +61,7 @@ export default class Stats extends React.Component {
                   <FlatList
                       data = {this.state.teams}
                       renderItem={({item}) => 
-                        <StatsTeamCell team={item} onItemPress={this.setCurrentTeam}/>
+                        <StatsTeamCell team={item} nickname={this.state.nicknames[item]} onItemPress={this.setCurrentTeam}/>
                       }
                       keyExtractor= {item => String(item)}
                       refreshControl={
