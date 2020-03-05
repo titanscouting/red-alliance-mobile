@@ -15,13 +15,11 @@ export default class Eval extends React.Component {
 
     static propTypes = {
         configuration: PropTypes.array.isRequired,
-        defaultData: PropTypes.object, // TODO: Implement for editing
+        defaultData: PropTypes.object.isRequired,
         makeAware: PropTypes.func.isRequired,
     }
 
     hasMadeAware = false
-
-
 
     doNothing = () => {}
 
@@ -42,7 +40,6 @@ export default class Eval extends React.Component {
         return tab;
     }
 
-    
     onUpdate = (key, value) => {
         this.props.makeAware(key, value)
         if (!this.hasMadeAware) {

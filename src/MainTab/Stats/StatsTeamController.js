@@ -14,7 +14,7 @@ export default class StatsTeamController extends React.Component {
     static propTypes = {
         team: PropTypes.number.isRequired,
         onBack: PropTypes.func.isRequired,
-        nickname: PropTypes.string.isRequired,
+        nickname: PropTypes.string,
     }
 
     state = {
