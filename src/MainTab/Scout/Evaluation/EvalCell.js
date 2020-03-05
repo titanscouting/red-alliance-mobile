@@ -32,7 +32,7 @@ export default class EvalCell extends React.Component {
     };
     
     handleGeneralChange = (num) => {
-        this.props.cellUpdate(this.key(), num);
+        this.props.cellUpdate(this.key(), num, true);
     };
 
     render () {

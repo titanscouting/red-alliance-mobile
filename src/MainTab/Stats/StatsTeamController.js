@@ -37,9 +37,9 @@ export default class StatsTeamController extends React.Component {
         this.backHandler.remove()
     }
     
-    acknowledgeChanges = (key, value) => {
+    acknowledgeChanges = (key, value, human) => {
         this.vals[key] = value;
-        if (!this.state.madeChanges) {
+        if (!this.state.madeChanges && human) {
             this.setState({madeChanges: true});
         }
     }

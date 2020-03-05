@@ -22,8 +22,13 @@ export default class EvalCell extends React.Component {
     options = (() => this.props.config.options);
  
     default = () => {
+
+        if (this.props.defaultData == null) {
+            return null;
+        }
+
         let d = null
-        if (this.key() in this.props.defaultData) {
+        if (Object(this.props.defaultData).hasOwnProperty(this.key())) {
             d = this.props.defaultData[this.key()];
         } else { return null; }
 
@@ -48,18 +53,18 @@ export default class EvalCell extends React.Component {
     
 
     state = {
-        selectedIndex:  this.default() ? this.default() : 0
+        selectedIndex: this.default() ? this.default() : 0
     };
 
     handleIndexChange = (index) => {
         this.setState({
             selectedIndex: index
         });
-        this.props.cellUpdate(this.key(), this.options()[index]);
+        this.props.cellUpdate(this.key(), this.options()[index], true);
     };
     
     handleGeneralChange = (num) => {
-        this.props.cellUpdate(this.key(), num);
+        this.props.cellUpdate(this.key(), num, true);
     };
 
     render () {
@@ -93,7 +98,7 @@ export default class EvalCell extends React.Component {
                     <Form style={styles.textarea}>
                        
                         <Item style={styles.textarea}>
-                         <Textarea maxLength={650} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
+                         <Textarea maxLength={666} defaultValue={this.default() ? this.default() : ""} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
                         </Item>
                     </Form>
                 );

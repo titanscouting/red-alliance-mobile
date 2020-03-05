@@ -40,9 +40,9 @@ export default class Eval extends React.Component {
         return tab;
     }
 
-    onUpdate = (key, value) => {
-        this.props.makeAware(key, value)
-        if (!this.hasMadeAware) {
+    onUpdate = (key, value, human) => {
+        this.props.makeAware(key, value, human)
+        if (!this.hasMadeAware && human) {
             this.hasMadeAware = true
         }
     }

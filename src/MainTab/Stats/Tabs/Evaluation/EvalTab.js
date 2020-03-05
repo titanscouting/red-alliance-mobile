@@ -15,10 +15,19 @@ export default class EvalTab extends React.Component {
         defaultData: PropTypes.object,
     }
 
-    cellUpdate = (key, value) => {
-        this.props.onUpdate(key, value);
+    cellUpdate = (key, value, human) => {
+        this.props.onUpdate(key, value, human);
     }
 
+    componentDidMount() {
+        const p = this.props.defaultData;
+        for (var key in p) {
+            if (p.hasOwnProperty(key)) {
+                this.cellUpdate(key, p[key], false);
+            }
+        }
+        
+    }
      
 
     render () {
