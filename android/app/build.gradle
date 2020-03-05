@@ -132,8 +132,8 @@ android {
         applicationId "com.redalliance"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 16
-        versionName "3.3-hf1"
+        versionCode 17
+        versionName "3.3.1"
     }
     splits {
         abi {
