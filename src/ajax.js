@@ -578,6 +578,8 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
               return response.json();
           }
       }).then((myJson) => {
+        console.log("Strategy get: ");
+          console.log(myJson);
           return myJson.data;
       });
   } catch(error) {
@@ -588,7 +590,7 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
 exports.submitStrategy = async (competition, match, data) => {
     const endpoint = apiHost + "api/submitStrategy";
     try {
-        fetch(endpoint, {
+        return await fetch(endpoint, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -601,11 +603,16 @@ exports.submitStrategy = async (competition, match, data) => {
                 data: data
             }),
         }).then((response) => {
-            const resp = response.json();
-            console.log(JSON.stringify(resp));
-            return resp;
+            if (response.status != 200) {
+                console.warn("Status " + response.status + " Error submitting scouting suggestions data for "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            console.log("Strategy submit: ");
+            console.log(myJson);
+            return myJson;
         })
-        // let responseJson = await JSON.parse(response);
     } catch(error) {
         console.error(error);
     }

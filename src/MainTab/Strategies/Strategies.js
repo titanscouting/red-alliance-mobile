@@ -40,14 +40,8 @@ export default class Strategies extends Component {
 
   handlePress = (match, teams) => {
     this.setState({currentMatch:match, currentTeams: teams});
-    this.refreshStrats();
   }
 
-  refreshStrats = async () => {
-    // let match = this.state.currentMatch;
-    // this.setState({currentMatch: match})
-    console.log("Implement refreshStrats");
-  }
 
   popMatch = () => {
     this.setState({currentMatch: null});
