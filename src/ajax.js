@@ -4,6 +4,8 @@ import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 
 import { Alert, Platform } from "react-native";
 
+import Globals from "./GlobalDefinitions";
+
 function wait(timeout) {
     return new Promise(resolve => {
         setTimeout(resolve, timeout);

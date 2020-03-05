@@ -44,7 +44,9 @@ export default class Strategies extends Component {
   }
 
   refreshStrats = async () => {
-    let match = this.state.currentMatch;
+    // let match = this.state.currentMatch;
+    // this.setState({currentMatch: match})
+    console.log("Implement refreshStrats");
   }
 
   popMatch = () => {
