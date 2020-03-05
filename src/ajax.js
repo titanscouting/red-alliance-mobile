@@ -610,3 +610,27 @@ exports.submitStrategy = async (competition, match, data) => {
         console.error(error);
     }
 }
+
+exports.getUserStrategy = async (competition, matchNumber) => {
+    const endpoint = encodeURI(apiHost + "api/getUserStrategy?competition="+competition+"&match_number="+matchNumber);
+    try {
+        return await fetch(endpoint, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'token': await exports.getIDToken(),
+            }
+        }).then((response) => {
+            if (response.status != 200) {
+                console.warn("Status " + response.status + " Error fetching getUserStrategy "+competition);
+            } else {
+                return response.json();
+            }
+        }).then((myJson) => {
+            return myJson;
+        });
+    } catch(error) {
+        console.error(error);
+    }
+  }
