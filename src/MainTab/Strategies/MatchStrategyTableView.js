@@ -9,7 +9,7 @@ import StratCell from './StratCell'
 const dataArray = [
   { title: "First Element", content: "Lorem ipsum dolor sit amet" },
   { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
-  { title: "Third Element", content: "Lorem ipsum dolor sit amet " }
+  { title: "Third Element", content: "Lorem ipsum dolor sit amet " },
 ];
 
 function wait(timeout) {
@@ -48,9 +48,6 @@ export default class MatchStrategyTableView extends Component {
 
   getSubmittedStrategy = async () => {
     let submittedStrat = await ajax.getUserStrategy(Globals.data.competition, this.props.match);
-    console.log("SUBMITTED STRAT~~~~~~~~~")
-    console.log(submittedStrat);
-    console.log("~~~~~~~~~~~~~~~~~~~~~~~~")
     this.setState({submittedStrat: submittedStrat[0]})
   }
 
