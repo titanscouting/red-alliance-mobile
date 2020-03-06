@@ -71,7 +71,6 @@ export default class EvalCell extends React.Component {
                 );
             default:
                 // TODO: Switch this to error.
-                console.log("Widget not found: " + this.widget());
                 return (
                     <Text>{"Nothing for widget named: " + this.widget()}</Text>
                 )

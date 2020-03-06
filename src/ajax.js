@@ -42,7 +42,6 @@ exports.isJSON = (str) => {
 exports.getIDToken = async () => {
     try {
         try {
-            // console.log(await exports.isSignedIn() ? "The user is signed in." : "The user is not signed in.");
             await GoogleSignin.hasPlayServices();
             await GoogleSignin.signInSilently()
             const tokens = await GoogleSignin.getTokens();
@@ -108,7 +107,6 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
                 }
                 data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
             }
-            console.log(data)
             return data;
         });
     } catch(error) {
@@ -250,8 +248,6 @@ exports.submitMatchData = async (competition, team, match, data) => {
 },
 
 exports.submitPitData = async (competition, team, data) => {
-    console.log(competition, team , data);
-    console.log(competition)
     let match = 0; // TODO: REMOVE MATCH FROM THE API
     const endpoint = apiHost + "api/submitPitData";
     try {
@@ -578,8 +574,6 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
               return response.json();
           }
       }).then((myJson) => {
-        console.log("Strategy get: ");
-          console.log(myJson);
           return myJson.data;
       });
   } catch(error) {
@@ -609,8 +603,6 @@ exports.submitStrategy = async (competition, match, data) => {
                 return response.json();
             }
         }).then((myJson) => {
-            console.log("Strategy submit: ");
-            console.log(myJson);
             return myJson;
         })
     } catch(error) {
