@@ -58,8 +58,7 @@ export default class MatchStrategyTableView extends Component {
 
   onSave = async () => {
     await ajax.submitStrategy(Globals.data.competition, this.props.match, this.state.ideas);
-    await wait(2000);
-    this.refreshStrats();
+    this.props.onBack()
   }
   componentWillUnmount() {
     this.backHandler.remove()
