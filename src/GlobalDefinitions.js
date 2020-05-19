@@ -1,6 +1,6 @@
 export default {
 
-    "colors":{
+ "colors":{
         "blue":"#1F8AE8",
         "light-blue":"#4B9AFF",
         "really-dark-blue":"136cb9",
@@ -21,6 +21,7 @@ export default {
         "tint":"light-red-tint",
     },
     "data":{
-        "competition":"2020ilch"
+        "competition":"2020ilch",
+        "version": "3.4.1"
     }
 };
