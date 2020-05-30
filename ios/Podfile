@@ -76,6 +76,8 @@ target 'RedAlliance' do
 
   pod 'Firebase/Analytics'
 
+  pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
+
   target 'RedAllianceTests' do
     inherit! :complete
     # Pods for testing
