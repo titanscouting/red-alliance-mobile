@@ -3,7 +3,7 @@ import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Foot
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler} from 'react-native';
+import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, Alert} from 'react-native';
 import PropTypes from 'prop-types';
 import TeamCell from './TeamCell';
 
@@ -31,7 +31,21 @@ export default class TeamList extends React.Component {
         this.props.onBack(); 
     }
 
-    doNothing = () => { }
+    doNothing = () => { 
+        Alert.alert(
+            "Match Already Being Scouted",
+            "This match is already being scouted by another user. If you continue, the person who submits their data first will have their data saved. Are you sure you would like to continue?",
+            [
+              {
+                text: "Yes",
+                onPress: () => this.props.onItemPress(),
+                style: "cancel"
+              },
+              { text: "No" }
+            ],
+            { cancelable: false }
+          );  
+    }
 
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
