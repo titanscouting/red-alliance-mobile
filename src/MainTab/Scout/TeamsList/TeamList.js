@@ -31,7 +31,7 @@ export default class TeamList extends React.Component {
         this.props.onBack(); 
     }
 
-    doNothing = () => { 
+    alertUser = () => { 
         Alert.alert(
             "Match Already Being Scouted",
             "This match is already being scouted by another user. If you continue, the person who submits their data first will have their data saved. Are you sure you would like to continue?",
@@ -102,7 +102,7 @@ export default class TeamList extends React.Component {
                             <FlatList
                                 data = {this.props.teams}
                                 renderItem={({item}) => 
-                                    <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.doNothing : this.props.onItemPress} showRefresh={this.showRefresh}/>
+                                    <TeamCell number={item.teamNumber} isBlue={item.isBlue} scouterDescription={item.scouterDescription} onPress={item.scouterDescription ? this.alertUser : this.props.onItemPress} showRefresh={this.showRefresh}/>
                                 }
                                 keyExtractor= {item => String(item.teamNumber)}
                                 refreshControl={
