@@ -20,6 +20,6 @@ export default {
     },
     "data":{
         "competition": "2020ilch",
-        "version": "3.4.2-git-20200712"
+        "version": "3.4.2-git-20200716"
     }
 };
