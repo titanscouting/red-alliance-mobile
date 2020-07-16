@@ -3,7 +3,8 @@
  * https://github.com/facebook/react-native
  *
  * @format
- * @flow
+ * @flow strict-local
+
  */
 
 import React from 'react';
