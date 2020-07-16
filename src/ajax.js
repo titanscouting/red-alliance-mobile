@@ -94,7 +94,6 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
             let data = []
             let is_blue;
             let desc = null;
-            let scouterID = null;
             for (let i = 0; i<myJson.scouters.length; i++) {
                 if (i < 3) {
                     is_blue = true;
@@ -103,12 +102,10 @@ exports.fetchTeamsForMatch= async (competition, match)  => {
                 }
                 try {
                     desc = myJson.scouters[i].name;
-                    scouterID = myJson.scouters[i].id;
                 } catch (e) {
                     desc = null;
-                    scouterID = null;
                 }
-                data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc, scouterID})
+                data.push({teamNumber: parseInt(myJson.teams[i]), isBlue: is_blue, scouterDescription: desc})
             }
             return data;
         });

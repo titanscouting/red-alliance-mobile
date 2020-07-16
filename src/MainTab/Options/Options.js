@@ -1,33 +1,32 @@
-import React, {Component} from 'react';
-import {
-  Container,
-  Card,
-  CardItem,
-  StyleProvider,
-  Header,
-  Title,
-  Content,
-  Button,
-  Right,
-  Body,
-  Text,
-} from 'native-base';
+import React, { Component } from 'react';
+import { Container, Card, CardItem, StyleProvider, Header, Title, Accordion, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 
-import ajax from '../../ajax';
-import Globals from '../../GlobalDefinitions';
+// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+
+const dataArray = [
+  { title: "First Element", content: "Lorem ipsum dolor sit amet" },
+  { title: "Second Element", content: "Lorem ipsum dolor sit amet" },
+  { title: "Third Element", content: "Lorem ipsum dolor sit amet " }
+];
+
+import ajax from '../../ajax'
 
 export default class Strategies extends Component {
+
+
+
   render() {
     return (
       <StyleProvider style={getTheme(material)}>
+
         <Container>
-          <Header>
-            <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-              <Title>Options</Title>
-            </Body>
-          </Header>
+        <Header>
+                    <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                        <Title>Options</Title>
+                    </Body>
+                </Header>
           <Content>
             <Card>
               <CardItem>
@@ -39,13 +38,9 @@ export default class Strategies extends Component {
                 </Right>
               </CardItem>
             </Card>
-            <Card>
-              <CardItem>
-                <Text>Red Alliance Mobile App - v{Globals.data.version}</Text>
-              </CardItem>
-            </Card>
           </Content>
         </Container>
+
       </StyleProvider>
     );
   }
