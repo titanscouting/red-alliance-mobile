@@ -14,10 +14,12 @@ import {
 } from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
+import '../../GlobalDefinitions';
 
 // import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import ajax from '../../ajax';
+import GlobalDefinitions from '../../GlobalDefinitions';
 
 export default class Strategies extends Component {
   render() {
@@ -40,6 +42,16 @@ export default class Strategies extends Component {
                     <Text>Switch User</Text>
                   </Button>
                 </Right>
+              </CardItem>
+            </Card>
+            <Card>
+              <CardItem>
+                <Text>
+                  The Red Alliance App — v{GlobalDefinitions.data.version}
+                </Text>
+              </CardItem>
+              <CardItem>
+                <Text>Made with ❤️ by Titan Scouting</Text>
               </CardItem>
             </Card>
           </Content>
