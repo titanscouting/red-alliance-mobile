@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* RedAllianceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RedAllianceTests.m */; };
 		0121A3ABFF044517828F445C /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = BA5CC183CD634931B06F9146 /* MaterialIcons.ttf */; };
+		04BE664D96CAFED084112832 /* libPods-RedAlliance.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9285227D30B826AB4826CB /* libPods-RedAlliance.a */; };
 		06571A87E7B84F998D94899F /* Proxima Nova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1DEAAEAAC04336B89483B1 /* Proxima Nova-Light.otf */; };
 		0759D3C25BF14520A29DAA9A /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D93A779114BA47EA81390D35 /* Feather.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -25,15 +26,14 @@
 		54B75B32493747E8A10B9FA7 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8B344BBBC2EB4C36880A9909 /* Ionicons.ttf */; };
 		587ADBA98EBB44F897A45F7B /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E47C7A2C48F647658DE1D07C /* AntDesign.ttf */; };
 		5BE420BB14D549F6B7F54053 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4EDAB8BFCB6B4D1BB82715D8 /* Entypo.ttf */; };
-		61079E5DBCAF10EE20C961B0 /* libPods-RedAllianceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 865EE2BD7FED607C1F7672CA /* libPods-RedAllianceTests.a */; };
 		6BB4EDE47D6D4076BF3A4536 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0141ADD00D01402FADFAFC7E /* EvilIcons.ttf */; };
 		71EE6C9E76C64A22B50ABF32 /* Proxima Nova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6196035FCC94373BF36C5F3 /* Proxima Nova-Semibold.otf */; };
 		7236C0DD79BF43748F2C049B /* Proxima Nova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57AC4204D5624B9A8F22BEED /* Proxima Nova-Semibold.ttf */; };
 		757CCEDD940D49C1985BA915 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD713EBB0234E728321F433 /* FontAwesome5_Brands.ttf */; };
 		7F935E9659454DB6B7AA980C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75850F43A25146BFAC583B05 /* Zocial.ttf */; };
-		843411DCE657E15983CAA1AD /* libPods-RedAlliance.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 149423D7532B6C5473F1C9B2 /* libPods-RedAlliance.a */; };
 		856385A17FCF4DDFB0C6EABC /* Proxima Nova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C463982CE254ED390300CF2 /* Proxima Nova-Bold.otf */; };
 		8F5E4810D86B4FC2975E1667 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 970691684E6D462B9431D170 /* SimpleLineIcons.ttf */; };
+		9234D2C644472D4FB82DA0DD /* libPods-RedAllianceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */; };
 		94622F05FFC4481790860E6F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F2C1B80BF94DF7915626C4 /* FontAwesome5_Regular.ttf */; };
 		AA522CBBC502414FA19D2D34 /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D8F8C1D739BA453CA577E587 /* Octicons.ttf */; };
 		ACC868ACD49A4CFDA899FC74 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7069A26482EF45678076AD3B /* MaterialCommunityIcons.ttf */; };
@@ -71,36 +71,31 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = RedAlliance/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = RedAlliance/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = RedAlliance/main.m; sourceTree = "<group>"; };
-		149423D7532B6C5473F1C9B2 /* libPods-RedAlliance.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAlliance.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		18F1591980B648D5BF61267A /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
+		24285AB41D8FE275BEB0AB7A /* Pods-RedAlliance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance.debug.xcconfig"; path = "Target Support Files/Pods-RedAlliance/Pods-RedAlliance.debug.xcconfig"; sourceTree = "<group>"; };
 		24F2C1B80BF94DF7915626C4 /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		29FD45EAD9EF1E3D310D973C /* Pods-RedAlliance-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-RedAlliance-tvOS/Pods-RedAlliance-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
+		2954A6A31F09F9AA346C5F2A /* Pods-RedAlliance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance.release.xcconfig"; path = "Target Support Files/Pods-RedAlliance/Pods-RedAlliance.release.xcconfig"; sourceTree = "<group>"; };
+		2D52546EAEE456BA7173A586 /* Pods-RedAllianceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.debug.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.debug.xcconfig"; sourceTree = "<group>"; };
 		3298E6FE75564977AF7CC75C /* FontAwesome5_Solid.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Solid.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Solid.ttf"; sourceTree = "<group>"; };
-		3D15F0ECC7F53D138CD084FB /* Pods-RedAlliance.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance.debug.xcconfig"; path = "Target Support Files/Pods-RedAlliance/Pods-RedAlliance.debug.xcconfig"; sourceTree = "<group>"; };
-		421B746DA425B8C4714AC818 /* libPods-RedAlliance-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAlliance-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		48808B4A79D9DD1D3209AE75 /* Pods-RedAlliance-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-RedAlliance-tvOSTests/Pods-RedAlliance-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4C463982CE254ED390300CF2 /* Proxima Nova-Bold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Bold.otf"; path = "../assets/fonts/Proxima Nova-Bold.otf"; sourceTree = "<group>"; };
 		4DD713EBB0234E728321F433 /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		4EDAB8BFCB6B4D1BB82715D8 /* Entypo.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Entypo.ttf; path = "../node_modules/native-base/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		57AC4204D5624B9A8F22BEED /* Proxima Nova-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Semibold.ttf"; path = "../assets/fonts/Proxima Nova-Semibold.ttf"; sourceTree = "<group>"; };
-		666C8D145209B33EF5FE3A7E /* Pods-RedAlliance-tvOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance-tvOS.release.xcconfig"; path = "Target Support Files/Pods-RedAlliance-tvOS/Pods-RedAlliance-tvOS.release.xcconfig"; sourceTree = "<group>"; };
 		6B88831C310D4F6DB11342AC /* Roboto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto.ttf; path = "../node_modules/native-base/Fonts/Roboto.ttf"; sourceTree = "<group>"; };
 		6C9C5459E1144858B8CC30CE /* Fontisto.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Fontisto.ttf; path = "../node_modules/native-base/Fonts/Fontisto.ttf"; sourceTree = "<group>"; };
 		6E63E999B2A04785B1C79AEA /* Proxima Nova-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Black.ttf"; path = "../assets/fonts/Proxima Nova-Black.ttf"; sourceTree = "<group>"; };
 		7069A26482EF45678076AD3B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		75850F43A25146BFAC583B05 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
-		865EE2BD7FED607C1F7672CA /* libPods-RedAllianceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAllianceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		78D5B23F3BBD0D93FE476E5C /* Pods-RedAllianceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.release.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.release.xcconfig"; sourceTree = "<group>"; };
 		8B344BBBC2EB4C36880A9909 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		8BCF90E597F64B83A2FE9237 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
-		8F539824376E2FA8C3D8BB28 /* Pods-RedAlliance-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-RedAlliance-tvOSTests/Pods-RedAlliance-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAllianceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FCA1217CA064DD8961580F4 /* Proxima Nova-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Light.ttf"; path = "../assets/fonts/Proxima Nova-Light.ttf"; sourceTree = "<group>"; };
 		970691684E6D462B9431D170 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/native-base/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		B6196035FCC94373BF36C5F3 /* Proxima Nova-Semibold.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Semibold.otf"; path = "../assets/fonts/Proxima Nova-Semibold.otf"; sourceTree = "<group>"; };
-		B6BE483ECCE6D147E05F9302 /* libPods-RedAlliance-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAlliance-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B7F938B664D763DD4F8A4032 /* Pods-RedAlliance.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAlliance.release.xcconfig"; path = "Target Support Files/Pods-RedAlliance/Pods-RedAlliance.release.xcconfig"; sourceTree = "<group>"; };
 		BA5CC183CD634931B06F9146 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
 		C46370F52307414EA6D0679F /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/native-base/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
-		CD183CDD455022B2B9C8ADB0 /* Pods-RedAllianceTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.debug.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE9285227D30B826AB4826CB /* libPods-RedAlliance.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAlliance.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D281C22658264CE4A52EDFDC /* Proxima Nova-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Bold.ttf"; path = "../assets/fonts/Proxima Nova-Bold.ttf"; sourceTree = "<group>"; };
 		D4457D41B27844299B179031 /* Proxima Nova-Black.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Black.otf"; path = "../assets/fonts/Proxima Nova-Black.otf"; sourceTree = "<group>"; };
 		D8F8C1D739BA453CA577E587 /* Octicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Octicons.ttf; path = "../node_modules/native-base/Fonts/Octicons.ttf"; sourceTree = "<group>"; };
@@ -108,7 +103,6 @@
 		E47C7A2C48F647658DE1D07C /* AntDesign.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = AntDesign.ttf; path = "../node_modules/native-base/Fonts/AntDesign.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
-		EF26F48237CB52AECFDABBF9 /* Pods-RedAllianceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.release.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.release.xcconfig"; sourceTree = "<group>"; };
 		EF520D36F8B94DB3A6E5B896 /* Proxima Nova-Regular.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Regular.otf"; path = "../assets/fonts/Proxima Nova-Regular.otf"; sourceTree = "<group>"; };
 		FD1DEAAEAAC04336B89483B1 /* Proxima Nova-Light.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Light.otf"; path = "../assets/fonts/Proxima Nova-Light.otf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -118,7 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				61079E5DBCAF10EE20C961B0 /* libPods-RedAllianceTests.a in Frameworks */,
+				9234D2C644472D4FB82DA0DD /* libPods-RedAllianceTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -126,7 +120,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				843411DCE657E15983CAA1AD /* libPods-RedAlliance.a in Frameworks */,
+				04BE664D96CAFED084112832 /* libPods-RedAlliance.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,10 +163,8 @@
 			children = (
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
-				149423D7532B6C5473F1C9B2 /* libPods-RedAlliance.a */,
-				421B746DA425B8C4714AC818 /* libPods-RedAlliance-tvOS.a */,
-				B6BE483ECCE6D147E05F9302 /* libPods-RedAlliance-tvOSTests.a */,
-				865EE2BD7FED607C1F7672CA /* libPods-RedAllianceTests.a */,
+				CE9285227D30B826AB4826CB /* libPods-RedAlliance.a */,
+				8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -180,14 +172,10 @@
 		716F91BF0E3F2E625BE34D9F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3D15F0ECC7F53D138CD084FB /* Pods-RedAlliance.debug.xcconfig */,
-				B7F938B664D763DD4F8A4032 /* Pods-RedAlliance.release.xcconfig */,
-				29FD45EAD9EF1E3D310D973C /* Pods-RedAlliance-tvOS.debug.xcconfig */,
-				666C8D145209B33EF5FE3A7E /* Pods-RedAlliance-tvOS.release.xcconfig */,
-				48808B4A79D9DD1D3209AE75 /* Pods-RedAlliance-tvOSTests.debug.xcconfig */,
-				8F539824376E2FA8C3D8BB28 /* Pods-RedAlliance-tvOSTests.release.xcconfig */,
-				CD183CDD455022B2B9C8ADB0 /* Pods-RedAllianceTests.debug.xcconfig */,
-				EF26F48237CB52AECFDABBF9 /* Pods-RedAllianceTests.release.xcconfig */,
+				24285AB41D8FE275BEB0AB7A /* Pods-RedAlliance.debug.xcconfig */,
+				2954A6A31F09F9AA346C5F2A /* Pods-RedAlliance.release.xcconfig */,
+				2D52546EAEE456BA7173A586 /* Pods-RedAllianceTests.debug.xcconfig */,
+				78D5B23F3BBD0D93FE476E5C /* Pods-RedAllianceTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -267,7 +255,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 00E357021AD99517003FC87E /* Build configuration list for PBXNativeTarget "RedAllianceTests" */;
 			buildPhases = (
-				50A18A83A38315BB4C71FAEC /* [CP] Check Pods Manifest.lock */,
+				57FDF30EC9FCE7F34A77B810 /* [CP] Check Pods Manifest.lock */,
 				00E356EA1AD99517003FC87E /* Sources */,
 				00E356EB1AD99517003FC87E /* Frameworks */,
 				00E356EC1AD99517003FC87E /* Resources */,
@@ -286,13 +274,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 13B07F931A680F5B00A75B9A /* Build configuration list for PBXNativeTarget "RedAlliance" */;
 			buildPhases = (
-				BF0B73A496454616153A476B /* [CP] Check Pods Manifest.lock */,
+				7C84A2F18BE0B03FC1066C1B /* [CP] Check Pods Manifest.lock */,
 				FD10A7F022414F080027D42C /* Start Packager */,
 				13B07F871A680F5B00A75B9A /* Sources */,
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
-				923FA47C4486C7DEA99BA800 /* [CP] Copy Pods Resources */,
+				FE6AC562C5FAA5E5C6369AD6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -407,7 +395,7 @@
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
-		50A18A83A38315BB4C71FAEC /* [CP] Check Pods Manifest.lock */ = {
+		57FDF30EC9FCE7F34A77B810 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -429,25 +417,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		923FA47C4486C7DEA99BA800 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-RedAlliance/Pods-RedAlliance-resources.sh",
-				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RedAlliance/Pods-RedAlliance-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		BF0B73A496454616153A476B /* [CP] Check Pods Manifest.lock */ = {
+		7C84A2F18BE0B03FC1066C1B /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -486,6 +456,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export RCT_METRO_PORT=\"${RCT_METRO_PORT:=8081}\"\necho \"export RCT_METRO_PORT=${RCT_METRO_PORT}\" > \"${SRCROOT}/../node_modules/react-native/scripts/.packager.env\"\nif [ -z \"${RCT_NO_LAUNCH_PACKAGER+xxx}\" ] ; then\n  if nc -w 5 -z localhost ${RCT_METRO_PORT} ; then\n    if ! curl -s \"http://localhost:${RCT_METRO_PORT}/status\" | grep -q \"packager-status:running\" ; then\n      echo \"Port ${RCT_METRO_PORT} already in use, packager is either not running or not running correctly\"\n      exit 2\n    fi\n  else\n    open \"$SRCROOT/../node_modules/react-native/scripts/launchPackager.command\" || echo \"Can't start packager automatically\"\n  fi\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FE6AC562C5FAA5E5C6369AD6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RedAlliance/Pods-RedAlliance-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/AccessibilityResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/AccessibilityResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RedAlliance/Pods-RedAlliance-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -533,7 +523,7 @@
 /* Begin XCBuildConfiguration section */
 		00E356F61AD99517003FC87E /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CD183CDD455022B2B9C8ADB0 /* Pods-RedAllianceTests.debug.xcconfig */;
+			baseConfigurationReference = 2D52546EAEE456BA7173A586 /* Pods-RedAllianceTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -562,7 +552,7 @@
 		};
 		00E356F71AD99517003FC87E /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EF26F48237CB52AECFDABBF9 /* Pods-RedAllianceTests.release.xcconfig */;
+			baseConfigurationReference = 78D5B23F3BBD0D93FE476E5C /* Pods-RedAllianceTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -588,7 +578,7 @@
 		};
 		13B07F941A680F5B00A75B9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3D15F0ECC7F53D138CD084FB /* Pods-RedAlliance.debug.xcconfig */;
+			baseConfigurationReference = 24285AB41D8FE275BEB0AB7A /* Pods-RedAlliance.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
@@ -614,7 +604,7 @@
 		};
 		13B07F951A680F5B00A75B9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B7F938B664D763DD4F8A4032 /* Pods-RedAlliance.release.xcconfig */;
+			baseConfigurationReference = 2954A6A31F09F9AA346C5F2A /* Pods-RedAlliance.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "Apple Development";
