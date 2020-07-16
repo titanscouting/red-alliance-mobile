@@ -16,7 +16,7 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import '../../GlobalDefinitions';
 
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ajax from '../../ajax';
 import GlobalDefinitions from '../../GlobalDefinitions';
@@ -51,7 +51,9 @@ export default class Strategies extends Component {
                 </Text>
               </CardItem>
               <CardItem>
-                <Text>Made with ❤️ by Titan Scouting</Text>
+                <Text>
+                  Made with <Icon name="cards-heart"/> by Titan Scouting
+                </Text>
               </CardItem>
             </Card>
           </Content>
