@@ -26,6 +26,7 @@ export default class Strategies extends Component {
         <Container>
           <Header>
             <Body
+              // eslint-disable-next-line react-native/no-inline-styles
               style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
               <Title>Options</Title>
             </Body>
