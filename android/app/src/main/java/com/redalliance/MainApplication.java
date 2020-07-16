@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import im.shimo.react.prompt.RNPromptPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
