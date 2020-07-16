@@ -14,12 +14,10 @@ import {
 } from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import '../../GlobalDefinitions';
-
+import DeviceInfo from 'react-native-device-info';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ajax from '../../ajax';
-import GlobalDefinitions from '../../GlobalDefinitions';
 
 export default class Strategies extends Component {
   render() {
@@ -46,13 +44,11 @@ export default class Strategies extends Component {
             </Card>
             <Card>
               <CardItem>
-                <Text>
-                  The Red Alliance App — v{GlobalDefinitions.data.version}
-                </Text>
+                <Text>The Red Alliance App — v{DeviceInfo.getVersion()}</Text>
               </CardItem>
               <CardItem>
                 <Text>
-                  Made with <Icon name="cards-heart"/> by Titan Scouting
+                  Made with <Icon name="cards-heart" /> by Titan Scouting
                 </Text>
               </CardItem>
             </Card>

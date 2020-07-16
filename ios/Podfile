@@ -38,6 +38,10 @@ target 'RedAlliance' do
 
   pod 'RNCAsyncStorage', :path => '../node_modules/@react-native-community/async-storage'
 
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
+  pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
+
   target 'RedAllianceTests' do
     inherit! :search_paths
     # Pods for testing
