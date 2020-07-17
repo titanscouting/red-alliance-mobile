@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {
   Container,
   Card,
@@ -19,7 +19,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import ajax from '../../ajax';
 
-export default class Options extends React.Component {
+export default class Strategies extends Component {
   render() {
     return (
       <StyleProvider style={getTheme(material)}>
