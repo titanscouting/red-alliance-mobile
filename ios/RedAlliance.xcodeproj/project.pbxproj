@@ -32,6 +32,7 @@
 		757CCEDD940D49C1985BA915 /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4DD713EBB0234E728321F433 /* FontAwesome5_Brands.ttf */; };
 		7F935E9659454DB6B7AA980C /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75850F43A25146BFAC583B05 /* Zocial.ttf */; };
 		856385A17FCF4DDFB0C6EABC /* Proxima Nova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C463982CE254ED390300CF2 /* Proxima Nova-Bold.otf */; };
+		89D5E65C24C2578C00B59BA5 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89D5E65B24C2578C00B59BA5 /* AppCenter-Config.plist */; };
 		8F5E4810D86B4FC2975E1667 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 970691684E6D462B9431D170 /* SimpleLineIcons.ttf */; };
 		9234D2C644472D4FB82DA0DD /* libPods-RedAllianceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */; };
 		94622F05FFC4481790860E6F /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 24F2C1B80BF94DF7915626C4 /* FontAwesome5_Regular.ttf */; };
@@ -87,6 +88,7 @@
 		7069A26482EF45678076AD3B /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/native-base/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		75850F43A25146BFAC583B05 /* Zocial.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Zocial.ttf; path = "../node_modules/native-base/Fonts/Zocial.ttf"; sourceTree = "<group>"; };
 		78D5B23F3BBD0D93FE476E5C /* Pods-RedAllianceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.release.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.release.xcconfig"; sourceTree = "<group>"; };
+		89D5E65B24C2578C00B59BA5 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "RedAlliance/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		8B344BBBC2EB4C36880A9909 /* Ionicons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Ionicons.ttf; path = "../node_modules/native-base/Fonts/Ionicons.ttf"; sourceTree = "<group>"; };
 		8BCF90E597F64B83A2FE9237 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAllianceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +192,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				89D5E65B24C2578C00B59BA5 /* AppCenter-Config.plist */,
 				13B07FAE1A68108700A75B9A /* RedAlliance */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* RedAllianceTests */,
@@ -363,6 +366,7 @@
 				CC27BC21E4834233BD949461 /* Roboto.ttf in Resources */,
 				C91F292F6DD7451DB2E0FD0C /* rubicon-icon-font.ttf in Resources */,
 				3C5B6FB623C6659E00301921 /* main.jsbundle in Resources */,
+				89D5E65C24C2578C00B59BA5 /* AppCenter-Config.plist in Resources */,
 				8F5E4810D86B4FC2975E1667 /* SimpleLineIcons.ttf in Resources */,
 				7F935E9659454DB6B7AA980C /* Zocial.ttf in Resources */,
 				3751CD42AC7A4E18A69E8BD7 /* Proxima Nova-Black.otf in Resources */,
