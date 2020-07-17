@@ -59,6 +59,7 @@ export default class Stats extends React.Component {
           <Container>
             <Header>
               <Body
+                // eslint-disable-next-line react-native/no-inline-styles
                 style={{
                   flex: 1,
                   justifyContent: 'center',
