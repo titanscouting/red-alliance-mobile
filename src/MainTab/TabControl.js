@@ -39,7 +39,7 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Stats'}
                   onPress={() => navigation.navigate('Stats')}>
-                  <Icon name="md-stats" />
+                  <Icon name="md-stats-chart" />
                 </Button>
 
                 <Button
@@ -52,7 +52,7 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Options'}
                   onPress={() => navigation.navigate('Options')}>
-                  <Icon name="ios-cog" />
+                  <Icon name="settings" />
                 </Button>
               </FooterTab>
             </Footer>
