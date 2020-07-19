@@ -15,7 +15,6 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import DeviceInfo from 'react-native-device-info';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Options extends React.Component {
   render() {
@@ -49,7 +48,7 @@ export default class Options extends React.Component {
             </CardItem>
             <CardItem>
               <Text>
-                Made with <Icon name="cards-heart" /> by Titan Scouting
+                Made with by Titan Scouting
               </Text>
             </CardItem>
           </Card>

@@ -4,7 +4,6 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import { RefreshControl, FlatList, StyleSheet, ScrollView, BackHandler} from 'react-native'
 import StratCell from './StratCell'
-// import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 function wait(timeout) {
   return new Promise(resolve => {

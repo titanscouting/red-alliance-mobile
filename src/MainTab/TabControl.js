@@ -7,7 +7,7 @@ import Options from './Options/Options';
 import {createAppContainer} from 'react-navigation';
 
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {StyleProvider, Button, Icon, Footer, FooterTab} from 'native-base';
+import {StyleProvider, Button, Icon, Footer, FooterTab, Text} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 
@@ -32,27 +32,27 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Teams'}
                   onPress={() => navigation.navigate('Teams')}>
-                  <Icon name="clipboard" />
+                  <Text>Teams</Text>
                 </Button>
 
                 <Button
                   vertical
                   active={routeName === 'Stats'}
                   onPress={() => navigation.navigate('Stats')}>
-                  <Icon name="md-stats-chart" />
+                  <Text>Statistics</Text>
                 </Button>
 
                 <Button
                   vertical
                   active={routeName === 'Strat'}
                   onPress={() => navigation.navigate('Strat')}>
-                  <Icon name="git-pull-request" />
+                  <Text>Strategies</Text>
                 </Button>
                 <Button
                   vertical
                   active={routeName === 'Options'}
                   onPress={() => navigation.navigate('Options')}>
-                  <Icon name="settings" />
+                  <Text>Options</Text>
                 </Button>
               </FooterTab>
             </Footer>
