@@ -51,7 +51,7 @@ export default class Strategies extends Component {
       return (
         <StyleProvider style={getTheme(material)}>
           <Container>
-            <Header>
+          <Header>
               <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
                   <Title>Strategies</Title>
               </Body>

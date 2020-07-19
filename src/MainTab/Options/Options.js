@@ -47,9 +47,7 @@ export default class Options extends React.Component {
               <Text>The Red Alliance App — v{DeviceInfo.getVersion()}</Text>
             </CardItem>
             <CardItem>
-              <Text>
-                Made with by Titan Scouting
-              </Text>
+              <Text>Made with ❤️ by Titan Scouting</Text>
             </CardItem>
           </Card>
         </Container>

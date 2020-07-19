@@ -7,7 +7,7 @@ import Options from './Options/Options';
 import {createAppContainer} from 'react-navigation';
 
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {StyleProvider, Button, Icon, Footer, FooterTab, Text} from 'native-base';
+import {StyleProvider, Button, Footer, FooterTab, Text} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 
@@ -32,7 +32,7 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Teams'}
                   onPress={() => navigation.navigate('Teams')}>
-                  <Text>Teams</Text>
+                  <Text>Matches</Text>
                 </Button>
 
                 <Button
