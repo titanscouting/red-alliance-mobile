@@ -57,7 +57,7 @@ export default class Options extends React.Component {
               </Text>
             </CardItem>
             <CardItem>
-              <Text>Copyright Titan Scouting 2020. All rights reserved</Text>
+              <Text>Copyright Titan Scouting 2020. All rights reserved.</Text>
             </CardItem>
           </Card>
         </Container>
