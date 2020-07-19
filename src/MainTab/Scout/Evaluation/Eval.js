@@ -25,7 +25,7 @@ export default class Eval extends React.Component {
 
     onBack = () => {
         Alert.alert(
-            'Continue without saving?',
+            'Discard your changes?',
             'If you go back, the fields will not be saved.',
             [
                 {
@@ -33,7 +33,7 @@ export default class Eval extends React.Component {
                   style: 'cancel',
                 },
                 {
-                  text: 'Continue',
+                  text: 'Discard',
                   onPress: () => {
                       ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
                       this.props.onBack(); 

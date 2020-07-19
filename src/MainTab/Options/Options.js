@@ -14,7 +14,8 @@ import {
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import DeviceInfo from 'react-native-device-info';
+import VersionCheck from 'react-native-version-check';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export default class Options extends React.Component {
   render() {
@@ -44,10 +45,19 @@ export default class Options extends React.Component {
           </Card>
           <Card>
             <CardItem>
-              <Text>The Red Alliance App — v{DeviceInfo.getVersion()}</Text>
+              <Text>
+                The Red Alliance App — v{VersionCheck.getCurrentVersion()} (
+                {VersionCheck.getCurrentBuildNumber()})
+              </Text>
             </CardItem>
             <CardItem>
-              <Text>Made with ❤️ by Titan Scouting</Text>
+              <Text>
+                Made with <Icon name="cards-heart" size={15} color="#FF0000" />{' '}
+                by Titan Scouting
+              </Text>
+            </CardItem>
+            <CardItem>
+              <Text>Copyright Titan Scouting 2020. All rights reserved</Text>
             </CardItem>
           </Card>
         </Container>

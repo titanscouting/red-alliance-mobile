@@ -10,6 +10,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {StyleProvider, Button, Footer, FooterTab, Text} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TabControl = createBottomTabNavigator(
   {

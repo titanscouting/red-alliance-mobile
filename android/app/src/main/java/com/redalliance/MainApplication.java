@@ -7,7 +7,6 @@ import com.facebook.react.ReactApplication;
 import com.oblador.vectoricons.VectorIconsPackage;
 import im.shimo.react.prompt.RNPromptPackage;
 import io.xogus.reactnative.versioncheck.RNVersionCheckPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.reactnativecommunity.asyncstorage.AsyncStoragePackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
