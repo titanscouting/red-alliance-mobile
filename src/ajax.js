@@ -713,7 +713,7 @@ exports.submitStrategy = async (competition, match, data) => {
 exports.getUserStrategy = async (competition, matchNumber) => {
   const endpoint = encodeURI(
     apiHost +
-      'api/getUserStrategy?competition=' +
+      'api/fetchUserStrategy?competition=' +
       competition +
       '&match_number=' +
       matchNumber,
@@ -732,7 +732,7 @@ exports.getUserStrategy = async (competition, matchNumber) => {
           console.warn(
             'Status ' +
               response.status +
-              ' Error fetching getUserStrategy ' +
+              ' Error fetching fetchUserStrategy ' +
               competition,
           );
         } else {
