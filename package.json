@@ -18,7 +18,7 @@
     "@react-native-community/async-storage": "^1.11.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
-    "@react-navigation/native": "^5.7.0",
+    "@react-navigation/native": "^5.7.1",
     "add": "^2.0.6",
     "appcenter": "3.1.0",
     "appcenter-analytics": "3.1.0",
