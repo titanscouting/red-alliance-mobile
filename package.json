@@ -41,7 +41,7 @@
     "react-native-prompt-android": "^1.1.0",
     "react-native-reanimated": "^1.10.1",
     "react-native-safe-area-context": "^0.7.3",
-    "react-native-screens": "^2.9.0",
+    "react-native-screens": "^2.10.1",
     "react-native-segmented-control-tab": "^3.4.1",
     "react-native-vector-icons": "7.0.0",
     "react-native-version-check": "^3.4.1",
