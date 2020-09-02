@@ -35,7 +35,7 @@
     "react-native-gesture-handler": "^1.7.0",
     "react-native-global-props": "^1.1.5",
     "react-native-google-signin": "^2.1.1",
-    "react-native-keyboard-aware-scroll-view": "^0.9.1",
+    "react-native-keyboard-aware-scroll-view": "^0.9.2",
     "react-native-number-stepper": "0.0.2",
     "react-native-progress": "^4.0.3",
     "react-native-prompt-android": "^1.1.0",
