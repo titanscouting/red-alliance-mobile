@@ -152,7 +152,7 @@ android {
         }
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
-                storeFile file(MYAPP_UPLOAD_STORE_FILE)
+                storeFile file('upload.keystore')
                 storePassword System.getProperty("APPCENTER_KEYSTORE_PASSWORD")
                 keyAlias System.getProperty("APPCENTER_KEY_ALIAS")
                 keyPassword System.getProperty("APPCENTER_KEY_PASSWORD")
