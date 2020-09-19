@@ -132,7 +132,11 @@ android {
         applicationId "com.redalliance"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 20
+        if (System.getProperty("MOBILECENTER_KEYSTORE_PASSWORD")) { //only mobile center exposes this
+            versionCode System.getProperty("MOBILECENTER_BUILD_VERSION")
+        } else {
+            versionCode 20
+        }
         versionName "3.4.1"
     }
     splits {
@@ -153,9 +157,9 @@ android {
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file('upload.keystore')
-                storePassword System.getProperty("APPCENTER_KEYSTORE_PASSWORD")
-                keyAlias System.getProperty("APPCENTER_KEY_ALIAS")
-                keyPassword System.getProperty("APPCENTER_KEY_PASSWORD")
+                storePassword System.getenv("APPCENTER_KEYSTORE_PASSWORD")
+                keyAlias System.getenv("APPCENTER_KEY_ALIAS")
+                keyPassword System.getenv("APPCENTER_KEY_PASSWORD")
             }
         }
     }
