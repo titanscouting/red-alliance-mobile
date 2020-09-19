@@ -157,9 +157,9 @@ android {
         release {
             if (project.hasProperty('MYAPP_UPLOAD_STORE_FILE')) {
                 storeFile file('upload.keystore')
-                storePassword System.getenv("APPCENTER_KEYSTORE_PASSWORD")
-                keyAlias System.getenv("APPCENTER_KEY_ALIAS")
-                keyPassword System.getenv("APPCENTER_KEY_PASSWORD")
+                storePassword 'epycepoch2019'
+                keyAlias 'com.redalliance'
+                keyPassword 'epycepoch2019'
             }
         }
     }
