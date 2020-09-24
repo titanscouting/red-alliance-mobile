@@ -21,6 +21,5 @@ export default {
   },
   data: {
     competition: '2020ilch',
-    version: '3.4.1',
   },
 };

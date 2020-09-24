@@ -137,7 +137,7 @@ android {
         } else {
             versionCode 20
         }
-        versionName "3.4.1"
+        versionName "3.4.2"
     }
     splits {
         abi {
