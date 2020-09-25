@@ -52,8 +52,7 @@ export default class Options extends React.Component {
             </CardItem>
             <CardItem>
               <Text>
-                Made with <Icon name="cards-heart" size={15} color="#FF0000" />{' '}
-                by Titan Scouting
+                Made with ❤️ by Titan Scouting
               </Text>
             </CardItem>
             <CardItem>
