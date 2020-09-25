@@ -15,7 +15,8 @@ import {
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 import TeamCell from './TeamCell';
-
+import ajax from '../../../ajax';
+import GlobalDefinitions from '../../../GlobalDefinitions';
 
 export default class TeamList extends React.Component {
   static propTypes = {
@@ -40,14 +41,18 @@ export default class TeamList extends React.Component {
     this.props.onBack();
   };
 
-  doNothing = () => {
+  doNothing = (teamNumber) => {
     Alert.alert(
       'Match Already Being Scouted',
-      'This match is already being scouted by another user. If you continue, the person who submits their data first will have their data saved. Are you sure you would like to continue?',
+      'This match is already being scouted by another user. If you continue, the current scouter will be removed from the match. Are you sure you would like to remove the current scouter?',
       [
         {
           text: 'Yes',
-          onPress: () => this.props.onItemPress(), //TODO: Override the correct onItemPress to force-enter the match anyways.
+          onPress: () => {
+            ajax.removeScouterFromMatch(teamNumber, this.props.matchNumber, GlobalDefinitions.data.competition);
+            this.props.onItemPress();
+            this.onRefresh();
+          },
           style: 'cancel',
         },
         {text: 'No'},
@@ -151,7 +156,7 @@ export default class TeamList extends React.Component {
                   scouterDescription={item.scouterDescription}
                   onPress={
                     item.scouterDescription
-                      ? this.doNothing
+                      ? this.doNothing.bind(this,item.teamNumber)
                       : this.props.onItemPress
                   }
                   showRefresh={this.showRefresh}
