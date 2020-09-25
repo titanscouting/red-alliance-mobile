@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Form, Textarea, StyleProvider, Header, Title, Accordion, View, Content, Footer, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { Container, Textarea, StyleProvider, Header, Title, View, Button, Left, Right, Body, Text, Icon} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import { RefreshControl, FlatList, StyleSheet, ScrollView, BackHandler} from 'react-native'
-import StratCell from './StratCell'
 
-function wait(timeout) {
-  return new Promise(resolve => {
-      setTimeout(resolve, timeout);
-  });
-}
 
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'

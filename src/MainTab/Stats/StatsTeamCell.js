@@ -1,9 +1,9 @@
-import React from 'react';
-import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, ListItem, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
+import { ListItem, Text } from 'native-base';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet, TouchableWithoutFeedback, View } from 'react-native';
+import ajax from '../../ajax';
 import Globals from '../../GlobalDefinitions';
-import ajax from '../../ajax'
 export default class StatsTeamCell extends React.Component {
 
     static propTypes = {

@@ -1,14 +1,13 @@
+import { Body, Button, Container, Header, Icon, Left, Right, StyleProvider, Tab, TabHeading, Tabs, Text, Title } from 'native-base';
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
-
+import { ActivityIndicator, Alert, BackHandler, StyleSheet, View } from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-import { FlatList, StyleSheet, ActivityIndicator, RefreshControl, SafeAreaView, BackHandler, View } from 'react-native';
-import PropTypes from 'prop-types';
+import ajax from '../../../ajax';
+import Globals from '../../../GlobalDefinitions';
 import EvalTab from './EvalTab';
-import { Alert } from "react-native";
-import Globals from '../../../GlobalDefinitions'
-import ajax from '../../../ajax'
+
 
 export default class Eval extends React.Component {
 
@@ -35,7 +34,7 @@ export default class Eval extends React.Component {
                 {
                   text: 'Discard',
                   onPress: () => {
-                      ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
+                      ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, Globals.data.competition);
                       this.props.onBack(); 
                       ajax.fetchMatches(Globals.data.competition);
                   },

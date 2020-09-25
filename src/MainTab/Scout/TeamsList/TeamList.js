@@ -1,28 +1,21 @@
 /* eslint-disable react-native/no-inline-styles */
+import {
+  Body, Button, Container,
+  Header,
+  Icon, Left,
+  Right, StyleProvider, Title
+} from 'native-base';
+import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  Container,
-  Header,
-  Title,
-  StyleProvider,
-  Button,
-  Left,
-  Right,
-  Body,
-  Icon,
-} from 'native-base';
+  ActivityIndicator,
+  Alert, BackHandler, FlatList,
+  RefreshControl
+} from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-
-import {
-  FlatList,
-  ActivityIndicator,
-  RefreshControl,
-  BackHandler,
-  Alert,
-} from 'react-native';
-import PropTypes from 'prop-types';
 import TeamCell from './TeamCell';
+
 
 export default class TeamList extends React.Component {
   static propTypes = {

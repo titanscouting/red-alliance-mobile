@@ -1,13 +1,13 @@
+import { Body, Container, Header, StyleProvider, Title } from 'native-base';
 import React from 'react';
-import {Container, Header, Title, StyleProvider, Body} from 'native-base';
+import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-
-import {FlatList, ActivityIndicator, RefreshControl} from 'react-native';
 import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
 import StatsTeamCell from './StatsTeamCell';
 import StatsTeamController from './StatsTeamController';
+
 export default class Stats extends React.Component {
   _isMounted = false;
   state = {
