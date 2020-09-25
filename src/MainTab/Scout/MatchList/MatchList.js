@@ -1,11 +1,11 @@
+import { Body, Container, Header, StyleProvider, Title } from 'native-base';
+import PropTypes from 'prop-types';
 import React from 'react';
-import { Form, Container, Header, Title, Accordion, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
+import { BackHandler, FlatList, RefreshControl } from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-
-import { FlatList, ActivityIndicator, RefreshControl, SafeAreaView, View, BackHandler} from 'react-native';
-import PropTypes from 'prop-types';
 import MatchCell from './MatchCell';
+
 
 export default class MatchList extends React.Component {
 

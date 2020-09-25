@@ -1,9 +1,7 @@
 import React from 'react';
-import { Container, Separator, Text, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, StyleSheet, View} from 'react-native';
+import { Text, Card, CardItem } from 'native-base';
+import { StyleSheet } from 'react-native';
 import PropTypes from 'prop-types';
-import Globals from '../../GlobalDefinitions'
-import { TouchableWithoutFeedback } from 'react-native';
 
 export default class SubmittedStrategyCell extends React.Component {
 

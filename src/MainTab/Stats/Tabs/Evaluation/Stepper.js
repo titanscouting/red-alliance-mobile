@@ -1,14 +1,11 @@
+import PropTypes from "prop-types";
 import React from "react";
 import {
-  ViewPropTypes,
-  View,
-  Text,
-  TouchableOpacity,
-  StyleSheet
+  StyleSheet, Text,
+  TouchableOpacity, View, ViewPropTypes
 } from "react-native";
-import PropTypes from "prop-types";
-
 import * as Animatable from 'react-native-animatable';
+
 
 
 export default class Stepper extends React.Component {

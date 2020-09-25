@@ -1,12 +1,10 @@
-import React from 'react';
-import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, Form, Textarea, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, StyleSheet, View, Text} from 'react-native';
+import { Form, Item, Textarea } from 'native-base';
 import PropTypes from 'prop-types';
-import Globals from '../../../GlobalDefinitions'
-import { TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text } from 'react-native';
 import SegmentedControlTab from "react-native-segmented-control-tab";
-import Segment from '../../../../native-base-theme/components/Segment';
-import Stepper from './Stepper'
+import Globals from '../../../GlobalDefinitions';
+import Stepper from './Stepper';
 
 export default class EvalCell extends React.Component {
 

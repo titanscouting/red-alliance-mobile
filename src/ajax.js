@@ -2,17 +2,9 @@
 /* eslint-disable no-unused-vars */
 const apiHost = 'https://scouting-api.herokuapp.com/';
 
-import {GoogleSignin, statusCodes} from 'react-native-google-signin';
-
-import {Alert, Platform} from 'react-native';
-
+import { Alert } from 'react-native';
+import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Globals from './GlobalDefinitions';
-
-function wait(timeout) {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
 
 exports.AsyncAlert = async () =>
   new Promise(resolve => {

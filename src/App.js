@@ -7,12 +7,12 @@
  */
 
 import React from 'react';
-import {GoogleSignin} from 'react-native-google-signin';
-import {Linking, Alert} from 'react-native';
-import TabControl from './MainTab/TabControl';
+import { Alert, Linking } from 'react-native';
+import { GoogleSignin } from 'react-native-google-signin';
+import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import ajax from './ajax';
-import prompt from 'react-native-prompt-android';
+import TabControl from './MainTab/TabControl';
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',

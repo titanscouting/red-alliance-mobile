@@ -1,9 +1,8 @@
-import React from 'react';
-import { Container, Separator, Header, Title, Accordion, ListItem, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Badge, H1, H2, H3, Item, Input, Icon} from 'native-base';
-import { FlatList, StyleSheet, View, Text} from 'react-native';
+import { ListItem } from 'native-base';
 import PropTypes from 'prop-types';
-import Globals from '../../../GlobalDefinitions'
-import { TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import Globals from '../../../GlobalDefinitions';
 
 export default class TeamCell extends React.Component {
 
