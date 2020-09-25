@@ -77,7 +77,7 @@ export default class Matches extends React.Component {
         return;
       }
     }
-    ajax.addScouterToMatch(teamNumber, this.state.currentMatchNumber);
+    ajax.addScouterToMatch(teamNumber, this.state.currentMatchNumber, GLOBAL.data.competition);
     this.state.currentTeamNumber = teamNumber;
     this.state.isBlue = isBlue;
     this.forceUpdate();

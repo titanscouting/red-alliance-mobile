@@ -57,7 +57,7 @@ export default class StatsTeamController extends React.Component {
                     {
                       text: 'Discard',
                       onPress: () => {
-                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
+                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, GLOBAL.data.competition);
                           this.props.onBack(); 
                       },
                     },
