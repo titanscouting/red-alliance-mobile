@@ -5,6 +5,7 @@ const apiHost = 'https://scouting-api.herokuapp.com/';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Globals from './GlobalDefinitions';
+import offlineHandler from './offlineHandler';
 
 exports.AsyncAlert = async () =>
   new Promise(resolve => {
@@ -80,9 +81,9 @@ exports.fetchTeamsForMatch = async (competition, match) => {
       },
     })
       .then(response => {
-        let meme_review;
+        let recvData;
         if (response.status !== 200) {
-          meme_review = {
+          recvData = {
             competition: Globals.competition,
             scouters: [
               {id: '0', name: 'ERROR: MATCH NOT IN DB'},
@@ -96,9 +97,9 @@ exports.fetchTeamsForMatch = async (competition, match) => {
             teams: ['0', '0', '0', '0', '0', '0'],
           };
         } else {
-          meme_review = response.json();
+          recvData = response.json();
         }
-        return meme_review;
+        return recvData;
       })
       .then(myJson => {
         let data = [];
@@ -239,6 +240,9 @@ exports.isSignedIn = async () => {
   }),
   (exports.submitMatchData = async (competition, team, match, data) => {
     const endpoint = apiHost + 'api/submitMatchData';
+    if (offlineHandler.isStaleData()) {
+      exports.submitStaleData();
+    }
     try {
       fetch(endpoint, {
         method: 'POST',
@@ -259,6 +263,7 @@ exports.isSignedIn = async () => {
       // let responseJson = await JSON.parse(response);
     } catch (error) {
       console.error(error);
+      offlineHandler.addStaleData(competition, team, match, data);
     }
   }),
   (exports.submitPitData = async (competition, team, data) => {
@@ -407,17 +412,17 @@ exports.findTeamNickname = async team_num => {
       },
     })
       .then(response => {
-        let meme_review;
+        let recvData;
         if (response.status === 200) {
-          meme_review = response.json();
+          recvData = response.json();
         } else {
-          meme_review = {
+          recvData = {
             success: false,
             team_num: team_num,
             nickname: 'ERR: TEAM NOT IN DB',
           };
         }
-        return meme_review;
+        return recvData;
       })
       .then(myJson => {
         return myJson.data;
