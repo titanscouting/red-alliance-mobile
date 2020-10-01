@@ -2,6 +2,7 @@
 /* eslint-disable no-unused-vars */
 const apiHost = 'https://scouting-api.herokuapp.com/';
 
+import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Globals from './GlobalDefinitions';
@@ -23,7 +24,22 @@ exports.AsyncAlert = async () =>
       {cancelable: false},
     );
   });
-
+  NoInternetAlert = async () =>
+  new Promise(resolve => {
+    Alert.alert(
+      'No Internet',
+      'Some features of the app may not work correctly. Please connect to the Internet and try again.',
+      [
+        {
+          text: 'Okay',
+          onPress: () => {
+            resolve('YES');
+          },
+        },
+      ],
+      {cancelable: false},
+    );
+  });
 exports.isJSON = str => {
   try {
     JSON.parse(str);
@@ -34,33 +50,41 @@ exports.isJSON = str => {
 };
 
 exports.getIDToken = async () => {
+  const now = new Date()  
+  const secondsSinceEpoch = Math.round(now.getTime() / 1000)
+  const jsonValue = await AsyncStorage.getItem('@gtoken')
+  const oldData = JSON.parse(jsonValue) || ""
+  if (now - oldData.time < 3500) {
+    console.log("returning already valid key")
+    return oldData.key
+  }
   try {
     try {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signInSilently();
       const tokens = await GoogleSignin.getTokens();
       await GoogleSignin.clearCachedToken(tokens.idToken);
-      return tokens.idToken;
+      const data = {time: secondsSinceEpoch, key: tokens.idToken}
+      AsyncStorage.setItem("@gtoken", data)
+      return data.key;
     } catch (error) {
-      console.log('There was an error with getting the tokens: ' + error);
       await GoogleSignin.hasPlayServices();
       try {
-        const userInfo = await GoogleSignin.signIn();
+        await GoogleSignin.signIn();
       } catch (err) {
         if (err.code === statusCodes.SIGN_IN_CANCELLED) {
           await exports.AsyncAlert();
           return await exports.getIDToken();
         } else if (err.code === statusCodes.IN_PROGRESS) {
-          console.log('Signing user in');
+          return await exports.getIDToken();
         } else {
-          // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE]
-          console.error(err);
+          await NoInternetAlert();
           return await exports.getIDToken();
         }
       }
     }
   } catch (error) {
-    console.error(error);
+    await NoInternetAlert();
   }
 };
 
@@ -241,7 +265,8 @@ exports.isSignedIn = async () => {
   (exports.submitMatchData = async (competition, team, match, data) => {
     const endpoint = apiHost + 'api/submitMatchData';
     if (offlineHandler.isStaleData()) {
-      exports.submitStaleData();
+      console.log("submitting stale data")
+      offlineHandler.submitStaleData();
     }
     try {
       fetch(endpoint, {
