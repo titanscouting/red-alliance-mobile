@@ -1,13 +1,13 @@
+import { StyleProvider } from 'native-base';
 import React from 'react';
-import {StyleProvider} from 'native-base';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-
-import MatchList from './MatchList/MatchList';
-import TeamList from './TeamsList/TeamList';
 import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
 import Eval from './Evaluation/Eval';
+import MatchList from './MatchList/MatchList';
+import TeamList from './TeamsList/TeamList';
+
 
 export default class Matches extends React.Component {
   _isMounted = false;
@@ -77,7 +77,7 @@ export default class Matches extends React.Component {
         return;
       }
     }
-    ajax.addScouterToMatch(teamNumber, this.state.currentMatchNumber);
+    ajax.addScouterToMatch(teamNumber, this.state.currentMatchNumber, GLOBAL.data.competition);
     this.state.currentTeamNumber = teamNumber;
     this.state.isBlue = isBlue;
     this.forceUpdate();

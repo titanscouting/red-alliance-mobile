@@ -1,13 +1,13 @@
-import React from 'react';
-import { Form, Container, Header, Title, Accordion, TabHeading, StyleProvider, Content, Footer, Card, CardItem, FooterTab, Button, Left, Right, Body, Text, Badge, H1, H2, H3, Item, Input, Icon, Tab, Tabs, ScrollableTab} from 'native-base';
-
-
-import { FlatList, StyleSheet, Alert, ActivityIndicator, RefreshControl, SafeAreaView, View , BackHandler, TouchableWithoutFeedback} from 'react-native';
+import { Body, Button, Container, Header, Icon, Left, Right, Tab, TabHeading, Tabs, Text, Title } from 'native-base';
 import PropTypes from 'prop-types';
-import Matches from './Tabs/Matches'
-import Pit from './Tabs/Pit'
-import ajax from '../../ajax'
-import GLOBAL from '../../GlobalDefinitions'
+import React from 'react';
+import { Alert, BackHandler, StyleSheet } from 'react-native';
+import ajax from '../../ajax';
+import GLOBAL from '../../GlobalDefinitions';
+import Matches from './Tabs/Matches';
+import Pit from './Tabs/Pit';
+
+
 
 export default class StatsTeamController extends React.Component {
 
@@ -57,7 +57,7 @@ export default class StatsTeamController extends React.Component {
                     {
                       text: 'Discard',
                       onPress: () => {
-                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber);
+                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, GLOBAL.data.competition);
                           this.props.onBack(); 
                       },
                     },
