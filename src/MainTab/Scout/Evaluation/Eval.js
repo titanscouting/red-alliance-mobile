@@ -7,7 +7,7 @@ import material from '../../../../native-base-theme/variables/material';
 import ajax from '../../../ajax';
 import Globals from '../../../GlobalDefinitions';
 import EvalTab from './EvalTab';
-
+import KeepAwake from 'react-native-keep-awake';
 
 export default class Eval extends React.Component {
 
@@ -35,6 +35,7 @@ export default class Eval extends React.Component {
                   text: 'Discard',
                   onPress: () => {
                       ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, Globals.data.competition);
+                      KeepAwake.deactivate();
                       this.props.onBack(); 
                       ajax.fetchMatches(Globals.data.competition);
                   },
@@ -47,6 +48,7 @@ export default class Eval extends React.Component {
 
 
     onSave = () => {
+        KeepAwake.deactivate();
         this.props.onSave(this.vals); 
     }
 
@@ -74,6 +76,7 @@ export default class Eval extends React.Component {
     }
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+        KeepAwake.activate();
       }
     
       componentWillUnmount() {
