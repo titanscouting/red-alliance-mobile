@@ -13,6 +13,7 @@ export default class MatchList extends React.Component {
         matches: PropTypes.array.isRequired,
         refreshMatches: PropTypes.func.isRequired,
         onItemPress: PropTypes.func.isRequired,
+        style: PropTypes.object.isRequired
     }
 
     state = {
@@ -50,13 +51,14 @@ export default class MatchList extends React.Component {
                         <FlatList
                             data = {this.props.matches}
                             renderItem={({item}) => 
-                                <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress}/>
+                                <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress} style={this.props.style}/>
                             }
                             keyExtractor= {item => String(item.number)}
                             refreshControl={
                                 <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                             }
                             showsVerticalScrollIndicator={false}
+                            style={this.props.style}
                         />
                 </Container>
             </StyleProvider>

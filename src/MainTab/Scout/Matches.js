@@ -7,7 +7,7 @@ import GLOBAL from '../../GlobalDefinitions';
 import Eval from './Evaluation/Eval';
 import MatchList from './MatchList/MatchList';
 import TeamList from './TeamsList/TeamList';
-
+import ThemeProvider from '../ThemeProvider'
 
 export default class Matches extends React.Component {
   _isMounted = false;
@@ -120,6 +120,7 @@ export default class Matches extends React.Component {
   };
 
   render() {
+    const matchesStyle = ThemeProvider.matchesStyle
     if (this.state.currentTeamNumber != null) {
       return (
         <StyleProvider style={getTheme(material)}>
@@ -145,6 +146,7 @@ export default class Matches extends React.Component {
             matchNumber={this.state.currentMatchNumber}
             onBack={this.unsetCurrentMatch}
             onItemPress={this.setCurrentTeam}
+            style={matchesStyle}
           />
         </StyleProvider>
       );
@@ -155,6 +157,7 @@ export default class Matches extends React.Component {
             matches={this.state.matches}
             onItemPress={this.setCurrentMatch}
             refreshMatches={this.refreshMatches}
+            style = {matchesStyle}
           />
         </StyleProvider>
       );

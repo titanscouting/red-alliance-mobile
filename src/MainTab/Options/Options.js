@@ -14,9 +14,17 @@ import ajax from '../../ajax';
 
 export default class Options extends React.Component {
   render() {
+    const isDarkMode = true;
+    const optionsStyle= isDarkMode ? {
+      backgroundColor: "#121212",
+      color: "white",
+    } : {
+      backgroundColor: "#ffffff",
+      color: "black",
+    } 
     return (
       <StyleProvider style={getTheme(material)}>
-        <Container>
+        <Container style={optionsStyle}>
           <Header>
             <Body
               // eslint-disable-next-line react-native/no-inline-styles
@@ -28,9 +36,9 @@ export default class Options extends React.Component {
               <Title>Options</Title>
             </Body>
           </Header>
-          <Card>
-            <CardItem>
-              <Text>Google Account</Text>
+          <Card style={optionsStyle}>
+            <CardItem style={optionsStyle}>
+              <Text style={optionsStyle}>Google Account</Text>
               <Right>
                 <Button hasText onPress={ajax.signOut}>
                   <Text>Switch User</Text>
@@ -38,21 +46,21 @@ export default class Options extends React.Component {
               </Right>
             </CardItem>
           </Card>
-          <Card>
-            <CardItem>
-              <Text>
+          <Card style={optionsStyle}>
+            <CardItem style={optionsStyle}>
+              <Text style={optionsStyle}>
                 The Red Alliance App — v{VersionCheck.getCurrentVersion()} (
                 {VersionCheck.getCurrentBuildNumber()})
               </Text>
             </CardItem>
-            <CardItem>
-              <Text>
+            <CardItem style={optionsStyle}>
+              <Text style={optionsStyle}>
                 Made with <Icon name="cards-heart" size={15} color="#FF0000" />{' '}
                 by Titan Scouting
               </Text>
             </CardItem>
-            <CardItem>
-              <Text>Copyright Titan Scouting 2020. All rights reserved.</Text>
+            <CardItem style={optionsStyle}>
+              <Text style={optionsStyle}>Copyright Titan Scouting 2020. All rights reserved.</Text>
             </CardItem>
           </Card>
         </Container>

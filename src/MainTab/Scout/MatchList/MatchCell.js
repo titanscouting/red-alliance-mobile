@@ -11,6 +11,7 @@ export default class MatchCell extends React.Component {
         number: PropTypes.number.isRequired,
         scouts: PropTypes.number.isRequired,
         onPress: PropTypes.func.isRequired,
+        style: PropTypes.object.isRequired
     };
 
     handlePress = () => {
@@ -22,7 +23,7 @@ export default class MatchCell extends React.Component {
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem>
                     <View style={styles.listItem}>
-                        <Text style={styles.match}>{"Match "+this.props.number}</Text>
+                        <Text style={this.props.style}>{"Match "+this.props.number}</Text>
                         <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
                     </View>
             </ListItem>

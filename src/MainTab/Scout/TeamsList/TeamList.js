@@ -25,6 +25,7 @@ export default class TeamList extends React.Component {
     onItemPress: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
     matchNumber: PropTypes.number.isRequired,
+    style: PropTypes.object.isRequired
   };
 
   state = {
@@ -51,7 +52,7 @@ export default class TeamList extends React.Component {
           onPress: () => {
             ajax.removeScouterFromMatch(teamNumber, this.props.matchNumber, GlobalDefinitions.data.competition);
             this.props.onItemPress();
-            this.onRefresh();
+            this.props.refreshTeams();
           },
           style: 'cancel',
         },
@@ -81,6 +82,7 @@ export default class TeamList extends React.Component {
   };
 
   render() {
+    console.log(this.props.style)
     if (this.props.teams.length === 0) {
       return (
         <StyleProvider style={getTheme(material)}>
