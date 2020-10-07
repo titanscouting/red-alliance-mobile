@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-community/async-storage"
 let isDarkMode;
 module.exports.refreshTheme = async () => {
   isDarkMode = await AsyncStorage.getItem('tra-dark-mode') == 'true'
-  console.log(isDarkMode)
 }
 export default {
     optionsStyle: {
