@@ -207,6 +207,7 @@ exports.isSignedIn = async () => {
       try {
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
+        await AsyncStorage.setItem('tra-google-auth', "")
       } catch (error) {
         console.error(error);
       }
