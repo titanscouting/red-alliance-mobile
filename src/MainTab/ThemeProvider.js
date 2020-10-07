@@ -40,5 +40,43 @@ export default {
             color: isDarkMode ? 'white' : 'black',
           }
         }
+      },
+      strategiesStyle: {
+        color: isDarkMode ? 'white' : 'black',
+        backgroundColor: isDarkMode ? "#121212": "#ffffff",
+        stratCellStyle: {
+          ribbon: {
+            width: 10,
+            height: 60,
+        },
+        team: {
+          color: isDarkMode ? 'white' : 'black',
+          fontSize: 18,
+          flex: 1,
+        },
+        type: {
+          color: isDarkMode ? 'white' : 'black',
+          fontSize: 16,
+          flex: 1,
+        },
+        match: {
+          color: isDarkMode ? 'white' : 'black',
+          fontSize: 20,
+        },
+        blue: {
+            flexDirection: 'column',
+            justifyContent: 'space-between',
+        },
+        cell: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+        },
+        left: {
+            flexDirection: 'row',
+        },
+        right: {
+            flexDirection: 'row-reverse'
+        }
+        }
       }
 }

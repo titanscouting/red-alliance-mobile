@@ -8,6 +8,7 @@ import StratCell from './StratCell'
 import ajax from '../../ajax'
 import Globals from '../../GlobalDefinitions'
 import MatchStrategyTableView from './MatchStrategyTableView'
+import ThemeProvider from '../ThemeProvider'
 
 export default class Strategies extends Component {
 
@@ -41,6 +42,7 @@ export default class Strategies extends Component {
   }
 
   render() {
+    const styles = ThemeProvider.strategiesStyle
     if (this.state.currentMatch == null) {
       return (
         <StyleProvider style={getTheme(material)}>
@@ -53,13 +55,14 @@ export default class Strategies extends Component {
             <FlatList
               data = {this.state.schedule}
               renderItem={({item}) => 
-                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress}/>
+                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress} style={styles.stratCellStyle}/>
               }
               keyExtractor= {(item, index) => String(index)}
               refreshControl={
                   <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
               }
               showsVerticalScrollIndicator={false}
+              style={styles}
             />
           </Container>
         </StyleProvider>

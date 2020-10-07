@@ -11,6 +11,7 @@ export default class StratCell extends React.Component {
         match: PropTypes.number.isRequired,
         teams: PropTypes.array.isRequired,
         handlePress: PropTypes.func.isRequired,
+        style: PropTypes.object.isRequired
     };
 
     _isMounted = false;
@@ -29,8 +30,8 @@ export default class StratCell extends React.Component {
     };
 
     render () {
+        const styles = this.props.style;
         return (
-            
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
                 <View style={styles.left}>
@@ -59,37 +60,3 @@ export default class StratCell extends React.Component {
     }
 }
 
-const styles = StyleSheet.create({
-    ribbon: {
-        width: 10,
-        height: 60,
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    match: {
-      color: 'black',
-      fontSize: 20,
-    },
-    blue: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    cell: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-    },
-    left: {
-        flexDirection: 'row',
-    },
-    right: {
-        flexDirection: 'row-reverse'
-    }
-});
