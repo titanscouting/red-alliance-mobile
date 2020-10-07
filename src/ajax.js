@@ -5,6 +5,7 @@ const apiHost = 'https://scouting-api.herokuapp.com/';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Globals from './GlobalDefinitions';
+import AsyncStorage from '@react-native-community/async-storage';
 
 exports.AsyncAlert = async () =>
   new Promise(resolve => {
@@ -34,17 +35,29 @@ exports.isJSON = str => {
 
 exports.getIDToken = async () => {
   try {
+    const keyData = await AsyncStorage.getItem('tra-google-auth');
+    keyData = keyData != null ? JSON.parse(keyData) : null;
+    const now = Date.now();
+    if(value !== null && now - keyData.time < 3500) {
+      return keyData.key
+    }
     try {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signInSilently();
       const tokens = await GoogleSignin.getTokens();
       await GoogleSignin.clearCachedToken(tokens.idToken);
+      try {
+        const jsonValue = JSON.stringify({key: tokens.idToken, time: now})
+        await AsyncStorage.setItem('tra-google-auth', jsonValue)
+      } catch (e) {
+        console.error('There was an error while saving the token: ' + e);
+      }
       return tokens.idToken;
     } catch (error) {
-      console.log('There was an error with getting the tokens: ' + error);
+      console.error('There was an error with getting the tokens: ' + error);
       await GoogleSignin.hasPlayServices();
       try {
-        const userInfo = await GoogleSignin.signIn();
+        await GoogleSignin.signIn();
       } catch (err) {
         if (err.code === statusCodes.SIGN_IN_CANCELLED) {
           await exports.AsyncAlert();
