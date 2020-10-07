@@ -9,6 +9,7 @@ export default class MatchStrategyHeader extends React.Component {
     static propTypes = {
         teams: PropTypes.array.isRequired,
         nicknames: PropTypes.object,
+        style: PropTypes.object.isRequired
     };
 
     _isMounted = false;
@@ -31,8 +32,8 @@ export default class MatchStrategyHeader extends React.Component {
     } 
 
     render () {
+        const styles = this.props.style.headerStyle
         return (
-            
             <ListItem style={styles.cell}>
             <View style={styles.left}>
                 <View backgroundColor={Globals.colors.blue} style={styles.ribbon}/>
@@ -57,40 +58,3 @@ export default class MatchStrategyHeader extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    ribbon: {
-        width: 10,
-        height: 60,
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    match: {
-      color: 'black',
-      fontSize: 20,
-    },
-    blue: {
-        flexDirection: 'column',
-    },
-    cell: {
-        flexDirection: 'column',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
-    },
-    left: {
-        flexDirection: 'row',
-    },
-    right: {
-        paddingTop: 10,
-        flexDirection: 'row',
-        textAlign: 'right',
-    }
-});

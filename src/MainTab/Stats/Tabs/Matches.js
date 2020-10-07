@@ -11,6 +11,7 @@ export default class Matches extends React.Component {
 
     static propTypes = {
         team: PropTypes.number.isRequired,
+        style: PropTypes.object.isRequired
     }
 
     componentDidMount() {
@@ -34,6 +35,7 @@ export default class Matches extends React.Component {
     }
 
     render() {
+        const styles = this.props.styles.matchDataViewerStyle
         if (this.state.statsData === null) {
             return (
                     <Container>
@@ -43,7 +45,7 @@ export default class Matches extends React.Component {
         } else {
             return (
                     <Container>
-                        <SectionList 
+                        <SectionList style={styles.generic}
                             // TODO: https://www.npmjs.com/package/react-native-expandable-section-list
                             sections={this.state.statsData} 
                             renderSectionHeader={({ section }) => <CardItem header><Text>{section.name}</Text></CardItem>} 
@@ -63,18 +65,3 @@ export default class Matches extends React.Component {
     }
   }
   
-  
-const styles = StyleSheet.create({
-    match: {
-        
-    },
-    value: {
-        
-    },
-    container: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingRight: 20,
-        paddingLeft: 20,
-    },
-});

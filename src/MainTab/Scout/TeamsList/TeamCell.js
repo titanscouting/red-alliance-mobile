@@ -12,6 +12,7 @@ export default class TeamCell extends React.Component {
         scouterDescription: PropTypes.string,
         onPress: PropTypes.func.isRequired,
         showRefresh: PropTypes.func.isRequired,
+        style: PropTypes.object.isRequired
     };
 
     _isMounted = false;
@@ -34,6 +35,7 @@ export default class TeamCell extends React.Component {
     };
 
     render () {
+        const styles = this.props.style.teamCellStyle
         return (
             
             <TouchableWithoutFeedback onPress={this.handlePress}>
@@ -52,27 +54,3 @@ export default class TeamCell extends React.Component {
         );
     }
 }
-
-const styles = StyleSheet.create({
-    ribbon: {
-        width: 15,
-        height: 40,
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    scouter: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    cell: {
-        flexDirection: 'row'
-    }
-});

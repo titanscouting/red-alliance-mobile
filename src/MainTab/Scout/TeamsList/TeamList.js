@@ -82,7 +82,6 @@ export default class TeamList extends React.Component {
   };
 
   render() {
-    console.log(this.props.style)
     if (this.props.teams.length === 0) {
       return (
         <StyleProvider style={getTheme(material)}>
@@ -151,6 +150,7 @@ export default class TeamList extends React.Component {
             </Header>
             <FlatList
               data={this.props.teams}
+              style={this.props.style}
               renderItem={({item}) => (
                 <TeamCell
                   number={item.teamNumber}
@@ -162,6 +162,7 @@ export default class TeamList extends React.Component {
                       : this.props.onItemPress
                   }
                   showRefresh={this.showRefresh}
+                  style={this.props.style}
                 />
               )}
               keyExtractor={item => String(item.teamNumber)}

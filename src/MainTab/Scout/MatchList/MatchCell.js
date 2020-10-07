@@ -4,7 +4,7 @@ import React from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Circle } from 'react-native-progress';
 import Globals from '../../../GlobalDefinitions';
-
+import ThemeProvider from '../../ThemeProvider'
 export default class MatchCell extends React.Component {
 
     static propTypes = {
@@ -23,7 +23,7 @@ export default class MatchCell extends React.Component {
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem>
                     <View style={styles.listItem}>
-                        <Text style={this.props.style}>{"Match "+this.props.number}</Text>
+                        <Text style={ThemeProvider.matchesStyle.cellStyle}>{"Match "+this.props.number}</Text>
                         <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true}/>
                     </View>
             </ListItem>

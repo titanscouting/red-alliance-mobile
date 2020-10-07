@@ -69,7 +69,7 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchStrategyTableView match={this.state.currentMatch} nicknames={this.state.nicknames} teams={this.state.currentTeams} onBack={this.popMatch}/>
+        <MatchStrategyTableView match={this.state.currentMatch} nicknames={this.state.nicknames} teams={this.state.currentTeams} onBack={this.popMatch} style={styles}/>
       )
       
     }

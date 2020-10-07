@@ -19,6 +19,7 @@ export default class MatchStrategyTableView extends Component {
     teams: PropTypes.array.isRequired,
     onBack: PropTypes.func.isRequired,
     nicknames: PropTypes.object,
+    style: PropTypes.object.isRequired
   };
   
   state = {
@@ -59,25 +60,28 @@ export default class MatchStrategyTableView extends Component {
     return true;
   }
   theList = () => {
+    const styles = this.props.style.tableViewStyle
     return (<FlatList
       data = {this.state.strats}
       renderItem={({item}) => 
-          <SubmittedStrategyCell scouter={item.scouter} strategy={item.data}/>
+          <SubmittedStrategyCell scouter={item.scouter} strategy={item.data} style={styles}/>
       }
       keyExtractor= {(item, index) => String(index)}
       refreshControl={
           <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />
       }
+      style={styles.listStyle}
       showsVerticalScrollIndicator={false}
   />);
   }
   renderStrategyList = () => {
+    const styles = this.props.style.tableViewStyle
     if (this.state.strats == null) {
       return this.theList();
     } else if (this.state.strats.length === 0){
 
       return (
-        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />}>
+        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} style={styles.noStrats}/>}>
           <View style={styles.noStrats}>
             <Text>No submitted strategies</Text>
           </View>
@@ -92,6 +96,7 @@ export default class MatchStrategyTableView extends Component {
   }
 
   render() {
+      const styles = this.props.style.tableViewStyle
       return (
       <StyleProvider style={getTheme(material)}>
         <Container>
@@ -110,7 +115,7 @@ export default class MatchStrategyTableView extends Component {
                 </Button>
             </Right>
           </Header>
-          <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames}/>
+          <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames} style={styles}/>
           <Textarea defaultValue={this.state.submittedStrat} style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
             {this.renderStrategyList()}
         </Container>
@@ -121,31 +126,3 @@ export default class MatchStrategyTableView extends Component {
   } 
 }
 
-const styles = StyleSheet.create({
-  noStrats: {
-    paddingTop: 10,
-    alignItems: 'center',
-  },
-  container: {
-    flex: 1,
-    alignItems: 'flex-start',
-  },
-  stepper: {
-    flex: 1,
-  },
-  tabStyle: {
-    borderColor: Globals.colors[Globals.brand.primary],
-  },
-  activeTabStyle: {
-    backgroundColor: Globals.colors[Globals.brand.primary],
-  },
-  tabTextStyle: {
-    color: Globals.colors[Globals.brand.primary],
-  },
-  textarea: {
-    height: 120,
-    flexDirection: 'row',
-    paddingLeft: 10,
-    paddingRight: 10,
-  }
-});

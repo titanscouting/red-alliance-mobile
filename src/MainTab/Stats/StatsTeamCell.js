@@ -52,7 +52,7 @@ export default class StatsTeamCell extends React.Component {
     }
 
     render () {
-        const styles = StyleSheet.create(this.props.style.teamCellStyle);
+        const styles = this.props.style.teamCellStyle;
         return (
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>

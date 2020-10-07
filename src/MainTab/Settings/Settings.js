@@ -11,12 +11,19 @@ import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import { View, Switch, StyleSheet } from "react-native";
-import ThemeProvider from '../ThemeProvider'
-export default class Options extends React.Component {
+import { Linking } from 'react-native';
+import ThemeProvider from '../ThemeProvider'; 
+
+export default class Settings extends React.Component {
+  constructor() {
+    super()
+    this.state = {darkMode: false}
+  }
+  toggleDarkMode = () => {
+    let darkMode = !this.state.darkMode; this.setState({darkMode: darkMode});
+  }
   render() {
     const optionsStyle = ThemeProvider.optionsStyle;
-    this.state = {enableDarkMode: false}
     return (
       <StyleProvider style={getTheme(material)}>
         <Container style={optionsStyle}>
@@ -28,7 +35,7 @@ export default class Options extends React.Component {
                 justifyContent: 'center',
                 alignItems: 'center',
               }}>
-              <Title>Options</Title>
+              <Title>Settings</Title>
             </Body>
           </Header>
           <Card style={optionsStyle}>
@@ -43,15 +50,11 @@ export default class Options extends React.Component {
           </Card>
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>Enable Dark Mode</Text>
+              <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
-                <Switch
-                  trackColor={{ false: "#000000", true: "#938dd8" }}
-                  thumbColor={enableDarkMode ? "#000000" : "#938dd8"}
-                  ios_backgroundColor="#3e3e3e"
-                  onValueChange={() => {this.state.enableDarkMode = !this.state.enableDarkMode}}
-                  value={this.state.enableDarkMode}
-                />
+                <Button hasText onPress={this.toggleDarkMode}>
+                    <Text>{this.state.darkMode ? "Disable": "Enable"}</Text>
+                </Button>
               </Right>
             </CardItem>
           </Card>
@@ -70,6 +73,11 @@ export default class Options extends React.Component {
             </CardItem>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Copyright Titan Scouting 2020. All rights reserved.</Text>
+            </CardItem>
+            <CardItem style={optionsStyle}>
+              <Button hasText onPress={() => { Linking.openURL('https://scouting-api.herokuapp.com/privacy-policy');}}>
+                  <Text>View Privacy Policy</Text>
+              </Button>            
             </CardItem>
           </Card>
         </Container>

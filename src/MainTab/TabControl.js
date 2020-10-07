@@ -2,7 +2,7 @@ import React from 'react';
 import Matches from './Scout/Matches';
 import Strategies from './Strategies/Strategies';
 import Stats from './Stats/Stats';
-import Options from './Options/Options';
+import Settings from './Settings/Settings';
 
 import {createAppContainer} from 'react-navigation';
 
@@ -16,8 +16,8 @@ const TabControl = createBottomTabNavigator(
   {
     Teams: {screen: Matches},
     Stats: {screen: Stats},
-    Strat: {screen: Strategies},
-    Options: {screen: Options},
+    Strategies: {screen: Strategies},
+    Settings: {screen: Settings},
   },
   {
     tabBarPosition: 'bottom',
@@ -47,17 +47,17 @@ const TabControl = createBottomTabNavigator(
 
                 <Button
                   vertical
-                  active={routeName === 'Strat'}
-                  onPress={() => navigation.navigate('Strat')}>
+                  active={routeName === 'Strategies'}
+                  onPress={() => navigation.navigate('Strategies')}>
                   <Icon name="source-pull" size={24} color="#ffffff" />
                   <Text>Strategies</Text>
                 </Button>
                 <Button
                   vertical
-                  active={routeName === 'Options'}
-                  onPress={() => navigation.navigate('Options')}>
+                  active={routeName === 'Settings'}
+                  onPress={() => navigation.navigate('Settings')}>
                   <Icon name="cog" size={24} color="#ffffff" />
-                  <Text>Options</Text>
+                  <Text>Settings</Text>
                 </Button>
               </FooterTab>
             </Footer>
