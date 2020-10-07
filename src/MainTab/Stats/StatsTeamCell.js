@@ -10,6 +10,7 @@ export default class StatsTeamCell extends React.Component {
         team: PropTypes.number.isRequired,
         onItemPress: PropTypes.func.isRequired,
         nickname: PropTypes.string,
+        style: PropTypes.object.isRequired
     }
 
     state = {
@@ -42,6 +43,7 @@ export default class StatsTeamCell extends React.Component {
     }
 
     getDot = () => {
+        const styles = StyleSheet.create(this.props.style.teamCellStyle);
         if (!this.state.done) {
             return (<View style={styles.ribbon} backgroundColor={Globals.colors[Globals.brand.primary]}/>);
         } else {
@@ -50,6 +52,7 @@ export default class StatsTeamCell extends React.Component {
     }
 
     render () {
+        const styles = StyleSheet.create(this.props.style.teamCellStyle);
         return (
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
@@ -64,33 +67,3 @@ export default class StatsTeamCell extends React.Component {
     }
     
 }
-
-
-
-
-const styles = StyleSheet.create({
-    ribbon: {
-        width: 8,
-        height: 8,
-        borderRadius: 4,
-        alignSelf: 'flex-start',
-    },
-    team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
-    },
-    type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
-    },
-    scouter: {
-        flexDirection: 'column',
-        justifyContent: 'space-between',
-    },
-    cell: {
-        flexDirection: 'row'
-    }
-  });
-  

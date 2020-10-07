@@ -7,6 +7,7 @@ import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
 import StatsTeamCell from './StatsTeamCell';
 import StatsTeamController from './StatsTeamController';
+import ThemeProvider from '../ThemeProvider'
 
 export default class Stats extends React.Component {
   _isMounted = false;
@@ -43,6 +44,7 @@ export default class Stats extends React.Component {
   };
 
   render() {
+    const statsStyle = ThemeProvider.statsStyle
     if (this.state.currentTeamNumber != null) {
       return (
         <StyleProvider style={getTheme(material)}>
@@ -65,7 +67,7 @@ export default class Stats extends React.Component {
                   justifyContent: 'center',
                   alignItems: 'center',
                 }}>
-                <Title>Stats</Title>
+                <Title>Statistics</Title>
               </Body>
             </Header>
             <FlatList
@@ -75,6 +77,7 @@ export default class Stats extends React.Component {
                   team={item}
                   nickname={this.state.nicknames[item]}
                   onItemPress={this.setCurrentTeam}
+                  style={statsStyle}
                 />
               )}
               keyExtractor={item => String(item)}
@@ -84,6 +87,7 @@ export default class Stats extends React.Component {
                   onRefresh={this.pullTeams}
                 />
               }
+              style={statsStyle}
               showsVerticalScrollIndicator={false}
             />
           </Container>
@@ -94,8 +98,12 @@ export default class Stats extends React.Component {
         <StyleProvider style={getTheme(material)}>
           <Container>
             <Header>
-              <Body>
-                <Title>Stats</Title>
+              <Body style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Title>Statistics</Title>
               </Body>
             </Header>
             <ActivityIndicator animating={true} />
