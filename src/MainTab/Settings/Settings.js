@@ -12,15 +12,23 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import { Linking } from 'react-native';
-import ThemeProvider from '../ThemeProvider'; 
-
+import ThemeProvider, {refreshTheme} from '../ThemeProvider'; 
+import AsyncStorage from '@react-native-community/async-storage';
 export default class Settings extends React.Component {
   constructor() {
     super()
     this.state = {darkMode: false}
   }
-  toggleDarkMode = () => {
-    let darkMode = !this.state.darkMode; this.setState({darkMode: darkMode});
+  toggleDarkMode = async () => {
+    let darkMode = !this.state.darkMode; 
+    this.setState({darkMode: darkMode});
+    try{
+      AsyncStorage.setItem('tra-dark-mode', darkMode.toString())
+      await refreshTheme()
+    } catch (e) {
+      console.error("Error setting dark mode: ", e)
+    }
+
   }
   render() {
     const optionsStyle = ThemeProvider.optionsStyle;
