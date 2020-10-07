@@ -10,6 +10,7 @@ import {createBottomTabNavigator} from 'react-navigation-tabs';
 import {StyleProvider, Button, Footer, FooterTab, Text} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const TabControl = createBottomTabNavigator(
   {
@@ -32,6 +33,7 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Teams'}
                   onPress={() => navigation.navigate('Teams')}>
+                  <Icon name="robot" size={24} color="#ffffff" />
                   <Text>Matches</Text>
                 </Button>
 
@@ -39,6 +41,7 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Stats'}
                   onPress={() => navigation.navigate('Stats')}>
+                  <Icon name="chart-pie" size={24} color="#ffffff" />
                   <Text>Statistics</Text>
                 </Button>
 
@@ -46,12 +49,14 @@ const TabControl = createBottomTabNavigator(
                   vertical
                   active={routeName === 'Strat'}
                   onPress={() => navigation.navigate('Strat')}>
+                  <Icon name="source-pull" size={24} color="#ffffff" />
                   <Text>Strategies</Text>
                 </Button>
                 <Button
                   vertical
                   active={routeName === 'Options'}
                   onPress={() => navigation.navigate('Options')}>
+                  <Icon name="cog" size={24} color="#ffffff" />
                   <Text>Options</Text>
                 </Button>
               </FooterTab>
