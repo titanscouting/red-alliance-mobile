@@ -1,5 +1,9 @@
 const isDarkMode = false;
 export default {
+    optionsStyle: {
+      backgroundColor: isDarkMode ? "#121212": "#ffffff",
+      color: isDarkMode ? "white" : "black",
+    },
     matchesStyle: isDarkMode ? {
         backgroundColor: "#121212",
         color: "white",

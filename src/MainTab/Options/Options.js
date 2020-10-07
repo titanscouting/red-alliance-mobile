@@ -11,17 +11,12 @@ import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-
+import { View, Switch, StyleSheet } from "react-native";
+import ThemeProvider from '../ThemeProvider'
 export default class Options extends React.Component {
   render() {
-    const isDarkMode = true;
-    const optionsStyle= isDarkMode ? {
-      backgroundColor: "#121212",
-      color: "white",
-    } : {
-      backgroundColor: "#ffffff",
-      color: "black",
-    } 
+    const optionsStyle = ThemeProvider.optionsStyle;
+    this.state = {enableDarkMode: false}
     return (
       <StyleProvider style={getTheme(material)}>
         <Container style={optionsStyle}>
@@ -43,6 +38,20 @@ export default class Options extends React.Component {
                 <Button hasText onPress={ajax.signOut}>
                   <Text>Switch User</Text>
                 </Button>
+              </Right>
+            </CardItem>
+          </Card>
+          <Card style={optionsStyle}>
+            <CardItem style={optionsStyle}>
+              <Text style={optionsStyle}>Enable Dark Mode</Text>
+              <Right>
+                <Switch
+                  trackColor={{ false: "#000000", true: "#938dd8" }}
+                  thumbColor={enableDarkMode ? "#000000" : "#938dd8"}
+                  ios_backgroundColor="#3e3e3e"
+                  onValueChange={() => {this.state.enableDarkMode = !this.state.enableDarkMode}}
+                  value={this.state.enableDarkMode}
+                />
               </Right>
             </CardItem>
           </Card>
