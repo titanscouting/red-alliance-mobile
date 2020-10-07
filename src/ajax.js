@@ -34,13 +34,17 @@ exports.isJSON = str => {
 };
 
 exports.getIDToken = async () => {
+  const now = Date.now();
   try {
-    const keyData = await AsyncStorage.getItem('tra-google-auth');
+    let keyData = await AsyncStorage.getItem('tra-google-auth');
     keyData = keyData != null ? JSON.parse(keyData) : null;
-    const now = Date.now();
-    if(value !== null && now - keyData.time < 3500) {
+    if(keyData !== null && now - keyData.time < 3500000) {
       return keyData.key
     }
+  } catch (e) {
+    console.warn("Error pulling stored key")
+  }
+  try {
     try {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signInSilently();
@@ -62,8 +66,6 @@ exports.getIDToken = async () => {
         if (err.code === statusCodes.SIGN_IN_CANCELLED) {
           await exports.AsyncAlert();
           return await exports.getIDToken();
-        } else if (err.code === statusCodes.IN_PROGRESS) {
-          console.log('Signing user in');
         } else {
           // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE]
           console.error(err);
@@ -72,7 +74,6 @@ exports.getIDToken = async () => {
       }
     }
   } catch (error) {
-    console.error(error);
   }
 };
 
@@ -365,14 +366,14 @@ exports.fetchPitData = async (competition, team) => {
       },
     })
       .then(response => {
-        if (response.status !== 200) {
-          console.warn('Error fetching pit data for ' + competition);
-        } else {
+        if (response.status == 200) {
           return response.json();
         }
       })
       .then(myJson => {
-        return myJson.data;
+        if (myJson !== undefined) {
+          return myJson.data;
+        }
       });
   } catch (error) {
     console.error(error);
