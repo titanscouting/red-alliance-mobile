@@ -33,6 +33,52 @@ exports.isJSON = str => {
   return true;
 };
 
+exports.checkUser = async (token) => {
+  const endpoint = encodeURI(
+    apiHost + 'api/checkUser',
+  );
+
+  try {
+    return await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
+  } catch (error) {
+    console.error(error);
+  }
+}
+exports.addUserToTeam = async (team) => {
+  const endpoint = apiHost + 'api/addUserToTeam';
+  try {
+    fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: await exports.getIDToken(),
+      },
+      body: JSON.stringify({
+        team: team
+      }),
+    }).then(async (response) => {
+      response = await response.json();
+      if (!response.success) {
+        throw new Error("Could not add the user")
+      }
+      return response;
+    });
+    // let responseJson = await JSON.parse(response);
+  } catch (error) {
+    console.error(error);
+  }
+}
 exports.getIDToken = async () => {
   const now = Date.now();
   try {

@@ -13,6 +13,7 @@ import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import ajax from './ajax';
 import TabControl from './MainTab/TabControl';
+import Enrollment from './Enrollment/Enrollment'
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',

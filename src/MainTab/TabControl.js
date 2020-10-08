@@ -11,6 +11,7 @@ import {StyleProvider, Button, Footer, FooterTab, Text} from 'native-base';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Enrollment from '../Enrollment/Enrollment';
 
 const TabControl = createBottomTabNavigator(
   {
@@ -18,10 +19,18 @@ const TabControl = createBottomTabNavigator(
     Stats: {screen: Stats},
     Strategies: {screen: Strategies},
     Settings: {screen: Settings},
+    Enrollment: {
+      screen: Enrollment,
+      navigationOptions:()=>{
+        return {
+          tabBarVisible: false,
+        };
+     }
+    }
   },
   {
     tabBarPosition: 'bottom',
-
+    initialRouteName: 'Enrollment',
     defaultNavigationOptions: ({navigation}) => ({
       tabBarComponent: () => {
         const {routeName} = navigation.state;

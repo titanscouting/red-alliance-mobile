@@ -8,6 +8,16 @@ export default {
       backgroundColor: isDarkMode ? "#121212": "#ffffff",
       color: isDarkMode ? "white" : "black",
     },
+    enrollmentStyle: {
+      generic: {
+        backgroundColor: isDarkMode ? "#121212": "#ffffff",
+        color: isDarkMode ? "white" : "black",
+      },
+      title1Style: {
+        color: isDarkMode ? "white" : "black",
+        fontSize: 30,
+      }
+    },
     generic: {
       backgroundColor: isDarkMode ? "#121212": "#ffffff",
       color: isDarkMode ? "white" : "black",
