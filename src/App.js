@@ -13,7 +13,7 @@ import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import ajax from './ajax';
 import TabControl from './MainTab/TabControl';
-import Enrollment from './Enrollment/Enrollment'
+import AsyncStorage from '@react-native-community/async-storage';
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',
@@ -86,6 +86,6 @@ ajax.getIDToken();
 
 export default class App extends React.Component {
   render() {
-    return <TabControl />;
+    return <TabControl />
   }
 }

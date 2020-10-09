@@ -1,18 +1,20 @@
 import {
-    Body,
-    Button, Card,
-    CardItem, Container, Header,
-    Right, StyleProvider,
-    Text, Title, View
-  } from 'native-base';
+  Body,
+  Button, Container, Header,
+  StyleProvider,
+  Text, Title, View,
+} from 'native-base';
 import React from 'react';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import ThemeProvider from '../MainTab/ThemeProvider'
 import ajax from '../ajax'
+import {Alert, TextInput} from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 export default class Enrollment extends React.Component {
 constructor() {
     super();
+    this.state = {teamValue: ''}
     this.getCreds().then((creds) => {
       ajax.checkUser(creds).then((data) => {
         if (data.isEnrolled) {
@@ -25,13 +27,29 @@ async getCreds() {
   this.userToken = await ajax.getIDToken()
   return this.userToken;
 }
-async addUser() {
-  await ajax.addUserToTeam(2022);
+throwError() {
+  Alert.alert(
+    'Error',
+    `There was an error adding you to the team.`,
+    [
+      {
+        text: 'OK',
+        onPress: () => {},
+        style: 'cancel',
+      },
+    ],
+    {cancelable: true},
+  );
 }
-static navigationOptions = {
-  //To hide the NavigationBar from current Screen
-  header: null
-};
+async addUser() {
+  console.log(this.state.teamValue)
+  await ajax.addUserToTeam(parseInt(this.state.teamValue)).then(() => {
+    AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
+      this.props.navigation.navigate('Teams');
+    }).catch(this.throwError);
+  }).catch(this.throwError);
+}
+
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
     return (
@@ -59,8 +77,14 @@ render() {
                 flex: 1,
                 justifyContent: 'center',
                 alignItems: 'center',
-            }}>
-          <Button onPress={async () => {await this.addUser(); this.props.navigation.navigate('Teams');}}>
+        }}>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: 60 }}
+            onChangeText={(text) => (this.setState({teamValue: text}))}
+            value={this.state.teamValue}
+            keyboardType="number-pad"
+          />
+          <Button onPress={async () => {this.addUser()}}>
             <Text>Get Started</Text>
           </Button>
         </View>

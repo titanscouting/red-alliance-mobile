@@ -12,7 +12,12 @@ import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Enrollment from '../Enrollment/Enrollment';
-
+let skipEnroll;
+import AsyncStorage from '@react-native-community/async-storage';
+AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
+  skipEnroll = (val === 'true');
+  console.log(skipEnroll)
+})
 const TabControl = createBottomTabNavigator(
   {
     Teams: {screen: Matches},
@@ -30,7 +35,7 @@ const TabControl = createBottomTabNavigator(
   },
   {
     tabBarPosition: 'bottom',
-    initialRouteName: 'Enrollment',
+    initialRouteName: skipEnroll ? 'Teams' : 'Enrollment',
     defaultNavigationOptions: ({navigation}) => ({
       tabBarComponent: () => {
         const {routeName} = navigation.state;
