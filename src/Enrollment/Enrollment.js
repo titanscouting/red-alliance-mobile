@@ -70,7 +70,7 @@ render() {
                 justifyContent: 'flex-start',
                 alignItems: 'center',
             }}>
-          <Text style={enrollmentStyle.title1Style}>Enroll into an FRC Team</Text>
+          <Text style={enrollmentStyle.title1Style}>Enroll into a FRC Team</Text>
           <Text style={enrollmentStyle.disclaimerStyle} onPress={() => { Linking.openURL('https://scouting-api.herokuapp.com/privacy-policy');}}>
             By using The Red Alliance, you agree to our Terms and Conditions and Privacy Policy.
           </Text>
