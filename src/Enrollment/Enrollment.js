@@ -80,14 +80,14 @@ render() {
                 justifyContent: 'center',
                 alignItems: 'center',
         }}>
-          <Text>Enter your FRC team number below:</Text>
+          <Text style={enrollmentStyle.generic}>Enter your FRC team number below:</Text>
           <View style={{padding: 30, width: 'auto'}}>
             <TextInput
-              style={{ height: 40, width: 100, borderColor: 'gray', borderWidth: 1, width: 60, borderRadius: 5 }}
+              style={enrollmentStyle.textInputStyle}
               onChangeText={(text) => (this.setState({teamValue: text}))}
               value={this.state.teamValue}
               keyboardType="number-pad"
-              placeholder="   2022"
+              placeholder="2022"
             />
           </View>
 

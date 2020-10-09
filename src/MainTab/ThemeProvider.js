@@ -21,6 +21,16 @@ export default {
         color: isDarkMode ? "white" : "black",
         fontSize: 18,
         padding: 50
+      },
+      textInputStyle: {
+        height: 40, 
+        width: 100,
+        borderColor: 'gray',
+        borderWidth: 1,
+        width: 60,
+        borderRadius: 5,
+        backgroundColor: isDarkMode ? "#121212": "#ffffff",
+        color: isDarkMode ? "white" : "black",
       }
     },
     generic: {
