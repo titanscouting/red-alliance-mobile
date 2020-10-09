@@ -254,12 +254,12 @@ exports.isSignedIn = async () => {
       try {
         await GoogleSignin.revokeAccess();
         await GoogleSignin.signOut();
-        await AsyncStorage.setItem('tra-google-auth', "")
+        AsyncStorage.setItem('tra-google-auth', "");
+        AsyncStorage.setItem('tra-is-enrolled-user', 'false');
       } catch (error) {
         console.error(error);
       }
     }
-
     exports.getIDToken();
   } catch (error) {
     console.error(error);

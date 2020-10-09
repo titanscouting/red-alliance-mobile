@@ -50,7 +50,7 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Google Account</Text>
               <Right>
-                <Button hasText onPress={ajax.signOut}>
+                <Button hasText onPress={() => {ajax.signOut(); this.props.navigation.navigate('Enrollment'); ajax.getIDToken();}}>
                   <Text>Switch User</Text>
                 </Button>
               </Right>

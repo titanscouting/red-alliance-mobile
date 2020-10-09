@@ -16,7 +16,6 @@ let skipEnroll;
 import AsyncStorage from '@react-native-community/async-storage';
 AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
   skipEnroll = (val === 'true');
-  console.log(skipEnroll)
 })
 const TabControl = createBottomTabNavigator(
   {
@@ -28,14 +27,14 @@ const TabControl = createBottomTabNavigator(
       screen: Enrollment,
       navigationOptions:()=>{
         return {
-          tabBarVisible: false,
+          tabBarVisible: false, // don't show the navigation bar when enrolling
         };
      }
     }
   },
   {
     tabBarPosition: 'bottom',
-    initialRouteName: skipEnroll ? 'Teams' : 'Enrollment',
+    initialRouteName: skipEnroll ? 'Teams' : 'Enrollment', // skip the enrollment screen if the user is already enrolled
     defaultNavigationOptions: ({navigation}) => ({
       tabBarComponent: () => {
         const {routeName} = navigation.state;

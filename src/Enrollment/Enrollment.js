@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 export default class Enrollment extends React.Component {
 constructor() {
     super();
-    this.state = {teamValue: ''}
+    this.state = {teamValue: '2022'}
     this.getCreds().then((creds) => {
       ajax.checkUser(creds).then((data) => {
         if (data.isEnrolled) {
@@ -42,7 +42,6 @@ throwError() {
   );
 }
 async addUser() {
-  console.log(this.state.teamValue)
   await ajax.addUserToTeam(parseInt(this.state.teamValue)).then(() => {
     AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
       this.props.navigation.navigate('Teams');
@@ -78,14 +77,19 @@ render() {
                 justifyContent: 'center',
                 alignItems: 'center',
         }}>
-          <TextInput
-            style={{ height: 40, borderColor: 'gray', borderWidth: 1, width: 60 }}
-            onChangeText={(text) => (this.setState({teamValue: text}))}
-            value={this.state.teamValue}
-            keyboardType="number-pad"
-          />
+          <Text>Enter your FRC team number below:</Text>
+          <View style={{padding: 30, width: 'auto'}}>
+            <TextInput
+              style={{ height: 40, width: 100, borderColor: 'gray', borderWidth: 1, width: 60, borderRadius: 5 }}
+              onChangeText={(text) => (this.setState({teamValue: text}))}
+              value={this.state.teamValue}
+              keyboardType="number-pad"
+              placeholder="   2022"
+            />
+          </View>
+
           <Button onPress={async () => {this.addUser()}}>
-            <Text>Get Started</Text>
+            <Text>Start Scouting</Text>
           </Button>
         </View>
       </Container>
