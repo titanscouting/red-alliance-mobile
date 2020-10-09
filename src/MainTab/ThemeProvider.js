@@ -16,6 +16,11 @@ export default {
       title1Style: {
         color: isDarkMode ? "white" : "black",
         fontSize: 30,
+      },
+      disclaimerStyle: {
+        color: isDarkMode ? "white" : "black",
+        fontSize: 18,
+        padding: 50
       }
     },
     generic: {
