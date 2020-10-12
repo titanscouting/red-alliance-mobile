@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const apiHost = 'https://scouting-api.herokuapp.com/';
+const apiHost = 'https://titanscouting.epochml.org/';
 
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
