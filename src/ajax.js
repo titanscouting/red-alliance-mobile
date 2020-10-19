@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const apiHost = 'https://scouting-api.herokuapp.com/';
+const apiHost = 'https://titanscouting.epochml.org/';
 
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
@@ -189,7 +189,8 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 };
 
 exports.fetchMatchConfig = async () => {
-  const endpoint = encodeURI(apiHost + 'api/fetchMatchConfig');
+  const team = 2022 //TODO: pull this from API
+  const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
       method: 'GET',
@@ -206,7 +207,7 @@ exports.fetchMatchConfig = async () => {
         }
       })
       .then(myJson => {
-        return myJson;
+        return myJson.config;
       });
   } catch (error) {
     console.error(error);
@@ -214,7 +215,8 @@ exports.fetchMatchConfig = async () => {
 };
 
 exports.fetchPitConfiguration = async () => {
-  const endpoint = encodeURI(apiHost + 'api/fetchPitConfig');
+  const team = 2022; //TODO: Pull this from the API
+  const endpoint = encodeURI(apiHost + `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
       method: 'GET',
@@ -231,7 +233,7 @@ exports.fetchPitConfiguration = async () => {
         }
       })
       .then(myJson => {
-        return myJson;
+        return myJson.config;
       });
   } catch (error) {
     console.error(error);
