@@ -129,7 +129,8 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 };
 
 exports.fetchMatchConfig = async () => {
-  const endpoint = encodeURI(apiHost + 'api/fetchMatchConfig');
+  const team = 2022 //TODO: pull this from API
+  const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
       method: 'GET',
@@ -146,7 +147,7 @@ exports.fetchMatchConfig = async () => {
         }
       })
       .then(myJson => {
-        return myJson;
+        return myJson.config;
       });
   } catch (error) {
     console.error(error);
@@ -154,7 +155,8 @@ exports.fetchMatchConfig = async () => {
 };
 
 exports.fetchPitConfiguration = async () => {
-  const endpoint = encodeURI(apiHost + 'api/fetchPitConfig');
+  const team = 2022; //TODO: Pull this from the API
+  const endpoint = encodeURI(apiHost + `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
       method: 'GET',
@@ -171,7 +173,7 @@ exports.fetchPitConfiguration = async () => {
         }
       })
       .then(myJson => {
-        return myJson;
+        return myJson.config;
       });
   } catch (error) {
     console.error(error);
