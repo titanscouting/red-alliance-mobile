@@ -35,7 +35,24 @@ export default class Matches extends React.Component {
     }
 
     render() {
-        const styles = this.props.styles.matchDataViewerStyle
+        const styles = {
+            generic: {
+                backgroundColor: "#ffffff",
+                color: "black",
+            },
+            match: {
+                
+            },
+            value: {
+                
+            },
+            container: {
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                paddingRight: 20,
+                paddingLeft: 20,
+            },
+        }
         if (this.state.statsData === null) {
             return (
                     <Container>
