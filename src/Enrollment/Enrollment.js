@@ -9,8 +9,10 @@ import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import ThemeProvider from '../MainTab/ThemeProvider'
 import ajax from '../ajax'
-import {Alert, TextInput, Linking} from 'react-native';
+import {Alert, TextInput, Linking, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
+import Onboarding from 'react-native-onboarding-swiper';
+
 export default class Enrollment extends React.Component {
 constructor() {
     super();
@@ -52,51 +54,41 @@ async addUser() {
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
     return (
-    <StyleProvider style={getTheme(material)}>
-      <Container style={enrollmentStyle.generic}>
-        <Header>
-            <Body
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}>
-            <Title>Welcome to The Red Alliance</Title>
-            </Body>
-        </Header>
-        <View style={{
-                flex: 1,
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-            }}>
-          <Text style={enrollmentStyle.title1Style}>Enroll into a FRC Team</Text>
-          <Text style={enrollmentStyle.disclaimerStyle} onPress={() => { Linking.openURL('https://scouting-api.herokuapp.com/privacy-policy');}}>
-            By using The Red Alliance, you agree to our Terms and Conditions and Privacy Policy.
-          </Text>
-        </View>
-        <View style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-        }}>
-          <Text style={enrollmentStyle.generic}>Enter your FRC team number below:</Text>
-          <View style={{padding: 30, width: 'auto'}}>
-            <TextInput
-              style={enrollmentStyle.textInputStyle}
-              onChangeText={(text) => (this.setState({teamValue: text}))}
-              value={this.state.teamValue}
-              keyboardType="number-pad"
-              placeholder="2022"
-            />
-          </View>
-
-          <Button onPress={async () => {this.addUser()}}>
-            <Text>Start Scouting</Text>
-          </Button>
-        </View>
-      </Container>
-    </StyleProvider>
+      <Onboarding
+      nextLabel='Next'
+      onDone={() => {this.addUser.bind(this); this.addUser()}}
+      showSkip={false}
+      controlStatusBar={true}
+      pages={[
+        {
+          backgroundColor: '#CC2232',
+          color: '#fff',
+          image: <Image source={require('./assets/iconTransparent.png')} />,
+          title: 'Welcome to The Red Alliance',
+          subtitle: 'Collect data for your FRC team',
+        },
+        {
+          backgroundColor: '#CC2232',
+          color: '#fff',
+          image: <Image source={require('./assets/screen1.jpg')} />,
+          title: 'View and scout qualification matches',
+          subtitle: 'Collect data about robot performance and gain a competitive advantage',
+        },
+        {
+          backgroundColor: '#CC2232',
+          color: '#fff',
+          image: <TextInput
+            style={enrollmentStyle.textInputStyle}
+            onChangeText={(text) => (this.setState({teamValue: text}))}
+            value={this.state.teamValue}
+            keyboardType="number-pad"
+            placeholder="2022"
+          />,
+          title: 'Enter your team number',
+          subtitle: 'Get the data for your team by entering your team number',
+        },
+      ]}
+    />
     );
   }
 }

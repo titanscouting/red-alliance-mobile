@@ -23,8 +23,9 @@ export default {
         padding: 50
       },
       textInputStyle: {
-        height: 40, 
-        width: 100,
+        height: 60, 
+        width: 'auto',
+        fontSize: 24,
         borderColor: 'gray',
         borderWidth: 1,
         width: 60,
