@@ -32,7 +32,26 @@ exports.isJSON = str => {
   }
   return true;
 };
-
+exports.checkUserTeam = async (token) => {
+  const endpoint = encodeURI(
+    apiHost + 'api/checkUserTeam',
+  );
+  try {
+    return await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: token,
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
+  } catch (error) {
+    console.error(error);
+  }
+}
 exports.checkUser = async (token) => {
   const endpoint = encodeURI(
     apiHost + 'api/checkUser',
@@ -48,6 +67,7 @@ exports.checkUser = async (token) => {
       },
     })
       .then(response => {
+
         return response.json();
       })
   } catch (error) {
@@ -262,7 +282,6 @@ exports.isSignedIn = async () => {
         console.error(error);
       }
     }
-    exports.getIDToken();
   } catch (error) {
     console.error(error);
   }

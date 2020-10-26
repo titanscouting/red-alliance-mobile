@@ -1,29 +1,47 @@
-import {
-  Body,
-  Button, Container, Header,
-  StyleProvider,
-  Text, Title, View,
-} from 'native-base';
 import React from 'react';
-import getTheme from '../../native-base-theme/components';
-import material from '../../native-base-theme/variables/material';
 import ThemeProvider from '../MainTab/ThemeProvider'
 import ajax from '../ajax'
-import {Alert, TextInput, Linking, Image } from 'react-native';
+import {Alert, TextInput, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
+import { GoogleSignin } from 'react-native-google-signin';
 
 export default class Enrollment extends React.Component {
 constructor() {
     super();
-    this.state = {teamValue: '2022'}
-    this.getCreds().then((creds) => {
-      ajax.checkUser(creds).then((data) => {
-        if (data.isEnrolled) {
-          this.props.navigation.navigate('Teams')
-        }
-      })
+    this.state = {teamValue: ''}
+}
+async getTeamData() {
+  AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
+    this.state.isEnrolled = value === "true"
+  })
+  this.getCreds().then((creds) => {
+    ajax.checkUserTeam(creds).then((data) => {
+      if (data.team && data.success == true) {
+        this.setState({teamValue: data.team.toString()})
+        AsyncStorage.setItem('tra-user-team', toString(data.team)).then(() => {
+          AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
+              this.props.navigation.navigate('Teams');  
+          })
+        })
+      }
     })
+  }).catch(this.throwError);
+}
+async refreshTeamData() {
+  AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
+    this.state.isEnrolled = value === "true"
+  })
+  this.getCreds().then((creds) => {
+    ajax.checkUserTeam(creds).then((data) => {
+      if (data.team && data.success == true) {
+        this.setState({teamValue: data.team.toString()})
+        AsyncStorage.setItem('tra-user-team', toString(data.team)).then(() => {
+          AsyncStorage.setItem("tra-is-enrolled-user", "true")
+        })
+      }
+    })
+  }).catch(this.throwError);
 }
 async getCreds() {
   this.userToken = await ajax.getIDToken()
@@ -47,12 +65,13 @@ async addUser() {
   await ajax.addUserToTeam(parseInt(this.state.teamValue)).then(() => {
     AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
       this.props.navigation.navigate('Teams');
-    }).catch(this.throwError);
+    })
   }).catch(this.throwError);
 }
 
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
+    this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
     return (
       <Onboarding
       nextLabel='Next'
@@ -65,7 +84,7 @@ render() {
           color: '#fff',
           image: <Image source={require('./assets/iconTransparent.png')} />,
           title: 'Welcome to The Red Alliance',
-          subtitle: 'Collect data for your FRC team',
+          subtitle: ''
         },
         {
           backgroundColor: '#CC2232',
@@ -79,10 +98,9 @@ render() {
           color: '#fff',
           image: <TextInput
             style={enrollmentStyle.textInputStyle}
-            onChangeText={(text) => (this.setState({teamValue: text}))}
+            onChangeText={(text) => {console.log(text); this.setState({teamValue: text})}}
             value={this.state.teamValue}
             keyboardType="number-pad"
-            placeholder="2022"
           />,
           title: 'Enter your team number',
           subtitle: 'Get the data for your team by entering your team number',
