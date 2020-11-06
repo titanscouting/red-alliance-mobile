@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-community/async-storage"
+import AsyncStorage from "@react-native-community/async-storage";
 let isDarkMode;
 module.exports.refreshTheme = async () => {
   isDarkMode = await AsyncStorage.getItem('tra-dark-mode') == 'true'
@@ -23,11 +23,13 @@ export default {
         padding: 50
       },
       textInputStyle: {
-        height: 40, 
-        width: 100,
+        height: 60, 
+        width: 'auto',
+        fontSize: 24,
         borderColor: 'gray',
         borderWidth: 1,
-        width: 60,
+        width: '100%',
+        textAlign: 'center',
         borderRadius: 5,
         backgroundColor: isDarkMode ? "#121212": "#ffffff",
         color: isDarkMode ? "white" : "black",

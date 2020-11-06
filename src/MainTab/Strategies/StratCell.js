@@ -1,9 +1,8 @@
-import React from 'react';
 import { ListItem } from 'native-base';
-import { StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
-import Globals from '../../GlobalDefinitions'
-import { TouchableWithoutFeedback } from 'react-native';
+import React from 'react';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import Globals from '../../GlobalDefinitions';
 
 export default class StratCell extends React.Component {
 
@@ -17,7 +16,7 @@ export default class StratCell extends React.Component {
     _isMounted = false;
 
     componentDidMount() {
-        this._isMounted = true;
+        this._isMounted = true;ßß
     }
 
     componentWillUnmount() {

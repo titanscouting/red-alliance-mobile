@@ -4,10 +4,10 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
+import ThemeProvider from '../ThemeProvider';
 import Eval from './Evaluation/Eval';
 import MatchList from './MatchList/MatchList';
 import TeamList from './TeamsList/TeamList';
-import ThemeProvider from '../ThemeProvider'
 
 export default class Matches extends React.Component {
   _isMounted = false;

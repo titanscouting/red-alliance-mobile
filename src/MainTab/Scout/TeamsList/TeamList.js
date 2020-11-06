@@ -14,9 +14,9 @@ import {
 } from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
-import TeamCell from './TeamCell';
 import ajax from '../../../ajax';
 import GlobalDefinitions from '../../../GlobalDefinitions';
+import TeamCell from './TeamCell';
 
 export default class TeamList extends React.Component {
   static propTypes = {

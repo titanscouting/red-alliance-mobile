@@ -1,7 +1,7 @@
-import React from 'react';
-import { Text, Card, CardItem } from 'native-base';
-import { StyleSheet } from 'react-native';
+import { Card, CardItem, Text } from 'native-base';
 import PropTypes from 'prop-types';
+import React from 'react';
+import { StyleSheet } from 'react-native';
 
 export default class SubmittedStrategyCell extends React.Component {
 
