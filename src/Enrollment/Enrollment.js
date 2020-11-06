@@ -10,6 +10,7 @@ export default class Enrollment extends React.Component {
 constructor() {
     super();
     this.state = {teamValue: ''}
+    this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
 }
 async getTeamData() {
   AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
@@ -98,7 +99,7 @@ render() {
           color: '#fff',
           image: <TextInput
             style={enrollmentStyle.textInputStyle}
-            onChangeText={(text) => {console.log(text); this.setState({teamValue: text})}}
+            onChangeText={text => this.setState({teamValue: String(text)})}
             value={this.state.teamValue}
             keyboardType="number-pad"
           />,
