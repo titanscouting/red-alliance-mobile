@@ -2,10 +2,10 @@
 /* eslint-disable no-unused-vars */
 const apiHost = 'https://titanscouting.epochml.org/';
 
+import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from 'react-native-google-signin';
 import Globals from './GlobalDefinitions';
-import AsyncStorage from '@react-native-community/async-storage';
 
 exports.AsyncAlert = async () =>
   new Promise(resolve => {

@@ -1,7 +1,7 @@
 import { CardItem, Container, Text } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { ActivityIndicator, RefreshControl, SectionList, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, RefreshControl, SectionList, View } from 'react-native';
 import ajax from '../../../ajax';
 import Globals from '../../../GlobalDefinitions';
 

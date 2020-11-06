@@ -1,19 +1,19 @@
+import AsyncStorage from '@react-native-community/async-storage';
+import { Button, Footer, FooterTab, StyleProvider, Text } from 'native-base';
 import React from 'react';
-import Matches from './Scout/Matches';
-import Strategies from './Strategies/Strategies';
-import Stats from './Stats/Stats';
-import Settings from './Settings/Settings';
-
-import {createAppContainer} from 'react-navigation';
-
-import {createBottomTabNavigator} from 'react-navigation-tabs';
-import {StyleProvider, Button, Footer, FooterTab, Text} from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { createAppContainer } from 'react-navigation';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Enrollment from '../Enrollment/Enrollment';
+import Matches from './Scout/Matches';
+import Settings from './Settings/Settings';
+import Stats from './Stats/Stats';
+import Strategies from './Strategies/Strategies';
+
+
 let skipEnroll;
-import AsyncStorage from '@react-native-community/async-storage';
 AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
   skipEnroll = (val === 'true');
 })

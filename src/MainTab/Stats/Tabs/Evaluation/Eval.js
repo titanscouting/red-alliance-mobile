@@ -1,11 +1,11 @@
-import React from 'react';
 import { Container, StyleProvider } from 'native-base';
-
+import PropTypes from 'prop-types';
+import React from 'react';
+import { ActivityIndicator, BackHandler } from 'react-native';
 import getTheme from '../../../../../native-base-theme/components';
 import material from '../../../../../native-base-theme/variables/material';
-import { ActivityIndicator, BackHandler } from 'react-native';
-import PropTypes from 'prop-types';
 import EvalTab from './EvalTab';
+
 
 
 export default class Eval extends React.Component {

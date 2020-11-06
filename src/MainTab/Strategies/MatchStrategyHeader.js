@@ -1,8 +1,8 @@
-import React from 'react';
 import { ListItem } from 'native-base';
-import { StyleSheet, View, Text} from 'react-native';
 import PropTypes from 'prop-types';
-import Globals from '../../GlobalDefinitions'
+import React from 'react';
+import { Text, View } from 'react-native';
+import Globals from '../../GlobalDefinitions';
 
 export default class MatchStrategyHeader extends React.Component {
 
@@ -18,7 +18,7 @@ export default class MatchStrategyHeader extends React.Component {
         this._isMounted = true;
     }
 
-    componentWillUnmount() {
+    componentWilßlUnmount() {
         this._isMounted = false;
     }
 

@@ -1,14 +1,14 @@
+import { Body, Container, Header, StyleProvider, Title } from 'native-base';
 import React, { Component } from 'react';
-import { Container, StyleProvider, Header, Title, Body } from 'native-base';
+import { FlatList, RefreshControl } from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import { RefreshControl, FlatList } from 'react-native'
-import StratCell from './StratCell'
+import ajax from '../../ajax';
+import Globals from '../../GlobalDefinitions';
+import ThemeProvider from '../ThemeProvider';
+import MatchStrategyTableView from './MatchStrategyTableView';
+import StratCell from './StratCell';
 
-import ajax from '../../ajax'
-import Globals from '../../GlobalDefinitions'
-import MatchStrategyTableView from './MatchStrategyTableView'
-import ThemeProvider from '../ThemeProvider'
 
 export default class Strategies extends Component {
 

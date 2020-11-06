@@ -4,7 +4,6 @@ import ajax from '../ajax'
 import {Alert, TextInput, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
-import { GoogleSignin } from 'react-native-google-signin';
 
 export default class Enrollment extends React.Component {
 constructor() {

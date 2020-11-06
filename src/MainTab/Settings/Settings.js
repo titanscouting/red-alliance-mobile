@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-community/async-storage';
 import {
   Body,
   Button, Card,
@@ -6,14 +7,13 @@ import {
   Text, Title
 } from 'native-base';
 import React from 'react';
+import { Linking } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import { Linking } from 'react-native';
-import ThemeProvider, {refreshTheme} from '../ThemeProvider'; 
-import AsyncStorage from '@react-native-community/async-storage';
+import ThemeProvider, { refreshTheme } from '../ThemeProvider';
 export default class Settings extends React.Component {
   constructor() {
     super()

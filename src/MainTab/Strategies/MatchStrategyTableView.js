@@ -1,15 +1,15 @@
+import { Body, Button, Container, Header, Icon, Left, Right, StyleProvider, Text, Textarea, Title, View } from 'native-base';
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
-import { Container, Textarea, StyleProvider, Header, Title, View, Button, Left, Right, Body, Text, Icon} from 'native-base';
+import { BackHandler, FlatList, RefreshControl, ScrollView } from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
-import { RefreshControl, FlatList, StyleSheet, ScrollView, BackHandler} from 'react-native'
-
-
-import ajax from '../../ajax'
-import Globals from '../../GlobalDefinitions'
-import PropTypes from 'prop-types';
-import SubmittedStrategyCell from './SubmittedStrategyCell';
+import ajax from '../../ajax';
+import Globals from '../../GlobalDefinitions';
 import MatchStrategyHeader from './MatchStrategyHeader';
+import SubmittedStrategyCell from './SubmittedStrategyCell';
+
+
 
 export default class MatchStrategyTableView extends Component {
 
@@ -19,7 +19,7 @@ export default class MatchStrategyTableView extends Component {
     teams: PropTypes.array.isRequired,
     onBack: PropTypes.func.isRequired,
     nicknames: PropTypes.object,
-    style: PropTypes.object.isRequired
+    style: PropTypes.object.isßßRequired
   };
   
   state = {

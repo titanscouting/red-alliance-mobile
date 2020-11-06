@@ -6,7 +6,6 @@ import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
-import ThemeProvider from '../ThemeProvider';
 
 
 export default class StatsTeamController extends React.Component {

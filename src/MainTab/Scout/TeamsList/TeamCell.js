@@ -1,7 +1,7 @@
 import { ListItem } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 import Globals from '../../../GlobalDefinitions';
 
 export default class TeamCell extends React.Component {
