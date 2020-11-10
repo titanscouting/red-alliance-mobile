@@ -8,7 +8,7 @@
 
 import React from 'react';
 import { Alert, Linking } from 'react-native';
-import { GoogleSignin } from 'react-native-google-signin';
+import { GoogleSignin } from '@react-native-community/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
@@ -82,7 +82,6 @@ GoogleSignin.configure({
   accountName: '', // [Android] specifies an account name on the device that should be used
   iosClientId: '291863698243-3nt50bms4e2vr721vlvgb505aaj5ihhu.apps.googleusercontent.com',
 });
-
 // This will prompt a user to sign in if they aren't already
 export default class App extends React.Component {
   render() {

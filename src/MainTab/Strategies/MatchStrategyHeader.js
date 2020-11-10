@@ -18,7 +18,7 @@ export default class MatchStrategyHeader extends React.Component {
         this._isMounted = true;
     }
 
-    componentWilßlUnmount() {
+    componentWillUnmount() {
         this._isMounted = false;
     }
 

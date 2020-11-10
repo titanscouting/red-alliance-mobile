@@ -4,7 +4,7 @@ const apiHost = 'https://titanscouting.epochml.org/';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
-import { GoogleSignin, statusCodes } from 'react-native-google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
 
 exports.AsyncAlert = async () =>
@@ -90,7 +90,7 @@ exports.addUserToTeam = async (team) => {
     }).then(async (response) => {
       response = await response.json();
       if (!response.success) {
-        throw new Error("Could not add the user")
+        console.error("Could not add the user")
       }
       return response;
     });
@@ -111,35 +111,16 @@ exports.getIDToken = async () => {
     console.warn("Error pulling stored key")
   }
   try {
-    try {
-      await GoogleSignin.hasPlayServices();
-      await GoogleSignin.signInSilently();
-      const tokens = await GoogleSignin.getTokens();
-      await GoogleSignin.clearCachedToken(tokens.idToken);
-      try {
-        const jsonValue = JSON.stringify({key: tokens.idToken, time: now})
-        await AsyncStorage.setItem('tra-google-auth', jsonValue)
-      } catch (e) {
-        console.error('There was an error while saving the token: ' + e);
-      }
-      return tokens.idToken;
-    } catch (error) {
-      console.error('There was an error with getting the tokens: ' + error);
-      await GoogleSignin.hasPlayServices();
-      try {
-        await GoogleSignin.signIn();
-      } catch (err) {
-        if (err.code === statusCodes.SIGN_IN_CANCELLED) {
-          await exports.AsyncAlert();
-          return await exports.getIDToken();
-        } else {
-          // Could also be: statusCodes.PLAY_SERVICES_NOT_AVAILABLE]
-          console.error(err);
-          return await exports.getIDToken();
-        }
-      }
-    }
+    const userInfo = await GoogleSignin.signInSilently();
+    const jsonValue = JSON.stringify({key: userInfo.idToken, time: now})
+    await AsyncStorage.setItem('tra-google-auth', jsonValue)
+    return userInfo.idToken
   } catch (error) {
+    if (error.code === statusCodes.SIGN_IN_REQUIRED) {
+      await GoogleSignin.signIn()
+    } else {
+      console.error(error)
+    }
   }
 };
 

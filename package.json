@@ -16,6 +16,7 @@
   "dependencies": {
     "@react-native-community/art": "^1.1.2",
     "@react-native-community/async-storage": "^1.12.1",
+    "@react-native-community/google-signin": "^5.0.0",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
     "@react-navigation/native": "^5.7.5",
@@ -36,7 +37,6 @@
     "react-native-dark-mode": "^0.2.2",
     "react-native-gesture-handler": "^1.7.0",
     "react-native-global-props": "^1.1.5",
-    "react-native-google-signin": "^2.1.1",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",
     "react-native-number-stepper": "0.0.2",
     "react-native-onboarding-swiper": "^1.1.4",

@@ -16,7 +16,7 @@ export default class StratCell extends React.Component {
     _isMounted = false;
 
     componentDidMount() {
-        this._isMounted = true;ßß
+        this._isMounted = true;
     }
 
     componentWillUnmount() {

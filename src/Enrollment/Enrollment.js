@@ -4,12 +4,18 @@ import ajax from '../ajax'
 import {Alert, TextInput, Image } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 
 export default class Enrollment extends React.Component {
 constructor() {
     super();
     this.state = {teamValue: ''}
     this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
+}
+componentDidMount() {
+  if (!GoogleSignin.isSignedIn()) {
+    ajax.getIDToken();
+  }
 }
 async getTeamData() {
   AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
