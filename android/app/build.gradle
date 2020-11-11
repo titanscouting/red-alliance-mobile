@@ -138,7 +138,7 @@ android {
         } else {
             versionCode 89
         }
-        versionName "3.7.0"
+        versionName "3.7.1"
         multiDexEnabled true
     }
     splits {
