@@ -1,21 +1,54 @@
-import React from 'react';
+import React, { Component } from 'react'
 import ThemeProvider from '../MainTab/ThemeProvider'
 import ajax from '../ajax'
-import {Alert, TextInput, Image } from 'react-native';
+import {Alert, TextInput, Image, Text, View, StyleSheet, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import Swiper from 'react-native-swiper'
 
+const styles = StyleSheet.create({
+  wrapper: {},
+  slide1: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#CC2232'
+  },
+  
+  slide2: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#CC2232'
+  },
+  slide3: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#CC2232'
+  },
+  text: {
+    color: '#fff',
+    fontSize: 30,
+    fontWeight: 'bold'
+  },
+  text2: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: 'bold'
+  },
+  smalltext: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'normal'
+  }
+})
 export default class Enrollment extends React.Component {
 constructor() {
     super();
     this.state = {teamValue: ''}
     this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
-}
-componentDidMount() {
-  if (!GoogleSignin.isSignedIn()) {
-    ajax.getIDToken();
-  }
 }
 async getTeamData() {
   AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
@@ -53,20 +86,6 @@ async getCreds() {
   this.userToken = await ajax.getIDToken()
   return this.userToken;
 }
-throwError() {
-  Alert.alert(
-    'Error',
-    `There was an error adding you to the team.`,
-    [
-      {
-        text: 'OK',
-        onPress: () => {},
-        style: 'cancel',
-      },
-    ],
-    {cancelable: true},
-  );
-}
 async addUser() {
   await ajax.addUserToTeam(parseInt(this.state.teamValue)).then(() => {
     AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
@@ -79,40 +98,33 @@ render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
     this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
     return (
-      <Onboarding
-      nextLabel='Next'
-      onDone={() => {this.addUser.bind(this); this.addUser()}}
-      showSkip={false}
-      controlStatusBar={true}
-      pages={[
-        {
-          backgroundColor: '#CC2232',
-          color: '#fff',
-          image: <Image source={require('./assets/iconTransparent.png')} />,
-          title: 'Welcome to The Red Alliance',
-          subtitle: ''
-        },
-        {
-          backgroundColor: '#CC2232',
-          color: '#fff',
-          image: <Image source={require('./assets/screen1.jpg')} />,
-          title: 'View and scout qualification matches',
-          subtitle: 'Collect data about robot performance and gain a competitive advantage',
-        },
-        {
-          backgroundColor: '#CC2232',
-          color: '#fff',
-          image: <TextInput
+      <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
+      <View style={styles.slide1}>
+        <Text style={styles.text}>The Red Alliance</Text>
+        <Text style={styles.smalltext}>Scouting Matches for your FRC team</Text>
+      </View>
+      <View style={styles.slide1}>
+        <Text style={styles.text2}>Scout qualification matches</Text>
+        <Text style={styles.smalltext}>Collect data about robot performance</Text>
+      </View>
+      <View style={styles.slide3}>
+        <TextInput
             style={enrollmentStyle.textInputStyle}
-            onChangeText={text => this.setState({teamValue: String(text)})}
+            onChangeText={(text) => {this.setState.bind(this); this.setState({teamValue: String(text)})}}
             value={this.state.teamValue}
             keyboardType="number-pad"
-          />,
-          title: 'Enter your team number',
-          subtitle: 'Get the data for your team by entering your team number',
-        },
-      ]}
-    />
+          />
+        <Text style={styles.text2}>Enter your team number</Text>
+        <Text style={styles.smalltext}>Get the data for your team by entering your team number</Text>
+        <Button
+          onPress={() => {this.addUser.bind(this); this.addUser()}}
+          title="Sign In"
+          color="#8F182C"
+          style={{marginTop: "30px"}}
+          accessibilityLabel="Learn more about this purple button"
+        />
+      </View>
+    </Swiper>
     );
   }
 }
