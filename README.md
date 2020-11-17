@@ -4,6 +4,6 @@ The Red Alliance mobile app allows scouters for FRC teams to collect data about 
 
 ## Installing Production Versions
 ### Android
-Click [here](https://play.google.com/store/apps/details?id=com.redalliance) to install from the Play Store
+Click [here](https://play.google.com/store/apps/details?id=com.redalliance) to install from the Google Play Store.
 ### iOS
-You must follow the instructions below to compile for iOS and run on a simulator. Official support is not current provided by Titan Scouting for wide installation on physical devices 
+You must follow the instructions below to compile for iOS and run on a simulator. Official support is not current provided by Titan Scouting for wide installation on physical devices. 
