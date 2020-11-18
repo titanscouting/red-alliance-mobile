@@ -19,6 +19,7 @@ export default class Settings extends React.Component {
     super()
     this.state = {darkMode: false}
   }
+  //darkmode toggle
   toggleDarkMode = async () => {
     let darkMode = !this.state.darkMode; 
     this.setState({darkMode: darkMode});
@@ -27,7 +28,7 @@ export default class Settings extends React.Component {
       await refreshTheme()
     } catch (e) {
       console.error("Error setting dark mode: ", e)
-    }
+    } 
 
   }
   render() {

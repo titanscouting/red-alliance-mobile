@@ -12,6 +12,8 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
+import toggleDarkMode from './Settings';
+import ThemeProvider, { refreshTheme } from '../ThemeProvider';
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',
