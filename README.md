@@ -31,3 +31,10 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
 - [Node.js LTS](https://nodejs.org/)
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - [CocoaPods](https://cocoapods.org/)
+## Setup
+1. Make sure that the CocoaPods executable `pod` are in your PATH folders.
+2. Ensure that all dependencies are installed by running `yarn`.
+3. Navigate to the `ios` folder and run `pod install`.
+## Running the app
+4. In Xcode, open the Xcode **workspace** file `ios/RedAlliance.xcworkspace`. 
+5. Click the play button in the toolbar.
