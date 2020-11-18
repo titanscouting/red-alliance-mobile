@@ -7,7 +7,7 @@ The Red Alliance mobile application is written in JavaScript with [React Native]
 
 The app allows scouters for FRC teams to collect data about competiting FRC teams. This app is the primary source of data for TRA API and TRA analysis. It features a JSON-configurable scouting GUI for easy customization with match and pit scouting functionality.  
 
-# Build/Run
+# Build/Run for Development
 
 ## Android
 **Requirements**
@@ -38,3 +38,13 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
 ### Running the app
 4. In Xcode, open the Xcode **workspace** file `ios/RedAlliance.xcworkspace`. 
 5. Click the play button in the toolbar.
+
+# Build Production Releases
+These releases bundle all JS assets with the app, minify all code, and create an Android App Bundle (AAB) file. This file can then be uploaded to the Google Play developer console for release to the public. 
+
+## Android
+1. Navigate to the `android` folder. 
+2. In a terminal window, execute `./gradlew assembleRelease`.
+
+## iOS
+Building iOS releases is not supported at this time.
