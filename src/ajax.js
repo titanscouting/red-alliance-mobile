@@ -311,9 +311,9 @@ exports.isSignedIn = async () => {
           token: await exports.getIDToken(),
         },
         body: JSON.stringify({
-          competition_id: competition,
-          match_number: match,
-          team_scouted: team,
+          competition: competition,
+          match: match,
+          teamScouted: team,
           data: data,
         }),
       }).then(response => {
