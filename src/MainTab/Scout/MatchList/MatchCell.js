@@ -1,11 +1,11 @@
 import { ListItem } from 'native-base';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, {PureComponent} from 'react';
 import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
 import { Circle } from 'react-native-progress';
 import Globals from '../../../GlobalDefinitions';
 import ThemeProvider from '../../ThemeProvider';
-export default class MatchCell extends React.Component {
+export default class MatchCell extends PureComponent {
 
     static propTypes = {
         number: PropTypes.number.isRequired,

@@ -1,4 +1,4 @@
-import { Body, Container, Header, StyleProvider, Title } from 'native-base';
+import { Body, Container, Header, StyleProvider, Title, } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { BackHandler, FlatList, RefreshControl } from 'react-native';
@@ -48,18 +48,18 @@ export default class MatchList extends React.Component {
                             <Title>Matches</Title>
                         </Body>
                     </Header>
-                        <FlatList
-                            data = {this.props.matches}
-                            renderItem={({item}) => 
-                                <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress} style={this.props.style}/>
-                            }
-                            keyExtractor= {item => String(item.number)}
-                            refreshControl={
-                                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
-                            }
-                            showsVerticalScrollIndicator={false}
-                            style={this.props.style}
-                        />
+                    <FlatList
+                        data = {this.props.matches}
+                        renderItem={({item}) => 
+                            <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress} style={this.props.style}/>
+                        }
+                        keyExtractor= {item => String(item.number)}
+                        refreshControl={
+                            <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
+                        }
+                        showsVerticalScrollIndicator={false}
+                        style={this.props.style}
+                    />
                 </Container>
             </StyleProvider>
         );

@@ -6,30 +6,46 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
-exports.AsyncAlert = async () =>
-  new Promise(resolve => {
-    Alert.alert(
-      'Sign In',
-      'You must be signed in with an IMSA Google account to use the app.',
-      [
-        {
-          text: 'Okay',
-          onPress: () => {
-            resolve('YES');
-          },
-        },
-      ],
-      {cancelable: false},
-    );
-  });
-exports.warnCouldNotAdd = async () =>
-  new Promise(resolve => {
-    Alert.alert(
-      'Unable to add user',
-      'Please try again later.',
-      {cancelable: false},
-    );
-  });
+exports.AsyncAlert = async () => {
+Alert.alert(
+  'Alert Title',
+  'My Alert Msg',
+  [
+    {
+      text: 'Ask me later',
+      onPress: () => console.log('Ask me later pressed')
+    },
+    {
+      text: 'Cancel',
+      onPress: () => console.log('Cancel Pressed'),
+      style: 'cancel'
+    },
+    { text: 'OK', onPress: () => {} }
+  ],
+  { cancelable: false }
+)
+};
+
+exports.warnCouldNotAdd = async () => {
+  Alert.alert(
+    'Could not add user',
+    'Please try again later',
+    [
+      { text: 'OK', onPress: () => {} }
+    ],
+    { cancelable: false }
+  );
+};
+exports.warnCouldNotSubmit = async () => {
+  Alert.alert(
+    'Could not submit data',
+    'Please try again later',
+    [
+      { text: 'OK', onPress: () => {} }
+    ],
+    { cancelable: false }
+  );
+};
 exports.isJSON = str => {
   try {
     JSON.parse(str);
@@ -62,7 +78,7 @@ exports.getUserInfo = async () => {
 exports.addUserToTeam = async (team) => {
   const endpoint = apiHost + 'api/addUserToTeam';
   try {
-    fetch(endpoint, {
+    const res = await fetch(endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -72,10 +88,9 @@ exports.addUserToTeam = async (team) => {
       body: JSON.stringify({
         team: team
       }),
-    }).then(async (response) => {
-      response = await response.json();
-      return response;
-    });
+    })
+    const resp = await res.json()
+    return resp
     // let responseJson = await JSON.parse(response);
   } catch (error) {
     console.error(error);
@@ -108,7 +123,7 @@ exports.fetchTeamsForMatch = async (competition, match) => {
     apiHost +
       'api/fetchScouterUIDs?competition=' +
       competition +
-      '&match_number=' +
+      '&match=' +
       match,
   );
   try {
@@ -182,6 +197,7 @@ exports.fetchMatchConfig = async () => {
     }).then(async response => {
         if (response.status !== 200) {
           console.warn('Error fetching match config');
+          console.log(await response.json())
         } else {
           return await response.json();
         }
@@ -250,7 +266,7 @@ exports.isSignedIn = async () => {
 }),
   (exports.fetchMatches = async competition => {
     const endpoint = encodeURI(
-      apiHost + 'api/fetchMatches?competition=' + competition,
+      apiHost + 'api/fetchScouters?competition=' + competition,
     );
 
     try {
@@ -283,7 +299,7 @@ exports.isSignedIn = async () => {
   (exports.submitMatchData = async (competition, team, match, data) => {
     const endpoint = apiHost + 'api/submitMatchData';
     try {
-      fetch(endpoint, {
+      const resp = await fetch(endpoint, {
         method: 'POST',
         headers: {
           Accept: 'application/json',
@@ -296,10 +312,9 @@ exports.isSignedIn = async () => {
           teamScouted: team,
           data: data,
         }),
-      }).then(response => {
-        return response.json();
-      });
-      // let responseJson = await JSON.parse(response);
+      })
+      const response = await resp.json()
+      return response
     } catch (error) {
       console.error(error);
     }
@@ -380,9 +395,7 @@ exports.fetchPitData = async (competition, team) => {
     apiHost +
       'api/fetchPitData?competition=' +
       competition +
-      '&match_number=' +
-      matchNumber +
-      '&team_scouted=' +
+      '&team=' +
       team,
   );
   try {

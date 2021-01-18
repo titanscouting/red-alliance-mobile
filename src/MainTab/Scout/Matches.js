@@ -103,20 +103,24 @@ export default class Matches extends React.Component {
     this.forceUpdate();
   };
 
-  saveScouting = vals => {
-    ajax.submitMatchData(
+  saveScouting = async vals => {
+    const resp = await ajax.submitMatchData(
       GLOBAL.data.competition,
       this.state.currentTeamNumber,
       this.state.currentMatchNumber,
       vals,
     );
-    this.setState({
-      currentMatchNumber: null,
-      teams: null,
-      currentTeamNumber: null,
-      isBlue: null,
-    });
-    this.forceUpdate();
+    if (!resp.success) {
+      ajax.warnCouldNotSubmit()
+    } else {
+      this.setState({
+        currentMatchNumber: null,
+        teams: null,
+        currentTeamNumber: null,
+        isBlue: null,
+      });
+      this.forceUpdate();
+    }
   };
 
   render() {

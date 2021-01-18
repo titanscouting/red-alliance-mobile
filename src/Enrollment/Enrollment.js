@@ -48,34 +48,50 @@ constructor() {
     super();
     this.state = {team: ''}
 }
-async addUser() {
+addUser() {
   const team = this.state.team;
   ajax.addUserToTeam(team).then((response) => {
-    if (!response.success) {
+    try {
+      if (!response.success) {
+        ajax.warnCouldNotAdd();
+        return
+      } else {
+        this.checkIfRegistered();
+      }
+    } catch {
       ajax.warnCouldNotAdd();
-    } else {
-      this.props.navigation.navigate('Teams');
     }
+
   })
 }
-
+checkIfRegistered() {
+  ajax.getUserInfo().then(userinfo => {
+    let team;
+    try {
+      team = parseInt(userinfo.team) // user team is valid
+      this.state.team = ''
+      this.props.navigation.navigate('Teams');
+    } catch (e) {
+      team = undefined;
+    }
+    this.setState({team: team})
+  }); 
+}
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
-    ajax.getUserInfo().then(userinfo => {
-      let team;
-      try {
-        team = parseInt(userinfo.team) // user team is valid
-        this.props.navigation.navigate('Teams');
-      } catch (e) {
-        team = undefined;
-      }
-      this.setState({team: team})
-    }); 
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
       <View style={styles.slide1}>
         <Text style={styles.text}>The Red Alliance</Text>
-        <Text style={styles.smalltext}>Scouting Matches for your FRC team</Text>
+        <Text style={styles.smalltext}>Scouting Matches for your FRC team{"\n"}</Text>
+        
+        <Button
+          onPress={() => {this.checkIfRegistered.bind(this); this.checkIfRegistered()}}
+          title="Sign In"
+          color="#8F182C"
+          style={{marginTop: "30px"}}
+          accessibilityLabel="Sign in to The Red Alliance"
+        />
       </View>
       <View style={styles.slide1}>
         <Text style={styles.text2}>Scout qualification matches</Text>
@@ -92,10 +108,10 @@ render() {
         <Text style={styles.smalltext}>Get the data for your team by entering your team number</Text>
         <Button
           onPress={() => {this.addUser.bind(this); this.addUser()}}
-          title="Sign In"
+          title="Sign Up"
           color="#8F182C"
           style={{marginTop: "30px"}}
-          accessibilityLabel="Sign in to The Red Alliance"
+          accessibilityLabel="Sign up for The Red Alliance"
         />
       </View>
     </Swiper>
