@@ -4,17 +4,17 @@ const apiHost = 'https://titanscouting.epochml.org/';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
-import { GoogleSignin } from '@react-native-community/google-signin';
+import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
 
-exports.apiHost = apiHost; 
+exports.apiHost = apiHost;
 
 exports.warnCouldNotAdd = async () => {
   Alert.alert(
     'Could not add user',
     'Please try again later',
     [
-      { text: 'OK', onPress: () => {} }
+      { text: 'OK', onPress: () => { } }
     ],
     { cancelable: false }
   );
@@ -24,7 +24,7 @@ exports.warnCouldNotSubmit = async () => {
     'Could not submit data',
     'Please try again later',
     [
-      { text: 'OK', onPress: () => {} }
+      { text: 'OK', onPress: () => { } }
     ],
     { cancelable: false }
   );
@@ -42,49 +42,62 @@ exports.getUserInfo = async () => {
     apiHost + 'api/getUserTeam',
   );
   const token = await exports.getIDToken()
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: token,
-      },
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: token,
+    },
+  })
+    .then(response => {
+      return response.json();
     })
-      .then(response => {
-        return response.json();
-      })
-  } catch (error) {
-    console.error(error);
-  }
+
 }
 exports.addUserToTeam = async (team) => {
   const endpoint = apiHost + 'api/addUserToTeam';
-  try {
-    const res = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-      body: JSON.stringify({
-        team: team
-      }),
-    })
-    const resp = await res.json()
-    return resp
-    // let responseJson = await JSON.parse(response);
-  } catch (error) {
-    console.error(error);
-  }
+
+  const res = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      team: team
+    }),
+  })
+  return await res.json()
+
 }
+exports.firstTimeSignIn = async () => {
+  const now = Date.now();
+  let userInfo;
+  try {
+    userInfo = await GoogleSignin.signIn();
+  } catch (e) {
+    if (e.code === statusCodes.SIGN_IN_REQUIRED) {
+      userInfo = GoogleSignin.signIn();
+    } else if (e.code === statusCodes.IN_PROGRESS) {
+      console.warn("Already signing in...")
+    } else {
+      console.error("Could not sign user in")
+    }
+  }
+  const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
+  await AsyncStorage.setItem('tra-google-auth', jsonValue)
+  return userInfo.idToken
+}
+
 exports.getIDToken = async () => {
   const now = Date.now();
+  let keyData = await AsyncStorage.getItem('tra-google-auth');
   try {
-    let keyData = await AsyncStorage.getItem('tra-google-auth');
     keyData = keyData != null ? JSON.parse(keyData) : null;
-    if(keyData !== null && now - keyData.time < 3500000) {
+    if (keyData !== null && now - keyData.time < 3500000) {
       return keyData.key
     }
   } catch (e) {
@@ -93,10 +106,16 @@ exports.getIDToken = async () => {
   let userInfo;
   try {
     userInfo = await GoogleSignin.signInSilently();
-  } catch(e) {
-    userInfo = await GoogleSignin.signIn()
+  } catch (e) {
+    if (e.code === statusCodes.SIGN_IN_REQUIRED) {
+      userInfo = GoogleSignin.signIn();
+    } else if (e.code === statusCodes.IN_PROGRESS) {
+      console.warn("Already signing in...")
+    } else {
+      console.error("Could not sign user in")
+    }
   }
-  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now})
+  const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
   await AsyncStorage.setItem('tra-google-auth', jsonValue)
   return userInfo.idToken
 };
@@ -104,146 +123,133 @@ exports.getIDToken = async () => {
 exports.fetchTeamsForMatch = async (competition, match) => {
   const endpoint = encodeURI(
     apiHost +
-      'api/fetchScouterUIDs?competition=' +
-      competition +
-      '&match=' +
-      match,
+    'api/fetchScouterUIDs?competition=' +
+    competition +
+    '&match=' +
+    match,
   );
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      let meme_review;
+      if (response.status !== 200) {
+        meme_review = {
+          competition: Globals.competition,
+          scouters: [
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+          ],
+          success: false,
+          teams: ['0', '0', '0', '0', '0', '0'],
+        };
+      } else {
+        meme_review = response.json();
+      }
+      return meme_review;
     })
-      .then(response => {
-        let meme_review;
-        if (response.status !== 200) {
-          meme_review = {
-            competition: Globals.competition,
-            scouters: [
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-              {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            ],
-            success: false,
-            teams: ['0', '0', '0', '0', '0', '0'],
-          };
+    .then(myJson => {
+      let data = [];
+      let is_blue;
+      let desc = null;
+      for (let i = 0; i < myJson.scouters.length; i++) {
+        if (i < 3) {
+          is_blue = true;
         } else {
-          meme_review = response.json();
+          is_blue = false;
         }
-        return meme_review;
-      })
-      .then(myJson => {
-        let data = [];
-        let is_blue;
-        let desc = null;
-        for (let i = 0; i < myJson.scouters.length; i++) {
-          if (i < 3) {
-            is_blue = true;
-          } else {
-            is_blue = false;
-          }
-          try {
-            desc = myJson.scouters[i].name;
-          } catch (e) {
-            desc = null;
-          }
-          data.push({
-            teamNumber: parseInt(myJson.teams[i], 10),
-            isBlue: is_blue,
-            scouterDescription: desc,
-          });
+        try {
+          desc = myJson.scouters[i].name;
+        } catch (e) {
+          desc = null;
         }
-        return data;
-      });
-  } catch (error) {
-    console.error(error);
-  }
+        data.push({
+          teamNumber: parseInt(myJson.teams[i], 10),
+          isBlue: is_blue,
+          scouterDescription: desc,
+        });
+      }
+      return data;
+    });
+
 };
 
 exports.fetchMatchConfig = async () => {
-  const userInfo = await exports.getUserInfo() 
+  const userInfo = await exports.getUserInfo()
   const team = userInfo.team
   const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-    }).then(async response => {
-        if (response.status !== 200) {
-          console.warn('Error fetching match config');
-        } else {
-          return await response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson.config;
-      });
-  } catch (error) {
-    console.error(error);
+
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+  if (response.status !== 200) {
+    console.warn('Error fetching match config');
+  } else {
+    const resp = await response.json()
+    return resp.config
   }
+
 };
 
 exports.fetchPitConfiguration = async () => {
-  const userInfo = await exports.getUserInfo() 
+  const userInfo = await exports.getUserInfo()
   const team = userInfo.team
   const endpoint = encodeURI(apiHost + `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`);
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      if (response.status !== 200) {
+        console.warn('Error fetching pit config');
+      } else {
+        return response.json();
+      }
     })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn('Error fetching pit config');
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson.config;
-      });
-  } catch (error) {
-    console.error(error);
-  }
+    .then(myJson => {
+      return myJson.config;
+    });
+
 };
 
 exports.isSignedIn = async () => {
-  try {
-    const isSignedIn = await GoogleSignin.isSignedIn();
-    return isSignedIn;
-  } catch (error) {
-    console.error(error);
-  }
+
+  const isSignedIn = await GoogleSignin.isSignedIn();
+  return isSignedIn;
+
 };
 
 (exports.signOut = async () => {
-  try {
-    const isSignedIn = await exports.isSignedIn();
-    if (isSignedIn) {
-      try {
-        await GoogleSignin.revokeAccess();
-        await GoogleSignin.signOut();
-        AsyncStorage.setItem('tra-google-auth', "");
-        AsyncStorage.setItem('tra-is-enrolled-user', 'false');
-      } catch (error) {
-        console.error(error);
-      }
+
+  const isSignedIn = await exports.isSignedIn();
+  if (isSignedIn) {
+    try {
+      await GoogleSignin.revokeAccess();
+      await GoogleSignin.signOut();
+      AsyncStorage.setItem('tra-google-auth', "");
+      AsyncStorage.setItem('tra-is-enrolled-user', 'false');
+    } catch (error) {
+      console.error(error);
     }
-  } catch (error) {
-    console.error(error);
   }
+
   // eslint-disable-next-line no-sequences
 }),
   (exports.fetchMatches = async competition => {
@@ -251,223 +257,56 @@ exports.isSignedIn = async () => {
       apiHost + 'api/fetchScouters?competition=' + competition,
     );
 
-    try {
-      return await fetch(endpoint, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          token: await exports.getIDToken(),
-        },
+
+    return await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: await exports.getIDToken(),
+      },
+    })
+      .then(response => {
+        return response.json();
       })
-        .then(response => {
-          return response.json();
-        })
-        .then(myJson => {
-          matches = myJson.data;
-          arr = [];
-          for (let i = 0; i < matches.length; i++) {
-            dict = {};
-            dict.number = i + 1;
-            dict.scouts = matches[i];
-            arr.push(dict);
-          }
-          return arr;
-        });
-    } catch (error) {
-      console.error(error);
-    }
+      .then(myJson => {
+        matches = myJson.data;
+        arr = [];
+        for (let i = 0; i < matches.length; i++) {
+          dict = {};
+          dict.number = i + 1;
+          dict.scouts = matches[i];
+          arr.push(dict);
+        }
+        return arr;
+      });
+
   }),
   (exports.submitMatchData = async (competition, team, match, data) => {
     const endpoint = apiHost + 'api/submitMatchData';
-    try {
-      const resp = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          token: await exports.getIDToken(),
-        },
-        body: JSON.stringify({
-          competition: competition,
-          match: match,
-          teamScouted: team,
-          data: data,
-        }),
-      })
-      const response = await resp.json()
-      return response
-    } catch (error) {
-      console.error(error);
-    }
+
+    const resp = await fetch(endpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+        token: await exports.getIDToken(),
+      },
+      body: JSON.stringify({
+        competition: competition,
+        match: match,
+        teamScouted: team,
+        data: data,
+      }),
+    })
+    const response = await resp.json()
+    return response
+
   }),
   (exports.submitPitData = async (competition, team, data) => {
     let match = 0; // TODO: REMOVE MATCH FROM THE API
     const endpoint = apiHost + 'api/submitPitData';
-    try {
-      fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-          token: await exports.getIDToken(),
-        },
-        body: JSON.stringify({
-          competition_id: competition,
-          match: match,
-          team_scouted: team,
-          data: data,
-        }),
-      })
-        .then(response => {
-          if (response.status !== 200) {
-            console.warn(
-              'Error fetching competition schedule for ' + competition,
-            );
-          } else {
-            return response.json();
-          }
-        })
-        .then(myJson => {
-          return myJson;
-        });
-      // let responseJson = await JSON.parse(response);
-    } catch (error) {
-      console.error(error);
-    }
-  }),
-  // STATS
-  (exports.fetchMatchData = async (competition, matchNumber, team) => {
-    const endpoint = encodeURI(
-      apiHost +
-        'api/fetchMatchData?competition=' +
-        competition +
-        '&match=' +
-        matchNumber +
-        '&team_scouted=' +
-        team,
-    );
 
-    try {
-      return await fetch(endpoint, {
-        method: 'GET',
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      })
-        .then(response => {
-          if (response.status !== 200) {
-            console.warn('Error fetching match data for ' + competition);
-          } else {
-            return response.json();
-          }
-        })
-        .then(myJson => {
-          return myJson;
-        });
-    } catch (error) {
-      console.error(error);
-    }
-  });
-
-exports.fetchPitData = async (competition, team) => {
-  let matchNumber = 0;
-  const endpoint = encodeURI(
-    apiHost +
-      'api/fetchPitData?competition=' +
-      competition +
-      '&team=' +
-      team,
-  );
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.status == 200) {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        if (myJson !== undefined) {
-          return myJson.data;
-        }
-      });
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-exports.fetchAllTeamNicknamesAtCompetition = async competition => {
-  const endpoint = encodeURI(
-    apiHost +
-      'api/fetchAllTeamNicknamesAtCompetition?competition=' +
-      competition,
-  );
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (response.status === 200) {
-          return response.json();
-        } else {
-          console.warn('Error fetching nicknames for ' + competition);
-        }
-      })
-      .then(myJson => {
-        return myJson.data;
-      });
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-exports.findTeamNickname = async team_num => {
-  const endpoint = encodeURI(
-    apiHost + 'api/findTeamNickname?team_number=' + team_num,
-  );
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        let meme_review;
-        if (response.status === 200) {
-          meme_review = response.json();
-        } else {
-          meme_review = {
-            success: false,
-            team_num: team_num,
-            nickname: 'ERR: TEAM NOT IN DB',
-          };
-        }
-        return meme_review;
-      })
-      .then(myJson => {
-        return myJson.data;
-      });
-  } catch (e) {
-    console.error(e);
-  }
-};
-
-exports.addScouterToMatch = async (team_scouting, match, competition) => {
-  const endpoint = apiHost + 'api/addScouterToMatch';
-  try {
     fetch(endpoint, {
       method: 'POST',
       headers: {
@@ -476,53 +315,11 @@ exports.addScouterToMatch = async (team_scouting, match, competition) => {
         token: await exports.getIDToken(),
       },
       body: JSON.stringify({
-        match,
-        team_scouting,
-        competition
+        competition: competition,
+        match: match,
+        teamScouted: team,
+        data: data,
       }),
-    }).then(response => {
-      return response.json();
-    });
-    // let responseJson = await JSON.parse(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-exports.removeScouterFromMatch = async (team_scouting, match, competition) => {
-  const endpoint = apiHost + 'api/removeScouterFromMatch';
-  try {
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-      body: JSON.stringify({
-        match,
-        team_scouting,
-        competition
-      }),
-    }).then(response => {
-      return response.json();
-    });
-    // let responseJson = await JSON.parse(response);
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-exports.fetchCompetitionSchedule = async competition => {
-  const endpoint =
-    apiHost + 'api/fetchCompetitionSchedule?competition=' + competition;
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
     })
       .then(response => {
         if (response.status !== 200) {
@@ -534,11 +331,187 @@ exports.fetchCompetitionSchedule = async competition => {
         }
       })
       .then(myJson => {
-        return myJson.data;
+        return myJson;
       });
-  } catch (error) {
-    console.error(error);
-  }
+    // let responseJson = await JSON.parse(response);
+
+  }),
+  // STATS
+  (exports.fetchMatchData = async (competition, matchNumber, team) => {
+    const endpoint = encodeURI(
+      apiHost +
+      'api/fetchMatchData?competition=' +
+      competition +
+      '&match=' +
+      matchNumber +
+      '&team_scouted=' +
+      team,
+    );
+    const response = await fetch(endpoint, {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    })
+    if (response.status !== 200) {
+      console.warn('Error fetching match data for ' + competition);
+    } else {
+      return await response.json();
+    }
+
+  });
+
+exports.fetchPitData = async (competition, team) => {
+  const endpoint = encodeURI(
+    apiHost +
+    'api/fetchPitData?competition=' +
+    competition +
+    '&team=' +
+    team,
+  );
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      if (response.status == 200) {
+        return response.json();
+      }
+    })
+    .then(myJson => {
+      if (myJson !== undefined) {
+        return myJson.data;
+      }
+    });
+
+};
+
+exports.fetchAllTeamNicknamesAtCompetition = async competition => {
+  const endpoint = encodeURI(
+    apiHost +
+    'api/fetchAllTeamNicknamesAtCompetition?competition=' +
+    competition,
+  );
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      if (response.status === 200) {
+        return response.json();
+      } else {
+        console.warn('Error fetching nicknames for ' + competition);
+      }
+    })
+    .then(myJson => {
+      return myJson.data;
+    });
+};
+
+exports.findTeamNickname = async team_num => {
+  const endpoint = encodeURI(
+    apiHost + 'api/findTeamNickname?team_number=' + team_num,
+  );
+
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      let meme_review;
+      if (response.status === 200) {
+        meme_review = response.json();
+      } else {
+        meme_review = {
+          success: false,
+          team_num: team_num,
+          nickname: 'ERR: TEAM NOT IN DB',
+        };
+      }
+      return meme_review;
+    })
+    .then(myJson => {
+      return myJson.data;
+    });
+};
+
+exports.addScouterToMatch = async (team_scouting, match, competition) => {
+  const endpoint = apiHost + 'api/addScouterToMatch';
+
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      match,
+      team_scouting,
+      competition
+    }),
+  }).then(response => {
+    return response.json();
+  });
+  // let responseJson = await JSON.parse(response);
+
+};
+
+exports.removeScouterFromMatch = async (team_scouting, match, competition) => {
+  const endpoint = apiHost + 'api/removeScouterFromMatch';
+
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      match,
+      team_scouting,
+      competition
+    }),
+  }).then(response => {
+    return response.json();
+  });
+  // let responseJson = await JSON.parse(response);
+
+};
+
+exports.fetchCompetitionSchedule = async competition => {
+  const endpoint =
+    apiHost + 'api/fetchCompetitionSchedule?competition=' + competition;
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  }).then(response => {
+    if (response.status !== 200) {
+      console.warn(
+        'Error fetching competition schedule for ' + competition,
+      );
+    } else {
+      return response.json();
+    }
+  })
+    .then(myJson => {
+      return myJson.data;
+    });
 };
 
 exports.fetchTeamsInCompetition = async competition => {
@@ -554,7 +527,7 @@ exports.fetchTeamsInCompetition = async competition => {
       }
     }
   }
-  return teams.sort(function(a, b) {
+  return teams.sort(function (a, b) {
     return a - b;
   });
 };
@@ -572,7 +545,7 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
       }
     }
   }
-  return matches.sort(function(a, b) {
+  return matches.sort(function (a, b) {
     return a - b;
   });
 };
@@ -627,146 +600,136 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
 
 exports.fetch2022Schedule = async competition => {
   const endpoint = apiHost + 'api/fetch2022Schedule?competition=' + competition;
-  try {
-    let schedule = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
+  let schedule = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+    .then(response => {
+      if (response.status !== 200) {
+        console.warn(
+          'Error fetching 2022 competition schedule for ' + competition,
+        );
+      } else {
+        return response.json();
+      }
     })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn(
-            'Error fetching 2022 competition schedule for ' + competition,
-          );
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        let data = [];
-        for (match of myJson.data) {
-          data.push({
-            match: match.match,
-            teams: [
-              match.teams[0],
-              match.teams[1],
-              match.teams[2],
-              match.teams[3],
-              match.teams[4],
-              match.teams[5],
-            ],
-          });
-        }
-        return data.sort(function(a, b) {
-          return a.match - b.match;
+    .then(myJson => {
+      let data = [];
+      for (match of myJson.data) {
+        data.push({
+          match: match.match,
+          teams: [
+            match.teams[0],
+            match.teams[1],
+            match.teams[2],
+            match.teams[3],
+            match.teams[4],
+            match.teams[5],
+          ],
         });
+      }
+      return data.sort(function (a, b) {
+        return a.match - b.match;
       });
-    return schedule;
-  } catch (error) {
-    console.error(error);
-  }
+    });
+  return schedule;
 };
 
 exports.getStrategiesForMatch = async (competition, matchNumber) => {
   const endpoint = encodeURI(
     apiHost +
-      'api/fetchScouterSuggestions?competition=' +
-      competition +
-      '&match=' +
-      matchNumber,
+    'api/fetchScouterSuggestions?competition=' +
+    competition +
+    '&match=' +
+    matchNumber,
   );
-  try {
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-    if (response.status !== 200) {
-      console.warn(
-        'Status ' +
-          response.status +
-          ' Error fetching scouting suggestions data for ' +
-          competition,
-      );
-    } else {
-      const resp = await response.json()
-      return resp
-    }
-  } catch (error) {
-    console.error(error);
+
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+  if (response.status !== 200) {
+    console.warn(
+      'Status ' +
+      response.status +
+      ' Error fetching scouting suggestions data for ' +
+      competition,
+    );
+  } else {
+    const resp = await response.json()
+    return resp
   }
+
 };
 
 exports.submitStrategy = async (competition, match, data) => {
   const endpoint = apiHost + 'api/submitStrategy';
-  try {
-    return await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-      body: JSON.stringify({
-        competition: competition,
-        match: match,
-        data: data,
-      }),
+
+  return await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      competition: competition,
+      match: match,
+      data: data,
+    }),
+  })
+    .then(response => {
+      if (response.status !== 200) {
+        console.warn(
+          'Status ' +
+          response.status +
+          ' Error submitting scouting suggestions data for ' +
+          competition,
+        );
+        exports.warnCouldNotSubmit();
+      } else {
+        return response.json();
+      }
     })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn(
-            'Status ' +
-              response.status +
-              ' Error submitting scouting suggestions data for ' +
-              competition,
-          );
-          exports.warnCouldNotSubmit();
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson;
-      });
-  } catch (error) {
-    console.error(error);
-  }
+    .then(myJson => {
+      return myJson;
+    });
+
 };
 
 exports.getUserStrategy = async (competition, matchNumber) => {
   const endpoint = encodeURI(
     apiHost +
-      'api/fetchUserStrategy?competition=' +
-      competition +
-      '&match=' +
-      matchNumber,
+    'api/fetchUserStrategy?competition=' +
+    competition +
+    '&match=' +
+    matchNumber,
   );
-  try {
-    const response =  await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-    })
-    if (response.status !== 200) {
-      console.warn(
-        'Status ' +
-          response.status +
-          ' Error fetching fetchUserStrategy ' +
-          competition,
-      );
-    } else {
-      const resp = await response.json()
-      return resp;
-    }
-  } catch (error) {
-    console.error(error);
+
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+  })
+  if (response.status !== 200) {
+    console.warn(
+      'Status ' +
+      response.status +
+      ' Error fetching fetchUserStrategy ' +
+      competition,
+    );
+  } else {
+    const resp = await response.json()
+    return resp;
   }
+
 };

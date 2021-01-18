@@ -14,10 +14,6 @@ export default class Matches extends React.Component {
         style: PropTypes.object.isRequired
     }
 
-    componentDidMount() {
-       this.refreshTeam();
-    }
-
     state = {
         refreshing: false,
         statsData: null,
@@ -35,6 +31,7 @@ export default class Matches extends React.Component {
     }
 
     render() {
+        this.refreshTeam();
         const styles = {
             generic: {
                 backgroundColor: "#ffffff",

@@ -77,6 +77,11 @@ checkIfRegistered() {
     this.setState({team: team})
   }); 
 }
+componentDidMount() {
+  ajax.firstTimeSignIn().then(() => {
+    this.checkIfRegistered()
+  })
+}
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
     return (
@@ -84,14 +89,6 @@ render() {
       <View style={styles.slide1}>
         <Text style={styles.text}>The Red Alliance</Text>
         <Text style={styles.smalltext}>Scouting Matches for your FRC team{"\n"}</Text>
-        
-        <Button
-          onPress={() => {this.checkIfRegistered.bind(this); this.checkIfRegistered()}}
-          title="Sign In"
-          color="#8F182C"
-          style={{marginTop: "30px"}}
-          accessibilityLabel="Sign in to The Red Alliance"
-        />
       </View>
       <View style={styles.slide1}>
         <Text style={styles.text2}>Scout qualification matches</Text>
