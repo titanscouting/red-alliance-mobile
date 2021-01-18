@@ -236,7 +236,7 @@ exports.isSignedIn = async () => {
 
 };
 
-(exports.signOut = async () => {
+exports.signOut = async () => {
 
   const isSignedIn = await exports.isSignedIn();
   if (isSignedIn) {
@@ -251,116 +251,116 @@ exports.isSignedIn = async () => {
   }
 
   // eslint-disable-next-line no-sequences
-}),
-  (exports.fetchMatches = async competition => {
-    const endpoint = encodeURI(
-      apiHost + 'api/fetchScouters?competition=' + competition,
-    );
+}
+exports.fetchMatches = async competition => {
+  const endpoint = encodeURI(
+    apiHost + 'api/fetchScouters?competition=' + competition,
+  );
 
 
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+  })
+    .then(response => {
+      return response.json();
     })
-      .then(response => {
+    .then(myJson => {
+      matches = myJson.data;
+      arr = [];
+      for (let i = 0; i < matches.length; i++) {
+        dict = {};
+        dict.number = i + 1;
+        dict.scouts = matches[i];
+        arr.push(dict);
+      }
+      return arr;
+    });
+
+}
+exports.submitMatchData = async (competition, team, match, data) => {
+  const endpoint = apiHost + 'api/submitMatchData';
+
+  const resp = await fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      competition: competition,
+      match: match,
+      teamScouted: team,
+      data: data,
+    }),
+  })
+  const response = await resp.json()
+  return response
+
+}
+exports.submitPitData = async (competition, team, data) => {
+  let match = 0; // TODO: REMOVE MATCH FROM THE API
+  const endpoint = apiHost + 'api/submitPitData';
+
+  fetch(endpoint, {
+    method: 'POST',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
+    },
+    body: JSON.stringify({
+      competition: competition,
+      match: match,
+      teamScouted: team,
+      data: data,
+    }),
+  })
+    .then(response => {
+      if (response.status !== 200) {
+        console.warn(
+          'Error fetching competition schedule for ' + competition,
+        );
+      } else {
         return response.json();
-      })
-      .then(myJson => {
-        matches = myJson.data;
-        arr = [];
-        for (let i = 0; i < matches.length; i++) {
-          dict = {};
-          dict.number = i + 1;
-          dict.scouts = matches[i];
-          arr.push(dict);
-        }
-        return arr;
-      });
-
-  }),
-  (exports.submitMatchData = async (competition, team, match, data) => {
-    const endpoint = apiHost + 'api/submitMatchData';
-
-    const resp = await fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-      body: JSON.stringify({
-        competition: competition,
-        match: match,
-        teamScouted: team,
-        data: data,
-      }),
+      }
     })
-    const response = await resp.json()
-    return response
+    .then(myJson => {
+      return myJson;
+    });
+  // let responseJson = await JSON.parse(response);
 
-  }),
-  (exports.submitPitData = async (competition, team, data) => {
-    let match = 0; // TODO: REMOVE MATCH FROM THE API
-    const endpoint = apiHost + 'api/submitPitData';
+}
+// STATS
+exports.fetchMatchData = async (competition, matchNumber, team) => {
+  const endpoint = encodeURI(
+    apiHost +
+    'api/fetchMatchData?competition=' +
+    competition +
+    '&match=' +
+    matchNumber +
+    '&team_scouted=' +
+    team,
+  );
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  })
+  if (response.status !== 200) {
+    console.warn('Error fetching match data for ' + competition);
+  } else {
+    return await response.json();
+  }
 
-    fetch(endpoint, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
-      },
-      body: JSON.stringify({
-        competition: competition,
-        match: match,
-        teamScouted: team,
-        data: data,
-      }),
-    })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn(
-            'Error fetching competition schedule for ' + competition,
-          );
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson;
-      });
-    // let responseJson = await JSON.parse(response);
-
-  }),
-  // STATS
-  (exports.fetchMatchData = async (competition, matchNumber, team) => {
-    const endpoint = encodeURI(
-      apiHost +
-      'api/fetchMatchData?competition=' +
-      competition +
-      '&match=' +
-      matchNumber +
-      '&team_scouted=' +
-      team,
-    );
-    const response = await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-    })
-    if (response.status !== 200) {
-      console.warn('Error fetching match data for ' + competition);
-    } else {
-      return await response.json();
-    }
-
-  });
+};
 
 exports.fetchPitData = async (competition, team) => {
   const endpoint = encodeURI(
