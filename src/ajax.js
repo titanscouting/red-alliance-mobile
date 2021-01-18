@@ -6,7 +6,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
-
 exports.AsyncAlert = async () =>
   new Promise(resolve => {
     Alert.alert(
@@ -32,9 +31,9 @@ exports.isJSON = str => {
   }
   return true;
 };
-exports.checkUserTeam = async (token) => {
+exports.getUserInfo = async () => {
   const endpoint = encodeURI(
-    apiHost + 'api/checkUserTeam',
+    apiHost + 'api/getUserTeam',
   );
   try {
     return await fetch(endpoint, {
@@ -42,32 +41,10 @@ exports.checkUserTeam = async (token) => {
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        token: token,
+        token: await exports.getIDToken(),
       },
     })
       .then(response => {
-        return response.json();
-      })
-  } catch (error) {
-    console.error(error);
-  }
-}
-exports.checkUser = async (token) => {
-  const endpoint = encodeURI(
-    apiHost + 'api/checkUser',
-  );
-
-  try {
-    return await fetch(endpoint, {
-      method: 'GET',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-        token: token,
-      },
-    })
-      .then(response => {
-
         return response.json();
       })
   } catch (error) {
@@ -190,7 +167,8 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 };
 
 exports.fetchMatchConfig = async () => {
-  const team = 2022 //TODO: pull this from API
+  const userInfo = await exports.getUserInfo() 
+  const team = userInfo.team
   const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
@@ -216,7 +194,8 @@ exports.fetchMatchConfig = async () => {
 };
 
 exports.fetchPitConfiguration = async () => {
-  const team = 2022; //TODO: Pull this from the API
+  const userInfo = await exports.getUserInfo() 
+  const team = userInfo.team
   const endpoint = encodeURI(apiHost + `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`);
   try {
     return await fetch(endpoint, {
@@ -492,14 +471,13 @@ exports.findTeamNickname = async team_num => {
 
 exports.addScouterToMatch = async (team_scouting, match, competition) => {
   const endpoint = apiHost + 'api/addScouterToMatch';
-  const token = await exports.getIDToken();
   try {
     fetch(endpoint, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        token: String(token),
+        token: await exports.getIDToken(),
       },
       body: JSON.stringify({
         match,
