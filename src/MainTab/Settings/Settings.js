@@ -83,7 +83,7 @@ export default class Settings extends React.Component {
               <Text style={optionsStyle}>Copyright Titan Scouting 2020. All rights reserved.</Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Button hasText onPress={() => { Linking.openURL('https://scouting-api.herokuapp.com/privacy-policy');}}>
+              <Button hasText onPress={() => { Linking.openURL(`${ajax.apiHost}privacy-policy`);}}>
                   <Text>View Privacy Policy</Text>
               </Button>            
             </CardItem>

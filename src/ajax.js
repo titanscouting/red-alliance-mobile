@@ -4,8 +4,10 @@ const apiHost = 'https://titanscouting.epochml.org/';
 
 import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
-import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import { GoogleSignin } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
+
+exports.apiHost = apiHost; 
 
 exports.warnCouldNotAdd = async () => {
   Alert.alert(
