@@ -16,11 +16,12 @@ export default class SubmittedStrategyCell extends React.Component {
         return (
             <Card style={styles}>
                 <CardItem header style={styles}>
-                    <Text bolded style={styles}>{this.props.scouter}</Text>
+                    <Text bolded style={styles}>{this.props.scouter} (scouted team {this.props.team_scouted})</Text>
                 </CardItem>
                 <CardItem style={styles}>
                     <Text style={styles}>{this.props.strategy}</Text>
                 </CardItem>
+
             </Card>
         );
     }

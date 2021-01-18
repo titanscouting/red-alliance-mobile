@@ -6,25 +6,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import { Alert } from 'react-native';
 import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
-exports.AsyncAlert = async () => {
-Alert.alert(
-  'Alert Title',
-  'My Alert Msg',
-  [
-    {
-      text: 'Ask me later',
-      onPress: () => console.log('Ask me later pressed')
-    },
-    {
-      text: 'Cancel',
-      onPress: () => console.log('Cancel Pressed'),
-      style: 'cancel'
-    },
-    { text: 'OK', onPress: () => {} }
-  ],
-  { cancelable: false }
-)
-};
 
 exports.warnCouldNotAdd = async () => {
   Alert.alert(
@@ -197,7 +178,6 @@ exports.fetchMatchConfig = async () => {
     }).then(async response => {
         if (response.status !== 200) {
           console.warn('Error fetching match config');
-          console.log(await response.json())
         } else {
           return await response.json();
         }
@@ -332,7 +312,7 @@ exports.isSignedIn = async () => {
         },
         body: JSON.stringify({
           competition_id: competition,
-          match_number: match,
+          match: match,
           team_scouted: team,
           data: data,
         }),
@@ -360,7 +340,7 @@ exports.isSignedIn = async () => {
       apiHost +
         'api/fetchMatchData?competition=' +
         competition +
-        '&match_number=' +
+        '&match=' +
         matchNumber +
         '&team_scouted=' +
         team,
@@ -692,32 +672,28 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
     apiHost +
       'api/fetchScouterSuggestions?competition=' +
       competition +
-      '&matchNumber=' +
+      '&match=' +
       matchNumber,
   );
   try {
-    return await fetch(endpoint, {
+    const response = await fetch(endpoint, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
     })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn(
-            'Status ' +
-              response.status +
-              ' Error fetching scouting suggestions data for ' +
-              competition,
-          );
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson.data;
-      });
+    if (response.status !== 200) {
+      console.warn(
+        'Status ' +
+          response.status +
+          ' Error fetching scouting suggestions data for ' +
+          competition,
+      );
+    } else {
+      const resp = await response.json()
+      return resp
+    }
   } catch (error) {
     console.error(error);
   }
@@ -747,6 +723,7 @@ exports.submitStrategy = async (competition, match, data) => {
               ' Error submitting scouting suggestions data for ' +
               competition,
           );
+          exports.warnCouldNotSubmit();
         } else {
           return response.json();
         }
@@ -764,11 +741,11 @@ exports.getUserStrategy = async (competition, matchNumber) => {
     apiHost +
       'api/fetchUserStrategy?competition=' +
       competition +
-      '&match_number=' +
+      '&match=' +
       matchNumber,
   );
   try {
-    return await fetch(endpoint, {
+    const response =  await fetch(endpoint, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
@@ -776,21 +753,17 @@ exports.getUserStrategy = async (competition, matchNumber) => {
         token: await exports.getIDToken(),
       },
     })
-      .then(response => {
-        if (response.status !== 200) {
-          console.warn(
-            'Status ' +
-              response.status +
-              ' Error fetching fetchUserStrategy ' +
-              competition,
-          );
-        } else {
-          return response.json();
-        }
-      })
-      .then(myJson => {
-        return myJson.data;
-      });
+    if (response.status !== 200) {
+      console.warn(
+        'Status ' +
+          response.status +
+          ' Error fetching fetchUserStrategy ' +
+          competition,
+      );
+    } else {
+      const resp = await response.json()
+      return resp;
+    }
   } catch (error) {
     console.error(error);
   }
