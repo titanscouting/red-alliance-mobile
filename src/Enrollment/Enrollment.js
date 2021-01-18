@@ -4,7 +4,6 @@ import ajax from '../ajax'
 import {Alert, TextInput, Image, Text, View, StyleSheet, Button } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Onboarding from 'react-native-onboarding-swiper';
-import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
 import Swiper from 'react-native-swiper'
 
 const styles = StyleSheet.create({
@@ -47,56 +46,31 @@ const styles = StyleSheet.create({
 export default class Enrollment extends React.Component {
 constructor() {
     super();
-    this.state = {teamValue: ''}
-    this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
-}
-async getTeamData() {
-  AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
-    this.state.isEnrolled = value === "true"
-  })
-  this.getCreds().then((creds) => {
-    ajax.checkUserTeam(creds).then((data) => {
-      if (data.team && data.success == true) {
-        this.setState({teamValue: data.team.toString()})
-        AsyncStorage.setItem('tra-user-team', toString(data.team)).then(() => {
-          AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
-              this.props.navigation.navigate('Teams');  
-          })
-        })
-      }
-    })
-  }).catch(this.throwError);
-}
-async refreshTeamData() {
-  AsyncStorage.getItem("tra-is-enrolled-user").then((err, value) => {
-    this.state.isEnrolled = value === "true"
-  })
-  this.getCreds().then((creds) => {
-    ajax.checkUserTeam(creds).then((data) => {
-      if (data.team && data.success == true) {
-        this.setState({teamValue: data.team.toString()})
-        AsyncStorage.setItem('tra-user-team', toString(data.team)).then(() => {
-          AsyncStorage.setItem("tra-is-enrolled-user", "true")
-        })
-      }
-    })
-  }).catch(this.throwError);
-}
-async getCreds() {
-  this.userToken = await ajax.getIDToken()
-  return this.userToken;
+    this.state = {team: ''}
 }
 async addUser() {
-  await ajax.addUserToTeam(parseInt(this.state.teamValue)).then(() => {
-    AsyncStorage.setItem("tra-is-enrolled-user", "true").then(() => {
+  const team = this.state.team;
+  ajax.addUserToTeam(team).then((response) => {
+    if (!response.success) {
+      ajax.warnCouldNotAdd();
+    } else {
       this.props.navigation.navigate('Teams');
-    })
-  }).catch(this.throwError);
+    }
+  })
 }
 
 render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
-    this.state.teamValue === '' ? this.getTeamData() : this.refreshTeamData();
+    ajax.getUserInfo().then(userinfo => {
+      let team;
+      try {
+        team = parseInt(userinfo.team) // user team is valid
+        this.props.navigation.navigate('Teams');
+      } catch (e) {
+        team = undefined;
+      }
+      this.setState({team: team})
+    }); 
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
       <View style={styles.slide1}>
@@ -110,8 +84,8 @@ render() {
       <View style={styles.slide3}>
         <TextInput
             style={enrollmentStyle.textInputStyle}
-            onChangeText={(text) => {this.setState.bind(this); this.setState({teamValue: String(text)})}}
-            value={this.state.teamValue}
+            onChangeText={(text) => {this.setState.bind(this); this.setState({team: String(text)})}}
+            value={String(this.state.team)}
             keyboardType="number-pad"
           />
         <Text style={styles.text2}>Enter your team number</Text>
@@ -121,7 +95,7 @@ render() {
           title="Sign In"
           color="#8F182C"
           style={{marginTop: "30px"}}
-          accessibilityLabel="Learn more about this purple button"
+          accessibilityLabel="Sign in to The Red Alliance"
         />
       </View>
     </Swiper>

@@ -22,7 +22,14 @@ exports.AsyncAlert = async () =>
       {cancelable: false},
     );
   });
-
+exports.warnCouldNotAdd = async () =>
+  new Promise(resolve => {
+    Alert.alert(
+      'Unable to add user',
+      'Please try again later.',
+      {cancelable: false},
+    );
+  });
 exports.isJSON = str => {
   try {
     JSON.parse(str);
@@ -35,13 +42,14 @@ exports.getUserInfo = async () => {
   const endpoint = encodeURI(
     apiHost + 'api/getUserTeam',
   );
+  const token = await exports.getIDToken()
   try {
     return await fetch(endpoint, {
       method: 'GET',
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
-        token: await exports.getIDToken(),
+        token: token,
       },
     })
       .then(response => {
@@ -66,9 +74,6 @@ exports.addUserToTeam = async (team) => {
       }),
     }).then(async (response) => {
       response = await response.json();
-      if (!response.success) {
-        console.error("Could not add the user")
-      }
       return response;
     });
     // let responseJson = await JSON.parse(response);
@@ -87,18 +92,15 @@ exports.getIDToken = async () => {
   } catch (e) {
     console.warn("Error pulling stored key")
   }
+  let userInfo;
   try {
-    const userInfo = await GoogleSignin.signInSilently();
-    const jsonValue = JSON.stringify({key: userInfo.idToken, time: now})
-    await AsyncStorage.setItem('tra-google-auth', jsonValue)
-    return userInfo.idToken
-  } catch (error) {
-    if (error.code === statusCodes.SIGN_IN_REQUIRED) {
-      await GoogleSignin.signIn()
-    } else {
-      console.error(error)
-    }
+    userInfo = await GoogleSignin.signInSilently();
+  } catch(e) {
+    userInfo = await GoogleSignin.signIn()
   }
+  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now})
+  await AsyncStorage.setItem('tra-google-auth', jsonValue)
+  return userInfo.idToken
 };
 
 exports.fetchTeamsForMatch = async (competition, match) => {
@@ -174,15 +176,14 @@ exports.fetchMatchConfig = async () => {
     return await fetch(endpoint, {
       method: 'GET',
       headers: {
-        Accept: 'application/json',
+        'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-    })
-      .then(response => {
+    }).then(async response => {
         if (response.status !== 200) {
           console.warn('Error fetching match config');
         } else {
-          return response.json();
+          return await response.json();
         }
       })
       .then(myJson => {
