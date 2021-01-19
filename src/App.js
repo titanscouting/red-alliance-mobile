@@ -22,9 +22,9 @@ const updateAlert = urlToOpen => {
         onPress: () => adminOverride(),
         style: 'cancel',
       },
-      {text: 'Update', onPress: () => Linking.openURL(urlToOpen)},
+      { text: 'Update', onPress: () => Linking.openURL(urlToOpen) },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 const adminOverride = () => {
@@ -44,8 +44,8 @@ const adminOverride = () => {
             Alert.alert(
               'Invalid Password',
               'The admin password was invalid',
-              [{text: 'Back', onPress: () => adminOverride()}],
-              {cancelable: false},
+              [{ text: 'Back', onPress: () => adminOverride() }],
+              { cancelable: false },
             );
           }
         },
@@ -56,7 +56,7 @@ const adminOverride = () => {
       cancelable: false,
       defaultValue: '',
     },
-  );  
+  );
 };
 VersionCheck.needUpdate().then(async res => {
   try {
@@ -83,7 +83,7 @@ GoogleSignin.configure({
   accountName: '', // [Android] specifies an account name on the device that should be used
   iosClientId: '291863698243-3nt50bms4e2vr721vlvgb505aaj5ihhu.apps.googleusercontent.com',
 });
-GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true }).catch((e) => {console.error("play services are not available")});
+GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true }).catch((e) => { console.error("play services are not available") });
 // This will prompt a user to sign in if they aren't already
 export default class App extends React.Component {
   render() {

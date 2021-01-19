@@ -56,7 +56,7 @@ export default class Settings extends React.Component {
               </Right>
             </CardItem>
           </Card>
-          <Card style={optionsStyle}>
+          {/* <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
@@ -65,7 +65,7 @@ export default class Settings extends React.Component {
                 </Button>
               </Right>
             </CardItem>
-          </Card>
+          </Card> */}
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
