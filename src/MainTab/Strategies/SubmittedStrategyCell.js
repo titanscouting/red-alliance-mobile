@@ -11,7 +11,7 @@ export default class SubmittedStrategyCell extends React.Component {
         style: PropTypes.object.isRequired
     };
 
-    render () {
+    render() {
         const styles = this.props.style.generic
         return (
             <Card style={styles}>
@@ -33,18 +33,18 @@ const styles = StyleSheet.create({
         height: 60,
     },
     team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
+        color: 'black',
+        fontSize: 18,
+        flex: 1,
     },
     type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
+        color: 'black',
+        fontSize: 16,
+        flex: 1,
     },
     match: {
-      color: 'black',
-      fontSize: 20,
+        color: 'black',
+        fontSize: 20,
     },
     blue: {
         flexDirection: 'column',

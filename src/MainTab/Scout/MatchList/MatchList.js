@@ -21,9 +21,9 @@ export default class MatchList extends React.Component {
     }
 
     onRefresh = async () => {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         await this.props.refreshMatches();
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
     componentDidMount() {
         this.onRefresh();
@@ -37,23 +37,23 @@ export default class MatchList extends React.Component {
     handleBackPress = () => {
         return true;
     }
-    
-    render () {
-          
+
+    render() {
+
         return (
             <StyleProvider style={getTheme(material)}>
                 <Container>
                     <Header>
-                        <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
+                        <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                             <Title>Matches</Title>
                         </Body>
                     </Header>
                     <FlatList
-                        data = {this.props.matches}
-                        renderItem={({item}) => 
-                            <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress} style={this.props.style}/>
+                        data={this.props.matches}
+                        renderItem={({ item }) =>
+                            <MatchCell number={item.number} scouts={item.scouts} onPress={this.props.onItemPress} style={this.props.style} />
                         }
-                        keyExtractor= {item => String(item.number)}
+                        keyExtractor={item => String(item.number)}
                         refreshControl={
                             <RefreshControl refreshing={this.state.refreshing} onRefresh={this.onRefresh} />
                         }
@@ -64,5 +64,5 @@ export default class MatchList extends React.Component {
             </StyleProvider>
         );
     }
-    
+
 }

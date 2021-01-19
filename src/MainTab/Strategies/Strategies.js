@@ -29,16 +29,16 @@ export default class Strategies extends Component {
   refreshSchedule = async () => {
     let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
     let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(Globals.data.competition);
-    this.setState({schedule: schedule, refreshing:false, nicknames: nicknames});
+    this.setState({ schedule: schedule, refreshing: false, nicknames: nicknames });
   }
 
   handlePress = (match, teams) => {
-    this.setState({currentMatch:match, currentTeams: teams});
+    this.setState({ currentMatch: match, currentTeams: teams });
   }
 
 
   popMatch = () => {
-    this.setState({currentMatch: null});
+    this.setState({ currentMatch: null });
   }
 
   render() {
@@ -47,19 +47,19 @@ export default class Strategies extends Component {
       return (
         <StyleProvider style={getTheme(material)}>
           <Container>
-          <Header>
-              <Body style={{ flex: 1,  justifyContent: 'center', alignItems: 'center' }}>
-                  <Title>Strategies</Title>
+            <Header>
+              <Body style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <Title>Strategies</Title>
               </Body>
             </Header>
             <FlatList
-              data = {this.state.schedule}
-              renderItem={({item}) => 
-                  <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress} style={styles.stratCellStyle}/>
+              data={this.state.schedule}
+              renderItem={({ item }) =>
+                <StratCell match={item.match} teams={item.teams} handlePress={this.handlePress} style={styles.stratCellStyle} />
               }
-              keyExtractor= {(item, index) => String(index)}
+              keyExtractor={(item, index) => String(index)}
               refreshControl={
-                  <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
+                <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshSchedule} />
               }
               showsVerticalScrollIndicator={false}
               style={styles}
@@ -69,12 +69,12 @@ export default class Strategies extends Component {
       );
     } else {
       return (
-        <MatchStrategyTableView match={this.state.currentMatch} nicknames={this.state.nicknames} teams={this.state.currentTeams} onBack={this.popMatch} style={styles}/>
+        <MatchStrategyTableView match={this.state.currentMatch} nicknames={this.state.nicknames} teams={this.state.currentTeams} onBack={this.popMatch} style={styles} />
       )
-      
+
     }
-      
-    
-    
-  } 
+
+
+
+  }
 }

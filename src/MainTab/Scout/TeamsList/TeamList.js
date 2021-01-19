@@ -33,9 +33,9 @@ export default class TeamList extends React.Component {
   };
 
   onRefresh = async () => {
-    this.setState({refreshing: true});
+    this.setState({ refreshing: true });
     await this.props.refreshTeams();
-    this.setState({refreshing: false});
+    this.setState({ refreshing: false });
   };
 
   onBack = () => {
@@ -56,9 +56,9 @@ export default class TeamList extends React.Component {
           },
           style: 'cancel',
         },
-        {text: 'No'},
+        { text: 'No' },
       ],
-      {cancelable: false},
+      { cancelable: false },
     );
   };
 
@@ -78,7 +78,7 @@ export default class TeamList extends React.Component {
   };
 
   showRefresh = serious => {
-    this.setState({refreshing: serious});
+    this.setState({ refreshing: serious });
   };
 
   render() {
@@ -151,14 +151,14 @@ export default class TeamList extends React.Component {
             <FlatList
               data={this.props.teams}
               style={this.props.style}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <TeamCell
                   number={item.teamNumber}
                   isBlue={item.isBlue}
                   scouterDescription={item.scouterDescription}
                   onPress={
                     item.scouterDescription
-                      ? this.doNothing.bind(this,item.teamNumber)
+                      ? this.doNothing.bind(this, item.teamNumber)
                       : this.props.onItemPress
                   }
                   showRefresh={this.showRefresh}

@@ -95,7 +95,7 @@ export default class Matches extends React.Component {
       Object.keys(this.state.configuration).length === 0
     ) {
       const config = await ajax.fetchMatchConfig();
-      this.setState({configuration: config});
+      this.setState({ configuration: config });
     }
   };
 
@@ -162,7 +162,7 @@ export default class Matches extends React.Component {
             matches={this.state.matches}
             onItemPress={this.setCurrentMatch}
             refreshMatches={this.refreshMatches}
-            style = {matchesStyle}
+            style={matchesStyle}
           />
         </StyleProvider>
       );

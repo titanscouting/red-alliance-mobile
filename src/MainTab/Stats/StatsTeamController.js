@@ -22,52 +22,52 @@ export default class StatsTeamController extends React.Component {
     }
 
     onRefresh = async () => {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         await this.props.refreshTeams();
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
 
 
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.onBack);
     }
-    
+
     componentWillUnmount() {
         this.backHandler.remove()
     }
-    
+
     acknowledgeChanges = (key, value, human) => {
         this.vals[key] = value;
         if (!this.state.madeChanges && human) {
-            this.setState({madeChanges: true});
+            this.setState({ madeChanges: true });
         }
     }
 
     onBack = () => {
-        if(this.state.madeChanges) {
+        if (this.state.madeChanges) {
             Alert.alert(
                 'Discard your changes?',
                 'If you go back, additional changes to the fields will not be saved.',
                 [
                     {
-                      text: 'Cancel',
-                      style: 'cancel',
+                        text: 'Cancel',
+                        style: 'cancel',
                     },
                     {
-                      text: 'Discard',
-                      onPress: () => {
-                          ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, GLOBAL.data.competition);
-                          this.props.onBack(); 
-                      },
+                        text: 'Discard',
+                        onPress: () => {
+                            ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, GLOBAL.data.competition);
+                            this.props.onBack();
+                        },
                     },
                 ],
                 { cancelable: true },
-              );
-            
+            );
+
         } else {
-            this.props.onBack(); 
+            this.props.onBack();
         }
-        
+
     }
 
     rightButton = () => {
@@ -75,13 +75,13 @@ export default class StatsTeamController extends React.Component {
             return (
                 <Right>
                     <Button transparent onPress={this.onSave}>
-                            <Icon name='save' />
+                        <Icon name='save' />
                     </Button>
                 </Right>
             );
         } else {
             return (
-                <Right style={{  justifyContent: 'flex-end', alignItems: 'flex-end' }}/>
+                <Right style={{ justifyContent: 'flex-end', alignItems: 'flex-end' }} />
             );
         }
     }
@@ -103,35 +103,35 @@ export default class StatsTeamController extends React.Component {
 
 
 
-    render () {
+    render() {
         return (
             <Container>
-                  <Header>
+                <Header>
 
                     <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                         <Button transparent onPress={this.onBack}>
-                                <Icon name='arrow-back' />
+                            <Icon name='arrow-back' />
                         </Button>
                     </Left>
                     <Body>
-                        <Title>{"Team "+this.props.team}</Title>
+                        <Title>{"Team " + this.props.team}</Title>
                         <Title style={styles.subtitle}>{this.props.nickname}</Title>
                     </Body>
                     {this.rightButton()}
-                  </Header>
-                  <Tabs>
-                        <Tab heading={ <TabHeading><Text>Matches</Text></TabHeading>}>
-                            <Matches team={this.props.team}/>
-                        </Tab>
-                        <Tab heading={ <TabHeading><Text>Pit</Text></TabHeading>}>
-                            <Pit team={this.props.team} onSave={this.saveScouting} onBack={this.onBack} acknowledgeChanges={this.acknowledgeChanges}/>
-                        </Tab>
-                    </Tabs>
+                </Header>
+                <Tabs>
+                    <Tab heading={<TabHeading><Text>Matches</Text></TabHeading>}>
+                        <Matches team={this.props.team} />
+                    </Tab>
+                    <Tab heading={<TabHeading><Text>Pit</Text></TabHeading>}>
+                        <Pit team={this.props.team} onSave={this.saveScouting} onBack={this.onBack} acknowledgeChanges={this.acknowledgeChanges} />
+                    </Tab>
+                </Tabs>
             </Container>
         );
 
     }
-    
+
 }
 
 
@@ -143,14 +143,14 @@ const styles = StyleSheet.create({
         height: 40,
     },
     team: {
-      color: 'black',
-      fontSize: 18,
-      flex: 1,
+        color: 'black',
+        fontSize: 18,
+        flex: 1,
     },
     type: {
-      color: 'black',
-      fontSize: 16,
-      flex: 1,
+        color: 'black',
+        fontSize: 16,
+        flex: 1,
     },
     scouter: {
         flexDirection: 'column',
@@ -162,5 +162,4 @@ const styles = StyleSheet.create({
     subtitle: {
         fontSize: 14,
     }
-  });
-  
+});

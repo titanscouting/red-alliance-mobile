@@ -19,7 +19,7 @@ export default class Eval extends React.Component {
 
     hasMadeAware = false
 
-    doNothing = () => {}
+    doNothing = () => { }
 
     getTab = (tabNumber) => {
         let tabDict = this.props.configuration[tabNumber];
@@ -47,11 +47,11 @@ export default class Eval extends React.Component {
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
     }
-    
+
     componentWillUnmount() {
         this.backHandler.remove()
     }
-    
+
     handleBackPress = () => {
         this.onBack()
         return true;
@@ -61,12 +61,12 @@ export default class Eval extends React.Component {
         this.props.onBack()
         return true;
     }
-    render () {
+    render() {
         if (this.props.configuration.length === 0) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <ActivityIndicator animating={true}/>
+                        <ActivityIndicator animating={true} />
                     </Container>
                 </StyleProvider>
             );
@@ -74,12 +74,12 @@ export default class Eval extends React.Component {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
-                        <EvalTab defaultData={this.props.defaultData} tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
+                        <EvalTab defaultData={this.props.defaultData} tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate} />
                     </Container>
                 </StyleProvider>
             );
         }
-        
+
     }
-    
+
 }

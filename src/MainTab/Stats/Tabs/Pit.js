@@ -26,39 +26,38 @@ export default class Pit extends React.Component {
     }
 
     refreshTeam = async () => {
-       let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
-       let c = await ajax.fetchPitConfiguration();
-       this.setState({defaultData: d.data, configuration: c});
+        let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
+        let c = await ajax.fetchPitConfiguration();
+        this.setState({ defaultData: d.data, configuration: c });
     }
 
 
 
     onRefresh = async () => {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         await this.refreshTeam();
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
 
-    
+
     render() {
         if (this.state.defaultData === null || this.state.configuration === null) {
             return (
-            <Container>
-                <ActivityIndicator animating={true}/>
-            </Container>
+                <Container>
+                    <ActivityIndicator animating={true} />
+                </Container>
             );
         } else {
             return (
-            <Container>
-                    <Eval configuration={this.state.configuration} 
-                            defaultData={this.state.defaultData} 
-                            onBack={this.props.onBack} 
-                            teamNumber={this.state.currentTeamNumber} 
-                            makeAware={this.props.acknowledgeChanges}/>
-            </Container>
+                <Container>
+                    <Eval configuration={this.state.configuration}
+                        defaultData={this.state.defaultData}
+                        onBack={this.props.onBack}
+                        teamNumber={this.state.currentTeamNumber}
+                        makeAware={this.props.acknowledgeChanges} />
+                </Container>
             );
         }
     }
-  }
-  
-  
+}
+
