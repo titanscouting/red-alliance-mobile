@@ -52,7 +52,6 @@ exports.getUserInfo = async () => {
     apiHost + 'api/getUserTeam',
   );
   const token = await exports.getIDToken()
-
   return await fetch(endpoint, {
     method: 'GET',
     headers: {
@@ -97,7 +96,7 @@ exports.firstTimeSignIn = async () => {
       console.error("Could not sign user in")
     }
   }
-  if (!undefined) {
+  if (!userInfo) {
     exports.couldNotLogin();
   }
   const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
@@ -196,11 +195,12 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 
 };
 
-exports.fetchMatchConfig = async () => {
-  const userInfo = await exports.getUserInfo()
-  const team = userInfo.team
+exports.fetchMatchConfig = async (team) => {
+  if (team === undefined) {
+    const userInfo = await exports.getUserInfo()
+    var team = userInfo.team
+  }
   const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
-
   const response = await fetch(endpoint, {
     method: 'GET',
     headers: {

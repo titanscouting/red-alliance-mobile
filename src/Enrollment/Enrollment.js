@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
 export default class Enrollment extends React.Component {
   constructor() {
     super();
-    this.state = { team: '' }
+    this.state = { team: '2022' }
   }
   addUser() {
     const team = this.state.team;
@@ -78,9 +78,26 @@ export default class Enrollment extends React.Component {
     });
   }
   componentDidMount() {
-    ajax.firstTimeSignIn().then(() => {
-      this.checkIfRegistered()
-    })
+    try {
+      AsyncStorage.getItem('tra-google-auth').then((info) => {
+        try {
+          const obj = JSON.parse(info)
+          if (obj.key !== undefined) {
+            this.checkIfRegistered();
+          } else {
+            throw new Error("Not signed in")
+          }
+        } catch {
+          ajax.firstTimeSignIn().then(() => {
+            this.checkIfRegistered()
+          })
+        }
+      })
+    } catch {
+      ajax.couldNotLogin()
+    }
+
+
   }
   render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
@@ -96,6 +113,7 @@ export default class Enrollment extends React.Component {
         </View>
         <View style={styles.slide3}>
           <TextInput
+            defaultValue='2022' 
             style={enrollmentStyle.textInputStyle}
             onChangeText={(text) => { this.setState.bind(this); this.setState({ team: String(text) }) }}
             value={String(this.state.team)}

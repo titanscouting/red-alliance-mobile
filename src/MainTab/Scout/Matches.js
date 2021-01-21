@@ -24,6 +24,7 @@ export default class Matches extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+
     this.pullConfiguration();
     this.refreshMatches();
   }
@@ -94,8 +95,17 @@ export default class Matches extends React.Component {
       !this.state.configuration ||
       Object.keys(this.state.configuration).length === 0
     ) {
-      const config = await ajax.fetchMatchConfig();
-      this.setState({ configuration: config });
+      let config;
+      ajax.getUserInfo().then(async userinfo => {
+        let team;
+        try {
+          team = parseInt(userinfo.team) // user team is valid
+          config = await ajax.fetchMatchConfig(team);
+        } catch (e) {
+          config = [];
+        }
+        this.setState({ configuration: config })
+      });
     }
   };
 
@@ -127,6 +137,7 @@ export default class Matches extends React.Component {
   render() {
     const matchesStyle = ThemeProvider.matchesStyle
     if (this.state.currentTeamNumber != null) {
+      this.pullConfiguration()
       return (
         <StyleProvider style={getTheme(material)}>
           <Eval

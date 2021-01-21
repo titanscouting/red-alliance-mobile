@@ -7,6 +7,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import Enrollment from '../Enrollment/Enrollment';
+import SignOut from '../Enrollment/SignOut';
 import Matches from './Scout/Matches';
 import Settings from './Settings/Settings';
 import Stats from './Stats/Stats';
@@ -25,6 +26,14 @@ const TabControl = createBottomTabNavigator(
     Settings: { screen: Settings },
     Enrollment: {
       screen: Enrollment,
+      navigationOptions: () => {
+        return {
+          tabBarVisible: false, // don't show the navigation bar when enrolling
+        };
+      }
+    },
+    SignOut: {
+      screen: SignOut,
       navigationOptions: () => {
         return {
           tabBarVisible: false, // don't show the navigation bar when enrolling
