@@ -31,24 +31,24 @@ export default class TeamCell extends React.Component {
         if (this._isMounted) {
             this.props.showRefresh(false);
         }
-        
+
     };
 
-    render () {
+    render() {
         const styles = this.props.style.teamCellStyle
         return (
-            
+
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
-                    <View backgroundColor={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon}/>
-                    <View width={10}/>
+                    <View backgroundColor={this.props.isBlue ? Globals.colors.blue : Globals.colors.red} style={styles.ribbon} />
+                    <View width={10} />
                     <View style={styles.scouter}>
                         <View>
-                            <Text style={styles.team}>{"Team "+this.props.number}</Text>
+                            <Text style={styles.team}>{"Team " + this.props.number}</Text>
                         </View>
-                        <Text style={styles.scouter}>{this.props.scouterDescription ? "Covered by "+this.props.scouterDescription : "Open"}</Text>
+                        <Text style={styles.scouter}>{this.props.scouterDescription ? "Covered by " + this.props.scouterDescription : "Open"}</Text>
                     </View>
-               </ListItem>
+                </ListItem>
             </TouchableWithoutFeedback>
 
         );

@@ -38,9 +38,9 @@ const updateAlert = urlToOpen => {
         onPress: () => adminOverride(),
         style: 'cancel',
       },
-      {text: 'Update', onPress: () => Linking.openURL(urlToOpen)},
+      { text: 'Update', onPress: () => Linking.openURL(urlToOpen) },
     ],
-    {cancelable: false},
+    { cancelable: false },
   );
 };
 const adminOverride = () => {
@@ -60,8 +60,8 @@ const adminOverride = () => {
             Alert.alert(
               'Invalid Password',
               'The admin password was invalid',
-              [{text: 'Back', onPress: () => adminOverride()}],
-              {cancelable: false},
+              [{ text: 'Back', onPress: () => adminOverride() }],
+              { cancelable: false },
             );
           }
         },
@@ -72,7 +72,7 @@ const adminOverride = () => {
       cancelable: false,
       defaultValue: '',
     },
-  );  
+  );
 };
 VersionCheck.needUpdate().then(async res => {
   try {
@@ -93,11 +93,13 @@ GoogleSignin.configure({
     '291863698243-obu2fpbfpr7ul9db9lm7rmc1e4r3oeag.apps.googleusercontent.com', // client ID of type WEB for your server (needed to verify user ID and offline access)
   offlineAccess: true, // if you want to access Google API on behalf of the user FROM YOUR SERVER
   hostedDomain: '', // specifies a hosted domain restriction
+  forceCodeForRefreshToken: true,
   loginHint: '@imsa.edu', // [iOS] The user's ID, or email address, to be prefilled in the authentication UI if possible. [See docs here](https://developers.google.com/identity/sign-in/ios/api/interface_g_i_d_sign_in.html#a0a68c7504c31ab0b728432565f6e33fd)
   forceConsentPrompt: false, // [Android] if you want to show the authorization prompt at each login.
   accountName: '', // [Android] specifies an account name on the device that should be used
   iosClientId: '291863698243-3nt50bms4e2vr721vlvgb505aaj5ihhu.apps.googleusercontent.com',
 });
+GoogleSignin.hasPlayServices({ showPlayServicesUpdateDialog: true }).catch((e) => { console.error("play services are not available") });
 // This will prompt a user to sign in if they aren't already
 export default class App extends React.Component {
   render() {

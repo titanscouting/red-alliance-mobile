@@ -17,7 +17,7 @@ export default class EvalCell extends React.Component {
     name = (() => this.props.config.name);
     widget = (() => this.props.config.widget);
     options = (() => this.props.config.options);
- 
+
     state = {
         selectedIndex: 0
     };
@@ -28,22 +28,22 @@ export default class EvalCell extends React.Component {
         });
         this.props.cellUpdate(this.key(), this.options()[index]);
     };
-    
+
     handleGeneralChange = (num) => {
         this.props.cellUpdate(this.key(), num, true);
     };
 
-    render () {
+    render() {
 
         switch (this.widget()) {
-            case 'segment': 
+            case 'segment':
                 return (
-                    <SegmentedControlTab 
+                    <SegmentedControlTab
                         tabStyle={styles.tabStyle}
                         tabTextStyle={styles.tabTextStyle}
                         activeTabStyle={styles.activeTabStyle}
                         values={this.options()}
-                        selectedIndex={this.state.selectedIndex} 
+                        selectedIndex={this.state.selectedIndex}
                         onTabPress={this.handleIndexChange}
                     />
                 );
@@ -61,9 +61,9 @@ export default class EvalCell extends React.Component {
             case 'text-area':
                 return (
                     <Form style={styles.textarea}>
-                       
+
                         <Item style={styles.textarea}>
-                         <Textarea maxLength={650} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
+                            <Textarea maxLength={650} style={styles.textarea} rowSpan={3} bordered placeholder={this.options()} onChangeText={this.handleGeneralChange} />
                         </Item>
                     </Form>
                 );
@@ -80,22 +80,22 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         alignItems: 'flex-start',
-      },
-      stepper: {
+    },
+    stepper: {
         flex: 1,
-      },
-      tabStyle: {
+    },
+    tabStyle: {
         borderColor: Globals.colors[Globals.brand.primary],
-      },
-      activeTabStyle: {
+    },
+    activeTabStyle: {
         backgroundColor: Globals.colors[Globals.brand.primary],
-      },
-      tabTextStyle: {
+    },
+    tabTextStyle: {
         color: Globals.colors[Globals.brand.primary],
-      },
-      textarea: {
-          flex: 1,
-          flexDirection: 'row',
-          
-      }
-  });
+    },
+    textarea: {
+        flex: 1,
+        flexDirection: 'row',
+
+    }
+});

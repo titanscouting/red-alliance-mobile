@@ -73,18 +73,18 @@ export default class Stepper extends React.Component {
     let { flex, label, onPress } = props
 
     return <View style={[styles.buttonContainer, { backgroundColor: buttonsBackgroundColor, borderTopRightRadius: flex === "right" ? cornorRadius : 0, borderTopLeftRadius: flex === "left" ? cornorRadius : 0, borderBottomRightRadius: flex === "right" ? cornorRadius : 0, borderBottomLeftRadius: flex === "left" ? cornorRadius : 0, width: buttonsContainerWidth }]}>
-        <TouchableOpacity onPress={() => {
-            onPress();
-          }}
-          style={{flex: 1}}
-        >
-          <View style={[styles.buttonSubContainer]}>
+      <TouchableOpacity onPress={() => {
+        onPress();
+      }}
+        style={{ flex: 1 }}
+      >
+        <View style={[styles.buttonSubContainer]}>
           <Text style={[styles.buttonLabelContainer, { color: buttonsTextColor }]} adjustsFontSizeToFit={true} numberOfLines={1}>
-              {label}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>;
+            {label}
+          </Text>
+        </View>
+      </TouchableOpacity>
+    </View>;
   }
 
   _renderLeftButton() {
@@ -102,7 +102,7 @@ export default class Stepper extends React.Component {
         }
 
         this._animate();
-        this.setState({value: newValue}, () => {
+        this.setState({ value: newValue }, () => {
           onChange && onChange(newValue, value);
         })
       }
@@ -130,7 +130,7 @@ export default class Stepper extends React.Component {
     })
   }
 
-  _animate () {
+  _animate() {
     // this.labelContainerRef && this.labelContainerRef
     //     .fadeIn(10000)
     //     .then(endState =>{ });
@@ -141,12 +141,12 @@ export default class Stepper extends React.Component {
     let { value } = this.state === -1 ? "Not Scouted" : this.state
 
     return <Animatable.View ref={ref => {
-          ref && (this.labelContainerRef = ref);
-        }} style={[styles.labelContainer, { backgroundColor: labelBackgroundColor }]} useNativeDriver={true}>
-        <Text style={[styles.valueStyle, { color: labelTextColor }]} adjustsFontSizeToFit={true} numberOfLines={1}>
-          {value.toString() === "-1" ?  "Not Scouted" : value.toString()}
-        </Text>
-      </Animatable.View>;
+      ref && (this.labelContainerRef = ref);
+    }} style={[styles.labelContainer, { backgroundColor: labelBackgroundColor }]} useNativeDriver={true}>
+      <Text style={[styles.valueStyle, { color: labelTextColor }]} adjustsFontSizeToFit={true} numberOfLines={1}>
+        {value.toString() === "-1" ? "Not Scouted" : value.toString()}
+      </Text>
+    </Animatable.View>;
   }
 
   render() {
@@ -162,42 +162,41 @@ export default class Stepper extends React.Component {
       {this._renderRightButton()}
     </View>;
   }
-  
+
 }
 
 const styles = StyleSheet.create({
-    container: {
-      flexDirection: "row",
-      justifyContent: "space-between",
-      flex: 1,
-      height: 40
-    },
-    buttonContainer: {
-      height: "100%"
-    },
-    buttonSubContainer: {
-      flex: 1,
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    buttonLabelContainer: {
-      textAlign: "center",
-      textAlignVertical: "center",
-      fontSize: 12,
-      fontWeight: "bold"
-    },
-    labelContainer: {
-      flex: 1,
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    valueStyle: {
-      textAlign: "center",
-      textAlignVertical: "center",
-      fontWeight: "bold",
-      fontSize: 16
-    },
-  });
-  
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    flex: 1,
+    height: 40
+  },
+  buttonContainer: {
+    height: "100%"
+  },
+  buttonSubContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonLabelContainer: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: 12,
+    fontWeight: "bold"
+  },
+  labelContainer: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  valueStyle: {
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontWeight: "bold",
+    fontSize: 16
+  },
+});

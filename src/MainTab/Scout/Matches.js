@@ -24,13 +24,14 @@ export default class Matches extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-    this.refreshMatches();
     this.pullConfiguration();
+    this.refreshMatches();
   }
 
   refreshMatches = async () => {
     const matches = await ajax.fetchMatches(GLOBAL.data.competition);
     this.state.matches = matches;
+    await this.pullConfiguration();
     this.forceUpdate();
   };
 
@@ -42,7 +43,7 @@ export default class Matches extends React.Component {
     this._isMounted = false;
   }
 
-  setCurrentMatch = number => {
+  setCurrentMatch = async number => {
     this.state.currentMatchNumber = number;
     this.state.teams = [];
     this.forceUpdate();
@@ -94,7 +95,7 @@ export default class Matches extends React.Component {
       Object.keys(this.state.configuration).length === 0
     ) {
       const config = await ajax.fetchMatchConfig();
-      this.setState({configuration: config});
+      this.setState({ configuration: config });
     }
   };
 
@@ -103,20 +104,24 @@ export default class Matches extends React.Component {
     this.forceUpdate();
   };
 
-  saveScouting = vals => {
-    ajax.submitMatchData(
+  saveScouting = async vals => {
+    const resp = await ajax.submitMatchData(
       GLOBAL.data.competition,
       this.state.currentTeamNumber,
       this.state.currentMatchNumber,
       vals,
     );
-    this.setState({
-      currentMatchNumber: null,
-      teams: null,
-      currentTeamNumber: null,
-      isBlue: null,
-    });
-    this.forceUpdate();
+    if (!resp.success) {
+      ajax.warnCouldNotSubmit()
+    } else {
+      this.setState({
+        currentMatchNumber: null,
+        teams: null,
+        currentTeamNumber: null,
+        isBlue: null,
+      });
+      this.forceUpdate();
+    }
   };
 
   render() {
@@ -157,7 +162,7 @@ export default class Matches extends React.Component {
             matches={this.state.matches}
             onItemPress={this.setCurrentMatch}
             refreshMatches={this.refreshMatches}
-            style = {matchesStyle}
+            style={matchesStyle}
           />
         </StyleProvider>
       );

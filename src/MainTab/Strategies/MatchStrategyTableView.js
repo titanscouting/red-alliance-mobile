@@ -21,7 +21,7 @@ export default class MatchStrategyTableView extends Component {
     nicknames: PropTypes.object,
     style: PropTypes.object.isRequired
   };
-  
+
   state = {
     strats: null,
     refreshing: true,
@@ -38,12 +38,12 @@ export default class MatchStrategyTableView extends Component {
 
   getSubmittedStrategy = async () => {
     let submittedStrat = await ajax.getUserStrategy(Globals.data.competition, this.props.match);
-    this.setState({submittedStrat: submittedStrat[0]})
+    this.setState({ submittedStrat: submittedStrat.data[0].data })
   }
 
   refreshStrats = async () => {
-    let strats = await ajax.getStrategiesForMatch(Globals.data.competition, this.props.match);
-    this.setState({strats: strats, refreshing:false});
+    const strats = await ajax.getStrategiesForMatch(Globals.data.competition, this.props.match);
+    this.setState({ strats: strats.data, refreshing: false });
   }
 
 
@@ -62,26 +62,26 @@ export default class MatchStrategyTableView extends Component {
   theList = () => {
     const styles = this.props.style.tableViewStyle
     return (<FlatList
-      data = {this.state.strats}
-      renderItem={({item}) => 
-          <SubmittedStrategyCell scouter={item.scouter} strategy={item.data} style={styles}/>
+      data={this.state.strats}
+      renderItem={({ item }) =>
+        <SubmittedStrategyCell scouter={item.scouter} team_scouted={item.team_scouted} strategy={item.strategy} style={styles} />
       }
-      keyExtractor= {(item, index) => String(index)}
+      keyExtractor={(item, index) => String(index)}
       refreshControl={
-          <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />
+        <RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} />
       }
       style={styles.listStyle}
       showsVerticalScrollIndicator={false}
-  />);
+    />);
   }
   renderStrategyList = () => {
     const styles = this.props.style.tableViewStyle
     if (this.state.strats == null) {
       return this.theList();
-    } else if (this.state.strats.length === 0){
+    } else if (this.state.strats.length === 0) {
 
       return (
-        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} style={styles.noStrats}/>}>
+        <ScrollView refreshControl={<RefreshControl refreshing={this.state.refreshing} onRefresh={this.refreshStrats} style={styles.noStrats} />}>
           <View style={styles.noStrats}>
             <Text>No submitted strategies</Text>
           </View>
@@ -96,33 +96,33 @@ export default class MatchStrategyTableView extends Component {
   }
 
   render() {
-      const styles = this.props.style.tableViewStyle
-      return (
+    const styles = this.props.style.tableViewStyle
+    return (
       <StyleProvider style={getTheme(material)}>
         <Container>
-         <Header>
+          <Header>
             <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
-                <Button transparent onPress={this.props.onBack}>
-                      <Icon name='arrow-back' />
-                </Button>
+              <Button transparent onPress={this.props.onBack}>
+                <Icon name='arrow-back' />
+              </Button>
             </Left>
             <Body >
-                <Title>{"Match "+this.props.match}</Title>
+              <Title>{"Match " + this.props.match}</Title>
             </Body>
             <Right>
-                <Button transparent onPress={this.onSave}>
-                        <Icon name='save' />
-                </Button>
+              <Button transparent onPress={this.onSave}>
+                <Icon name='save' />
+              </Button>
             </Right>
           </Header>
-          <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames} style={styles}/>
+          <MatchStrategyHeader teams={this.props.teams} nicknames={this.props.nicknames} style={styles} />
           <Textarea defaultValue={this.state.submittedStrat} style={styles.textarea} rowSpan={3} bordered placeholder={"Detail your own match strategy here. How should we work with the teams on our alliance and work against the teams on the opposing alliance?"} onChangeText={this.handleText} />
-            {this.renderStrategyList()}
+          {this.renderStrategyList()}
         </Container>
       </StyleProvider>
     );
-    
-    
-  } 
+
+
+  }
 }
 

@@ -28,29 +28,29 @@ export default class Eval extends React.Component {
             'If you go back, the fields will not be saved.',
             [
                 {
-                  text: 'Cancel',
-                  style: 'cancel',
+                    text: 'Cancel',
+                    style: 'cancel',
                 },
                 {
-                  text: 'Discard',
-                  onPress: () => {
-                      ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, Globals.data.competition);
-                      this.props.onBack(); 
-                      ajax.fetchMatches(Globals.data.competition);
-                  },
+                    text: 'Discard',
+                    onPress: () => {
+                        ajax.removeScouterFromMatch(this.props.teamNumber, this.props.matchNumber, Globals.data.competition);
+                        this.props.onBack();
+                        ajax.fetchMatches(Globals.data.competition);
+                    },
                 },
             ],
             { cancelable: true },
-          );
-        
+        );
+
     }
 
 
     onSave = () => {
-        this.props.onSave(this.vals); 
+        this.props.onSave(this.vals);
     }
 
-    doNothing = () => {}
+    doNothing = () => { }
 
     getTab = (tabNumber) => {
         let tabDict = this.props.configuration[tabNumber];
@@ -74,29 +74,29 @@ export default class Eval extends React.Component {
     }
     componentDidMount() {
         this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
-      }
-    
-      componentWillUnmount() {
+    }
+
+    componentWillUnmount() {
         this.backHandler.remove()
-      }
-    
-      handleBackPress = () => {
+    }
+
+    handleBackPress = () => {
         this.onBack()
         return true;
-      }
+    }
 
-    render () {
+    render() {
         if (this.props.configuration.length === 0) {
             return (
                 <StyleProvider style={getTheme(material)}>
                     <Container>
                         <Header>
-                             <Body style={styles.body}>
-                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
+                            <Body style={styles.body}>
+                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed} />
                                 <Title>Team {this.props.teamNumber}</Title>
                             </Body>
                         </Header>
-                        <ActivityIndicator animating={true}/>
+                        <ActivityIndicator animating={true} />
                     </Container>
                 </StyleProvider>
             );
@@ -107,46 +107,46 @@ export default class Eval extends React.Component {
                         <Header>
                             <Left style={{ paddingLeft: 10, justifyContent: 'center', alignItems: 'flex-start' }}>
                                 <Button transparent onPress={this.onBack}>
-                                     <Icon name='arrow-back' />
+                                    <Icon name='arrow-back' />
                                 </Button>
                             </Left>
                             <Body style={styles.body}>
-                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed}/>
+                                <View style={this.props.isBlue ? styles.circleBlue : styles.circleRed} />
                                 <Title>Team {this.props.teamNumber}</Title>
                             </Body>
 
                             <Right>
                                 <Button transparent onPress={this.onSave}>
-                                     <Icon name='save' />
+                                    <Icon name='save' />
                                 </Button>
                             </Right>
                         </Header>
                         <Tabs>
                             {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate}/>
+                            <Tab heading={<TabHeading><Text>{this.getTabTitle(0)}</Text></TabHeading>}>
+                                <EvalTab tabConfig={this.getTabBody(0)} onUpdate={this.onUpdate} />
                             </Tab>
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(1)} onUpdate={this.onUpdate}/>
+                            <Tab heading={<TabHeading><Text>{this.getTabTitle(1)}</Text></TabHeading>}>
+                                <EvalTab tabConfig={this.getTabBody(1)} onUpdate={this.onUpdate} />
                             </Tab>
-                            <Tab heading={ <TabHeading><Text>{this.getTabTitle(2)}</Text></TabHeading>}>
-                                <EvalTab tabConfig={this.getTabBody(2)} onUpdate={this.onUpdate}/>
+                            <Tab heading={<TabHeading><Text>{this.getTabTitle(2)}</Text></TabHeading>}>
+                                <EvalTab tabConfig={this.getTabBody(2)} onUpdate={this.onUpdate} />
                             </Tab>
                         </Tabs>
                     </Container>
                 </StyleProvider>
             );
         }
-        
+
     }
-    
+
 }
 
 const styles = StyleSheet.create({
     circleRed: {
         width: 12,
         height: 12,
-        borderRadius: 12/2,
+        borderRadius: 12 / 2,
         backgroundColor: Globals.colors.red,
         borderWidth: 1,
         borderColor: 'white'
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     circleBlue: {
         width: 12,
         height: 12,
-        borderRadius: 12/2,
+        borderRadius: 12 / 2,
         backgroundColor: Globals.colors.blue,
         borderWidth: 1,
         borderColor: 'white'

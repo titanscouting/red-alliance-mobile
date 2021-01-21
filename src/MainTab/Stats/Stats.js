@@ -29,7 +29,7 @@ export default class Stats extends React.Component {
     const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
       GLOBAL.data.competition,
     );
-    this.setState({teams: teams, nicknames: nicknames});
+    this.setState({ teams: teams, nicknames: nicknames });
   };
 
   async componentWillUnmount() {
@@ -37,10 +37,10 @@ export default class Stats extends React.Component {
   }
 
   setCurrentTeam = number => {
-    this.setState({currentTeamNumber: number});
+    this.setState({ currentTeamNumber: number });
   };
   removeCurrentTeam = () => {
-    this.setState({currentTeamNumber: null});
+    this.setState({ currentTeamNumber: null });
   };
 
   render() {
@@ -72,7 +72,7 @@ export default class Stats extends React.Component {
             </Header>
             <FlatList
               data={this.state.teams}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <StatsTeamCell
                   team={item}
                   nickname={this.state.nicknames[item]}
@@ -99,10 +99,10 @@ export default class Stats extends React.Component {
           <Container>
             <Header>
               <Body style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}>
                 <Title>Statistics</Title>
               </Body>
             </Header>

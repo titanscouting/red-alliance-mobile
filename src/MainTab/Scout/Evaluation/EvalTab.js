@@ -16,28 +16,28 @@ export default class EvalTab extends React.Component {
         this.props.onUpdate(key, value);
     }
 
-     
 
-    render () {
+
+    render() {
         if (this.props.tabConfig != null) {
             return (
                 <KeyboardAwareFlatList
-                    data = {this.props.tabConfig}
-                    renderItem={({item}) => 
+                    data={this.props.tabConfig}
+                    renderItem={({ item }) =>
                         <ListItem style={styles.cell}>
                             <Text>{item.name}</Text>
-                            <View style={styles.separator}/>
-                            <EvalCell config={item} cellUpdate={this.cellUpdate}/>
+                            <View style={styles.separator} />
+                            <EvalCell config={item} cellUpdate={this.cellUpdate} />
                         </ListItem>
                     }
-                    keyExtractor= {item => String(item.key)}
+                    keyExtractor={item => String(item.key)}
                     showsVerticalScrollIndicator={false}
                     extraScrollHeight={Platform.OS === "ios" ? 70 : -53}
                 />
-    
+
             );
         }
-        
+
     }
 }
 

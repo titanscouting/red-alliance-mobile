@@ -23,19 +23,19 @@ export default class StatsTeamCell extends React.Component {
     }
 
     onRefresh = async () => {
-        this.setState({refreshing: true});
+        this.setState({ refreshing: true });
         await this.checkPit();
-        this.setState({refreshing: false});
+        this.setState({ refreshing: false });
     }
 
     checkPit = async () => {
-       let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
-       if (d != null) {
-           this.setState({done: true});
-       }
+        let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
+        if (d != null) {
+            this.setState({ done: true });
+        }
     }
     onBack = () => {
-        this.props.onBack(); 
+        this.props.onBack();
     }
 
     handlePress = () => {
@@ -45,25 +45,25 @@ export default class StatsTeamCell extends React.Component {
     getDot = () => {
         const styles = StyleSheet.create(this.props.style.teamCellStyle);
         if (!this.state.done) {
-            return (<View style={styles.ribbon} backgroundColor={Globals.colors[Globals.brand.primary]}/>);
+            return (<View style={styles.ribbon} backgroundColor={Globals.colors[Globals.brand.primary]} />);
         } else {
-            return (<View/>);
+            return (<View />);
         }
     }
 
-    render () {
+    render() {
         const styles = this.props.style.teamCellStyle;
         return (
             <TouchableWithoutFeedback onPress={this.handlePress}>
                 <ListItem style={styles.cell}>
-                    <Text style={styles.team}>{"Team "+this.props.team}</Text>
+                    <Text style={styles.team}>{"Team " + this.props.team}</Text>
                     <Text style={styles.nickname}>{this.props.nickname}</Text>
                     {this.getDot()}
                 </ListItem>
-                
+
             </TouchableWithoutFeedback>
         );
-        
+
     }
-    
+
 }

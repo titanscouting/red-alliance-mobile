@@ -17,13 +17,13 @@ import ThemeProvider, { refreshTheme } from '../ThemeProvider';
 export default class Settings extends React.Component {
   constructor() {
     super()
-    this.state = {darkMode: false}
+    this.state = { darkMode: false }
   }
   //darkmode toggle
   toggleDarkMode = async () => {
-    let darkMode = !this.state.darkMode; 
-    this.setState({darkMode: darkMode});
-    try{
+    let darkMode = !this.state.darkMode;
+    this.setState({ darkMode: darkMode });
+    try {
       AsyncStorage.setItem('tra-dark-mode', darkMode.toString())
       await refreshTheme()
     } catch (e) {
@@ -51,13 +51,13 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Google Account</Text>
               <Right>
-                <Button hasText onPress={() => {ajax.signOut(); this.props.navigation.navigate('Enrollment');}}>
+                <Button hasText onPress={() => { ajax.signOut(); this.props.navigation.navigate('Enrollment'); }}>
                   <Text>Sign Out</Text>
                 </Button>
               </Right>
             </CardItem>
           </Card>
-          <Card style={optionsStyle}>
+          {/* <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
@@ -66,7 +66,7 @@ export default class Settings extends React.Component {
                 </Button>
               </Right>
             </CardItem>
-          </Card>
+          </Card> */}
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
@@ -84,9 +84,9 @@ export default class Settings extends React.Component {
               <Text style={optionsStyle}>Copyright Titan Scouting 2020. All rights reserved.</Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Button hasText onPress={() => { Linking.openURL('https://scouting-api.herokuapp.com/privacy-policy');}}>
-                  <Text>View Privacy Policy</Text>
-              </Button>            
+              <Button hasText onPress={() => { Linking.openURL(`${ajax.apiHost}privacy-policy`); }}>
+                <Text>View Privacy Policy</Text>
+              </Button>
             </CardItem>
           </Card>
         </Container>
