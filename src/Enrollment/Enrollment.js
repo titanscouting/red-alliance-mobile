@@ -70,7 +70,7 @@ export default class Enrollment extends React.Component {
       try {
         team = parseInt(userinfo.team) // user team is valid
         this.state.team = ''
-        this.props.navigation.navigate('Teams');
+        AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(this.props.navigation.navigate('Teams'))
       } catch (e) {
         team = undefined;
       }

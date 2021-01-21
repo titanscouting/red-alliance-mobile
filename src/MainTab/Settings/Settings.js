@@ -50,13 +50,13 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Google Account</Text>
               <Right>
-                <Button hasText onPress={() => { ajax.signOut(); this.setState({signOut: true}); this.props.navigation.navigate('SignOut'); }}>
+                <Button hasText onPress={() => { ajax.signOut(); this.setState({signOut: true}); AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(this.props.navigation.navigate('SignOut'));}}>
                   <Text>Sign Out</Text>
                 </Button>
               </Right>
             </CardItem>
           </Card>
-          {/* <Card style={optionsStyle}>
+          <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
@@ -65,7 +65,7 @@ export default class Settings extends React.Component {
                 </Button>
               </Right>
             </CardItem>
-          </Card> */}
+          </Card>
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
