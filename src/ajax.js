@@ -11,8 +11,8 @@ exports.apiHost = apiHost;
 
 exports.warnCouldNotAdd = async () => {
   Alert.alert(
-    'Could not add user',
-    'Please try again later',
+    'Could not add user!',
+    'Please try again later.',
     [
       { text: 'OK', onPress: () => { } }
     ],
@@ -21,8 +21,18 @@ exports.warnCouldNotAdd = async () => {
 };
 exports.warnCouldNotSubmit = async () => {
   Alert.alert(
-    'Could not submit data',
-    'Please try again later',
+    'Could not submit data!',
+    'Please try again later.',
+    [
+      { text: 'OK', onPress: () => { } }
+    ],
+    { cancelable: false }
+  );
+};
+exports.couldNotLogin = async () => {
+  Alert.alert(
+    'Could not login to The Red Alliance!',
+    'Please check that you are connected to the internet and try again.',
     [
       { text: 'OK', onPress: () => { } }
     ],
@@ -86,6 +96,9 @@ exports.firstTimeSignIn = async () => {
     } else {
       console.error("Could not sign user in")
     }
+  }
+  if (!undefined) {
+    exports.couldNotLogin();
   }
   const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
   await AsyncStorage.setItem('tra-google-auth', jsonValue)
