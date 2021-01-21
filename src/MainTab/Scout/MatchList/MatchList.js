@@ -31,7 +31,7 @@ export default class MatchList extends React.Component {
     }
 
     componentWillUnmount() {
-        this.backHandler.remove()
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
 
     handleBackPress = () => {

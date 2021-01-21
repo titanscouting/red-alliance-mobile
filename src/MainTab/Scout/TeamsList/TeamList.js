@@ -69,7 +69,7 @@ export default class TeamList extends React.Component {
     );
   }
   componentWillUnmount() {
-    this.backHandler.remove();
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   handleBackPress = () => {

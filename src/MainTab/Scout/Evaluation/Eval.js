@@ -77,9 +77,9 @@ export default class Eval extends React.Component {
     }
 
     componentWillUnmount() {
-        this.backHandler.remove()
+        BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     }
-
+    
     handleBackPress = () => {
         this.onBack()
         return true;
