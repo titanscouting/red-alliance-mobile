@@ -4,6 +4,16 @@ module.exports.refreshTheme = async () => {
   isDarkMode = await AsyncStorage.getItem('tra-dark-mode') == 'true'
 }
 export default {
+  toggleDarkMode = async () => {
+       let darkMode = !this.state.darkMode; 
+       this.setState({darkMode: darkMode});
+       try{
+         AsyncStorage.setItem('tra-dark-mode', darkMode.toString())
+         await refreshTheme()
+       } catch (e) {
+         console.error("Error setting dark mode: ", e)
+       } },
+  
     optionsStyle: {
       backgroundColor: isDarkMode ? "#121212": "#ffffff",
       color: isDarkMode ? "white" : "black",

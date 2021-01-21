@@ -12,8 +12,22 @@ import { GoogleSignin } from '@react-native-community/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
-import toggleDarkMode from './Settings';
+import toggleDarkMode from '../Settings/Settings';
 import ThemeProvider, { refreshTheme } from '../ThemeProvider';
+const App = () => {
+  const [darkMode, setDarkMode] = React.useState(false);
+  React.useEffect(()  => {
+    if (darkMode) {
+      document.body.classList.add("dark");
+    } else{
+      document.body.classList.remove("dark");
+    }
+  }, [darkMode]);
+  )
+  // return (
+    
+  // ); 
+};
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',
