@@ -55,6 +55,11 @@
     "react-navigation-tabs": "^2.9.2",
     "yarn": "^1.22.10"
   },
+  "eslintIgnore": [
+    "node_modules",
+    "build/*",
+    "native-base-theme/*"
+  ],
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/runtime": "^7.7.7",
