@@ -3,12 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 46;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* RedAllianceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RedAllianceTests.m */; };
-		04BE664D96CAFED084112832 /* libPods-RedAlliance.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9285227D30B826AB4826CB /* libPods-RedAlliance.a */; };
 		06571A87E7B84F998D94899F /* Proxima Nova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1DEAAEAAC04336B89483B1 /* Proxima Nova-Light.otf */; };
 		0FED7923A3504FC4824A9039 /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7941014D0FD4475D9ED97727 /* FontAwesome5_Regular.ttf */; };
 		11947EC298554FC18F9DF062 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 46EB495378604055A0118060 /* Ionicons.ttf */; };
