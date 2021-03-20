@@ -48,27 +48,17 @@ export default class MatchStrategyTableView extends Component {
   }
 
   getSubmittedStrategy = async () => {
-    let submittedStrat = await ajax.getUserStrategy(
-      Globals.data.competition,
-      this.props.match,
-    );
+    let submittedStrat = await ajax.getUserStrategy(this.props.match);
     this.setState({submittedStrat: submittedStrat.data[0].data});
   };
 
   refreshStrats = async () => {
-    const strats = await ajax.getStrategiesForMatch(
-      Globals.data.competition,
-      this.props.match,
-    );
+    const strats = await ajax.getStrategiesForMatch(this.props.match);
     this.setState({strats: strats.data, refreshing: false});
   };
 
   onSave = async () => {
-    await ajax.submitStrategy(
-      Globals.data.competition,
-      this.props.match,
-      this.state.ideas,
-    );
+    await ajax.submitStrategy(this.props.match, this.state.ideas);
     this.props.onBack();
   };
   componentWillUnmount() {

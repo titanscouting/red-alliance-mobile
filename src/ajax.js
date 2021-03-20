@@ -93,6 +93,33 @@ exports.firstTimeSignIn = async () => {
   return userInfo.idToken;
 };
 
+exports.getCurrentCompetition = async () => {
+  const endpoint = encodeURI(apiHost + 'api/getCurrentCompetition');
+  return '2020ilch';
+  // return await fetch(endpoint, {
+  //   method: 'GET',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //     token: await exports.getIDToken(),
+  //   },
+  // })
+  //   .then(response => {
+  //     return response.json();
+  //   })
+  //   .then(myJson => {
+  //     matches = myJson.data;
+  //     arr = [];
+  //     for (let i = 0; i < matches.length; i++) {
+  //       dict = {};
+  //       dict.number = i + 1;
+  //       dict.scouts = matches[i];
+  //       arr.push(dict);
+  //     }
+  //     return arr;
+  //   });
+};
+
 exports.getIDToken = async () => {
   const now = Date.now();
   let keyData = await AsyncStorage.getItem('tra-google-auth');
@@ -184,15 +211,13 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 };
 
 exports.fetchMatchConfig = async team => {
+  const competition = await exports.getCurrentCompetition();
   if (team === undefined) {
     const userInfo = await exports.getUserInfo();
     var team = userInfo.team;
   }
   const endpoint = encodeURI(
-    apiHost +
-      `api/fetchMatchConfig?competition=${
-        Globals.data.competition
-      }&team=${team}`,
+    apiHost + `api/fetchMatchConfig?competition=${competition}&team=${team}`,
   );
   const response = await fetch(endpoint, {
     method: 'GET',
@@ -210,11 +235,11 @@ exports.fetchMatchConfig = async team => {
 };
 
 exports.fetchPitConfiguration = async () => {
+  const competition = await exports.getCurrentCompetition();
   const userInfo = await exports.getUserInfo();
   const team = userInfo.team;
   const endpoint = encodeURI(
-    apiHost +
-      `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`,
+    apiHost + `api/fetchPitConfig?competition=${competition}&team=${team}`,
   );
 
   return await fetch(endpoint, {
@@ -256,7 +281,8 @@ exports.signOut = async () => {
 
   // eslint-disable-next-line no-sequences
 };
-exports.fetchMatches = async competition => {
+exports.fetchMatches = async () => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost + 'api/fetchScouters?competition=' + competition,
   );
@@ -359,7 +385,8 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
   }
 };
 
-exports.fetchPitData = async (competition, team) => {
+exports.fetchPitData = async team => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost + 'api/fetchPitData?competition=' + competition + '&team=' + team,
   );
@@ -383,7 +410,8 @@ exports.fetchPitData = async (competition, team) => {
     });
 };
 
-exports.fetchAllTeamNicknamesAtCompetition = async competition => {
+exports.fetchAllTeamNicknamesAtCompetition = async () => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost +
       'api/fetchAllTeamNicknamesAtCompetition?competition=' +
@@ -460,7 +488,8 @@ exports.addScouterToMatch = async (team_scouting, match, competition) => {
   // let responseJson = await JSON.parse(response);
 };
 
-exports.removeScouterFromMatch = async (team_scouting, match, competition) => {
+exports.removeScouterFromMatch = async (team_scouting, match) => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = apiHost + 'api/removeScouterFromMatch';
 
   fetch(endpoint, {
@@ -539,7 +568,8 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
   });
 };
 
-exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
+exports.fetchMatchDataForTeamInCompetition = async team => {
+  const competition = await exports.getCurrentCompetition();
   let matches = await exports.fetchMatchesForTeamInCompetition(
     competition,
     team,
@@ -587,7 +617,8 @@ exports.fetchMatchDataForTeamInCompetition = async (competition, team) => {
 
 // Strategies
 
-exports.fetch2022Schedule = async competition => {
+exports.fetch2022Schedule = async () => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = apiHost + 'api/fetch2022Schedule?competition=' + competition;
   let schedule = await fetch(endpoint, {
     method: 'GET',
@@ -627,7 +658,8 @@ exports.fetch2022Schedule = async competition => {
   return schedule;
 };
 
-exports.getStrategiesForMatch = async (competition, matchNumber) => {
+exports.getStrategiesForMatch = async matchNumber => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost +
       'api/fetchScouterSuggestions?competition=' +
@@ -656,7 +688,8 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
   }
 };
 
-exports.submitStrategy = async (competition, match, data) => {
+exports.submitStrategy = async (match, data) => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = apiHost + 'api/submitStrategy';
 
   return await fetch(endpoint, {
@@ -690,7 +723,8 @@ exports.submitStrategy = async (competition, match, data) => {
     });
 };
 
-exports.getUserStrategy = async (competition, matchNumber) => {
+exports.getUserStrategy = async matchNumber => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost +
       'api/fetchUserStrategy?competition=' +

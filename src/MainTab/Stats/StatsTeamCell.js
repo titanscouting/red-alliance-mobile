@@ -28,7 +28,7 @@ export default class StatsTeamCell extends React.Component {
   };
 
   checkPit = async () => {
-    let d = await ajax.fetchPitData(Globals.data.competition, this.props.team);
+    let d = await ajax.fetchPitData(this.props.team);
     if (d != null) {
       this.setState({done: true});
     }

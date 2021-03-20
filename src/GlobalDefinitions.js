@@ -1,3 +1,6 @@
+function getCurrentCompetition() {
+  return '2020ilch';
+}
 export default {
   colors: {
     blue: '#1F8AE8',
@@ -20,6 +23,6 @@ export default {
     tint: 'light-red-tint',
   },
   data: {
-    competition: '2020ilch',
+    competition: getCurrentCompetition(),
   },
 };

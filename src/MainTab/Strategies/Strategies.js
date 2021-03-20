@@ -23,10 +23,8 @@ export default class Strategies extends Component {
   }
 
   refreshSchedule = async () => {
-    let schedule = await ajax.fetch2022Schedule(Globals.data.competition);
-    let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
-      Globals.data.competition,
-    );
+    let schedule = await ajax.fetch2022Schedule();
+    let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition();
     this.setState({
       schedule: schedule,
       refreshing: false,
