@@ -52,7 +52,7 @@
     "react-native-version-check": "^3.4.2",
     "react-navigation": "^4.4.2",
     "react-navigation-stack": "^2.8.2",
-    "react-navigation-tabs": "^2.9.2",
+    "react-navigation-tabs": "^2.11.0",
     "yarn": "^1.22.10"
   },
   "eslintIgnore": [
