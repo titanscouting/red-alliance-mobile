@@ -1,4 +1,4 @@
-import { StyleProvider } from 'native-base';
+import {StyleProvider} from 'native-base';
 import React from 'react';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
@@ -79,7 +79,11 @@ export default class Matches extends React.Component {
         return;
       }
     }
-    ajax.addScouterToMatch(teamNumber, this.state.currentMatchNumber, GLOBAL.data.competition);
+    ajax.addScouterToMatch(
+      teamNumber,
+      this.state.currentMatchNumber,
+      GLOBAL.data.competition,
+    );
     this.state.currentTeamNumber = teamNumber;
     this.state.isBlue = isBlue;
     this.forceUpdate();
@@ -99,12 +103,12 @@ export default class Matches extends React.Component {
       ajax.getUserInfo().then(async userinfo => {
         let team;
         try {
-          team = parseInt(userinfo.team) // user team is valid
+          team = parseInt(userinfo.team, 10); // user team is valid
           config = await ajax.fetchMatchConfig(team);
         } catch (e) {
           config = [];
         }
-        this.setState({ configuration: config })
+        this.setState({configuration: config});
       });
     }
   };
@@ -122,7 +126,7 @@ export default class Matches extends React.Component {
       vals,
     );
     if (!resp.success) {
-      ajax.warnCouldNotSubmit()
+      ajax.warnCouldNotSubmit();
     } else {
       this.setState({
         currentMatchNumber: null,
@@ -135,9 +139,9 @@ export default class Matches extends React.Component {
   };
 
   render() {
-    const matchesStyle = ThemeProvider.matchesStyle
+    const matchesStyle = ThemeProvider.matchesStyle;
     if (this.state.currentTeamNumber != null) {
-      this.pullConfiguration()
+      this.pullConfiguration();
       return (
         <StyleProvider style={getTheme(material)}>
           <Eval

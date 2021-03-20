@@ -1,17 +1,16 @@
-import { ListItem } from 'native-base';
+import {ListItem} from 'native-base';
 import PropTypes from 'prop-types';
-import React, { PureComponent } from 'react';
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from 'react-native';
-import { Circle } from 'react-native-progress';
+import React, {PureComponent} from 'react';
+import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
+import {Circle} from 'react-native-progress';
 import Globals from '../../../GlobalDefinitions';
 import ThemeProvider from '../../ThemeProvider';
 export default class MatchCell extends PureComponent {
-
   static propTypes = {
     number: PropTypes.number.isRequired,
     scouts: PropTypes.number.isRequired,
     onPress: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired
+    style: PropTypes.object.isRequired,
   };
 
   handlePress = () => {
@@ -23,12 +22,19 @@ export default class MatchCell extends PureComponent {
       <TouchableWithoutFeedback onPress={this.handlePress}>
         <ListItem>
           <View style={styles.listItem}>
-            <Text style={ThemeProvider.matchesStyle.cellStyle}>{"Match " + this.props.number}</Text>
-            <Circle color={Globals["colors"][Globals["brand"]["primary"]]} progress={this.props.scouts / 6.0} formatText={() => this.props.scouts} textStyle={styles.scouts} showsText={true} />
+            <Text style={ThemeProvider.matchesStyle.cellStyle}>
+              {'Match ' + this.props.number}
+            </Text>
+            <Circle
+              color={Globals.colors[Globals.brand.primary]}
+              progress={this.props.scouts / 6.0}
+              formatText={() => this.props.scouts}
+              textStyle={styles.scouts}
+              showsText={true}
+            />
           </View>
         </ListItem>
       </TouchableWithoutFeedback>
-
     );
   }
 }
@@ -49,5 +55,5 @@ const styles = StyleSheet.create({
     height: 30,
     flex: 1,
     alignItems: 'center',
-  }
+  },
 });

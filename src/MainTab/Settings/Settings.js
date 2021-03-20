@@ -1,35 +1,39 @@
 import AsyncStorage from '@react-native-community/async-storage';
 import {
   Body,
-  Button, Card,
-  CardItem, Container, Header,
-  Right, StyleProvider,
-  Text, Title
+  Button,
+  Card,
+  CardItem,
+  Container,
+  Header,
+  Right,
+  StyleProvider,
+  Text,
+  Title,
 } from 'native-base';
 import React from 'react';
-import { Linking } from 'react-native';
+import {Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import ThemeProvider, { refreshTheme } from '../ThemeProvider';
+import ThemeProvider, {refreshTheme} from '../ThemeProvider';
 export default class Settings extends React.Component {
   constructor() {
-    super()
-    this.state = { darkMode: false }
+    super();
+    this.state = {darkMode: false};
   }
   toggleDarkMode = async () => {
     let darkMode = !this.state.darkMode;
-    this.setState({ darkMode: darkMode });
+    this.setState({darkMode: darkMode});
     try {
-      AsyncStorage.setItem('tra-dark-mode', darkMode.toString())
-      await refreshTheme()
+      AsyncStorage.setItem('tra-dark-mode', darkMode.toString());
+      await refreshTheme();
     } catch (e) {
-      console.error("Error setting dark mode: ", e)
+      console.error('Error setting dark mode: ', e);
     }
-
-  }
+  };
   render() {
     const optionsStyle = ThemeProvider.optionsStyle;
     return (
@@ -50,7 +54,15 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Google Account</Text>
               <Right>
-                <Button hasText onPress={() => { ajax.signOut(); this.setState({signOut: true}); AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(this.props.navigation.navigate('SignOut'));}}>
+                <Button
+                  hasText
+                  onPress={() => {
+                    ajax.signOut();
+                    this.setState({signOut: true});
+                    AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(
+                      this.props.navigation.navigate('SignOut'),
+                    );
+                  }}>
                   <Text>Sign Out</Text>
                 </Button>
               </Right>
@@ -61,7 +73,7 @@ export default class Settings extends React.Component {
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
                 <Button hasText onPress={this.toggleDarkMode}>
-                    <Text>{this.state.darkMode ? "Disable": "Enable"}</Text>
+                  <Text>{this.state.darkMode ? 'Disable' : 'Enable'}</Text>
                 </Button>
               </Right>
             </CardItem>
@@ -80,10 +92,16 @@ export default class Settings extends React.Component {
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>Copyright Titan Scouting 2021. All rights reserved.</Text>
+              <Text style={optionsStyle}>
+                Copyright Titan Scouting 2021. All rights reserved.
+              </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Button hasText onPress={() => { Linking.openURL(`${ajax.apiHost}privacy-policy`); }}>
+              <Button
+                hasText
+                onPress={() => {
+                  Linking.openURL(`${ajax.apiHost}privacy-policy`);
+                }}>
                 <Text>View Privacy Policy</Text>
               </Button>
             </CardItem>

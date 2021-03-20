@@ -1,16 +1,23 @@
 /* eslint-disable react-native/no-inline-styles */
 import {
-  Body, Button, Container,
+  Body,
+  Button,
+  Container,
   Header,
-  Icon, Left,
-  Right, StyleProvider, Title
+  Icon,
+  Left,
+  Right,
+  StyleProvider,
+  Title,
 } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
   ActivityIndicator,
-  Alert, BackHandler, FlatList,
-  RefreshControl
+  Alert,
+  BackHandler,
+  FlatList,
+  RefreshControl,
 } from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
@@ -25,7 +32,7 @@ export default class TeamList extends React.Component {
     onItemPress: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
     matchNumber: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired
+    style: PropTypes.object.isRequired,
   };
 
   state = {
@@ -33,16 +40,16 @@ export default class TeamList extends React.Component {
   };
 
   onRefresh = async () => {
-    this.setState({ refreshing: true });
+    this.setState({refreshing: true});
     await this.props.refreshTeams();
-    this.setState({ refreshing: false });
+    this.setState({refreshing: false});
   };
 
   onBack = () => {
     this.props.onBack();
   };
 
-  doNothing = (teamNumber) => {
+  doNothing = teamNumber => {
     Alert.alert(
       'Match Already Being Scouted',
       'This match is already being scouted by another user. If you continue, the current scouter will be removed from the match. Are you sure you would like to remove the current scouter?',
@@ -50,15 +57,19 @@ export default class TeamList extends React.Component {
         {
           text: 'Yes',
           onPress: () => {
-            ajax.removeScouterFromMatch(teamNumber, this.props.matchNumber, GlobalDefinitions.data.competition);
+            ajax.removeScouterFromMatch(
+              teamNumber,
+              this.props.matchNumber,
+              GlobalDefinitions.data.competition,
+            );
             this.props.onItemPress();
             this.props.refreshTeams();
           },
           style: 'cancel',
         },
-        { text: 'No' },
+        {text: 'No'},
       ],
-      { cancelable: false },
+      {cancelable: false},
     );
   };
 
@@ -78,7 +89,7 @@ export default class TeamList extends React.Component {
   };
 
   showRefresh = serious => {
-    this.setState({ refreshing: serious });
+    this.setState({refreshing: serious});
   };
 
   render() {
@@ -151,7 +162,7 @@ export default class TeamList extends React.Component {
             <FlatList
               data={this.props.teams}
               style={this.props.style}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <TeamCell
                   number={item.teamNumber}
                   isBlue={item.isBlue}

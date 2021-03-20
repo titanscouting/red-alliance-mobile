@@ -3,8 +3,8 @@
 const apiHost = 'https://titanscouting.epochml.org/';
 
 import AsyncStorage from '@react-native-community/async-storage';
-import { Alert } from 'react-native';
-import { GoogleSignin, statusCodes } from '@react-native-community/google-signin';
+import {Alert} from 'react-native';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 import Globals from './GlobalDefinitions';
 
 exports.apiHost = apiHost;
@@ -13,30 +13,24 @@ exports.warnCouldNotAdd = async () => {
   Alert.alert(
     'Could not add user!',
     'Please try again later.',
-    [
-      { text: 'OK', onPress: () => { } }
-    ],
-    { cancelable: false }
+    [{text: 'OK', onPress: () => {}}],
+    {cancelable: false},
   );
 };
 exports.warnCouldNotSubmit = async () => {
   Alert.alert(
     'Could not submit data!',
     'Please try again later.',
-    [
-      { text: 'OK', onPress: () => { } }
-    ],
-    { cancelable: false }
+    [{text: 'OK', onPress: () => {}}],
+    {cancelable: false},
   );
 };
 exports.couldNotLogin = async () => {
   Alert.alert(
     'Could not login to The Red Alliance!',
     'Please check that you are connected to the internet and try again.',
-    [
-      { text: 'OK', onPress: () => { } }
-    ],
-    { cancelable: false }
+    [{text: 'OK', onPress: () => {}}],
+    {cancelable: false},
   );
 };
 exports.isJSON = str => {
@@ -48,10 +42,8 @@ exports.isJSON = str => {
   return true;
 };
 exports.getUserInfo = async () => {
-  const endpoint = encodeURI(
-    apiHost + 'api/getUserTeam',
-  );
-  const token = await exports.getIDToken()
+  const endpoint = encodeURI(apiHost + 'api/getUserTeam');
+  const token = await exports.getIDToken();
   return await fetch(endpoint, {
     method: 'GET',
     headers: {
@@ -59,13 +51,11 @@ exports.getUserInfo = async () => {
       'Content-Type': 'application/json',
       token: token,
     },
-  })
-    .then(response => {
-      return response.json();
-    })
-
-}
-exports.addUserToTeam = async (team) => {
+  }).then(response => {
+    return response.json();
+  });
+};
+exports.addUserToTeam = async team => {
   const endpoint = apiHost + 'api/addUserToTeam';
 
   const res = await fetch(endpoint, {
@@ -76,12 +66,11 @@ exports.addUserToTeam = async (team) => {
       token: await exports.getIDToken(),
     },
     body: JSON.stringify({
-      team: team
+      team: team,
     }),
-  })
-  return await res.json()
-
-}
+  });
+  return await res.json();
+};
 exports.firstTimeSignIn = async () => {
   const now = Date.now();
   let userInfo;
@@ -91,18 +80,18 @@ exports.firstTimeSignIn = async () => {
     if (e.code === statusCodes.SIGN_IN_REQUIRED) {
       userInfo = GoogleSignin.signIn();
     } else if (e.code === statusCodes.IN_PROGRESS) {
-      console.warn("Already signing in...")
+      console.warn('Already signing in...');
     } else {
-      console.error("Could not sign user in")
+      console.error('Could not sign user in');
     }
   }
   if (!userInfo) {
     exports.couldNotLogin();
   }
-  const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
-  await AsyncStorage.setItem('tra-google-auth', jsonValue)
-  return userInfo.idToken
-}
+  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+  await AsyncStorage.setItem('tra-google-auth', jsonValue);
+  return userInfo.idToken;
+};
 
 exports.getIDToken = async () => {
   const now = Date.now();
@@ -110,10 +99,10 @@ exports.getIDToken = async () => {
   try {
     keyData = keyData != null ? JSON.parse(keyData) : null;
     if (keyData !== null && now - keyData.time < 3500000) {
-      return keyData.key
+      return keyData.key;
     }
   } catch (e) {
-    console.warn("Error pulling stored key")
+    console.warn('Error pulling stored key');
   }
   let userInfo;
   try {
@@ -122,23 +111,23 @@ exports.getIDToken = async () => {
     if (e.code === statusCodes.SIGN_IN_REQUIRED) {
       userInfo = GoogleSignin.signIn();
     } else if (e.code === statusCodes.IN_PROGRESS) {
-      console.warn("Already signing in...")
+      console.warn('Already signing in...');
     } else {
-      console.error("Could not sign user in")
+      console.error('Could not sign user in');
     }
   }
-  const jsonValue = JSON.stringify({ key: userInfo.idToken, time: now })
-  await AsyncStorage.setItem('tra-google-auth', jsonValue)
-  return userInfo.idToken
+  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+  await AsyncStorage.setItem('tra-google-auth', jsonValue);
+  return userInfo.idToken;
 };
 
 exports.fetchTeamsForMatch = async (competition, match) => {
   const endpoint = encodeURI(
     apiHost +
-    'api/fetchScouterUIDs?competition=' +
-    competition +
-    '&match=' +
-    match,
+      'api/fetchScouterUIDs?competition=' +
+      competition +
+      '&match=' +
+      match,
   );
 
   return await fetch(endpoint, {
@@ -154,12 +143,12 @@ exports.fetchTeamsForMatch = async (competition, match) => {
         meme_review = {
           competition: Globals.competition,
           scouters: [
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
-            { id: '0', name: 'ERROR: MATCH NOT IN DB' },
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
           ],
           success: false,
           teams: ['0', '0', '0', '0', '0', '0'],
@@ -192,35 +181,41 @@ exports.fetchTeamsForMatch = async (competition, match) => {
       }
       return data;
     });
-
 };
 
-exports.fetchMatchConfig = async (team) => {
+exports.fetchMatchConfig = async team => {
   if (team === undefined) {
-    const userInfo = await exports.getUserInfo()
-    var team = userInfo.team
+    const userInfo = await exports.getUserInfo();
+    var team = userInfo.team;
   }
-  const endpoint = encodeURI(apiHost + `api/fetchMatchConfig?competition=${Globals.data.competition}&team=${team}`);
+  const endpoint = encodeURI(
+    apiHost +
+      `api/fetchMatchConfig?competition=${
+        Globals.data.competition
+      }&team=${team}`,
+  );
   const response = await fetch(endpoint, {
     method: 'GET',
     headers: {
-      'Accept': 'application/json',
+      Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-  })
+  });
   if (response.status !== 200) {
     console.warn('Error fetching match config');
   } else {
-    const resp = await response.json()
-    return resp.config
+    const resp = await response.json();
+    return resp.config;
   }
-
 };
 
 exports.fetchPitConfiguration = async () => {
-  const userInfo = await exports.getUserInfo()
-  const team = userInfo.team
-  const endpoint = encodeURI(apiHost + `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`);
+  const userInfo = await exports.getUserInfo();
+  const team = userInfo.team;
+  const endpoint = encodeURI(
+    apiHost +
+      `api/fetchPitConfig?competition=${Globals.data.competition}&team=${team}`,
+  );
 
   return await fetch(endpoint, {
     method: 'GET',
@@ -239,24 +234,20 @@ exports.fetchPitConfiguration = async () => {
     .then(myJson => {
       return myJson.config;
     });
-
 };
 
 exports.isSignedIn = async () => {
-
   const isSignedIn = await GoogleSignin.isSignedIn();
   return isSignedIn;
-
 };
 
 exports.signOut = async () => {
-
   const isSignedIn = await exports.isSignedIn();
   if (isSignedIn) {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      AsyncStorage.setItem('tra-google-auth', "");
+      AsyncStorage.setItem('tra-google-auth', '');
       AsyncStorage.setItem('tra-is-enrolled-user', 'false');
     } catch (error) {
       console.error(error);
@@ -264,12 +255,11 @@ exports.signOut = async () => {
   }
 
   // eslint-disable-next-line no-sequences
-}
+};
 exports.fetchMatches = async competition => {
   const endpoint = encodeURI(
     apiHost + 'api/fetchScouters?competition=' + competition,
   );
-
 
   return await fetch(endpoint, {
     method: 'GET',
@@ -293,8 +283,7 @@ exports.fetchMatches = async competition => {
       }
       return arr;
     });
-
-}
+};
 exports.submitMatchData = async (competition, team, match, data) => {
   const endpoint = apiHost + 'api/submitMatchData';
 
@@ -311,11 +300,10 @@ exports.submitMatchData = async (competition, team, match, data) => {
       teamScouted: team,
       data: data,
     }),
-  })
-  const response = await resp.json()
-  return response
-
-}
+  });
+  const response = await resp.json();
+  return response;
+};
 exports.submitPitData = async (competition, team, data) => {
   let match = 0; // TODO: REMOVE MATCH FROM THE API
   const endpoint = apiHost + 'api/submitPitData';
@@ -336,9 +324,7 @@ exports.submitPitData = async (competition, team, data) => {
   })
     .then(response => {
       if (response.status !== 200) {
-        console.warn(
-          'Error fetching competition schedule for ' + competition,
-        );
+        console.warn('Error fetching competition schedule for ' + competition);
       } else {
         return response.json();
       }
@@ -347,18 +333,17 @@ exports.submitPitData = async (competition, team, data) => {
       return myJson;
     });
   // let responseJson = await JSON.parse(response);
-
-}
+};
 // STATS
 exports.fetchMatchData = async (competition, matchNumber, team) => {
   const endpoint = encodeURI(
     apiHost +
-    'api/fetchMatchData?competition=' +
-    competition +
-    '&match=' +
-    matchNumber +
-    '&team_scouted=' +
-    team,
+      'api/fetchMatchData?competition=' +
+      competition +
+      '&match=' +
+      matchNumber +
+      '&team_scouted=' +
+      team,
   );
   const response = await fetch(endpoint, {
     method: 'GET',
@@ -366,22 +351,17 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-  })
+  });
   if (response.status !== 200) {
     console.warn('Error fetching match data for ' + competition);
   } else {
     return await response.json();
   }
-
 };
 
 exports.fetchPitData = async (competition, team) => {
   const endpoint = encodeURI(
-    apiHost +
-    'api/fetchPitData?competition=' +
-    competition +
-    '&team=' +
-    team,
+    apiHost + 'api/fetchPitData?competition=' + competition + '&team=' + team,
   );
 
   return await fetch(endpoint, {
@@ -401,14 +381,13 @@ exports.fetchPitData = async (competition, team) => {
         return myJson.data;
       }
     });
-
 };
 
 exports.fetchAllTeamNicknamesAtCompetition = async competition => {
   const endpoint = encodeURI(
     apiHost +
-    'api/fetchAllTeamNicknamesAtCompetition?competition=' +
-    competition,
+      'api/fetchAllTeamNicknamesAtCompetition?competition=' +
+      competition,
   );
 
   return await fetch(endpoint, {
@@ -473,13 +452,12 @@ exports.addScouterToMatch = async (team_scouting, match, competition) => {
     body: JSON.stringify({
       match,
       team_scouting,
-      competition
+      competition,
     }),
   }).then(response => {
     return response.json();
   });
   // let responseJson = await JSON.parse(response);
-
 };
 
 exports.removeScouterFromMatch = async (team_scouting, match, competition) => {
@@ -495,13 +473,12 @@ exports.removeScouterFromMatch = async (team_scouting, match, competition) => {
     body: JSON.stringify({
       match,
       team_scouting,
-      competition
+      competition,
     }),
   }).then(response => {
     return response.json();
   });
   // let responseJson = await JSON.parse(response);
-
 };
 
 exports.fetchCompetitionSchedule = async competition => {
@@ -513,15 +490,14 @@ exports.fetchCompetitionSchedule = async competition => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-  }).then(response => {
-    if (response.status !== 200) {
-      console.warn(
-        'Error fetching competition schedule for ' + competition,
-      );
-    } else {
-      return response.json();
-    }
   })
+    .then(response => {
+      if (response.status !== 200) {
+        console.warn('Error fetching competition schedule for ' + competition);
+      } else {
+        return response.json();
+      }
+    })
     .then(myJson => {
       return myJson.data;
     });
@@ -540,7 +516,7 @@ exports.fetchTeamsInCompetition = async competition => {
       }
     }
   }
-  return teams.sort(function (a, b) {
+  return teams.sort(function(a, b) {
     return a - b;
   });
 };
@@ -558,7 +534,7 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
       }
     }
   }
-  return matches.sort(function (a, b) {
+  return matches.sort(function(a, b) {
     return a - b;
   });
 };
@@ -644,7 +620,7 @@ exports.fetch2022Schedule = async competition => {
           ],
         });
       }
-      return data.sort(function (a, b) {
+      return data.sort(function(a, b) {
         return a.match - b.match;
       });
     });
@@ -654,10 +630,10 @@ exports.fetch2022Schedule = async competition => {
 exports.getStrategiesForMatch = async (competition, matchNumber) => {
   const endpoint = encodeURI(
     apiHost +
-    'api/fetchScouterSuggestions?competition=' +
-    competition +
-    '&match=' +
-    matchNumber,
+      'api/fetchScouterSuggestions?competition=' +
+      competition +
+      '&match=' +
+      matchNumber,
   );
 
   const response = await fetch(endpoint, {
@@ -666,19 +642,18 @@ exports.getStrategiesForMatch = async (competition, matchNumber) => {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
-  })
+  });
   if (response.status !== 200) {
     console.warn(
       'Status ' +
-      response.status +
-      ' Error fetching scouting suggestions data for ' +
-      competition,
+        response.status +
+        ' Error fetching scouting suggestions data for ' +
+        competition,
     );
   } else {
-    const resp = await response.json()
-    return resp
+    const resp = await response.json();
+    return resp;
   }
-
 };
 
 exports.submitStrategy = async (competition, match, data) => {
@@ -701,9 +676,9 @@ exports.submitStrategy = async (competition, match, data) => {
       if (response.status !== 200) {
         console.warn(
           'Status ' +
-          response.status +
-          ' Error submitting scouting suggestions data for ' +
-          competition,
+            response.status +
+            ' Error submitting scouting suggestions data for ' +
+            competition,
         );
         exports.warnCouldNotSubmit();
       } else {
@@ -713,16 +688,15 @@ exports.submitStrategy = async (competition, match, data) => {
     .then(myJson => {
       return myJson;
     });
-
 };
 
 exports.getUserStrategy = async (competition, matchNumber) => {
   const endpoint = encodeURI(
     apiHost +
-    'api/fetchUserStrategy?competition=' +
-    competition +
-    '&match=' +
-    matchNumber,
+      'api/fetchUserStrategy?competition=' +
+      competition +
+      '&match=' +
+      matchNumber,
   );
 
   const response = await fetch(endpoint, {
@@ -732,17 +706,16 @@ exports.getUserStrategy = async (competition, matchNumber) => {
       'Content-Type': 'application/json',
       token: await exports.getIDToken(),
     },
-  })
+  });
   if (response.status !== 200) {
     console.warn(
       'Status ' +
-      response.status +
-      ' Error fetching fetchUserStrategy ' +
-      competition,
+        response.status +
+        ' Error fetching fetchUserStrategy ' +
+        competition,
     );
   } else {
-    const resp = await response.json()
+    const resp = await response.json();
     return resp;
   }
-
 };

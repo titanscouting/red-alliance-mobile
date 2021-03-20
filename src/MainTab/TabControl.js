@@ -1,9 +1,9 @@
 import AsyncStorage from '@react-native-community/async-storage';
-import { Button, Footer, FooterTab, StyleProvider, Text } from 'native-base';
+import {Button, Footer, FooterTab, StyleProvider, Text} from 'native-base';
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { createAppContainer } from 'react-navigation';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
+import {createAppContainer} from 'react-navigation';
+import {createBottomTabNavigator} from 'react-navigation-tabs';
 import getTheme from '../../native-base-theme/components';
 import material from '../../native-base-theme/variables/material';
 import Enrollment from '../Enrollment/Enrollment';
@@ -13,24 +13,23 @@ import Settings from './Settings/Settings';
 import Stats from './Stats/Stats';
 import Strategies from './Strategies/Strategies';
 
-
 let skipEnroll;
 AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
-  skipEnroll = (val === 'true');
-})
+  skipEnroll = val === 'true';
+});
 const TabControl = createBottomTabNavigator(
   {
-    Teams: { screen: Matches },
-    Stats: { screen: Stats },
-    Strategies: { screen: Strategies },
-    Settings: { screen: Settings },
+    Teams: {screen: Matches},
+    Stats: {screen: Stats},
+    Strategies: {screen: Strategies},
+    Settings: {screen: Settings},
     Enrollment: {
       screen: Enrollment,
       navigationOptions: () => {
         return {
           tabBarVisible: false, // don't show the navigation bar when enrolling
         };
-      }
+      },
     },
     SignOut: {
       screen: SignOut,
@@ -38,15 +37,15 @@ const TabControl = createBottomTabNavigator(
         return {
           tabBarVisible: false, // don't show the navigation bar when enrolling
         };
-      }
-    }
+      },
+    },
   },
   {
     tabBarPosition: 'bottom',
     initialRouteName: skipEnroll ? 'Teams' : 'Enrollment', // skip the enrollment screen if the user is already enrolled
-    defaultNavigationOptions: ({ navigation }) => ({
+    defaultNavigationOptions: ({navigation}) => ({
       tabBarComponent: () => {
-        const { routeName } = navigation.state;
+        const {routeName} = navigation.state;
         return (
           <StyleProvider style={getTheme(material)}>
             <Footer>

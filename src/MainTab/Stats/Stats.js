@@ -1,6 +1,6 @@
-import { Body, Container, Header, StyleProvider, Title } from 'native-base';
+import {Body, Container, Header, StyleProvider, Title} from 'native-base';
 import React from 'react';
-import { ActivityIndicator, FlatList, RefreshControl } from 'react-native';
+import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
@@ -29,7 +29,7 @@ export default class Stats extends React.Component {
     const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
       GLOBAL.data.competition,
     );
-    this.setState({ teams: teams, nicknames: nicknames });
+    this.setState({teams: teams, nicknames: nicknames});
   };
 
   async componentWillUnmount() {
@@ -37,14 +37,14 @@ export default class Stats extends React.Component {
   }
 
   setCurrentTeam = number => {
-    this.setState({ currentTeamNumber: number });
+    this.setState({currentTeamNumber: number});
   };
   removeCurrentTeam = () => {
-    this.setState({ currentTeamNumber: null });
+    this.setState({currentTeamNumber: null});
   };
 
   render() {
-    const statsStyle = ThemeProvider.statsStyle
+    const statsStyle = ThemeProvider.statsStyle;
     if (this.state.currentTeamNumber != null) {
       return (
         <StyleProvider style={getTheme(material)}>
@@ -72,7 +72,7 @@ export default class Stats extends React.Component {
             </Header>
             <FlatList
               data={this.state.teams}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <StatsTeamCell
                   team={item}
                   nickname={this.state.nicknames[item]}
@@ -98,11 +98,12 @@ export default class Stats extends React.Component {
         <StyleProvider style={getTheme(material)}>
           <Container>
             <Header>
-              <Body style={{
-                flex: 1,
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}>
+              <Body
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
                 <Title>Statistics</Title>
               </Body>
             </Header>
