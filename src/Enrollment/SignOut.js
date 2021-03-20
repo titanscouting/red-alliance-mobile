@@ -1,17 +1,5 @@
-import React, {Component} from 'react';
-import ThemeProvider from '../MainTab/ThemeProvider';
-import ajax from '../ajax';
-import {
-  Alert,
-  TextInput,
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  Button,
-} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
-import Onboarding from 'react-native-onboarding-swiper';
+import React from 'react';
+import {Text, View, StyleSheet} from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
@@ -49,17 +37,18 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     fontWeight: 'normal',
+    textAlign: 'center',
   },
 });
 export default class Enrollment extends React.Component {
   render() {
-    const enrollmentStyle = ThemeProvider.enrollmentStyle;
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
         <View style={styles.slide1}>
           <Text style={styles.text}>You have been signed out</Text>
           <Text style={styles.smalltext}>
             Thank you for using The Red Alliance{'\n'}
+            Force exit the app to sign in again{'\n'}
           </Text>
         </View>
       </Swiper>

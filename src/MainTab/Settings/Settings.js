@@ -19,10 +19,24 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import ThemeProvider, {refreshTheme} from '../ThemeProvider';
+import {GoogleSignin} from '@react-native-community/google-signin';
+
 export default class Settings extends React.Component {
   constructor() {
     super();
     this.state = {darkMode: false};
+  }
+  getCurrentUser = async () => {
+    const currentUser = await GoogleSignin.getCurrentUser();
+    this.setState({currentUser});
+  };
+  componentDidMount() {
+    GoogleSignin.getCurrentUser().then(currentUser => {
+      this.setState({
+        currentUserName: currentUser.user.name,
+        currentUserEmail: currentUser.user.email,
+      });
+    });
   }
   toggleDarkMode = async () => {
     let darkMode = !this.state.darkMode;
@@ -52,7 +66,11 @@ export default class Settings extends React.Component {
           </Header>
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>Google Account</Text>
+              <Text style={optionsStyle}>
+                Signed in as:{'\n'}
+                {this.state.currentUserName}
+                {'\n'}({this.state.currentUserEmail})
+              </Text>
               <Right>
                 <Button
                   hasText

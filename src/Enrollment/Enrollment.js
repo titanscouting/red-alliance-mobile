@@ -1,17 +1,8 @@
-import React, {Component} from 'react';
+import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
-import {
-  Alert,
-  TextInput,
-  Image,
-  Text,
-  View,
-  StyleSheet,
-  Button,
-} from 'react-native';
+import {TextInput, Text, View, StyleSheet, Button} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import Onboarding from 'react-native-onboarding-swiper';
 import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
@@ -75,7 +66,7 @@ export default class Enrollment extends React.Component {
     ajax.getUserInfo().then(userinfo => {
       let team;
       try {
-        team = parseInt(userinfo.team); // user team is valid
+        team = parseInt(userinfo.team, 10); // user team is valid
         this.state.team = '';
         AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
           this.props.navigation.navigate('Teams'),
@@ -108,6 +99,9 @@ export default class Enrollment extends React.Component {
   }
   render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
+    this.props.navigation.addListener('focus', () => {
+      this.componentDidMount();
+    });
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
         <View style={styles.slide1}>
