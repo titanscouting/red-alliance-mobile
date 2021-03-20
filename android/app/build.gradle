@@ -140,7 +140,7 @@ android {
         } else {
             versionCode 128
         }
-        versionName "3.9.0"
+        versionName "3.10.0"
         multiDexEnabled true
     }
     splits {

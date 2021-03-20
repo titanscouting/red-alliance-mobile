@@ -655,7 +655,7 @@
 				DEVELOPMENT_TEAM = 3W66J6878U;
 				INFOPLIST_FILE = RedAlliance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.9.0;
+				MARKETING_VERSION = 3.10.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -681,7 +681,7 @@
 				DEVELOPMENT_TEAM = 3W66J6878U;
 				INFOPLIST_FILE = RedAlliance/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 3.9.0;
+				MARKETING_VERSION = 3.10.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
