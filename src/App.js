@@ -64,7 +64,6 @@ VersionCheck.needUpdate().then(async res => {
       updateAlert(res.storeUrl);
     }
   } catch (e) {
-    console.warn('Could not verify app version');
   }
 });
 // Other Web Client ID: 291863698243-t3adrufmitbd3ulgejs8pq255jvvuv9u.apps.googleusercontent.com

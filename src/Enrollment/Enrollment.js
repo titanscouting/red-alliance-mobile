@@ -1,7 +1,7 @@
 import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
-import {TextInput, Text, View, StyleSheet, Button} from 'react-native';
+import {TextInput, Text, View, StyleSheet, Button, Platform, Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Swiper from 'react-native-swiper';
 
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 export default class Enrollment extends React.Component {
   constructor() {
     super();
-    this.state = {team: '2022'};
+    this.state = {team: '0000'};
   }
   addUser() {
     const team = this.state.team;
@@ -77,24 +77,58 @@ export default class Enrollment extends React.Component {
       this.setState({team: team});
     });
   }
+  handleForceLogin() {
+    console.log("Running force Google login")
+    ajax.firstTimeSignIn().then((rval) => {
+      try {
+        if (rval.login === false) {
+          Alert.alert(
+            'Could not login to The Red Alliance!',
+            'Please check that you are connected to the internet and try again.',
+            [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+            {cancelable: false},
+          );
+        } else {
+          this.checkIfRegistered()
+        }
+      } catch {
+        Alert.alert(
+          'Could not login to The Red Alliance!',
+          'Please check that you are connected to the internet and try again.',
+          [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+          {cancelable: false},
+        );
+      }
+    });  
+    return
+  }
   componentDidMount() {
     try {
-      AsyncStorage.getItem('tra-google-auth').then(info => {
-        try {
-          const obj = JSON.parse(info);
-          if (obj.key !== undefined) {
-            this.checkIfRegistered();
-          } else {
-            throw new Error('Not signed in');
+      if (Platform.OS === "ios") {
+        this.handleForceLogin()
+      } else {
+        AsyncStorage.getItem('tra-google-auth').then(info => {
+          try {
+            const obj = JSON.parse(info);
+            if (obj.key !== undefined) {
+              this.checkIfRegistered();
+            } else {
+              throw new Error('Not signed in');
+            }
+          } catch {
+            ajax.firstTimeSignIn().then(() => {
+              this.checkIfRegistered();
+            });
           }
-        } catch {
-          ajax.firstTimeSignIn().then(() => {
-            this.checkIfRegistered();
-          });
-        }
-      });
+        });
+      }
     } catch {
-      ajax.couldNotLogin();
+      Alert.alert(
+        'Could not login to The Red Alliance!',
+        'Please check that you are connected to the internet and try again.',
+        [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+        {cancelable: false},
+      );
     }
   }
   render() {

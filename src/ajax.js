@@ -81,16 +81,19 @@ exports.firstTimeSignIn = async () => {
       userInfo = GoogleSignin.signIn();
     } else if (e.code === statusCodes.IN_PROGRESS) {
       console.warn('Already signing in...');
+    } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+      return {login: false}
     } else {
-      console.error('Could not sign user in');
+      console.error('Could not sign user in', e.code);
     }
   }
-  if (!userInfo) {
+  try {
+    const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+    await AsyncStorage.setItem('tra-google-auth', jsonValue);
+    return userInfo.idToken;
+  } catch {
     exports.couldNotLogin();
   }
-  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-  await AsyncStorage.setItem('tra-google-auth', jsonValue);
-  return userInfo.idToken;
 };
 
 exports.getCurrentCompetition = async () => {
@@ -140,7 +143,7 @@ exports.getIDToken = async () => {
     } else if (e.code === statusCodes.IN_PROGRESS) {
       console.warn('Already signing in...');
     } else {
-      console.error('Could not sign user in');
+      console.error('Could not sign user in', e);
     }
   }
   const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});

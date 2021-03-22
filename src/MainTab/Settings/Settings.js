@@ -12,7 +12,7 @@ import {
   Title,
 } from 'native-base';
 import React from 'react';
-import {Linking} from 'react-native';
+import {Linking, Platform} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
@@ -28,15 +28,15 @@ export default class Settings extends React.Component {
   }
   getCurrentUser = async () => {
     const currentUser = await GoogleSignin.getCurrentUser();
-    this.setState({currentUser});
+    if (currentUser !== null) {
+      this.setState({currentUserName: currentUser.user.name, currentUserEmail: currentUser.user.email});
+    } else {
+      this.getCurrentUser();
+    }
   };
+
   componentDidMount() {
-    GoogleSignin.getCurrentUser().then(currentUser => {
-      this.setState({
-        currentUserName: currentUser.user.name,
-        currentUserEmail: currentUser.user.email,
-      });
-    });
+    this.getCurrentUser();
   }
   toggleDarkMode = async () => {
     let darkMode = !this.state.darkMode;
@@ -86,7 +86,7 @@ export default class Settings extends React.Component {
               </Right>
             </CardItem>
           </Card>
-          <Card style={optionsStyle}>
+          {/* <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
               <Right>
@@ -95,12 +95,12 @@ export default class Settings extends React.Component {
                 </Button>
               </Right>
             </CardItem>
-          </Card>
+          </Card> */}
           <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
-                The Red Alliance App — v{VersionCheck.getCurrentVersion()} (
-                {VersionCheck.getCurrentBuildNumber()})
+                The Red Alliance — v{VersionCheck.getCurrentVersion()} (
+                {VersionCheck.getCurrentBuildNumber()} {Platform.OS}{Platform.Version}-{!!global.HermesInternal ? 'hermes' : 'legacy'})
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
@@ -111,7 +111,7 @@ export default class Settings extends React.Component {
             </CardItem>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
-                Copyright Titan Scouting 2021. All rights reserved.
+                © Titan Scouting 2021. Licensed under the BSD 3-Clause License.
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
@@ -121,6 +121,15 @@ export default class Settings extends React.Component {
                   Linking.openURL(`${ajax.apiHost}privacy-policy`);
                 }}>
                 <Text>View Privacy Policy</Text>
+              </Button>
+            </CardItem>
+            <CardItem style={optionsStyle}>
+              <Button
+                hasText
+                onPress={() => {
+                  Linking.openURL('https://github.com/titanscouting/red-alliance-mobile');
+                }}>
+                <Text>View Source Code</Text>
               </Button>
             </CardItem>
           </Card>
