@@ -1,4 +1,11 @@
-import {Body, Container, Header, StyleProvider, Title} from 'native-base';
+import {
+  Body,
+  Container,
+  Header,
+  StyleProvider,
+  Subtitle,
+  Title,
+} from 'native-base';
 import React from 'react';
 import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
@@ -21,18 +28,24 @@ export default class Stats extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
+    this.getCompetitionName();
     this.pullTeams();
   }
 
   pullTeams = async () => {
+    this.getCompetitionName();
     const teams = await ajax.fetchTeamsInCompetition(GLOBAL.data.competition);
     const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
       GLOBAL.data.competition,
     );
     this.setState({teams: teams, nicknames: nicknames});
   };
-
-  async componentWillUnmount() {
+  getCompetitionName() {
+    ajax.getCompeitionFriendlyName().then(data => {
+      this.setState({competitionFriendlyName: data.friendlyName});
+    });
+  }
+  componentWillUnmount() {
     this._isMounted = false;
   }
 
@@ -68,6 +81,7 @@ export default class Stats extends React.Component {
                   alignItems: 'center',
                 }}>
                 <Title>Statistics</Title>
+                <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>
             </Header>
             <FlatList
@@ -105,6 +119,7 @@ export default class Stats extends React.Component {
                   alignItems: 'center',
                 }}>
                 <Title>Statistics</Title>
+                <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>
             </Header>
             <ActivityIndicator animating={true} />

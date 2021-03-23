@@ -8,6 +8,7 @@ import {
   Left,
   Right,
   StyleProvider,
+  Subtitle,
   Title,
 } from 'native-base';
 import PropTypes from 'prop-types';
@@ -41,6 +42,7 @@ export default class TeamList extends React.Component {
 
   onRefresh = async () => {
     this.setState({refreshing: true});
+    this.getCompetitionName();
     await this.props.refreshTeams();
     this.setState({refreshing: false});
   };
@@ -48,7 +50,11 @@ export default class TeamList extends React.Component {
   onBack = () => {
     this.props.onBack();
   };
-
+  getCompetitionName() {
+    ajax.getCompeitionFriendlyName().then(data => {
+      this.setState({competitionFriendlyName: data.friendlyName});
+    });
+  }
   doNothing = teamNumber => {
     Alert.alert(
       'Match Already Being Scouted',
@@ -74,6 +80,7 @@ export default class TeamList extends React.Component {
   };
 
   componentDidMount() {
+    this.getCompetitionName();
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
@@ -150,6 +157,7 @@ export default class TeamList extends React.Component {
                   alignItems: 'center',
                 }}>
                 <Title>Match {this.props.matchNumber}</Title>
+                <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>
               <Right
                 style={{

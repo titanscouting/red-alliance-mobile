@@ -689,6 +689,31 @@ exports.getStrategiesForMatch = async matchNumber => {
   }
 };
 
+exports.getCompeitionFriendlyName = async () => {
+  const competition = await exports.getCurrentCompetition();
+  const endpoint = encodeURI(
+    apiHost + 'api/fetchCompetitionFriendlyName?competition=' + competition,
+  );
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+    },
+  });
+  if (response.status !== 200) {
+    console.warn(
+      'Status ' +
+        response.status +
+        ' Error fetching competition friendly name for ' +
+        competition,
+    );
+  } else {
+    const resp = await response.json();
+    return resp.data;
+  }
+};
+
 exports.submitStrategy = async (match, data) => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = apiHost + 'api/submitStrategy';

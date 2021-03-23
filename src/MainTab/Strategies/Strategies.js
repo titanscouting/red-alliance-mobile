@@ -1,4 +1,11 @@
-import {Body, Container, Header, StyleProvider, Title} from 'native-base';
+import {
+  Body,
+  Container,
+  Header,
+  StyleProvider,
+  Subtitle,
+  Title,
+} from 'native-base';
 import React, {Component} from 'react';
 import {FlatList, RefreshControl} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
@@ -18,10 +25,12 @@ export default class Strategies extends Component {
   };
 
   componentDidMount() {
+    this.getCompetitionName();
     this.refreshSchedule();
   }
 
   refreshSchedule = async () => {
+    this.getCompetitionName();
     let schedule = await ajax.fetch2022Schedule();
     let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition();
     this.setState({
@@ -30,7 +39,11 @@ export default class Strategies extends Component {
       nicknames: nicknames,
     });
   };
-
+  getCompetitionName() {
+    ajax.getCompeitionFriendlyName().then(data => {
+      this.setState({competitionFriendlyName: data.friendlyName});
+    });
+  }
   handlePress = (match, teams) => {
     this.setState({currentMatch: match, currentTeams: teams});
   };
@@ -53,6 +66,7 @@ export default class Strategies extends Component {
                   alignItems: 'center',
                 }}>
                 <Title>Strategies</Title>
+                <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>
             </Header>
             <FlatList

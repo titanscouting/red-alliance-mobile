@@ -11,6 +11,7 @@ import {
   Textarea,
   Title,
   View,
+  Subtitle,
 } from 'native-base';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
@@ -38,6 +39,7 @@ export default class MatchStrategyTableView extends Component {
   };
 
   componentDidMount() {
+    this.getCompetitionName();
     this.getSubmittedStrategy();
     this.refreshStrats();
     this.backHandler = BackHandler.addEventListener(
@@ -58,9 +60,14 @@ export default class MatchStrategyTableView extends Component {
 
   refreshStrats = async () => {
     const strats = await ajax.getStrategiesForMatch(this.props.match);
+    this.getCompetitionName();
     this.setState({strats: strats, refreshing: false});
   };
-
+  getCompetitionName() {
+    ajax.getCompeitionFriendlyName().then(data => {
+      this.setState({competitionFriendlyName: data.friendlyName});
+    });
+  }
   onSave = async () => {
     await ajax.submitStrategy(this.props.match, this.state.ideas);
     this.props.onBack();
@@ -142,6 +149,7 @@ export default class MatchStrategyTableView extends Component {
             </Left>
             <Body>
               <Title>{'Match ' + this.props.match}</Title>
+              <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
             </Body>
             <Right>
               <Button transparent onPress={this.onSave}>
