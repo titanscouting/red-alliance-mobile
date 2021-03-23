@@ -2,14 +2,12 @@ import {CardItem, Container, Text} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 import {
-  BackHandler,
   ActivityIndicator,
   RefreshControl,
   SectionList,
   View,
 } from 'react-native';
 import ajax from '../../../ajax';
-import Globals from '../../../GlobalDefinitions';
 
 export default class Matches extends React.Component {
   static propTypes = {

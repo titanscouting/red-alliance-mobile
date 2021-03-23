@@ -1,7 +1,15 @@
 import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
-import {TextInput, Text, View, StyleSheet, Button, Platform, Alert} from 'react-native';
+import {
+  TextInput,
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Platform,
+  Alert,
+} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Swiper from 'react-native-swiper';
 
@@ -78,34 +86,48 @@ export default class Enrollment extends React.Component {
     });
   }
   handleForceLogin() {
-    console.log("Running force Google login")
-    ajax.firstTimeSignIn().then((rval) => {
+    console.log('Running force Google login');
+    ajax.firstTimeSignIn().then(rval => {
       try {
         if (rval.login === false) {
           Alert.alert(
             'Could not login to The Red Alliance!',
             'Please check that you are connected to the internet and try again.',
-            [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+            [
+              {
+                text: 'OK',
+                onPress: () => {
+                  this.handleForceLogin();
+                },
+              },
+            ],
             {cancelable: false},
           );
         } else {
-          this.checkIfRegistered()
+          this.checkIfRegistered();
         }
       } catch {
         Alert.alert(
           'Could not login to The Red Alliance!',
           'Please check that you are connected to the internet and try again.',
-          [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                this.handleForceLogin();
+              },
+            },
+          ],
           {cancelable: false},
         );
       }
-    });  
-    return
+    });
+    return;
   }
   componentDidMount() {
     try {
-      if (Platform.OS === "ios") {
-        this.handleForceLogin()
+      if (Platform.OS === 'ios') {
+        this.handleForceLogin();
       } else {
         AsyncStorage.getItem('tra-google-auth').then(info => {
           try {
@@ -126,7 +148,14 @@ export default class Enrollment extends React.Component {
       Alert.alert(
         'Could not login to The Red Alliance!',
         'Please check that you are connected to the internet and try again.',
-        [{text: 'OK', onPress: () => {this.handleForceLogin();}}],
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              this.handleForceLogin();
+            },
+          },
+        ],
         {cancelable: false},
       );
     }

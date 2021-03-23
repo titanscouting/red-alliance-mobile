@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {ActivityIndicator} from 'react-native';
 import ajax from '../../../ajax';
-import Globals from '../../../GlobalDefinitions';
 import Eval from './Evaluation/Eval';
 
 export default class Pit extends React.Component {

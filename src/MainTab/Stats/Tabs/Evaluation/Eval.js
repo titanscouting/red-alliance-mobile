@@ -1,7 +1,7 @@
 import {Container, StyleProvider} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {ActivityIndicator, BackHandler, Platform} from 'react-native';
+import {ActivityIndicator, BackHandler} from 'react-native';
 import getTheme from '../../../../../native-base-theme/components';
 import material from '../../../../../native-base-theme/variables/material';
 import EvalTab from './EvalTab';
@@ -25,12 +25,12 @@ export default class Eval extends React.Component {
   };
 
   getTabTitle = tabNumber => {
-    let [title, tab] = this.getTab(tabNumber);
+    let title = this.getTab(tabNumber)[0];
     return title;
   };
 
   getTabBody = tabNumber => {
-    let [title, tab] = this.getTab(tabNumber);
+    let tab = this.getTab(tabNumber)[1];
     return tab;
   };
 

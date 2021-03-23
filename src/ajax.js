@@ -82,7 +82,7 @@ exports.firstTimeSignIn = async () => {
     } else if (e.code === statusCodes.IN_PROGRESS) {
       console.warn('Already signing in...');
     } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
-      return {login: false}
+      return {login: false};
     } else {
       console.error('Could not sign user in', e.code);
     }
@@ -281,9 +281,8 @@ exports.signOut = async () => {
       console.error(error);
     }
   }
-
-  // eslint-disable-next-line no-sequences
 };
+
 exports.fetchMatches = async () => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(

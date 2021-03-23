@@ -29,7 +29,10 @@ export default class Settings extends React.Component {
   getCurrentUser = async () => {
     const currentUser = await GoogleSignin.getCurrentUser();
     if (currentUser !== null) {
-      this.setState({currentUserName: currentUser.user.name, currentUserEmail: currentUser.user.email});
+      this.setState({
+        currentUserName: currentUser.user.name,
+        currentUserEmail: currentUser.user.email,
+      });
     } else {
       this.getCurrentUser();
     }
@@ -100,7 +103,9 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
                 The Red Alliance — v{VersionCheck.getCurrentVersion()} (
-                {VersionCheck.getCurrentBuildNumber()} {Platform.OS}{Platform.Version}-{!!global.HermesInternal ? 'hermes' : 'legacy'})
+                {VersionCheck.getCurrentBuildNumber()} {Platform.OS}
+                {Platform.Version}-{global.HermesInternal ? 'hermes' : 'legacy'}
+                )
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
@@ -127,7 +132,9 @@ export default class Settings extends React.Component {
               <Button
                 hasText
                 onPress={() => {
-                  Linking.openURL('https://github.com/titanscouting/red-alliance-mobile');
+                  Linking.openURL(
+                    'https://github.com/titanscouting/red-alliance-mobile',
+                  );
                 }}>
                 <Text>View Source Code</Text>
               </Button>

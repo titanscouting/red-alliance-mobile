@@ -63,8 +63,7 @@ VersionCheck.needUpdate().then(async res => {
     if (res.isNeeded) {
       updateAlert(res.storeUrl);
     }
-  } catch (e) {
-  }
+  } catch (e) {}
 });
 // Other Web Client ID: 291863698243-t3adrufmitbd3ulgejs8pq255jvvuv9u.apps.googleusercontent.com
 // Web client ID 291863698243-8u79bk1a6odv021fu0km8htvpu6k2uqo.apps.googleusercontent.com

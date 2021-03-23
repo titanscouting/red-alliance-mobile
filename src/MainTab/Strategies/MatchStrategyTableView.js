@@ -18,7 +18,6 @@ import {BackHandler, FlatList, RefreshControl, ScrollView} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import Globals from '../../GlobalDefinitions';
 import MatchStrategyHeader from './MatchStrategyHeader';
 import SubmittedStrategyCell from './SubmittedStrategyCell';
 
