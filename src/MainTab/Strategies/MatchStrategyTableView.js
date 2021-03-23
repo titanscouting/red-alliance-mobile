@@ -48,12 +48,17 @@ export default class MatchStrategyTableView extends Component {
 
   getSubmittedStrategy = async () => {
     let submittedStrat = await ajax.getUserStrategy(this.props.match);
-    this.setState({submittedStrat: submittedStrat.data[0].data});
+    if (submittedStrat.data.length > 0) {
+      this.setState({
+        submittedStrat: submittedStrat.data[0].data,
+        ideas: submittedStrat.data[0].data,
+      });
+    }
   };
 
   refreshStrats = async () => {
     const strats = await ajax.getStrategiesForMatch(this.props.match);
-    this.setState({strats: strats.data, refreshing: false});
+    this.setState({strats: strats, refreshing: false});
   };
 
   onSave = async () => {
@@ -76,8 +81,7 @@ export default class MatchStrategyTableView extends Component {
         renderItem={({item}) => (
           <SubmittedStrategyCell
             scouter={item.scouter}
-            team_scouted={item.team_scouted}
-            strategy={item.strategy}
+            strategy={item.data}
             style={styles}
           />
         )}

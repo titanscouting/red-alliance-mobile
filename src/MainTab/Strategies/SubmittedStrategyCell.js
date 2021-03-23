@@ -19,9 +19,7 @@ export default class SubmittedStrategyCell extends React.Component {
           </Text>
         </CardItem>
         <CardItem style={styles}>
-          <Text style={styles}>
-            Team {this.props.team_scouted}: {this.props.strategy}
-          </Text>
+          <Text style={styles}>{this.props.strategy}</Text>
         </CardItem>
       </Card>
     );

@@ -664,12 +664,11 @@ exports.getStrategiesForMatch = async matchNumber => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost +
-      'api/fetchScouterSuggestions?competition=' +
+      'api/fetchStrategy?competition=' +
       competition +
       '&match=' +
       matchNumber,
   );
-
   const response = await fetch(endpoint, {
     method: 'GET',
     headers: {
@@ -686,14 +685,13 @@ exports.getStrategiesForMatch = async matchNumber => {
     );
   } else {
     const resp = await response.json();
-    return resp;
+    return resp.data;
   }
 };
 
 exports.submitStrategy = async (match, data) => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = apiHost + 'api/submitStrategy';
-
   return await fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -707,7 +705,7 @@ exports.submitStrategy = async (match, data) => {
       data: data,
     }),
   })
-    .then(response => {
+    .then(async response => {
       if (response.status !== 200) {
         console.warn(
           'Status ' +
@@ -717,7 +715,8 @@ exports.submitStrategy = async (match, data) => {
         );
         exports.warnCouldNotSubmit();
       } else {
-        return response.json();
+        const json = await response.json();
+        return json;
       }
     })
     .then(myJson => {
