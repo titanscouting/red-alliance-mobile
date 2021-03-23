@@ -41,26 +41,30 @@ export default class Settings extends React.Component {
 
   componentDidMount() {
     this.getCurrentUser();
-    DeviceInfo.getCarrier().then((carrier) => {
-      this.setState({carrier})
-    })
-    if (Platform.OS === "android") {
-      DeviceInfo.getLastUpdateTime().then((lastUpdateTime) => {
-        this.setState({lastUpdateTime: new Date(lastUpdateTime)})
+    DeviceInfo.getCarrier().then(carrier => {
+      this.setState({carrier});
+    });
+    if (Platform.OS === 'android') {
+      DeviceInfo.getLastUpdateTime().then(lastUpdateTime => {
+        this.setState({lastUpdateTime: new Date(lastUpdateTime)});
       });
     }
-    DeviceInfo.getPowerState().then((state) => {
+    DeviceInfo.getPowerState().then(state => {
       const {batteryLevel, batteryState, lowPowerMode} = state;
-      this.setState({batteryLevel: (batteryLevel * 100).toFixed(0), batteryState, lowPowerMode})
+      this.setState({
+        batteryLevel: (batteryLevel * 100).toFixed(0),
+        batteryState,
+        lowPowerMode,
+      });
     });
-    DeviceInfo.isEmulator().then((isEmulator) => {
-      this.setState({isEmulator})
+    DeviceInfo.isEmulator().then(isEmulator => {
+      this.setState({isEmulator});
     });
-    DeviceInfo.isAirplaneMode().then((airplaneModeOn) => {
-      this.setState({airplaneModeOn})
+    DeviceInfo.isAirplaneMode().then(airplaneModeOn => {
+      this.setState({airplaneModeOn});
     });
-    DeviceInfo.hasGms().then((hasGms) => {
-      this.setState({hasGms})
+    DeviceInfo.hasGms().then(hasGms => {
+      this.setState({hasGms});
     });
   }
   toggleDarkMode = async () => {
@@ -122,14 +126,35 @@ export default class Settings extends React.Component {
             </CardItem>
           </Card> */}
           <Card style={optionsStyle}>
-
             <CardItem style={optionsStyle}>
               <Button
                 hasText
                 onPress={() => {
                   Alert.alert(
                     'Diagnostic Information',
-                    `The Red Alliance — v${VersionCheck.getCurrentVersion()}\nBuild: ${VersionCheck.getCurrentBuildNumber()}\nPlatform: ${Platform.OS === 'ios' ? 'iOS' : 'Android'} ${Platform.Version}\nEngine: ${global.HermesInternal ? 'Hermes' : 'JSC'}\nDevice: ${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}\nCarrier: ${this.state.carrier}\n App Last Updated: ${this.state.lastUpdateTime === undefined ? "Unknown" : this.state.lastUpdateTime}\nBattery Level: ${this.state.batteryLevel}%\nCharging Status: ${this.state.batteryState}\nLow Power Mode: ${this.state.lowPowerMode ? "Yes" : "No"}\nEmulated: ${this.state.isEmulator ? "Yes" : "No"}\nAirplane Mode: ${this.state.airplaneModeOn ? "Yes" : "No"}\nGoogle Mobile Services: ${this.state.hasGms ? "Yes" : "No"}`,
+                    `Version: ${VersionCheck.getCurrentVersion()}\nBuild: ${VersionCheck.getCurrentBuildNumber()}\nPlatform: ${
+                      Platform.OS === 'ios' ? 'iOS' : 'Android'
+                    } ${Platform.Version}\nEngine: ${
+                      global.HermesInternal ? 'Hermes' : 'JSC'
+                    }\nDevice: ${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}\nCarrier: ${
+                      this.state.carrier
+                    }\nApp Last Updated: ${
+                      this.state.lastUpdateTime === undefined
+                        ? 'Unknown'
+                        : this.state.lastUpdateTime
+                    }\nBattery Level: ${
+                      this.state.batteryLevel
+                    }%\nCharging Status: ${
+                      this.state.batteryState
+                    }\nLow Power Mode: ${
+                      this.state.lowPowerMode ? 'Yes' : 'No'
+                    }\nEmulated: ${
+                      this.state.isEmulator ? 'Yes' : 'No'
+                    }\nAirplane Mode: ${
+                      this.state.airplaneModeOn ? 'Yes' : 'No'
+                    }\nGoogle Mobile Services: ${
+                      this.state.hasGms ? 'Yes' : 'No'
+                    }`,
                     [
                       {
                         text: 'OK',
@@ -160,9 +185,7 @@ export default class Settings extends React.Component {
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>
-                © Titan Scouting 2021. 
-              </Text>
+              <Text style={optionsStyle}>© Titan Scouting 2021.</Text>
             </CardItem>
           </Card>
         </Container>
