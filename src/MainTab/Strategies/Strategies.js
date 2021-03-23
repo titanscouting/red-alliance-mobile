@@ -86,7 +86,7 @@ export default class Strategies extends Component {
                   onRefresh={this.refreshSchedule}
                 />
               }
-              showsVerticalScrollIndicator={false}
+              showsVerticalScrollIndicator={true}
               style={styles}
             />
           </Container>

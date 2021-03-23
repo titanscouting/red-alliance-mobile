@@ -90,7 +90,7 @@ export default class MatchList extends React.Component {
                 onRefresh={this.onRefresh}
               />
             }
-            showsVerticalScrollIndicator={false}
+            showsVerticalScrollIndicator={true}
             style={this.props.style}
           />
         </Container>
