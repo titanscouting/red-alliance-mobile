@@ -185,7 +185,9 @@ export default class Settings extends React.Component {
               </Text>
             </CardItem>
             <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>© Titan Scouting 2021.</Text>
+              <Text style={optionsStyle}>
+                © Titan Scouting 2021. All Rights Reserved.
+              </Text>
             </CardItem>
           </Card>
         </Container>
