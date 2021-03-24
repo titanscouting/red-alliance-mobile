@@ -15,7 +15,9 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
 - [Node.js LTS](https://nodejs.org/) 
 - [Yarn](https://classic.yarnpkg.com/en/docs/install)
 - [Java JDK](https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html)
-  - You may also use OpenJDK or similar Java implementations
+  - You may also use OpenJDK or similar Java implementations.
+- [Android Studio](https://developer.android.com/studio)
+  - You do not need to use Android Studio as the IDE, we just need its build tools and emulator support.
 
 ### Setup 
 1. Make sure that the `emulator`, `adb`, `yarn`, and `android-studio` executables are in your PATH folders.
@@ -44,7 +46,7 @@ These releases bundle all JS assets with the app, minify all code, and create an
 
 ## Android
 1. Navigate to the `android` folder. 
-2. In a terminal window, execute `./gradlew assembleRelease`.
+2. In a terminal window, execute `./gradlew bundleRelease`.
 
 ## iOS
 Building iOS releases is not supported at this time.
