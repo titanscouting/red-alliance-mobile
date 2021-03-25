@@ -55,7 +55,6 @@ export default class MatchList extends React.Component {
   componentWillUnmount() {
     clearInterval(this.refreshTimer);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
-    console.log('match list unmounting!');
   }
 
   handleBackPress = () => {

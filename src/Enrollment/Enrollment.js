@@ -86,7 +86,7 @@ export default class Enrollment extends React.Component {
     });
   }
   handleForceLogin() {
-    console.log('Running force Google login');
+    console.warn('Running force Google login');
     ajax.firstTimeSignIn().then(rval => {
       try {
         if (rval.login === false) {

@@ -80,8 +80,8 @@ export default class Matches extends React.Component {
       }
     }
     ajax.addScouterToMatch(
-      teamNumber,
-      this.state.currentMatchNumber,
+      teamNumber.toString(),
+      this.state.currentMatchNumber.toString(),
       GLOBAL.data.competition,
     );
     this.state.currentTeamNumber = teamNumber;

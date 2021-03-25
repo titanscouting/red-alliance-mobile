@@ -471,7 +471,6 @@ exports.findTeamNickname = async team_num => {
 
 exports.addScouterToMatch = async (team_scouting, match, competition) => {
   const endpoint = apiHost + 'api/addScouterToMatch';
-
   fetch(endpoint, {
     method: 'POST',
     headers: {
