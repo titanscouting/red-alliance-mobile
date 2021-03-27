@@ -612,9 +612,16 @@ exports.fetchMatchDataForTeamInCompetition = async team => {
 
 // Strategies
 
-exports.fetch2022Schedule = async () => {
+exports.fetchTeamSchedule = async () => {
   const competition = await exports.getCurrentCompetition();
-  const endpoint = apiHost + 'api/fetch2022Schedule?competition=' + competition;
+  const userInfo = await exports.getUserInfo();
+  let team;
+  if (userInfo) {
+    team = userInfo.team
+  } else {
+    team = '2022'
+  }
+  const endpoint = `${apiHost}api/fetchTeamSchedule?competition=${competition}&team=${team}`;
   let schedule = await fetch(endpoint, {
     method: 'GET',
     headers: {

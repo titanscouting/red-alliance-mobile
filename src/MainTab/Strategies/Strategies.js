@@ -31,7 +31,7 @@ export default class Strategies extends Component {
 
   refreshSchedule = async () => {
     this.getCompetitionName();
-    let schedule = await ajax.fetch2022Schedule();
+    let schedule = await ajax.fetchTeamSchedule();
     let nicknames = await ajax.fetchAllTeamNicknamesAtCompetition();
     this.setState({
       schedule: schedule,

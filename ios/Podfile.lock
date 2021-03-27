@@ -401,9 +401,9 @@ PODS:
   - RNGoogleSignin (5.0.0):
     - GoogleSignIn (~> 5.0.0)
     - React-Core
-  - RNReanimated (1.13.1):
-    - React
-  - RNScreens (2.16.1):
+  - RNReanimated (1.13.3):
+    - React-Core
+  - RNScreens (2.18.1):
     - React-Core
   - RNVectorIcons (7.1.0):
     - React
@@ -634,8 +634,8 @@ SPEC CHECKSUMS:
   RNDeviceInfo: a91ad51aaf8dc7079f56614045cf6f0a923237bb
   RNGestureHandler: a479ebd5ed4221a810967000735517df0d2db211
   RNGoogleSignin: ad866d4c4af2651e36801dd3b7771d7715353499
-  RNReanimated: dd8c286ab5dd4ba36d3a7fef8bff7e08711b5476
-  RNScreens: 45c457af3d2ee9e08fc01e70da87e653d46b1198
+  RNReanimated: 514a11da3a2bcc6c3dfd9de32b38e2b9bf101926
+  RNScreens: f7ad633b2e0190b77b6a7aab7f914fad6f198d8d
   RNVectorIcons: bc69e6a278b14842063605de32bec61f0b251a59
   toolbar-android: 85f3ef4d691469f2d304e7dee4bca013aa1ba1ff
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
