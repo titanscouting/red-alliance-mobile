@@ -617,9 +617,9 @@ exports.fetchTeamSchedule = async () => {
   const userInfo = await exports.getUserInfo();
   let team;
   if (userInfo) {
-    team = userInfo.team
+    team = userInfo.team;
   } else {
-    team = '2022'
+    team = '2022';
   }
   const endpoint = `${apiHost}api/fetchTeamSchedule?competition=${competition}&team=${team}`;
   let schedule = await fetch(endpoint, {
