@@ -82,7 +82,21 @@ GoogleSignin.configure({
     '291863698243-3nt50bms4e2vr721vlvgb505aaj5ihhu.apps.googleusercontent.com',
 });
 GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true}).catch(e => {
-  console.error('play services are not available');
+  Alert.alert(
+    'Get Google Play Services',
+    'The Red Alliance requires Google Play Services to function correctly, which are missing from your device.',
+    [
+      {
+        text: 'Get Google Play Services',
+        onPress: () => {
+          Linking.openURL(
+            'https://play.google.com/store/apps/details?id=com.google.android.gms',
+          );
+        },
+      },
+    ],
+    {cancelable: false},
+  );
 });
 // This will prompt a user to sign in if they aren't already
 export default class App extends React.Component {
