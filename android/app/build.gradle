@@ -138,7 +138,7 @@ android {
         if (System.getProperty("MOBILECENTER_KEYSTORE_PASSWORD")) { //only mobile center exposes this
             versionCode System.getProperty("MOBILECENTER_BUILD_VERSION")
         } else {
-            versionCode 151
+            versionCode 152
         }
         versionName "3.10.3"
         multiDexEnabled true
