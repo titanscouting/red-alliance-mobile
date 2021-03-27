@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, View, StyleSheet} from 'react-native';
+import {Text, View, StyleSheet, Button} from 'react-native';
 import Swiper from 'react-native-swiper';
 
 const styles = StyleSheet.create({
@@ -48,8 +48,16 @@ export default class Enrollment extends React.Component {
           <Text style={styles.text}>You have been signed out</Text>
           <Text style={styles.smalltext}>
             Thank you for using The Red Alliance{'\n'}
-            Force exit the app to sign in again{'\n'}
           </Text>
+          <Button
+            onPress={() => {
+              this.props.navigation.navigate('Enrollment');
+            }}
+            title="Sign In Again"
+            color="#000000"
+            style={{marginTop: '30px'}}
+            accessibilityLabel="Sign in to The Red Alliance"
+          />
         </View>
       </Swiper>
     );

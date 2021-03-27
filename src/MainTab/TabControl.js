@@ -35,7 +35,7 @@ const TabControl = createBottomTabNavigator(
       screen: SignOut,
       navigationOptions: () => {
         return {
-          tabBarVisible: false, // don't show the navigation bar when enrolling
+          tabBarVisible: false, // don't show the navigation bar when signed out
         };
       },
     },

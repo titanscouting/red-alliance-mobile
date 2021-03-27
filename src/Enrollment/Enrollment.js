@@ -1,17 +1,10 @@
 import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
-import {
-  TextInput,
-  Text,
-  View,
-  StyleSheet,
-  Button,
-  Platform,
-  Alert,
-} from 'react-native';
+import {TextInput, Text, View, StyleSheet, Button, Alert} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import Swiper from 'react-native-swiper';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -53,112 +46,78 @@ const styles = StyleSheet.create({
 export default class Enrollment extends React.Component {
   constructor() {
     super();
-    this.state = {team: '0000'};
+    this.state = {team: ''};
   }
   addUser() {
     const team = this.state.team;
-    ajax.addUserToTeam(team).then(response => {
+    ajax.addUserToTeam(team, this.state.idToken).then(response => {
+      console.log(response);
       try {
-        if (!response.success) {
+        if (response.success !== true) {
           ajax.warnCouldNotAdd();
           return;
         } else {
-          this.checkIfRegistered();
+          this.setState({team: parseInt(this.state.team, 10)});
+          AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
+            this.props.navigation.navigate('Teams'),
+          );
         }
       } catch {
         ajax.warnCouldNotAdd();
       }
     });
   }
-  checkIfRegistered() {
-    ajax.getUserInfo().then(userinfo => {
-      let team;
-      try {
-        team = parseInt(userinfo.team, 10); // user team is valid
-        this.state.team = '';
-        AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
-          this.props.navigation.navigate('Teams'),
-        );
-      } catch (e) {
-        team = undefined;
+
+  async signUserIn() {
+    let userInfo;
+    try {
+      userInfo = await GoogleSignin.signIn();
+      if (userInfo === null) {
+        throw {code: statusCodes.SIGN_IN_CANCELLED};
       }
-      this.setState({team: team});
-    });
-  }
-  handleForceLogin() {
-    console.warn('Running force Google login');
-    ajax.firstTimeSignIn().then(rval => {
-      try {
-        if (rval.login === false) {
-          Alert.alert(
-            'Could not login to The Red Alliance!',
-            'Please check that you are connected to the internet and try again.',
-            [
-              {
-                text: 'OK',
-                onPress: () => {
-                  this.handleForceLogin();
-                },
-              },
-            ],
-            {cancelable: false},
-          );
-        } else {
-          this.checkIfRegistered();
+      if (userInfo !== null) {
+        const now = Date.now();
+        const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+        await AsyncStorage.setItem('tra-google-auth', jsonValue);
+        const userTeamData = await ajax.getUserInfo(userInfo.idToken);
+        this.setState({idToken: userInfo.idToken});
+        try {
+          if (Number.isFinite(userTeamData.team)) {
+            this.setState({team: userTeamData.team});
+            AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
+              this.props.navigation.navigate('Teams'),
+            );
+          }
+        } catch (e) {
+          console.log('Error with team assoc data ', e);
         }
-      } catch {
+      }
+    } catch (e) {
+      if (e.code === statusCodes.SIGN_IN_REQUIRED) {
+        userInfo = GoogleSignin.signIn();
+      } else if (e.code === statusCodes.IN_PROGRESS) {
+        console.warn('Already signing in...');
+      } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
         Alert.alert(
-          'Could not login to The Red Alliance!',
+          'You must login with Google to use The Red Alliance!',
           'Please check that you are connected to the internet and try again.',
           [
             {
               text: 'OK',
               onPress: () => {
-                this.handleForceLogin();
+                this.signUserIn();
               },
             },
           ],
           {cancelable: false},
         );
+      } else {
+        console.error('Could not sign user in', e.code);
       }
-    });
-    return;
+    }
   }
   componentDidMount() {
-    try {
-      if (Platform.OS === 'ios') {
-        this.handleForceLogin();
-      } else {
-        AsyncStorage.getItem('tra-google-auth').then(info => {
-          try {
-            const obj = JSON.parse(info);
-            if (obj.key !== undefined) {
-              this.checkIfRegistered();
-            } else {
-              throw new Error('Not signed in');
-            }
-          } catch {
-            ajax.firstTimeSignIn().then(() => {
-              this.checkIfRegistered();
-            });
-          }
-        });
-      }
-    } catch {
-      Alert.alert(
-        'Could not login to The Red Alliance!',
-        'Please check that you are connected to the internet and try again.',
-        [
-          {
-            text: 'OK',
-            onPress: () => {
-              this.handleForceLogin();
-            },
-          },
-        ],
-        {cancelable: false},
-      );
-    }
+    this.signUserIn();
   }
   render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;

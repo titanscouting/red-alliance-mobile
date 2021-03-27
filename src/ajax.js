@@ -41,9 +41,12 @@ exports.isJSON = str => {
   }
   return true;
 };
-exports.getUserInfo = async () => {
+exports.getUserInfo = async idToken => {
+  if (idToken === undefined) {
+    idToken = await exports.getIDToken();
+  }
   const endpoint = encodeURI(apiHost + 'api/getUserTeam');
-  const token = await exports.getIDToken();
+  const token = idToken;
   return await fetch(endpoint, {
     method: 'GET',
     headers: {
@@ -51,19 +54,22 @@ exports.getUserInfo = async () => {
       'Content-Type': 'application/json',
       token: token,
     },
-  }).then(response => {
-    return response.json();
+  }).then(async response => {
+    const resp = await response.json();
+    return resp;
   });
 };
-exports.addUserToTeam = async team => {
+exports.addUserToTeam = async (team, idToken) => {
+  if (idToken === undefined) {
+    idToken = await exports.getIDToken();
+  }
   const endpoint = apiHost + 'api/addUserToTeam';
-
   const res = await fetch(endpoint, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      token: idToken,
     },
     body: JSON.stringify({
       team: team,
@@ -82,7 +88,7 @@ exports.firstTimeSignIn = async () => {
     } else if (e.code === statusCodes.IN_PROGRESS) {
       console.warn('Already signing in...');
     } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
-      return {login: false};
+      exports.firstTimeSignIn();
     } else {
       console.error('Could not sign user in', e.code);
     }
@@ -229,12 +235,11 @@ exports.fetchMatchConfig = async team => {
       'Content-Type': 'application/json',
     },
   });
-  if (response.status !== 200) {
-    console.warn('Error fetching match config');
-  } else {
+  if (response.success === true) {
     const resp = await response.json();
     return resp.config;
   }
+  console.log('Could not get match config data');
 };
 
 exports.fetchPitConfiguration = async () => {
