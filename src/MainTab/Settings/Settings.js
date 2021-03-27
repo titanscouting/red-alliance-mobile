@@ -38,9 +38,7 @@ export default class Settings extends React.Component {
       this.getCurrentUser();
     }
   };
-
-  componentDidMount() {
-    this.getCurrentUser();
+  getDiagInfo() {
     DeviceInfo.getCarrier().then(carrier => {
       this.setState({carrier});
     });
@@ -66,6 +64,26 @@ export default class Settings extends React.Component {
     DeviceInfo.hasGms().then(hasGms => {
       this.setState({hasGms});
     });
+  }
+  styles = {
+    bold: {fontWeight: 'bold'},
+    italic: {fontStyle: 'italic'},
+    underline: {textDecorationLine: 'underline'},
+  };
+  async getTeam() {
+    await ajax.getUserInfo().then(userInfo => {
+      try {
+        this.setState({userTeam: userInfo.team});
+      } catch {
+        this.setState({userTeam: undefined});
+        console.warn('Could not get user team assocation');
+      }
+    });
+  }
+  componentDidMount() {
+    this.getCurrentUser();
+    this.getTeam();
+    this.getDiagInfo();
   }
   toggleDarkMode = async () => {
     let darkMode = !this.state.darkMode;
@@ -97,8 +115,16 @@ export default class Settings extends React.Component {
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>
                 Signed in as:{'\n'}
-                {this.state.currentUserName}
-                {'\n'}({this.state.currentUserEmail})
+                <Text style={this.styles.bold}>
+                  {this.state.currentUserName}
+                </Text>{' '}
+                {this.state.userTeam !== undefined
+                  ? `(Team ${this.state.userTeam})`
+                  : ''}
+                {'\n'}
+                <Text style={this.styles.italic}>
+                  {this.state.currentUserEmail}
+                </Text>
               </Text>
               <Right>
                 <Button

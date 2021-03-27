@@ -33,12 +33,14 @@ export default class Stats extends React.Component {
   }
 
   pullTeams = async () => {
+    this.setState({isRefreshing: true});
     this.getCompetitionName();
     const teams = await ajax.fetchTeamsInCompetition(GLOBAL.data.competition);
     const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
       GLOBAL.data.competition,
     );
     this.setState({teams: teams, nicknames: nicknames});
+    this.setState({isRefreshing: false});
   };
   getCompetitionName() {
     ajax.getCompeitionFriendlyName().then(data => {
@@ -68,7 +70,7 @@ export default class Stats extends React.Component {
           />
         </StyleProvider>
       );
-    } else if (this.state.teams != null) {
+    } else if (this.state.teams != null && this.state.nicknames != null) {
       return (
         <StyleProvider style={getTheme(material)}>
           <Container>
@@ -108,20 +110,30 @@ export default class Stats extends React.Component {
         </StyleProvider>
       );
     } else {
+      const bodyStyle = {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+      };
       return (
         <StyleProvider style={getTheme(material)}>
           <Container>
             <Header>
-              <Body
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <Body style={bodyStyle}>
                 <Title>Statistics</Title>
                 <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>
             </Header>
+            <FlatList
+              refreshControl={
+                <RefreshControl
+                  refreshing={this.state.isRefreshing}
+                  onRefresh={this.pullTeams}
+                />
+              }
+              style={statsStyle}
+              showsVerticalScrollIndicator={false}
+            />
             <ActivityIndicator animating={true} />
           </Container>
         </StyleProvider>

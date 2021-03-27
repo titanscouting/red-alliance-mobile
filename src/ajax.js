@@ -103,30 +103,23 @@ exports.firstTimeSignIn = async () => {
 };
 
 exports.getCurrentCompetition = async () => {
-  const endpoint = encodeURI(apiHost + 'api/getCurrentCompetition');
-  return '2020ilch';
-  // return await fetch(endpoint, {
-  //   method: 'GET',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //     token: await exports.getIDToken(),
-  //   },
-  // })
-  //   .then(response => {
-  //     return response.json();
-  //   })
-  //   .then(myJson => {
-  //     matches = myJson.data;
-  //     arr = [];
-  //     for (let i = 0; i < matches.length; i++) {
-  //       dict = {};
-  //       dict.number = i + 1;
-  //       dict.scouts = matches[i];
-  //       arr.push(dict);
-  //     }
-  //     return arr;
-  //   });
+  const idToken = await exports.getIDToken();
+  const endpoint = encodeURI(apiHost + 'api/fetchTeamCompetition');
+  return await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      token: idToken,
+    },
+  }).then(async response => {
+    const json = await response.json();
+    if (json.success === true) {
+      return json.competition;
+    } else {
+      return '2020ilch'; // default competition if API cannot be queried.
+    }
+  });
 };
 
 exports.getIDToken = async () => {
