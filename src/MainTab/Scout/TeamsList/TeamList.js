@@ -23,7 +23,6 @@ import {
 import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 import ajax from '../../../ajax';
-import GlobalDefinitions from '../../../GlobalDefinitions';
 import TeamCell from './TeamCell';
 
 export default class TeamList extends React.Component {
@@ -62,20 +61,18 @@ export default class TeamList extends React.Component {
       [
         {
           text: 'Yes',
-          onPress: () => {
-            ajax.removeScouterFromMatch(
+          onPress: async () => {
+            await ajax.removeScouterFromMatch(
               teamNumber,
               this.props.matchNumber,
-              GlobalDefinitions.data.competition,
             );
-            this.props.onItemPress();
             this.props.refreshTeams();
           },
           style: 'cancel',
         },
         {text: 'No'},
       ],
-      {cancelable: false},
+      {cancelable: true},
     );
   };
 

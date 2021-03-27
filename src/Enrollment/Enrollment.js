@@ -51,7 +51,6 @@ export default class Enrollment extends React.Component {
   addUser() {
     const team = this.state.team;
     ajax.addUserToTeam(team, this.state.idToken).then(response => {
-      console.log(response);
       try {
         if (response.success !== true) {
           ajax.warnCouldNotAdd();

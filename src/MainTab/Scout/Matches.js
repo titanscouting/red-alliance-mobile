@@ -24,7 +24,6 @@ export default class Matches extends React.Component {
 
   componentDidMount() {
     this._isMounted = true;
-
     this.pullConfiguration();
     this.refreshMatches();
   }
@@ -95,22 +94,18 @@ export default class Matches extends React.Component {
   };
 
   pullConfiguration = async () => {
-    if (
-      !this.state.configuration ||
-      Object.keys(this.state.configuration).length === 0
-    ) {
-      let config;
-      ajax.getUserInfo().then(async userinfo => {
-        let team;
+    let config;
+    ajax.getUserInfo().then(async userinfo => {
+      if (userinfo.success === true) {
         try {
-          team = parseInt(userinfo.team, 10); // user team is valid
+          const team = userinfo.team;
           config = await ajax.fetchMatchConfig(team);
+          this.setState({configuration: config});
         } catch (e) {
-          config = [];
+          this.setState({config: []});
         }
-        this.setState({configuration: config});
-      });
-    }
+      }
+    });
   };
 
   popEval = () => {

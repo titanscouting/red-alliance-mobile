@@ -221,10 +221,6 @@ exports.fetchTeamsForMatch = async (competition, match) => {
 
 exports.fetchMatchConfig = async team => {
   const competition = await exports.getCurrentCompetition();
-  if (team === undefined) {
-    const userInfo = await exports.getUserInfo();
-    var team = userInfo.team;
-  }
   const endpoint = encodeURI(
     apiHost + `api/fetchMatchConfig?competition=${competition}&team=${team}`,
   );
@@ -235,7 +231,7 @@ exports.fetchMatchConfig = async team => {
       'Content-Type': 'application/json',
     },
   });
-  if (response.success === true) {
+  if (response.status === 200) {
     const resp = await response.json();
     return resp.config;
   }
@@ -496,24 +492,24 @@ exports.addScouterToMatch = async (team_scouting, match, competition) => {
 
 exports.removeScouterFromMatch = async (team_scouting, match) => {
   const competition = await exports.getCurrentCompetition();
+  const token = await exports.getIDToken();
   const endpoint = apiHost + 'api/removeScouterFromMatch';
-
   fetch(endpoint, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      token: token,
     },
     body: JSON.stringify({
-      match,
-      team_scouting,
-      competition,
+      match: match.toString(),
+      team_scouting: team_scouting.toString(),
+      competition: competition.toString(),
     }),
-  }).then(response => {
-    return response.json();
+  }).then(async response => {
+    const resp = await response.json();
+    return resp;
   });
-  // let responseJson = await JSON.parse(response);
 };
 
 exports.fetchCompetitionSchedule = async competition => {
