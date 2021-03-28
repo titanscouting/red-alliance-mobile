@@ -233,10 +233,8 @@ exports.fetchMatchConfig = async team => {
 
 exports.fetchPitConfiguration = async () => {
   const competition = await exports.getCurrentCompetition();
-  const userInfo = await exports.getUserInfo();
-  const team = userInfo.team;
   const endpoint = encodeURI(
-    apiHost + `api/fetchPitConfig?competition=${competition}&team=${team}`,
+    apiHost + `api/fetchPitConfig?competition=${competition}`,
   );
 
   return await fetch(endpoint, {
@@ -244,6 +242,7 @@ exports.fetchPitConfiguration = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -614,19 +613,13 @@ exports.fetchMatchDataForTeamInCompetition = async team => {
 
 exports.fetchTeamSchedule = async () => {
   const competition = await exports.getCurrentCompetition();
-  const userInfo = await exports.getUserInfo();
-  let team;
-  if (userInfo) {
-    team = userInfo.team;
-  } else {
-    team = '2022';
-  }
-  const endpoint = `${apiHost}api/fetchTeamSchedule?competition=${competition}&team=${team}`;
+  const endpoint = `${apiHost}api/fetchTeamSchedule?competition=${competition}`;
   let schedule = await fetch(endpoint, {
     method: 'GET',
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   })
     .then(response => {
