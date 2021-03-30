@@ -1,6 +1,9 @@
 import React from 'react';
-import {Text, View, StyleSheet, Button} from 'react-native';
+import {Text, View, StyleSheet, Button, Alert} from 'react-native';
 import Swiper from 'react-native-swiper';
+import AsyncStorage from '@react-native-community/async-storage';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import ajax from '../ajax';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -41,6 +44,56 @@ const styles = StyleSheet.create({
   },
 });
 export default class Enrollment extends React.Component {
+  async signUserIn() {
+    let userInfo;
+    try {
+      userInfo = await GoogleSignin.signIn();
+      if (userInfo === null) {
+        throw {code: statusCodes.SIGN_IN_CANCELLED};
+      }
+      if (userInfo !== null) {
+        const now = Date.now();
+        const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+        await AsyncStorage.setItem('tra-google-auth', jsonValue);
+        const userTeamData = await ajax.getUserInfo(userInfo.idToken);
+        this.setState({idToken: userInfo.idToken});
+        try {
+          if (Number.isFinite(userTeamData.team)) {
+            this.setState({team: userTeamData.team});
+            AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
+              this.props.navigation.navigate('Teams'),
+            );
+          } else {
+            this.props.navigation.navigate('Enrollment');
+          }
+        } catch (e) {
+          console.log('Error with team assoc data ', e);
+        }
+      }
+    } catch (e) {
+      if (e.code === statusCodes.SIGN_IN_REQUIRED) {
+        userInfo = GoogleSignin.signIn();
+      } else if (e.code === statusCodes.IN_PROGRESS) {
+        console.warn('Already signing in...');
+      } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+        Alert.alert(
+          'You must login with Google to use The Red Alliance!',
+          'Please check that you are connected to the internet and try again.',
+          [
+            {
+              text: 'OK',
+              onPress: () => {
+                this.signUserIn();
+              },
+            },
+          ],
+          {cancelable: false},
+        );
+      } else {
+        console.error('Could not sign user in', e.code);
+      }
+    }
+  }
   render() {
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
@@ -51,10 +104,10 @@ export default class Enrollment extends React.Component {
           </Text>
           <Button
             onPress={() => {
-              this.props.navigation.navigate('Enrollment');
+              this.signUserIn();
             }}
             title="Sign In Again"
-            color="#000000"
+            color="#8F182C"
             style={{marginTop: '30px'}}
             accessibilityLabel="Sign in to The Red Alliance"
           />
