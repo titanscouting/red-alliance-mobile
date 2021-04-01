@@ -2,9 +2,12 @@
 /* eslint-disable no-unused-vars */
 const apiHost = 'https://titanscouting.epochml.org/';
 
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
-import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 import Globals from './GlobalDefinitions';
 
 exports.apiHost = apiHost;
@@ -212,10 +215,10 @@ exports.fetchTeamsForMatch = async (competition, match) => {
     });
 };
 
-exports.fetchMatchConfig = async team => {
+exports.fetchMatchConfig = async () => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
-    apiHost + `api/fetchMatchConfig?competition=${competition}&team=${team}`,
+    apiHost + `api/fetchMatchConfig?competition=${competition}`,
   );
   const response = await fetch(endpoint, {
     method: 'GET',
@@ -364,7 +367,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
       competition +
       '&match=' +
       matchNumber +
-      '&team_scouted=' +
+      '&teamScouted=' +
       team,
   );
   const response = await fetch(endpoint, {

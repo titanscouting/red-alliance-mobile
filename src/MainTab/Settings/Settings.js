@@ -1,4 +1,4 @@
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Body,
   Button,
@@ -19,7 +19,7 @@ import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import ThemeProvider, {refreshTheme} from '../ThemeProvider';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import DeviceInfo from 'react-native-device-info';
 
 export default class Settings extends React.Component {

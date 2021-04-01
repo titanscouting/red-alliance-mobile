@@ -8,7 +8,7 @@
 
 import React from 'react';
 import {Alert, Linking} from 'react-native';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';

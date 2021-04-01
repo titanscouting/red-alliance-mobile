@@ -19,6 +19,7 @@ import ajax from '../../ajax';
 import GLOBAL from '../../GlobalDefinitions';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
+import Analysis from './Tabs/Analysis';
 
 export default class StatsTeamController extends React.Component {
   static propTypes = {
@@ -160,6 +161,14 @@ export default class StatsTeamController extends React.Component {
               onBack={this.onBack}
               acknowledgeChanges={this.acknowledgeChanges}
             />
+          </Tab>
+          <Tab
+            heading={
+              <TabHeading>
+                <Text>Analysis</Text>
+              </TabHeading>
+            }>
+            <Analysis team={this.props.team} />
           </Tab>
         </Tabs>
       </Container>

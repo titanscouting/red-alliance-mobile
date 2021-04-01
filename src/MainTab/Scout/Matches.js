@@ -95,17 +95,12 @@ export default class Matches extends React.Component {
 
   pullConfiguration = async () => {
     let config;
-    ajax.getUserInfo().then(async userinfo => {
-      if (userinfo.success === true) {
-        try {
-          const team = userinfo.team;
-          config = await ajax.fetchMatchConfig(team);
-          this.setState({configuration: config});
-        } catch (e) {
-          this.setState({config: []});
-        }
-      }
-    });
+    try {
+      config = await ajax.fetchMatchConfig();
+      this.setState({configuration: config});
+    } catch (e) {
+      this.setState({config: []});
+    }
   };
 
   popEval = () => {

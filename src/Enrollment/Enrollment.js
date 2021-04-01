@@ -2,9 +2,9 @@ import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
 import {TextInput, Text, View, StyleSheet, Button, Alert} from 'react-native';
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
-import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
 
 const styles = StyleSheet.create({
   wrapper: {},
