@@ -4,7 +4,10 @@ import ajax from '../ajax';
 import {TextInput, Text, View, StyleSheet, Button, Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
-import {GoogleSignin, statusCodes} from '@react-native-google-signin/google-signin';
+import {
+  GoogleSignin,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
 
 const styles = StyleSheet.create({
   wrapper: {},
