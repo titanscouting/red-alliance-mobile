@@ -222,6 +222,7 @@ exports.fetchMatchConfig = async team => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   });
   if (response.status === 200) {
