@@ -42,8 +42,6 @@ export default class Matches extends React.Component {
       },
       match: {},
       value: {
-        overflowWrap: 'break-word',
-        whiteSpace: 'pre-wrap',
         paddingRight: 10,
       },
       container: {
