@@ -17,10 +17,65 @@ export default class Analysis extends React.Component {
   };
   async getAnalysisData() {
     const data = await ajax.fetchTeamTestsData(this.props.team);
-    this.setState({analysisData: data.data});
+    this.setState({analysisData: this.cleanupData(data.data)});
   }
   componentDidMount() {
     this.getAnalysisData();
+  }
+  isObject(obj) {
+    return Object.prototype.toString.call(obj) === '[object Object]';
+  }
+  removeNull(obj) {
+    for (var propName in obj) {
+      if (
+        obj[propName] === null ||
+        obj[propName] === undefined ||
+        obj[propName] === ''
+      ) {
+        delete obj[propName];
+      } else if (typeof obj[propName] === 'object') {
+        this.removeNull(obj[propName]);
+      }
+    }
+    return obj;
+  }
+  cleanupData(data) {
+    data = this.removeNull(data);
+    for (const key in data) {
+      let newKey = key.replace(/[-_]/g, ' ');
+      let oldVal = data[key];
+      if (Number.isFinite(oldVal)) {
+        oldVal = parseFloat(oldVal.toFixed(4));
+      }
+      const keyArr = newKey.split(' ');
+      if (keyArr.length === 3) {
+        newKey = `${keyArr[0].charAt(0).toUpperCase() + keyArr[0].slice(1)} ${
+          keyArr[1]
+        } (${keyArr[2]})`;
+      } else if (keyArr.length === 2) {
+        newKey = `${keyArr[0].charAt(0).toUpperCase() + keyArr[0].slice(1)} ${
+          keyArr[1]
+        }`;
+      } else if (keyArr.length === 1) {
+        newKey = `${keyArr[0].charAt(0).toUpperCase() + keyArr[0].slice(1)}`;
+      }
+      if (keyArr[0] === 'regression') {
+        newKey = `${keyArr[1].charAt(0).toUpperCase() + keyArr[1].slice(1)} ${
+          keyArr[0]
+        }`;
+      }
+      data[newKey] = oldVal;
+      delete data[key];
+      if (data[newKey] === null || data[newKey] === undefined) {
+        delete data[newKey];
+      }
+      if (typeof data[newKey] === 'object') {
+        data[newKey] = this.cleanupData(data[newKey]);
+      } else {
+        data[newKey] = oldVal;
+      }
+    }
+    return data;
   }
   render() {
     const styles = {
