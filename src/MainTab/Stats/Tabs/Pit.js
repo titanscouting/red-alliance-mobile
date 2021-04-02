@@ -1,7 +1,7 @@
 import {Container} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
-import {ActivityIndicator} from 'react-native';
+import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
 import ajax from '../../../ajax';
 import Eval from './Evaluation/Eval';
 
@@ -37,6 +37,10 @@ export default class Pit extends React.Component {
     if (this.state.defaultData === null || this.state.configuration === null) {
       return (
         <Container>
+          <FlatList
+            refreshControl={<RefreshControl refreshing={true} />}
+            showsVerticalScrollIndicator={false}
+          />
           <ActivityIndicator animating={true} />
         </Container>
       );

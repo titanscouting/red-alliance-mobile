@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   RefreshControl,
   SectionList,
+  FlatList,
   View,
 } from 'react-native';
 import ajax from '../../../ajax';
@@ -24,7 +25,9 @@ export default class Matches extends React.Component {
     let d = await ajax.fetchMatchDataForTeamInCompetition(this.props.team);
     this.setState({statsData: d});
   };
-
+  componentDidMount() {
+    this.refreshTeam();
+  }
   onRefresh = async () => {
     this.setState({refreshing: true});
     await this.refreshTeam();
@@ -32,14 +35,17 @@ export default class Matches extends React.Component {
   };
 
   render() {
-    this.refreshTeam();
     const styles = {
       generic: {
         backgroundColor: '#ffffff',
         color: 'black',
       },
       match: {},
-      value: {},
+      value: {
+        overflowWrap: 'break-word',
+        whiteSpace: 'pre-wrap',
+        paddingRight: 10,
+      },
       container: {
         flexDirection: 'row',
         justifyContent: 'space-between',
@@ -50,6 +56,10 @@ export default class Matches extends React.Component {
     if (this.state.statsData === null) {
       return (
         <Container>
+          <FlatList
+            refreshControl={<RefreshControl refreshing={true} />}
+            showsVerticalScrollIndicator={false}
+          />
           <ActivityIndicator animating={true} />
         </Container>
       );
