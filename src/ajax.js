@@ -409,7 +409,6 @@ exports.fetchPitData = async team => {
   const endpoint = encodeURI(
     apiHost + 'api/fetchPitData?competition=' + competition + '&team=' + team,
   );
-
   return await fetch(endpoint, {
     method: 'GET',
     headers: {

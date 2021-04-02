@@ -13,7 +13,7 @@ import ajax from '../../../ajax';
 export default class Matches extends React.Component {
   static propTypes = {
     team: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
+    style: PropTypes.object,
   };
 
   state = {

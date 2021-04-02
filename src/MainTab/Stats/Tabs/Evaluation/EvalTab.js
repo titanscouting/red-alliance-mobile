@@ -47,6 +47,7 @@ export default class EvalTab extends React.Component {
         />
       );
     }
+    return null;
   }
 }
 
