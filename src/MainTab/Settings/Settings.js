@@ -12,7 +12,14 @@ import {
   Title,
 } from 'native-base';
 import React from 'react';
-import {Linking, Platform, Alert} from 'react-native';
+import {
+  Linking,
+  Platform,
+  Alert,
+  FlatList,
+  RefreshControl,
+  ActivityIndicator,
+} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import VersionCheck from 'react-native-version-check';
 import getTheme from '../../../native-base-theme/components';
@@ -97,6 +104,30 @@ export default class Settings extends React.Component {
   };
   render() {
     const optionsStyle = ThemeProvider.optionsStyle;
+    if (!this.state.userTeam) {
+      return (
+        <StyleProvider style={getTheme(material)}>
+          <Container style={optionsStyle}>
+            <Header>
+              <Body
+                // eslint-disable-next-line react-native/no-inline-styles
+                style={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}>
+                <Title>Settings</Title>
+              </Body>
+            </Header>
+            <FlatList
+              refreshControl={<RefreshControl refreshing={true} />}
+              showsVerticalScrollIndicator={false}
+            />
+            <ActivityIndicator animating={true} />
+          </Container>
+        </StyleProvider>
+      );
+    }
     return (
       <StyleProvider style={getTheme(material)}>
         <Container style={optionsStyle}>
@@ -116,6 +147,7 @@ export default class Settings extends React.Component {
               <Text style={optionsStyle}>
                 Signed in as:{'\n'}
                 <Text style={this.styles.bold}>
+                  <Icon name="account" size={20} color="#6F6F6F" />{' '}
                   {this.state.currentUserName}
                 </Text>{' '}
                 {this.state.userTeam !== undefined
@@ -123,6 +155,7 @@ export default class Settings extends React.Component {
                   : ''}
                 {'\n'}
                 <Text style={this.styles.italic}>
+                  <Icon name="email" size={20} color="#6F6F6F" />{' '}
                   {this.state.currentUserEmail}
                 </Text>
               </Text>
