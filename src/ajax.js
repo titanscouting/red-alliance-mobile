@@ -649,13 +649,14 @@ exports.fetchTeamSchedule = async () => {
       token: await exports.getIDToken(),
     },
   })
-    .then(response => {
+    .then(async response => {
+      const json = await response.json();
       if (response.status !== 200) {
         console.warn(
           'Error fetching 2022 competition schedule for ' + competition,
         );
       } else {
-        return response.json();
+        return json;
       }
     })
     .then(myJson => {
