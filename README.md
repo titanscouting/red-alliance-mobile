@@ -2,6 +2,12 @@
 
 <a href="https://play.google.com/store/apps/details?id=com.redalliance" target="_blank"><img alt="Get it on Google Play" src="https://imgur.com/YQzmZi9.png" width="153" height="46"></a>
 
+# Status Badges
+
+[![Build - Android](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/build-android.yml/badge.svg)](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/build-android.yml)
+
+[![Linting](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/lint.yml/badge.svg)](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/lint.yml)
+
 # Overview
 The Red Alliance mobile application is written in JavaScript with [React Native](https://reactnative.dev/). 
 
