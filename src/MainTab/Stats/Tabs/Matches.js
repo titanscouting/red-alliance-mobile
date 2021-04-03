@@ -6,7 +6,6 @@ import {
   RefreshControl,
   SectionList,
   FlatList,
-  View,
 } from 'react-native';
 import ajax from '../../../ajax';
 
@@ -50,6 +49,7 @@ export default class Matches extends React.Component {
         paddingRight: 20,
         paddingLeft: 20,
       },
+      header: {fontWeight: 'bold'}
     };
     if (this.state.statsData === null) {
       return (
@@ -69,15 +69,15 @@ export default class Matches extends React.Component {
             // TODO: https://www.npmjs.com/package/react-native-expandable-section-list
             sections={this.state.statsData}
             renderSectionHeader={({section}) => (
-              <CardItem header>
-                <Text>{section.name}</Text>
+              <CardItem header bordered>
+                <Text style={styles.header}>{section.name}</Text>
               </CardItem>
             )}
             renderItem={({item}) => (
-              <View style={styles.container}>
+              <CardItem style={styles.container} bordered>
                 <Text style={styles.match}>{'Match ' + item.match}</Text>
                 <Text style={styles.value}>{item.val}</Text>
-              </View>
+              </CardItem>
             )}
             showsVerticalScrollIndicator={false}
             refreshControl={
