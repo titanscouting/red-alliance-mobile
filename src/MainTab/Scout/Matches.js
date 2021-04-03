@@ -29,7 +29,7 @@ export default class Matches extends React.Component {
   }
 
   refreshMatches = async () => {
-    const matches = await ajax.fetchMatches(GLOBAL.data.competition);
+    const matches = await ajax.fetchMatches();
     this.state.matches = matches;
     await this.pullConfiguration();
     this.forceUpdate();
@@ -57,10 +57,7 @@ export default class Matches extends React.Component {
   };
 
   getTeams = async () => {
-    const teams = await ajax.fetchTeamsForMatch(
-      GLOBAL.data.competition,
-      this.state.currentMatchNumber,
-    );
+    const teams = await ajax.fetchTeamsForMatch(this.state.currentMatchNumber);
     return teams;
   };
   refreshTeams = async () => {
@@ -81,7 +78,6 @@ export default class Matches extends React.Component {
     ajax.addScouterToMatch(
       teamNumber.toString(),
       this.state.currentMatchNumber.toString(),
-      GLOBAL.data.competition,
     );
     this.state.currentTeamNumber = teamNumber;
     this.state.isBlue = isBlue;
@@ -110,7 +106,6 @@ export default class Matches extends React.Component {
 
   saveScouting = async vals => {
     const resp = await ajax.submitMatchData(
-      GLOBAL.data.competition,
       this.state.currentTeamNumber,
       this.state.currentMatchNumber,
       vals,

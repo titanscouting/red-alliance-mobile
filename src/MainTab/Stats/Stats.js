@@ -11,7 +11,6 @@ import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
-import GLOBAL from '../../GlobalDefinitions';
 import ThemeProvider from '../ThemeProvider';
 import StatsTeamCell from './StatsTeamCell';
 import StatsTeamController from './StatsTeamController';
@@ -35,10 +34,8 @@ export default class Stats extends React.Component {
   pullTeams = async () => {
     this.setState({isRefreshing: true});
     this.getCompetitionName();
-    const teams = await ajax.fetchTeamsInCompetition(GLOBAL.data.competition);
-    const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition(
-      GLOBAL.data.competition,
-    );
+    const teams = await ajax.fetchTeamsInCompetition();
+    const nicknames = await ajax.fetchAllTeamNicknamesAtCompetition();
     this.setState({teams: teams, nicknames: nicknames});
     this.setState({isRefreshing: false});
   };

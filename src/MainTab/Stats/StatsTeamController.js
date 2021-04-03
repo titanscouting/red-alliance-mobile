@@ -16,7 +16,6 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import {Alert, BackHandler, StyleSheet} from 'react-native';
 import ajax from '../../ajax';
-import GLOBAL from '../../GlobalDefinitions';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
 import Analysis from './Tabs/Analysis';
@@ -73,7 +72,6 @@ export default class StatsTeamController extends React.Component {
               ajax.removeScouterFromMatch(
                 this.props.teamNumber,
                 this.props.matchNumber,
-                GLOBAL.data.competition,
               );
               this.props.onBack();
             },
@@ -105,11 +103,7 @@ export default class StatsTeamController extends React.Component {
   vals = {};
 
   onSave = async () => {
-    await ajax.submitPitData(
-      GLOBAL.data.competition,
-      this.props.team,
-      this.vals,
-    );
+    await ajax.submitPitData(this.props.team, this.vals);
     this.setState({
       currentMatchNumber: null,
       teams: null,

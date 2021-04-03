@@ -8,7 +8,6 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-import Globals from './GlobalDefinitions';
 
 exports.apiHost = apiHost;
 
@@ -153,7 +152,8 @@ exports.getIDToken = async () => {
   return userInfo.idToken;
 };
 
-exports.fetchTeamsForMatch = async (competition, match) => {
+exports.fetchTeamsForMatch = async match => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost +
       'api/fetchScouterUIDs?competition=' +
@@ -169,11 +169,11 @@ exports.fetchTeamsForMatch = async (competition, match) => {
       'Content-Type': 'application/json',
     },
   })
-    .then(response => {
+    .then(async response => {
       let meme_review;
       if (response.status !== 200) {
         meme_review = {
-          competition: Globals.competition,
+          competition: competition,
           scouters: [
             {id: '0', name: 'ERROR: MATCH NOT IN DB'},
             {id: '0', name: 'ERROR: MATCH NOT IN DB'},
@@ -329,7 +329,7 @@ exports.fetchMatches = async () => {
       return arr;
     });
 };
-exports.submitMatchData = async (competition, team, match, data) => {
+exports.submitMatchData = async (team, match, data) => {
   const endpoint = apiHost + 'api/submitMatchData';
 
   const resp = await fetch(endpoint, {
@@ -340,7 +340,7 @@ exports.submitMatchData = async (competition, team, match, data) => {
       token: await exports.getIDToken(),
     },
     body: JSON.stringify({
-      competition: competition,
+      competition: await exports.getCurrentCompetition(),
       match: match,
       teamScouted: team,
       data: data,
@@ -349,10 +349,10 @@ exports.submitMatchData = async (competition, team, match, data) => {
   const response = await resp.json();
   return response;
 };
-exports.submitPitData = async (competition, team, data) => {
+exports.submitPitData = async (team, data) => {
   let match = 0; // TODO: REMOVE MATCH FROM THE API
   const endpoint = apiHost + 'api/submitPitData';
-
+  const competition = await exports.getCurrentCompetition();
   fetch(endpoint, {
     method: 'POST',
     headers: {
@@ -485,7 +485,7 @@ exports.findTeamNickname = async team_num => {
     });
 };
 
-exports.addScouterToMatch = async (team_scouting, match, competition) => {
+exports.addScouterToMatch = async (team_scouting, match) => {
   const endpoint = apiHost + 'api/addScouterToMatch';
   fetch(endpoint, {
     method: 'POST',
@@ -497,7 +497,7 @@ exports.addScouterToMatch = async (team_scouting, match, competition) => {
     body: JSON.stringify({
       match,
       team_scouting,
-      competition,
+      competition: await exports.getCurrentCompetition(),
     }),
   }).then(response => {
     return response.json();
@@ -549,7 +549,8 @@ exports.fetchCompetitionSchedule = async competition => {
     });
 };
 
-exports.fetchTeamsInCompetition = async competition => {
+exports.fetchTeamsInCompetition = async () => {
+  const competition = await exports.getCurrentCompetition();
   let compSchedlule = await exports.fetchCompetitionSchedule(competition);
   var teams = [];
   for (let i in compSchedlule) {
