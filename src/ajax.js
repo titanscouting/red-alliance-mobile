@@ -138,6 +138,9 @@ exports.getIDToken = async () => {
   let userInfo;
   try {
     userInfo = await GoogleSignin.signInSilently();
+    if (userInfo === null) {
+      throw {code: statusCodes.SIGN_IN_REQUIRED};
+    }
   } catch (e) {
     if (e.code === statusCodes.SIGN_IN_REQUIRED) {
       userInfo = GoogleSignin.signIn();

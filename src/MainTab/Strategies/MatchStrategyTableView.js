@@ -12,6 +12,7 @@ import {
   Title,
   View,
   Subtitle,
+  Toast,
 } from 'native-base';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
@@ -69,8 +70,23 @@ export default class MatchStrategyTableView extends Component {
     });
   }
   onSave = async () => {
-    await ajax.submitStrategy(this.props.match, this.state.ideas);
-    this.props.onBack();
+    try {
+      await ajax.submitStrategy(this.props.match, this.state.ideas);
+      Toast.show({
+        text: 'Strategy submitted!',
+        type: 'success',
+        buttonText: 'OK',
+        duration: 2000,
+      });
+      this.props.onBack();
+    } catch {
+      Toast.show({
+        text: 'Error submitting data!',
+        type: 'warning',
+        buttonText: 'OK',
+        duration: 2000,
+      });
+    }
   };
   componentWillUnmount() {
     this.backHandler.remove();
@@ -133,16 +149,16 @@ export default class MatchStrategyTableView extends Component {
 
   render() {
     const styles = this.props.style.tableViewStyle;
+    const leftStyle = {
+      paddingLeft: 10,
+      justifyContent: 'center',
+      alignItems: 'flex-start',
+    };
     return (
       <StyleProvider style={getTheme(material)}>
         <Container>
           <Header>
-            <Left
-              style={{
-                paddingLeft: 10,
-                justifyContent: 'center',
-                alignItems: 'flex-start',
-              }}>
+            <Left style={leftStyle}>
               <Button transparent onPress={this.props.onBack}>
                 <Icon name="arrow-back" />
               </Button>

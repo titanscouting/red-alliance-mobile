@@ -11,6 +11,7 @@ import {
   Tabs,
   Text,
   Title,
+  Toast,
 } from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -103,7 +104,22 @@ export default class StatsTeamController extends React.Component {
   vals = {};
 
   onSave = async () => {
-    await ajax.submitPitData(this.props.team, this.vals);
+    try {
+      await ajax.submitPitData(this.props.team, this.vals);
+      Toast.show({
+        text: 'Pit data submitted!',
+        type: 'success',
+        buttonText: 'OK',
+        duration: 2000,
+      });
+    } catch {
+      Toast.show({
+        text: 'Error submitting data!',
+        type: 'warning',
+        buttonText: 'OK',
+        duration: 2000,
+      });
+    }
     this.setState({
       currentMatchNumber: null,
       teams: null,
