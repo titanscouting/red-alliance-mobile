@@ -49,7 +49,7 @@ export default class Matches extends React.Component {
         paddingRight: 20,
         paddingLeft: 20,
       },
-      header: {fontWeight: 'bold'}
+      header: {fontWeight: 'bold'},
     };
     if (this.state.statsData === null) {
       return (
