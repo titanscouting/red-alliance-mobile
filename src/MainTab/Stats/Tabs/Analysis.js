@@ -1,9 +1,9 @@
 import {Container} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
-import JSONTree from 'react-native-json-tree';
 import ajax from '../../../ajax';
 import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
+import JSONRenderer from '../../../JSONRenderer';
 
 export default class Analysis extends React.Component {
   static propTypes = {
@@ -116,13 +116,7 @@ export default class Analysis extends React.Component {
     if (this.state.analysisData) {
       return (
         <Container>
-          <JSONTree
-            data={this.state.analysisData}
-            hideRoot={true}
-            getItemString={() => null}
-            theme={styles.treeTheme}
-            isLightTheme={false}
-          />
+          <JSONRenderer data={this.state.analysisData} />
         </Container>
       );
     } else {
