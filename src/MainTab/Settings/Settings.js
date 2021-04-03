@@ -189,6 +189,7 @@ export default class Settings extends React.Component {
               <Button
                 hasText
                 onPress={() => {
+                  this.getDiagInfo();
                   Alert.alert(
                     'Diagnostic Information',
                     `Version: ${VersionCheck.getCurrentVersion()}\nBuild: ${VersionCheck.getCurrentBuildNumber()}\nPlatform: ${
