@@ -10,6 +10,10 @@ import {
   StyleProvider,
   Text,
   Title,
+  List,
+  ListItem,
+  Thumbnail,
+  Left,
 } from 'native-base';
 import React from 'react';
 import {
@@ -40,6 +44,7 @@ export default class Settings extends React.Component {
       this.setState({
         currentUserName: currentUser.user.name,
         currentUserEmail: currentUser.user.email,
+        currentUserPhoto: currentUser.user.photo,
       });
     } else {
       this.getCurrentUser();
@@ -142,26 +147,25 @@ export default class Settings extends React.Component {
               <Title>Settings</Title>
             </Body>
           </Header>
-          <Card style={optionsStyle}>
-            <CardItem style={optionsStyle}>
-              <Text style={optionsStyle}>
-                Signed in as:{'\n'}
-                <Text style={this.styles.bold}>
-                  <Icon name="account" size={20} color="#6F6F6F" />{' '}
-                  {this.state.currentUserName}
-                </Text>{' '}
-                {this.state.userTeam !== undefined
-                  ? `(Team ${this.state.userTeam})`
-                  : ''}
-                {'\n'}
-                <Text style={this.styles.italic}>
-                  <Icon name="email" size={20} color="#6F6F6F" />{' '}
+          <List>
+            <ListItem thumbnail>
+              <Left>
+                <Thumbnail square source={{uri: this.state.currentUserPhoto}} />
+              </Left>
+              <Body>
+                <Text>
+                  {this.state.currentUserName}{' '}
+                  {this.state.userTeam !== undefined
+                    ? `(Team ${this.state.userTeam})`
+                    : ''}
+                </Text>
+                <Text note numberOfLines={1} style={this.styles.italic}>
                   {this.state.currentUserEmail}
                 </Text>
-              </Text>
+              </Body>
               <Right>
                 <Button
-                  hasText
+                  transparent
                   onPress={() => {
                     ajax.signOut();
                     this.setState({signOut: true});
@@ -172,8 +176,8 @@ export default class Settings extends React.Component {
                   <Text>Sign Out</Text>
                 </Button>
               </Right>
-            </CardItem>
-          </Card>
+            </ListItem>
+          </List>
           {/* <Card style={optionsStyle}>
             <CardItem style={optionsStyle}>
               <Text style={optionsStyle}>Dark Mode (ALPHA)</Text>
