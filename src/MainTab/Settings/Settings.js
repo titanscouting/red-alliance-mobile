@@ -14,6 +14,7 @@ import {
   ListItem,
   Thumbnail,
   Left,
+  Toast,
 } from 'native-base';
 import React from 'react';
 import {
@@ -85,10 +86,18 @@ export default class Settings extends React.Component {
   async getTeam() {
     await ajax.getUserInfo().then(userInfo => {
       try {
+        if (!userInfo.success) {
+          throw new Error('Could not sign in.');
+        }
         this.setState({userTeam: userInfo.team});
       } catch {
         this.setState({userTeam: undefined});
-        console.warn('Could not get user team assocation');
+        Toast.show({
+          text: 'Could not get user info.',
+          buttonText: 'Okay',
+          duration: 5000,
+          type: 'danger',
+        });
       }
     });
   }
@@ -193,6 +202,8 @@ export default class Settings extends React.Component {
               <Button
                 hasText
                 onPress={() => {
+                  this.getCurrentUser();
+                  this.getTeam();
                   this.getDiagInfo();
                   Alert.alert(
                     'Diagnostic Information',
