@@ -84,7 +84,7 @@ export default class Enrollment extends React.Component {
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
         this.setState({idToken: userInfo.idToken});
         try {
-          if (Number.isFinite(userTeamData.team)) {
+          if (Number.isFinite(parseInt(userTeamData.team, 10))) {
             this.setState({team: userTeamData.team});
             AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
               this.props.navigation.navigate('Teams'),
