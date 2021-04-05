@@ -11,10 +11,10 @@ import {
 
 exports.apiHost = apiHost;
 
-exports.warnCouldNotAdd = async team => {
+exports.warnCouldNotAdd = async () => {
   Alert.alert(
-    `Could not register to team ${team}!`,
-    'Check that you are using the correct Google account and try again.',
+    'Could not add user!',
+    'Please try again later.',
     [{text: 'OK', onPress: () => {}}],
     {cancelable: false},
   );
@@ -125,33 +125,34 @@ exports.getCurrentCompetition = async () => {
 };
 
 exports.getIDToken = async () => {
+  const now = Date.now();
+  let keyData = await AsyncStorage.getItem('tra-google-auth');
+  try {
+    keyData = keyData != null ? JSON.parse(keyData) : null;
+    if (keyData !== null && now - keyData.time < 3500000) {
+      return keyData.key;
+    }
+  } catch (e) {
+    console.warn('Error pulling stored key');
+  }
   let userInfo;
   try {
-    userInfo = await GoogleSignin.getTokens();
-    await GoogleSignin.clearCachedAccessToken(userInfo.accessToken);
-    userInfo = await GoogleSignin.getTokens();
-    if (userInfo === null || userInfo === undefined) {
+    userInfo = await GoogleSignin.signInSilently();
+    if (userInfo === null) {
       throw {code: statusCodes.SIGN_IN_REQUIRED};
     }
   } catch (e) {
     if (e.code === statusCodes.SIGN_IN_REQUIRED) {
-      userInfo = await GoogleSignin.signIn().catch(e2 => {
-        console.error(e2);
-      });
+      userInfo = GoogleSignin.signIn();
     } else if (e.code === statusCodes.IN_PROGRESS) {
       console.warn('Already signing in...');
     } else {
       console.error('Could not sign user in', e);
     }
   }
-  try {
-    const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-    await AsyncStorage.setItem('tra-google-auth', jsonValue);
-    return userInfo.idToken;
-  } catch {
-    return '';
-  }
-
+  const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+  await AsyncStorage.setItem('tra-google-auth', jsonValue);
+  return userInfo.idToken;
 };
 
 exports.fetchTeamsForMatch = async match => {

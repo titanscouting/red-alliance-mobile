@@ -7,7 +7,6 @@ import Swiper from 'react-native-swiper';
 import {
   GoogleSignin,
   statusCodes,
-  GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 
 const styles = StyleSheet.create({
@@ -51,24 +50,13 @@ export default class Enrollment extends React.Component {
   constructor() {
     super();
     this.state = {team: ''};
-    this.signUserIn.bind(this);
-  }
-
-  state = {
-    team: '',
-    isSignInProgress: false,
-  };
-  componentDidMount() {
-    this.checkUserSignIn();
   }
   addUser() {
-    this.signUserIn();
     const team = this.state.team;
     ajax.addUserToTeam(team, this.state.idToken).then(response => {
       try {
         if (response.success !== true) {
-          ajax.warnCouldNotAdd(team);
-          this.signUserIn();
+          ajax.warnCouldNotAdd();
           return;
         } else {
           this.setState({team: parseInt(this.state.team, 10)});
@@ -77,58 +65,27 @@ export default class Enrollment extends React.Component {
           );
         }
       } catch {
-        ajax.warnCouldNotAdd(team);
+        ajax.warnCouldNotAdd();
       }
     });
   }
-  async checkUserSignIn() {
-    let userInfo = await GoogleSignin.getCurrentUser();
-    if (userInfo !== null) {
-      const now = Date.now();
-      const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-      await AsyncStorage.setItem('tra-google-auth', jsonValue);
-      const userTeamData = await ajax.getUserInfo(userInfo.idToken);
-      this.setState({idToken: userInfo.idToken});
-      try {
-        if (Number.isFinite(userTeamData.team)) {
-          this.setState({team: userTeamData.team});
-          this.setState({isSignInProgress: false});
-          AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
-            this.props.navigation.navigate('Teams'),
-          );
-        }
-      } catch (e) {
-        console.log('Error with team assoc data ', e);
-      }
-    }
-  }
-  async signUserIn(forceUserSignIn) {
-    this.setState({isSignInProgress: true});
+
+  async signUserIn() {
     let userInfo;
     try {
-      userInfo = await GoogleSignin.getCurrentUser();
-      if (userInfo === null || forceUserSignIn === true) {
-        throw {code: statusCodes.SIGN_IN_REQUIRED};
+      userInfo = await GoogleSignin.signIn();
+      if (userInfo === null) {
+        throw {code: statusCodes.SIGN_IN_CANCELLED};
       }
-      if (userInfo !== null || forceUserSignIn !== true) {
+      if (userInfo !== null) {
         const now = Date.now();
         const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
         await AsyncStorage.setItem('tra-google-auth', jsonValue);
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
-        if (!userTeamData.success) {
-          ajax.couldNotLogin();
-          this.signUserIn(true);
-        }
         this.setState({idToken: userInfo.idToken});
         try {
-          if (Number.isFinite(parseInt(userTeamData.team, 10))) {
+          if (Number.isFinite(userTeamData.team)) {
             this.setState({team: userTeamData.team});
-            this.setState({isSignInProgress: false});
-            const jsonValue2 = JSON.stringify({
-              key: userInfo.idToken,
-              time: now,
-            });
-            await AsyncStorage.setItem('tra-google-auth', jsonValue2);
             AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
               this.props.navigation.navigate('Teams'),
             );
@@ -139,23 +96,7 @@ export default class Enrollment extends React.Component {
       }
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
-        userInfo = await GoogleSignin.signIn()
-          .then(() => {
-            this.signUserIn();
-          })
-          .catch(() => {
-            Alert.alert(
-              'You must login with Google to use The Red Alliance!',
-              'Please check that you are connected to the internet and try again.',
-              [
-                {
-                  text: 'OK',
-                  onPress: () => {},
-                },
-              ],
-              {cancelable: true},
-            );
-          });
+        userInfo = GoogleSignin.signIn();
       } else if (e.code === statusCodes.IN_PROGRESS) {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -165,20 +106,26 @@ export default class Enrollment extends React.Component {
           [
             {
               text: 'OK',
-              onPress: () => {},
+              onPress: () => {
+                this.signUserIn();
+              },
             },
           ],
-          {cancelable: true},
+          {cancelable: false},
         );
       } else {
         console.error('Could not sign user in', e.code);
       }
     }
   }
+  componentDidMount() {
+    this.signUserIn();
+  }
   render() {
-    const googleStyle = {width: 192, height: 48};
-    const signUpStyle = {marginTop: '30px'};
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
+    this.props.navigation.addListener('focus', () => {
+      this.componentDidMount();
+    });
     return (
       <Swiper style={styles.wrapper} showsButtons={false} loop={false}>
         <View style={styles.slide1}>
@@ -186,15 +133,6 @@ export default class Enrollment extends React.Component {
           <Text style={styles.smalltext}>
             Scouting Matches for your FRC team{'\n'}
           </Text>
-          <GoogleSigninButton
-            style={googleStyle}
-            size={GoogleSigninButton.Size.Wide}
-            color={GoogleSigninButton.Color.Dark}
-            onPress={() => {
-              this.signUserIn();
-            }}
-            disabled={this.state.isSigninInProgress}
-          />
         </View>
         <View style={styles.slide1}>
           <Text style={styles.text2}>Scout qualification matches</Text>
@@ -224,7 +162,7 @@ export default class Enrollment extends React.Component {
             }}
             title="Sign Up"
             color="#8F182C"
-            style={signUpStyle}
+            style={{marginTop: '30px'}}
             accessibilityLabel="Sign up for The Red Alliance"
           />
         </View>
