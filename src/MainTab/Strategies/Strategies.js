@@ -54,17 +54,17 @@ export default class Strategies extends Component {
 
   render() {
     const styles = ThemeProvider.strategiesStyle;
+    const bodyStyle = {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+    };
     if (this.state.currentMatch == null) {
       return (
         <StyleProvider style={getTheme(material)}>
           <Container>
             <Header>
-              <Body
-                style={{
-                  flex: 1,
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                }}>
+              <Body style={bodyStyle}>
                 <Title>Strategies</Title>
                 <Subtitle>{this.state.competitionFriendlyName}</Subtitle>
               </Body>

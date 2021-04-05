@@ -1,4 +1,4 @@
-import {Card, CardItem, Text} from 'native-base';
+import {Card, CardItem, Content, Text} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -11,17 +11,22 @@ export default class SubmittedStrategyCell extends React.Component {
 
   render() {
     const styles = this.props.style.generic;
+    const weightStyles = {
+      boldAndItalic: {fontWeight: 'bold', fontStyle: 'italic'},
+    };
     return (
-      <Card style={styles}>
-        <CardItem header style={styles}>
-          <Text bolded style={styles}>
-            {this.props.scouter}
-          </Text>
-        </CardItem>
-        <CardItem style={styles}>
-          <Text style={styles}>{this.props.strategy}</Text>
-        </CardItem>
-      </Card>
+      <Content padder>
+        <Card style={styles}>
+          <CardItem header style={styles}>
+            <Text bolded style={weightStyles.boldAndItalic}>
+              {this.props.scouter}
+            </Text>
+          </CardItem>
+          <CardItem style={styles}>
+            <Text style={styles}>{this.props.strategy}</Text>
+          </CardItem>
+        </Card>
+      </Content>
     );
   }
 }

@@ -50,9 +50,9 @@ export default class Enrollment extends React.Component {
   async signUserIn() {
     let userInfo;
     try {
-      userInfo = await GoogleSignin.signIn();
+      userInfo = await GoogleSignin.getCurrentUser();
       if (userInfo === null) {
-        throw {code: statusCodes.SIGN_IN_CANCELLED};
+        throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
         const now = Date.now();
@@ -61,13 +61,11 @@ export default class Enrollment extends React.Component {
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
         this.setState({idToken: userInfo.idToken});
         try {
-          if (Number.isFinite(userTeamData.team)) {
+          if (Number.isFinite(parseInt(userTeamData.team, 10))) {
             this.setState({team: userTeamData.team});
             AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
               this.props.navigation.navigate('Teams'),
             );
-          } else {
-            this.props.navigation.navigate('Enrollment');
           }
         } catch (e) {
           console.log('Error with team assoc data ', e);
@@ -75,7 +73,8 @@ export default class Enrollment extends React.Component {
       }
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
-        userInfo = GoogleSignin.signIn();
+        userInfo = await GoogleSignin.signIn();
+        this.signUserIn();
       } else if (e.code === statusCodes.IN_PROGRESS) {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {

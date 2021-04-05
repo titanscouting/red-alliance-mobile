@@ -51,7 +51,7 @@ export default class StatsTeamCell extends React.Component {
         />
       );
     } else {
-      return <View />;
+      return null;
     }
   };
 

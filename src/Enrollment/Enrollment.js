@@ -73,9 +73,9 @@ export default class Enrollment extends React.Component {
   async signUserIn() {
     let userInfo;
     try {
-      userInfo = await GoogleSignin.signIn();
+      userInfo = await GoogleSignin.getCurrentUser();
       if (userInfo === null) {
-        throw {code: statusCodes.SIGN_IN_CANCELLED};
+        throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
         const now = Date.now();
@@ -96,7 +96,8 @@ export default class Enrollment extends React.Component {
       }
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
-        userInfo = GoogleSignin.signIn();
+        userInfo = await GoogleSignin.signIn();
+        this.signUserIn();
       } else if (e.code === statusCodes.IN_PROGRESS) {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
