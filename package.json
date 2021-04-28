@@ -15,7 +15,7 @@
     "clear": "npm cache clean --force"
   },
   "dependencies": {
-    "@react-native-async-storage/async-storage": "^1.14.1",
+    "@react-native-async-storage/async-storage": "^1.15.2",
     "@react-native-community/art": "^1.1.2",
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
