@@ -13,6 +13,7 @@ import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 import MatchCell from './MatchCell';
 import ajax from '../../../ajax';
+import {io} from 'socket.io-client';
 
 export default class MatchList extends React.Component {
   static propTypes = {
@@ -21,7 +22,6 @@ export default class MatchList extends React.Component {
     onItemPress: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
   };
-
   state = {
     refreshing: false,
   };
@@ -39,14 +39,26 @@ export default class MatchList extends React.Component {
       this.setState({refreshing: false});
     }
   };
+  async listenScouterChange() {
+    const competition = await ajax.getCurrentCompetition();
+    this.socket.on(`${competition}_scoutChange`, data => {
+      this.onRefresh(true);
+    });
+  }
   componentDidMount() {
     this.getCompetitionName();
-    this.onRefresh();
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
     );
-    this.refreshTimer = setInterval(() => this.onRefresh(true), 60000);
+    this.socket = io('https://titanscouting.epochml.org');
+    this.socket.on('connect', () => {
+      this.onRefresh();
+    });
+    this.socket.on('disconnect', () => {
+      this.onRefresh();
+    });
+    this.listenScouterChange();
   }
   async getCompetitionName() {
     const data = await ajax.getCompeitionFriendlyName();
@@ -54,10 +66,12 @@ export default class MatchList extends React.Component {
   }
   componentWillUnmount() {
     clearInterval(this.refreshTimer);
+    this.socket.disconnect();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   handleBackPress = () => {
+    this.socket.disconnect();
     return true;
   };
 

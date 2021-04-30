@@ -24,6 +24,7 @@ import getTheme from '../../../../native-base-theme/components';
 import material from '../../../../native-base-theme/variables/material';
 import ajax from '../../../ajax';
 import TeamCell from './TeamCell';
+import {io} from 'socket.io-client';
 
 export default class TeamList extends React.Component {
   static propTypes = {
@@ -47,6 +48,7 @@ export default class TeamList extends React.Component {
   };
 
   onBack = () => {
+    this.socket.disconnect();
     this.props.onBack();
   };
   getCompetitionName() {
@@ -75,16 +77,33 @@ export default class TeamList extends React.Component {
       {cancelable: true},
     );
   };
-
+  async listenScouterChange() {
+    const competition = await ajax.getCurrentCompetition();
+    this.socket.on(
+      `${competition}_${this.props.matchNumber}_scoutChange`,
+      data => {
+        this.onRefresh(true);
+      },
+    );
+  }
   componentDidMount() {
     this.getCompetitionName();
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
     );
+    this.socket = io('https://titanscouting.epochml.org');
+    this.socket.on('connect', () => {
+      this.onRefresh();
+    });
+    this.socket.on('disconnect', () => {
+      this.onRefresh();
+    });
+    this.listenScouterChange();
   }
   componentWillUnmount() {
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.socket.disconnect();
   }
 
   handleBackPress = () => {
