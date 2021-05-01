@@ -51,7 +51,7 @@ export default class MatchList extends React.Component {
       'hardwareBackPress',
       this.handleBackPress,
     );
-    this.socket = io('https://titanscouting.epochml.org');
+    this.socket = io('wss://titanscouting.epochml.org');
     this.socket.on('connect', () => {
       this.onRefresh();
     });
@@ -65,8 +65,8 @@ export default class MatchList extends React.Component {
     this.setState({competitionFriendlyName: data.friendlyName});
   }
   componentWillUnmount() {
-    clearInterval(this.refreshTimer);
     this.socket.disconnect();
+    clearInterval(this.refreshTimer);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 

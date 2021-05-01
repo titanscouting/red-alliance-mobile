@@ -82,6 +82,7 @@ export default class TeamList extends React.Component {
     this.socket.on(
       `${competition}_${this.props.matchNumber}_scoutChange`,
       data => {
+        console.log(data);
         this.onRefresh(true);
       },
     );
@@ -92,7 +93,7 @@ export default class TeamList extends React.Component {
       'hardwareBackPress',
       this.handleBackPress,
     );
-    this.socket = io('https://titanscouting.epochml.org');
+    this.socket = io('wss://titanscouting.epochml.org');
     this.socket.on('connect', () => {
       this.onRefresh();
     });
@@ -102,8 +103,8 @@ export default class TeamList extends React.Component {
     this.listenScouterChange();
   }
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
     this.socket.disconnect();
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   handleBackPress = () => {

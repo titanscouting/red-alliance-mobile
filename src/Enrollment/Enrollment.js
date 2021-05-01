@@ -73,6 +73,7 @@ export default class Enrollment extends React.Component {
   async signUserIn() {
     let userInfo;
     try {
+      userInfo = await GoogleSignin.signIn();
       userInfo = await GoogleSignin.getCurrentUser();
       if (userInfo === null) {
         throw {code: statusCodes.SIGN_IN_REQUIRED};
