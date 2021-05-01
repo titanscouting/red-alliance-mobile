@@ -7,6 +7,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import ajax from '../ajax';
+import messaging from '@react-native-firebase/messaging';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -63,9 +64,9 @@ export default class Enrollment extends React.Component {
         try {
           if (Number.isFinite(parseInt(userTeamData.team, 10))) {
             this.setState({team: userTeamData.team});
-            AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
-              this.props.navigation.navigate('Teams'),
-            );
+            await AsyncStorage.setItem('tra-is-enrolled-user', 'true');
+            messaging().subscribeToTopic(`${this.state.team}_broadcastMessage`);
+            this.props.navigation.navigate('Teams');
           }
         } catch (e) {
           console.log('Error with team assoc data ', e);

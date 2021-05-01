@@ -1,6 +1,7 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Button, Footer, FooterTab, StyleProvider, Text} from 'native-base';
-import React from 'react';
+import {Alert} from 'react-native';
+import React, {useEffect} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createAppContainer} from 'react-navigation';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
@@ -12,6 +13,8 @@ import Matches from './Scout/Matches';
 import Settings from './Settings/Settings';
 import Stats from './Stats/Stats';
 import Strategies from './Strategies/Strategies';
+import ajax from '../ajax';
+import messaging from '@react-native-firebase/messaging';
 
 let skipEnroll;
 AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
@@ -46,6 +49,25 @@ const TabControl = createBottomTabNavigator(
     defaultNavigationOptions: ({navigation}) => ({
       tabBarComponent: () => {
         const {routeName} = navigation.state;
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        useEffect(() => {
+          async function subscribe() {
+            const userInfo = (await ajax.getUserInfo()) || {team: 'all'};
+            messaging().subscribeToTopic(`${userInfo.team}_broadcastMessage`);
+            if (userInfo.team !== 'all') {
+              messaging().subscribeToTopic('all_broadcastMessage');
+            }
+            messaging().onMessage(async remoteMessage => {
+              Alert.alert(
+                remoteMessage.notification.title,
+                remoteMessage.notification.body,
+                [{text: 'OK', onPress: () => {}}],
+                {cancelable: false},
+              );
+            });
+          }
+          subscribe();
+        }, []);
         return (
           <StyleProvider style={getTheme(material)}>
             <Footer>

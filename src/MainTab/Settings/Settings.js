@@ -32,6 +32,7 @@ import ajax from '../../ajax';
 import ThemeProvider, {refreshTheme} from '../ThemeProvider';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import DeviceInfo from 'react-native-device-info';
+import messaging from '@react-native-firebase/messaging';
 
 export default class Settings extends React.Component {
   constructor() {
@@ -167,6 +168,9 @@ export default class Settings extends React.Component {
                 <Button
                   transparent
                   onPress={() => {
+                    messaging().unsubscribeFromTopic(
+                      `${this.state.userTeam}_broadcastMessage`,
+                    );
                     ajax.signOut();
                     this.setState({signOut: true});
                     AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(
