@@ -40,11 +40,18 @@ export default class TeamList extends React.Component {
     refreshing: false,
   };
 
-  onRefresh = async () => {
-    this.setState({refreshing: true});
+  onRefresh = async silent => {
+    if (silent === undefined) {
+      silent = false;
+    }
+    if (!silent) {
+      this.setState({refreshing: true});
+    }
     this.getCompetitionName();
     await this.props.refreshTeams();
-    this.setState({refreshing: false});
+    if (!silent) {
+      this.setState({refreshing: false});
+    }
   };
 
   onBack = () => {
@@ -82,7 +89,7 @@ export default class TeamList extends React.Component {
     this.socket.on(
       `${competition}_${this.props.matchNumber}_scoutChange`,
       () => {
-        this.onRefresh(false);
+        this.onRefresh(true);
       },
     );
   }
