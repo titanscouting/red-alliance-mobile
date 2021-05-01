@@ -20,6 +20,7 @@
     "@react-native-community/masked-view": "^0.1.10",
     "@react-native-community/toolbar-android": "0.1.0-rc.2",
     "@react-native-firebase/app": "^11.4.1",
+    "@react-native-firebase/iid": "^11.4.1",
     "@react-native-firebase/messaging": "^11.4.1",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/native": "^5.9.3",

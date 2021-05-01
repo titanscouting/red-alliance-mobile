@@ -1,7 +1,7 @@
 require_relative '../node_modules/react-native/scripts/react_native_pods'
 require_relative '../node_modules/@react-native-community/cli-platform-ios/native_modules'
 
-platform :ios, '10.0'
+platform :ios, '11.0'
 
 target 'RedAlliance' do
   # Pods for RedAlliance
@@ -40,6 +40,9 @@ target 'RedAlliance' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'RCT-Folly', :podspec => '../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec'
   pod 'Firebase/Analytics'
+  pod 'FirebaseInstanceID'
+  pod 'Firebase/Messaging'
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
   pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 

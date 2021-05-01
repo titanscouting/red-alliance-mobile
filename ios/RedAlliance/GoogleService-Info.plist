@@ -3,19 +3,19 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>291863698243-ovppseib28p6usahf60igsp7ia3ovq6l.apps.googleusercontent.com</string>
+	<string>291863698243-g8ck3op8kk0cukc8ielhs3u8t652k4gp.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.291863698243-ovppseib28p6usahf60igsp7ia3ovq6l</string>
+	<string>com.googleusercontent.apps.291863698243-g8ck3op8kk0cukc8ielhs3u8t652k4gp</string>
 	<key>ANDROID_CLIENT_ID</key>
 	<string>291863698243-0dsmvs8uetpd9odms7aqn63iknroi4op.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyCJcxLoyxj37vbkPfvoSmimwXEYx4z80Wg</string>
+	<string>AIzaSyB3NIp92alyCxBg8ueQhb-7R77VRAZK0IE</string>
 	<key>GCM_SENDER_ID</key>
 	<string>291863698243</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.reactjs.native.example.RedAllianceTests</string>
+	<string>com.titanscouting.redalliance</string>
 	<key>PROJECT_ID</key>
 	<string>titan-scouting-api</string>
 	<key>STORAGE_BUCKET</key>
@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:291863698243:ios:6ea25df7cee04103aa6df6</string>
+	<string>1:291863698243:ios:71785eb47dc9bef5aa6df6</string>
 	<key>DATABASE_URL</key>
 	<string>https://titan-scouting-api.firebaseio.com</string>
 </dict>
