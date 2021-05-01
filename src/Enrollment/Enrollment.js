@@ -8,7 +8,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
-
+import messaging from '@react-native-firebase/messaging';
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
@@ -120,7 +120,30 @@ export default class Enrollment extends React.Component {
       }
     }
   }
+
+  async requestUserPermission() {
+    const authStatus = await messaging().requestPermission({
+      announcement: true,
+    });
+    const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED;
+    if (!enabled) {
+      Alert.alert(
+        'Notifications permissions have not been granted!',
+        'The Red Alliance mobile app requires the ability to send notifications to allow your team administrator to send you critical information. Please enable notifications access in Settings.',
+        [
+          {
+            text: 'OK',
+            onPress: () => {
+              this.requestUserPermission();
+            },
+          },
+        ],
+        {cancelable: false},
+      );
+    }
+  }
   componentDidMount() {
+    this.requestUserPermission();
     this.signUserIn();
   }
   render() {
