@@ -128,7 +128,7 @@ export default class Enrollment extends React.Component {
     const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED;
     if (!enabled) {
       Alert.alert(
-        'Notifications permission has not been granted!',
+        'Notifications permissions have not been granted!',
         'The Red Alliance mobile app requires the ability to send notifications to allow your team administrator to send you critical information. Please enable notifications access in Settings.',
         [
           {
