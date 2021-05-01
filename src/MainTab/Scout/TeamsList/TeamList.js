@@ -79,6 +79,7 @@ export default class TeamList extends React.Component {
   };
   async listenScouterChange() {
     const competition = await ajax.getCurrentCompetition();
+    this.setState({competition});
     this.socket.on(
       `${competition}_${this.props.matchNumber}_scoutChange`,
       data => {
@@ -103,6 +104,9 @@ export default class TeamList extends React.Component {
     this.listenScouterChange();
   }
   componentWillUnmount() {
+    this.socket.off(
+      `${this.state.competition}_${this.props.matchNumber}_scoutChange`,
+    );
     this.socket.disconnect();
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }

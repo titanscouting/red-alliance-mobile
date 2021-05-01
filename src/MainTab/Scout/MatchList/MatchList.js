@@ -41,6 +41,7 @@ export default class MatchList extends React.Component {
   };
   async listenScouterChange() {
     const competition = await ajax.getCurrentCompetition();
+    this.setState({competition});
     this.socket.on(`${competition}_scoutChange`, data => {
       this.onRefresh(true);
     });
@@ -65,6 +66,7 @@ export default class MatchList extends React.Component {
     this.setState({competitionFriendlyName: data.friendlyName});
   }
   componentWillUnmount() {
+    this.socket.off(`${this.statecompetition}_scoutChange`);
     this.socket.disconnect();
     clearInterval(this.refreshTimer);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
