@@ -48,7 +48,6 @@ export default class TeamList extends React.Component {
   };
 
   onBack = () => {
-    this.socket.disconnect();
     this.props.onBack();
   };
   getCompetitionName() {
@@ -82,9 +81,8 @@ export default class TeamList extends React.Component {
     this.setState({competition});
     this.socket.on(
       `${competition}_${this.props.matchNumber}_scoutChange`,
-      data => {
-        console.log(data);
-        this.onRefresh(true);
+      () => {
+        this.onRefresh(false);
       },
     );
   }
