@@ -112,6 +112,10 @@ export default class TeamList extends React.Component {
   }
 
   handleBackPress = () => {
+    this.socket.off(
+      `${this.state.competition}_${this.props.matchNumber}_scoutChange`,
+    );
+    this.socket.disconnect();
     this.onBack();
     return true;
   };

@@ -66,13 +66,14 @@ export default class MatchList extends React.Component {
     this.setState({competitionFriendlyName: data.friendlyName});
   }
   componentWillUnmount() {
-    this.socket.off(`${this.statecompetition}_scoutChange`);
+    this.socket.off(`${this.state.competition}_scoutChange`);
     this.socket.disconnect();
     clearInterval(this.refreshTimer);
     BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
   }
 
   handleBackPress = () => {
+    this.socket.off(`${this.state.competition}_scoutChange`);
     this.socket.disconnect();
     return true;
   };
