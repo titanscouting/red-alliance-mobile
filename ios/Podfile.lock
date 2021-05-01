@@ -483,6 +483,7 @@ PODS:
   - Yoga (1.14.0)
 
 DEPENDENCIES:
+  - AppAuth
   - appcenter-analytics (from `../node_modules/appcenter-analytics/ios`)
   - appcenter-core (from `../node_modules/appcenter/ios`)
   - appcenter-crashes (from `../node_modules/appcenter-crashes/ios`)
@@ -729,6 +730,6 @@ SPEC CHECKSUMS:
   toolbar-android: 85f3ef4d691469f2d304e7dee4bca013aa1ba1ff
   Yoga: 8c8436d4171c87504c648ae23b1d81242bdf3bbf
 
-PODFILE CHECKSUM: c5c06ed5fb7ed3236ab604208160b2c1eb090f17
+PODFILE CHECKSUM: 0f56230643ba6ece5347a1fd572e8a929f148f20
 
 COCOAPODS: 1.10.1
