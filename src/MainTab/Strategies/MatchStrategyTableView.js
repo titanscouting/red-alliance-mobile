@@ -22,6 +22,7 @@ import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
 import MatchStrategyHeader from './MatchStrategyHeader';
 import SubmittedStrategyCell from './SubmittedStrategyCell';
+import {io} from 'socket.io-client';
 
 export default class MatchStrategyTableView extends Component {
   static propTypes = {
@@ -43,12 +44,27 @@ export default class MatchStrategyTableView extends Component {
     this.getCompetitionName();
     this.getSubmittedStrategy();
     this.refreshStrats();
+    this.listenNewStrategy();
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
     );
   }
-
+  async listenNewStrategy() {
+    this.socket = io('wss://titanscouting.epochml.org');
+    const userInfo = await ajax.getUserInfo();
+    const competition = await ajax.getCurrentCompetition();
+    this.setState({userTeam: userInfo.team, competition});
+    this.socket.on(
+      `${String(userInfo.team)}_${competition}_${String(
+        this.props.match,
+      )}_newStrategy`,
+      () => {
+        this.getSubmittedStrategy();
+        this.refreshStrats();
+      },
+    );
+  }
   getSubmittedStrategy = async () => {
     let submittedStrat = await ajax.getUserStrategy(this.props.match);
     if (submittedStrat.data.length > 0) {
@@ -90,6 +106,11 @@ export default class MatchStrategyTableView extends Component {
   };
   componentWillUnmount() {
     this.backHandler.remove();
+    this.socket.off(
+      `${String(this.state.userTeam)}_${this.state.competition}_${String(
+        this.props.match,
+      )}_newStrategy`,
+    );
   }
 
   handleBackPress = () => {

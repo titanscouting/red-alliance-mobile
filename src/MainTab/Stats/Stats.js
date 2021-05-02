@@ -14,6 +14,7 @@ import ajax from '../../ajax';
 import ThemeProvider from '../ThemeProvider';
 import StatsTeamCell from './StatsTeamCell';
 import StatsTeamController from './StatsTeamController';
+import {io} from 'socket.io-client';
 
 export default class Stats extends React.Component {
   _isMounted = false;
@@ -29,6 +30,7 @@ export default class Stats extends React.Component {
     this._isMounted = true;
     this.getCompetitionName();
     this.pullTeams();
+    this.listenScouterChange();
   }
 
   pullTeams = async () => {
@@ -46,6 +48,15 @@ export default class Stats extends React.Component {
   }
   componentWillUnmount() {
     this._isMounted = false;
+  }
+
+  async listenScouterChange() {
+    this.socket = io('wss://titanscouting.epochml.org');
+    const userInfo = await ajax.getUserInfo();
+    const competition = await ajax.getCurrentCompetition();
+    this.socket.on(`${String(userInfo.team)}_${competition}_newPitData`, () => {
+      this.pullTeams();
+    });
   }
 
   setCurrentTeam = number => {
