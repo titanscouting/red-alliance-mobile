@@ -40,7 +40,7 @@ target 'RedAlliance' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'RCT-Folly', :podspec => '../node_modules/react-native/third-party-podspecs/RCT-Folly.podspec'
   pod 'Firebase/Analytics'
-  pod 'react-native-version-check', :path => '../node_modules/react-native-version-check'
+
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   target 'RedAllianceTests' do
