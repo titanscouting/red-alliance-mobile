@@ -168,9 +168,12 @@ export default class Settings extends React.Component {
                 <Button
                   transparent
                   onPress={() => {
-                    messaging().unsubscribeFromTopic(
-                      `${this.state.userTeam}_broadcastMessage`,
-                    );
+                    try {
+                      messaging().unsubscribeFromTopic(
+                        `${this.state.userTeam}_broadcastMessage`,
+                      );
+                    } catch {
+                    }
                     ajax.signOut();
                     this.setState({signOut: true});
                     AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(
