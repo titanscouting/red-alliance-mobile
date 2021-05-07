@@ -8,7 +8,7 @@ import {name as appName} from './app.json';
 import messaging from '@react-native-firebase/messaging';
 
 if (Platform.OS === 'android') {
-    messaging().setBackgroundMessageHandler(() => {});
+  messaging().setBackgroundMessageHandler(() => {});
 }
 
 AppRegistry.registerComponent(appName, () => App);

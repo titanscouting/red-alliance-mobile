@@ -172,8 +172,7 @@ export default class Settings extends React.Component {
                       messaging().unsubscribeFromTopic(
                         `${this.state.userTeam}_broadcastMessage`,
                       );
-                    } catch {
-                    }
+                    } catch {}
                     ajax.signOut();
                     this.setState({signOut: true});
                     AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(
