@@ -45,6 +45,7 @@ export default class Analysis extends React.Component {
   }
   render() {
     const objType = this.objType(this.state.data);
+    const biggerText = {fontSize: 16};
     switch (objType) {
       case 'Error':
       case 'Object':
@@ -64,17 +65,13 @@ export default class Analysis extends React.Component {
                         onPress={() => {
                           this.handleClick(key);
                         }}>
-                        <Text>
-                          {index + 1}: {key}
-                        </Text>
+                        <Text style={biggerText}>{key}</Text>
                       </ListItem>
                     );
                   } else {
                     return (
                       <ListItem key={index} button={true} onPress={() => {}}>
-                        <Text>
-                          {key}: {this.state.data[key]}
-                        </Text>
+                        <Text style={biggerText}>{this.state.data[key]}</Text>
                       </ListItem>
                     );
                   }
@@ -85,7 +82,7 @@ export default class Analysis extends React.Component {
                   onPress={() => {
                     this.handleGoBack();
                   }}>
-                  <Text>Go Back</Text>
+                  <Text style={biggerText}>Go Back</Text>
                 </ListItem>
               </List>
             </Content>
@@ -95,7 +92,7 @@ export default class Analysis extends React.Component {
         return (
           <Container>
             <ListItem key={0}>
-              <Text>No Data</Text>
+              <Text style={biggerText}>No Data</Text>
             </ListItem>
             <ListItem
               key={1}
@@ -103,7 +100,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text>Go Back</Text>
+              <Text style={biggerText}>Go Back</Text>
             </ListItem>
           </Container>
         );
@@ -114,7 +111,7 @@ export default class Analysis extends React.Component {
             <Content>
               <List>
                 <ListItem key={0} button={true}>
-                  <Text>{this.state.data}</Text>
+                  <Text style={biggerText}>{this.state.data}</Text>
                 </ListItem>
                 {this.state.path !== [] ? (
                   <ListItem
@@ -123,7 +120,7 @@ export default class Analysis extends React.Component {
                     onPress={() => {
                       this.handleGoBack();
                     }}>
-                    <Text>Go Back</Text>
+                    <Text style={biggerText}>Go Back</Text>
                   </ListItem>
                 ) : null}
               </List>
@@ -143,7 +140,7 @@ export default class Analysis extends React.Component {
                     onPress={() => {
                       this.handleClick(key);
                     }}>
-                    <Text>
+                    <Text style={biggerText}>
                       {index + 1}: {key}
                     </Text>
                   </ListItem>
@@ -151,7 +148,7 @@ export default class Analysis extends React.Component {
               } else {
                 return (
                   <ListItem key={index} button={true} onPress={() => {}}>
-                    <Text>
+                    <Text style={biggerText}>
                       {index + 1}: {key}
                     </Text>
                   </ListItem>
@@ -164,7 +161,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text>Go Back</Text>
+              <Text style={biggerText}>Go Back</Text>
             </ListItem>
           </List>
         );
@@ -173,7 +170,7 @@ export default class Analysis extends React.Component {
         return (
           <List>
             <ListItem key={0} button={true}>
-              <Text>{this.state.data} </Text>
+              <Text style={biggerText}>{this.state.data} </Text>
             </ListItem>
             <ListItem
               key={1}
@@ -181,7 +178,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text>Go Back</Text>
+              <Text style={biggerText}>Go Back</Text>
             </ListItem>
           </List>
         );
