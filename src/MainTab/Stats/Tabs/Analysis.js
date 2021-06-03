@@ -2,8 +2,14 @@ import {Container, Toast} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ajax from '../../../ajax';
-import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
+import {
+  ActivityIndicator,
+  FlatList,
+  ToastAndroid,
+  RefreshControl,
+} from 'react-native';
 import JSONRenderer from '../../../JSONRenderer';
+import {Platform} from 'react-native';
 
 export default class Analysis extends React.Component {
   static propTypes = {
@@ -18,12 +24,19 @@ export default class Analysis extends React.Component {
   async getAnalysisData() {
     const data = await ajax.fetchTeamTestsData(this.props.team);
     if (!data.success) {
-      Toast.show({
-        text: 'Error occurred getting analysis data.',
-        type: 'warning',
-        buttonText: 'OK',
-        duration: 2000,
-      });
+      if (Platform.OS === 'android') {
+        ToastAndroid.show(
+          'An error occurred getting analysis data!',
+          ToastAndroid.LONG,
+        );
+      } else {
+        Toast.show({
+          text: 'An error occurred getting analysis data!',
+          type: 'warning',
+          buttonText: 'OK',
+          duration: 2000,
+        });
+      }
     }
     this.setState({analysisData: this.cleanupData(data.data)});
   }

@@ -20,6 +20,8 @@ import ajax from '../../ajax';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
 import Analysis from './Tabs/Analysis';
+import {Platform} from 'react-native';
+import {ToastAndroid} from 'react-native';
 
 export default class StatsTeamController extends React.Component {
   static propTypes = {
@@ -106,19 +108,27 @@ export default class StatsTeamController extends React.Component {
   onSave = async () => {
     try {
       await ajax.submitPitData(this.props.team, this.vals);
-      Toast.show({
-        text: 'Pit data submitted!',
-        type: 'success',
-        buttonText: 'OK',
-        duration: 2000,
-      });
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Pit data submitted!', ToastAndroid.SHORT);
+      } else {
+        Toast.show({
+          text: 'Pit data submitted!',
+          type: 'success',
+          buttonText: 'OK',
+          duration: 2000,
+        });
+      }
     } catch {
-      Toast.show({
-        text: 'Error submitting data!',
-        type: 'warning',
-        buttonText: 'OK',
-        duration: 2000,
-      });
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Error submitting data!', ToastAndroid.LONG);
+      } else {
+        Toast.show({
+          text: 'Error submitting data!',
+          type: 'warning',
+          buttonText: 'OK',
+          duration: 2000,
+        });
+      }
     }
     this.setState({
       currentMatchNumber: null,

@@ -1,7 +1,16 @@
 import React from 'react';
 import ThemeProvider from '../MainTab/ThemeProvider';
 import ajax from '../ajax';
-import {TextInput, Text, View, StyleSheet, Button, Alert} from 'react-native';
+import {
+  TextInput,
+  Text,
+  View,
+  StyleSheet,
+  Button,
+  Alert,
+  ToastAndroid,
+  Platform,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import {
@@ -85,6 +94,19 @@ export default class Enrollment extends React.Component {
         await AsyncStorage.setItem('tra-google-auth', jsonValue);
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
         if (userTeamData.success !== true) {
+          if (Platform.OS === 'android') {
+            ToastAndroid.show(
+              'Login was not successful! Contact support.',
+              ToastAndroid.LONG,
+            );
+          } else {
+            Toast.show({
+              text: 'Login was not successful! Contact support.',
+              type: 'error',
+              buttonText: 'OK',
+              duration: 2000,
+            });
+          }
           console.warn('Error validating token, likely RNGoogleNative error.');
         }
         this.setState({idToken: userInfo.idToken});

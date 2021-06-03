@@ -16,7 +16,14 @@ import {
 } from 'native-base';
 import PropTypes from 'prop-types';
 import React, {Component} from 'react';
-import {BackHandler, FlatList, RefreshControl, ScrollView} from 'react-native';
+import {
+  BackHandler,
+  FlatList,
+  RefreshControl,
+  ScrollView,
+  Platform,
+  ToastAndroid,
+} from 'react-native';
 import getTheme from '../../../native-base-theme/components';
 import material from '../../../native-base-theme/variables/material';
 import ajax from '../../ajax';
@@ -88,20 +95,29 @@ export default class MatchStrategyTableView extends Component {
   onSave = async () => {
     try {
       await ajax.submitStrategy(this.props.match, this.state.ideas);
-      Toast.show({
-        text: 'Strategy submitted!',
-        type: 'success',
-        buttonText: 'OK',
-        duration: 2000,
-      });
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Strategy submitted!', ToastAndroid.SHORT);
+      } else {
+        Toast.show({
+          text: 'Strategy submitted!',
+          type: 'success',
+          buttonText: 'OK',
+          duration: 2000,
+        });
+      }
+
       this.props.onBack();
     } catch {
-      Toast.show({
-        text: 'Error submitting data!',
-        type: 'warning',
-        buttonText: 'OK',
-        duration: 2000,
-      });
+      if (Platform.OS === 'android') {
+        ToastAndroid.show('Error submitting data!', ToastAndroid.LONG);
+      } else {
+        Toast.show({
+          text: 'Error submitting data!',
+          type: 'warning',
+          buttonText: 'OK',
+          duration: 2000,
+        });
+      }
     }
   };
   componentWillUnmount() {
