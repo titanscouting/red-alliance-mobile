@@ -9,6 +9,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import messaging from '@react-native-firebase/messaging';
+import {Toast} from 'native-base';
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
@@ -53,7 +54,7 @@ export default class Enrollment extends React.Component {
   }
   addUser() {
     const team = this.state.team;
-    ajax.addUserToTeam(team, this.state.idToken).then(response => {
+    ajax.addUserToTeam(team).then(response => {
       try {
         if (response.success !== true) {
           ajax.warnCouldNotAdd();
@@ -83,6 +84,9 @@ export default class Enrollment extends React.Component {
         const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
         await AsyncStorage.setItem('tra-google-auth', jsonValue);
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
+        if (userTeamData.success !== true) {
+          console.warn('Error validating token, likely RNGoogleNative error.');
+        }
         this.setState({idToken: userInfo.idToken});
         try {
           if (Number.isFinite(parseInt(userTeamData.team, 10))) {

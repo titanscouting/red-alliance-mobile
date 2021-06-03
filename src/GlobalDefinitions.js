@@ -9,6 +9,7 @@ export default {
     'really-dark-red': '#ae1e2c',
 
     'light-red-tint': '#f08f9d',
+    'other-blue': '#0D2481',
   },
   brand: {
     primary: 'red',

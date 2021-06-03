@@ -1,4 +1,4 @@
-import {Container} from 'native-base';
+import {Container, Toast} from 'native-base';
 import PropTypes from 'prop-types';
 import React from 'react';
 import ajax from '../../../ajax';
@@ -17,6 +17,14 @@ export default class Analysis extends React.Component {
   };
   async getAnalysisData() {
     const data = await ajax.fetchTeamTestsData(this.props.team);
+    if (!data.success) {
+      Toast.show({
+        text: 'Error occurred getting analysis data.',
+        type: 'warning',
+        buttonText: 'OK',
+        duration: 2000,
+      });
+    }
     this.setState({analysisData: this.cleanupData(data.data)});
   }
   componentDidMount() {
