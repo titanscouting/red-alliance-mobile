@@ -24,6 +24,8 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
   - You may also use OpenJDK or similar Java implementations.
 - [Android Studio](https://developer.android.com/studio)
   - You do not need to use Android Studio as the IDE, we just need its build tools and emulator support.
+  - Instructions for installing Android Studio on Windows and macOS can be found [here](https://titanscouting.github.io/mobile/android-studio).
+
 
 ### Setup 
 1. Make sure that the `emulator`, `adb`, `yarn`, and `android-studio` executables are in your PATH folders.
