@@ -40,7 +40,7 @@ export default class Strategies extends Component {
     });
   };
   getCompetitionName() {
-    ajax.getCompeitionFriendlyName().then(data => {
+    ajax.getCompetitionFriendlyName().then(data => {
       this.setState({competitionFriendlyName: data.friendlyName});
     });
   }

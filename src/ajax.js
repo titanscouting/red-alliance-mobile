@@ -170,28 +170,29 @@ exports.fetchTeamsForMatch = async match => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   })
     .then(async response => {
-      let meme_review;
+      let output;
       if (response.status !== 200) {
-        meme_review = {
+        output = {
           competition: competition,
           scouters: [
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
-            {id: '0', name: 'ERROR: MATCH NOT IN DB'},
+            {id: '0', name: 'An error occurred.'},
+            {id: '1', name: 'An error occurred.'},
+            {id: '2', name: 'An error occurred.'},
+            {id: '3', name: 'An error occurred.'},
+            {id: '4', name: 'An error occurred.'},
+            {id: '5', name: 'An error occurred.'},
           ],
           success: false,
-          teams: ['0', '0', '0', '0', '0', '0'],
+          teams: ['0', '1', '2', '3', '4', '5'],
         };
       } else {
-        meme_review = response.json();
+        output = response.json();
       }
-      return meme_review;
+      return output;
     })
     .then(myJson => {
       let data = [];
@@ -398,6 +399,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
@@ -417,6 +419,7 @@ exports.fetchPitData = async team => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -538,6 +541,7 @@ exports.fetchCompetitionSchedule = async competition => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -695,6 +699,7 @@ exports.getStrategiesForMatch = async matchNumber => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
@@ -710,7 +715,7 @@ exports.getStrategiesForMatch = async matchNumber => {
   }
 };
 
-exports.getCompeitionFriendlyName = async () => {
+exports.getCompetitionFriendlyName = async () => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
     apiHost + 'api/fetchCompetitionFriendlyName?competition=' + competition,
@@ -720,6 +725,7 @@ exports.getCompeitionFriendlyName = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
+      token: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {

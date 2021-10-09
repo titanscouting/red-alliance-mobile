@@ -58,7 +58,7 @@ export default class TeamList extends React.Component {
     this.props.onBack();
   };
   getCompetitionName() {
-    ajax.getCompeitionFriendlyName().then(data => {
+    ajax.getCompetitionFriendlyName().then(data => {
       this.setState({competitionFriendlyName: data.friendlyName});
     });
   }

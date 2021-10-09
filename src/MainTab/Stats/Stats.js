@@ -42,7 +42,7 @@ export default class Stats extends React.Component {
     this.setState({isRefreshing: false});
   };
   getCompetitionName() {
-    ajax.getCompeitionFriendlyName().then(data => {
+    ajax.getCompetitionFriendlyName().then(data => {
       this.setState({competitionFriendlyName: data.friendlyName});
     });
   }
