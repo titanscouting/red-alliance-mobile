@@ -88,7 +88,7 @@ export default class MatchStrategyTableView extends Component {
     this.setState({strats: strats, refreshing: false});
   };
   getCompetitionName() {
-    ajax.getCompeitionFriendlyName().then(data => {
+    ajax.getCompetitionFriendlyName().then(data => {
       this.setState({competitionFriendlyName: data.friendlyName});
     });
   }

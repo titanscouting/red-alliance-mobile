@@ -62,7 +62,7 @@ export default class MatchList extends React.Component {
     this.listenScouterChange();
   }
   async getCompetitionName() {
-    const data = await ajax.getCompeitionFriendlyName();
+    const data = await ajax.getCompetitionFriendlyName();
     this.setState({competitionFriendlyName: data.friendlyName});
   }
   componentWillUnmount() {
