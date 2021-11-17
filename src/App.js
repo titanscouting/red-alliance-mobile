@@ -13,6 +13,8 @@ import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
 import {Root} from 'native-base';
+import messaging from '@react-native-firebase/messaging';
+
 const updateAlert = urlToOpen => {
   Alert.alert(
     'Update Available!',
@@ -99,7 +101,6 @@ GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true}).catch(e => {
     {cancelable: false},
   );
 });
-// This will prompt a user to sign in if they aren't already
 export default class App extends React.Component {
   render() {
     return (

@@ -79,7 +79,41 @@ export default class Enrollment extends React.Component {
       }
     });
   }
-
+  async handleGoodSignIn(userInfo) {
+    if (userInfo !== null) {
+      const now = Date.now();
+      const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
+      await AsyncStorage.setItem('tra-google-auth', jsonValue);
+      const userTeamData = await ajax.getUserInfo(userInfo.idToken);
+      if (userTeamData.success !== true) {
+        if (Platform.OS === 'android') {
+          ToastAndroid.show(
+            'Login was not successful! Contact support.',
+            ToastAndroid.LONG,
+          );
+        } else {
+          Toast.show({
+            text: 'Login was not successful! Contact support.',
+            type: 'error',
+            buttonText: 'OK',
+            duration: 2000,
+          });
+        }
+        console.warn('Error validating token, likely RNGoogleNative error.');
+      }
+      this.setState({idToken: userInfo.idToken});
+      try {
+        if (Number.isFinite(parseInt(userTeamData.team, 10))) {
+          this.setState({team: userTeamData.team});
+          AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
+            this.props.navigation.navigate('Teams'),
+          );
+        }
+      } catch (e) {
+        console.log('Error with team assoc data ', e);
+      }
+    }
+  }
   async signUserIn() {
     let userInfo;
     try {
@@ -89,38 +123,9 @@ export default class Enrollment extends React.Component {
         throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
-        const now = Date.now();
-        const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-        await AsyncStorage.setItem('tra-google-auth', jsonValue);
-        const userTeamData = await ajax.getUserInfo(userInfo.idToken);
-        if (userTeamData.success !== true) {
-          if (Platform.OS === 'android') {
-            ToastAndroid.show(
-              'Login was not successful! Contact support.',
-              ToastAndroid.LONG,
-            );
-          } else {
-            Toast.show({
-              text: 'Login was not successful! Contact support.',
-              type: 'error',
-              buttonText: 'OK',
-              duration: 2000,
-            });
-          }
-          console.warn('Error validating token, likely RNGoogleNative error.');
-        }
-        this.setState({idToken: userInfo.idToken});
-        try {
-          if (Number.isFinite(parseInt(userTeamData.team, 10))) {
-            this.setState({team: userTeamData.team});
-            AsyncStorage.setItem('tra-is-enrolled-user', 'true').then(
-              this.props.navigation.navigate('Teams'),
-            );
-          }
-        } catch (e) {
-          console.log('Error with team assoc data ', e);
-        }
+        this.handleGoodSignIn(userInfo)
       }
+
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
         userInfo = await GoogleSignin.signIn();
@@ -128,6 +133,13 @@ export default class Enrollment extends React.Component {
       } else if (e.code === statusCodes.IN_PROGRESS) {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
+        // alert only if the user isn't already signed in
+        const user = await GoogleSignin.getCurrentUser();
+        const signedIn = await GoogleSignin.isSignedIn();
+        if (user !== null && signedIn) {
+          this.handleGoodSignIn(user)
+          return;
+        }
         Alert.alert(
           'You must login with Google to use The Red Alliance!',
           'Please check that you are connected to the internet and try again.',
@@ -150,6 +162,8 @@ export default class Enrollment extends React.Component {
   async requestUserPermission() {
     const authStatus = await messaging().requestPermission({
       announcement: true,
+      badge: true,
+      announcement: true,
     });
     const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED;
     if (!enabled) {
@@ -169,8 +183,9 @@ export default class Enrollment extends React.Component {
     }
   }
   componentDidMount() {
-    this.requestUserPermission();
-    this.signUserIn();
+    this.requestUserPermission().then(() => {
+      this.signUserIn();
+    });
   }
   render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
