@@ -94,7 +94,10 @@ export default class MatchStrategyTableView extends Component {
   }
   onSave = async () => {
     try {
-      await ajax.submitStrategy(this.props.match, this.state.ideas);
+      const resp = await ajax.submitStrategy(this.props.match, this.state.ideas || " ");
+      if (!resp.success) {
+        throw new Error("Error in submitting!")
+      }
       if (Platform.OS === 'android') {
         ToastAndroid.show('Strategy submitted!', ToastAndroid.SHORT);
       } else {

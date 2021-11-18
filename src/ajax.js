@@ -765,9 +765,14 @@ exports.submitStrategy = async (match, data) => {
             ' Error submitting scouting suggestions data for ' +
             competition,
         );
-        exports.warnCouldNotSubmit();
+        try {
+          return await response.json()
+        } catch {
+          return {"success": false}
+        }
       } else {
         const json = await response.json();
+        console.log(json)
         return json;
       }
     })
