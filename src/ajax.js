@@ -772,7 +772,6 @@ exports.submitStrategy = async (match, data) => {
         }
       } else {
         const json = await response.json();
-        console.log(json)
         return json;
       }
     })
