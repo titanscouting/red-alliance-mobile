@@ -766,9 +766,9 @@ exports.submitStrategy = async (match, data) => {
             competition,
         );
         try {
-          return await response.json()
+          return await response.json();
         } catch {
-          return {"success": false}
+          return {success: false};
         }
       } else {
         const json = await response.json();

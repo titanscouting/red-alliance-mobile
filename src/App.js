@@ -7,13 +7,15 @@
  */
 
 import React from 'react';
-import {Alert, Linking} from 'react-native';
+import {Alert, InteractionManager, Linking} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
 import {Root} from 'native-base';
 import messaging from '@react-native-firebase/messaging';
+import {AppState, StyleSheet, Text, View} from 'react-native';
+import ajax from './ajax';
 
 const updateAlert = urlToOpen => {
   Alert.alert(
@@ -100,6 +102,26 @@ GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true}).catch(e => {
     ],
     {cancelable: false},
   );
+});
+
+AppState.addEventListener('change', state => {
+  console.log(state);
+  let interval = null;
+  if (state === 'active') {
+    InteractionManager.runAfterInteractions(ajax.getIDToken);
+    interval = setInterval(() => {
+      InteractionManager.runAfterInteractions(ajax.getIDToken);
+    }, 600000);
+  } else {
+    try {
+      clearInterval(interval);
+      console.log('Cleared background listener');
+    } catch {
+      console.warn(
+        'Tried to clear background auth handler but did not exist to clear, or an error occurred clearing it!',
+      );
+    }
+  }
 });
 export default class App extends React.Component {
   render() {
