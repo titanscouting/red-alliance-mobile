@@ -138,9 +138,9 @@ android {
         if (System.getProperty("MOBILECENTER_KEYSTORE_PASSWORD")) { //only mobile center exposes this
             versionCode System.getProperty("MOBILECENTER_BUILD_VERSION")
         } else {
-            versionCode 167
+            versionCode 168
         }
-        versionName "3.19.0"
+        versionName "3.19.1"
         multiDexEnabled true
     }
     splits {
