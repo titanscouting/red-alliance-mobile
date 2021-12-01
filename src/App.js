@@ -104,25 +104,6 @@ GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true}).catch(e => {
   );
 });
 
-AppState.addEventListener('change', state => {
-  console.log(state);
-  let interval = null;
-  if (state === 'active') {
-    InteractionManager.runAfterInteractions(ajax.getIDToken);
-    interval = setInterval(() => {
-      InteractionManager.runAfterInteractions(ajax.getIDToken);
-    }, 600000);
-  } else {
-    try {
-      clearInterval(interval);
-      console.log('Cleared background listener');
-    } catch {
-      console.warn(
-        'Tried to clear background auth handler but did not exist to clear, or an error occurred clearing it!',
-      );
-    }
-  }
-});
 export default class App extends React.Component {
   render() {
     return (

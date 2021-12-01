@@ -15,10 +15,30 @@ import Stats from './Stats/Stats';
 import Strategies from './Strategies/Strategies';
 import ajax from '../ajax';
 import messaging from '@react-native-firebase/messaging';
+import {AppState, InteractionManager} from 'react-native';
 
 let skipEnroll;
 AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
   skipEnroll = val === 'true';
+});
+AppState.addEventListener('change', state => {
+  console.log(state);
+  let interval = null;
+  if (state === 'active') {
+    InteractionManager.runAfterInteractions(ajax.getIDToken);
+    interval = setInterval(() => {
+      InteractionManager.runAfterInteractions(ajax.getIDToken);
+    }, 600000);
+  } else {
+    try {
+      clearInterval(interval);
+      console.log('Cleared background listener');
+    } catch {
+      console.warn(
+        'Tried to clear background auth handler but did not exist to clear, or an error occurred clearing it!',
+      );
+    }
+  }
 });
 const TabControl = createBottomTabNavigator(
   {
