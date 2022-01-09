@@ -41,6 +41,7 @@
     "react-native-onboarding-swiper": "^1.1.4",
     "react-native-progress": "^4.0.3",
     "react-native-prompt-android": "^1.1.0",
+    "react-native-reanimated": "^2.3.1",
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.18.1",
     "react-native-segmented-control-tab": "^3.4.1",
