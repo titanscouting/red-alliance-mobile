@@ -51,6 +51,13 @@ export default class Settings extends React.Component {
       this.getCurrentUser();
     }
   };
+  getReactNativeVersion() {
+    const rnVersion = Platform.constants.reactNativeVersion;
+    const rnVersionString = `${rnVersion.major}.${rnVersion.minor}.${
+      rnVersion.patch
+    }${rnVersion.prerelease === null ? '' : '-' + rnVersion.prerelease}`;
+    return rnVersionString;
+  }
   getDiagInfo() {
     DeviceInfo.getCarrier().then(carrier => {
       this.setState({carrier});
@@ -68,6 +75,7 @@ export default class Settings extends React.Component {
         lowPowerMode,
       });
     });
+    this.setState({rnVersion: this.getReactNativeVersion()});
     DeviceInfo.isEmulator().then(isEmulator => {
       this.setState({isEmulator});
     });
@@ -204,7 +212,9 @@ export default class Settings extends React.Component {
                     'Diagnostic Information',
                     `Version: ${VersionCheck.getCurrentVersion()}\nBuild: ${VersionCheck.getCurrentBuildNumber()}\nPlatform: ${
                       Platform.OS === 'ios' ? 'iOS' : 'Android'
-                    } ${Platform.Version}\nEngine: ${
+                    } ${Platform.Version}\nReact Native Version: ${
+                      this.state.rnVersion
+                    }\nEngine: ${
                       global.HermesInternal ? 'Hermes' : 'JSC'
                     }\nDevice: ${DeviceInfo.getBrand()} ${DeviceInfo.getDeviceId()}\nCarrier: ${
                       this.state.carrier
