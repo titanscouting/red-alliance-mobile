@@ -26,9 +26,11 @@ AppState.addEventListener('change', state => {
   let interval = null;
   if (state === 'active') {
     interval = setInterval(() => {
-      InteractionManager.runAfterInteractions(ajax.getIDToken).catch(() => {
+      try {
+        InteractionManager.runAfterInteractions(ajax.getIDToken);
+      } catch {
         console.log('Already signing in!');
-      });
+      }
     }, 600000);
   } else {
     try {
