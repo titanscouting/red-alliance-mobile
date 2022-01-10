@@ -9,42 +9,26 @@
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* RedAllianceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* RedAllianceTests.m */; };
 		06571A87E7B84F998D94899F /* Proxima Nova-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FD1DEAAEAAC04336B89483B1 /* Proxima Nova-Light.otf */; };
-		0B785A6963CB4F5FB632DE4D /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = CEB2FC68BFBE4E76917AC732 /* Zocial.ttf */; };
-		0D15ACCD73104405A96CC7FF /* AntDesign.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8F839D4B5C7C4F6BA9F5523D /* AntDesign.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
-		1439BB5A2B034BCEAA691E73 /* Ionicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 34B86A76B57546F393A1331C /* Ionicons.ttf */; };
 		30C098A9DA314D50B2638C26 /* Proxima Nova-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0DBCFF1ED79048819714AA9A /* Proxima Nova-Regular.ttf */; };
-		35773C8EAA064B4F9B2D09EB /* Octicons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8E0940C5693842E5B887139B /* Octicons.ttf */; };
 		3751CD42AC7A4E18A69E8BD7 /* Proxima Nova-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = D4457D41B27844299B179031 /* Proxima Nova-Black.otf */; };
 		3C5B6FB623C6659E00301921 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = 008F07F21AC5B25A0029DE68 /* main.jsbundle */; };
-		3F7ECEAE00B54500BFABE439 /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52F896DAB1234E9FAC694A31 /* Entypo.ttf */; };
 		437D7266C94F48EBB5E7E668 /* Proxima Nova-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6E63E999B2A04785B1C79AEA /* Proxima Nova-Black.ttf */; };
 		4CFE3B45ABF94903A18CAD4C /* Proxima Nova-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = EF520D36F8B94DB3A6E5B896 /* Proxima Nova-Regular.otf */; };
-		4F02A0B1C827412D93813D14 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B8E75C46C434612A8353A90 /* FontAwesome.ttf */; };
 		5C64FC6F9394173DFBEE2FEB /* libPods-RedAlliance.a in Frameworks */ = {isa = PBXBuildFile; fileRef = CE9285227D30B826AB4826CB /* libPods-RedAlliance.a */; };
 		70FF4DAD27459AAE00BF10DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70FF4DAC27459AAE00BF10DC /* GoogleService-Info.plist */; };
 		70FF4DAE27459AAE00BF10DC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 70FF4DAC27459AAE00BF10DC /* GoogleService-Info.plist */; };
 		71EE6C9E76C64A22B50ABF32 /* Proxima Nova-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = B6196035FCC94373BF36C5F3 /* Proxima Nova-Semibold.otf */; };
 		7236C0DD79BF43748F2C049B /* Proxima Nova-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 57AC4204D5624B9A8F22BEED /* Proxima Nova-Semibold.ttf */; };
-		7ACEA276A33F4BFD866819BA /* MaterialIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D97494AEF4F840CCAC236B3F /* MaterialIcons.ttf */; };
-		7E6234326FEC49FDB5187B2C /* FontAwesome5_Brands.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6D673FCCC6B44DADB1656BB3 /* FontAwesome5_Brands.ttf */; };
 		856385A17FCF4DDFB0C6EABC /* Proxima Nova-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 4C463982CE254ED390300CF2 /* Proxima Nova-Bold.otf */; };
 		89D5E65C24C2578C00B59BA5 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 89D5E65B24C2578C00B59BA5 /* AppCenter-Config.plist */; };
 		9234D2C644472D4FB82DA0DD /* libPods-RedAllianceTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */; };
-		9D6E48654E7D44A7B69516EE /* Fontisto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 15FD6AA09689452DAC1F6CCF /* Fontisto.ttf */; };
-		A338813A487E43DA9AA5324B /* FontAwesome5_Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F032E4EECE83417BA95FD341 /* FontAwesome5_Regular.ttf */; };
-		B84C996CAE3E47A0BD209601 /* Foundation.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A25E4E14D714418DB85CA136 /* Foundation.ttf */; };
-		BC3E505FE44B42059D9A6662 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B9019823DDDA47A8B4ADD3E0 /* SimpleLineIcons.ttf */; };
 		BF1F224CC2D24D1E8CCD17B8 /* Proxima Nova-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8FCA1217CA064DD8961580F4 /* Proxima Nova-Light.ttf */; };
-		C2635021F97E4AB1BC9ACF41 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3B8BA51223274A2C9EDF4614 /* EvilIcons.ttf */; };
 		C91F292F6DD7451DB2E0FD0C /* rubicon-icon-font.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8BCF90E597F64B83A2FE9237 /* rubicon-icon-font.ttf */; };
-		CA09646054A84DB4A3628A48 /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 689D4BAE448B4A6F96334211 /* FontAwesome5_Solid.ttf */; };
 		CC27BC21E4834233BD949461 /* Roboto.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B88831C310D4F6DB11342AC /* Roboto.ttf */; };
-		CCABB0707DBB465D85F318F0 /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 23C839ABA1664578B8CED381 /* Feather.ttf */; };
-		D09DD39274D24B928419FEF7 /* MaterialCommunityIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 414BDAC37A44406CA151870F /* MaterialCommunityIcons.ttf */; };
 		E7764439329A4326B062BF18 /* Roboto_medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 18F1591980B648D5BF61267A /* Roboto_medium.ttf */; };
 		ECC1ED18835543AF94761345 /* Proxima Nova-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D281C22658264CE4A52EDFDC /* Proxima Nova-Bold.ttf */; };
 /* End PBXBuildFile section */
@@ -368,23 +352,7 @@
 				BF1F224CC2D24D1E8CCD17B8 /* Proxima Nova-Light.ttf in Resources */,
 				30C098A9DA314D50B2638C26 /* Proxima Nova-Regular.ttf in Resources */,
 				7236C0DD79BF43748F2C049B /* Proxima Nova-Semibold.ttf in Resources */,
-				0D15ACCD73104405A96CC7FF /* AntDesign.ttf in Resources */,
-				3F7ECEAE00B54500BFABE439 /* Entypo.ttf in Resources */,
-				C2635021F97E4AB1BC9ACF41 /* EvilIcons.ttf in Resources */,
-				CCABB0707DBB465D85F318F0 /* Feather.ttf in Resources */,
-				4F02A0B1C827412D93813D14 /* FontAwesome.ttf in Resources */,
-				7E6234326FEC49FDB5187B2C /* FontAwesome5_Brands.ttf in Resources */,
-				A338813A487E43DA9AA5324B /* FontAwesome5_Regular.ttf in Resources */,
-				CA09646054A84DB4A3628A48 /* FontAwesome5_Solid.ttf in Resources */,
-				9D6E48654E7D44A7B69516EE /* Fontisto.ttf in Resources */,
-				B84C996CAE3E47A0BD209601 /* Foundation.ttf in Resources */,
-				1439BB5A2B034BCEAA691E73 /* Ionicons.ttf in Resources */,
-				D09DD39274D24B928419FEF7 /* MaterialCommunityIcons.ttf in Resources */,
 				70FF4DAD27459AAE00BF10DC /* GoogleService-Info.plist in Resources */,
-				7ACEA276A33F4BFD866819BA /* MaterialIcons.ttf in Resources */,
-				35773C8EAA064B4F9B2D09EB /* Octicons.ttf in Resources */,
-				BC3E505FE44B42059D9A6662 /* SimpleLineIcons.ttf in Resources */,
-				0B785A6963CB4F5FB632DE4D /* Zocial.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
