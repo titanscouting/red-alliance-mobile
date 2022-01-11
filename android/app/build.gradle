@@ -140,7 +140,7 @@ android {
         } else {
             versionCode 171
         }
-        versionName "3.21.0"
+        versionName "3.21.1"
         multiDexEnabled true
     }
     splits {
