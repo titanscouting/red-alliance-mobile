@@ -54,7 +54,7 @@ exports.getUserInfo = async idToken => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: token,
+      Authorization: token,
     },
   }).then(async response => {
     const resp = await response.json();
@@ -71,7 +71,7 @@ exports.addUserToTeam = async (team, idToken) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: idToken,
+      Authorization: idToken,
     },
     body: JSON.stringify({
       team: team,
@@ -112,7 +112,7 @@ exports.getCurrentCompetition = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: idToken,
+      Authorization: idToken,
     },
   }).then(async response => {
     const json = await response.json();
@@ -170,7 +170,7 @@ exports.fetchTeamsForMatch = async match => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(async response => {
@@ -229,7 +229,7 @@ exports.fetchMatchConfig = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status === 200) {
@@ -249,7 +249,7 @@ exports.fetchTeamTestsData = async team => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status === 200) {
@@ -270,7 +270,7 @@ exports.fetchPitConfiguration = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -315,7 +315,7 @@ exports.fetchMatches = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -341,7 +341,7 @@ exports.submitMatchData = async (team, match, data) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
     body: JSON.stringify({
       competition: await exports.getCurrentCompetition(),
@@ -362,7 +362,7 @@ exports.submitPitData = async (team, data) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
     body: JSON.stringify({
       competition: competition,
@@ -399,7 +399,7 @@ exports.fetchMatchData = async (competition, matchNumber, team) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
@@ -419,7 +419,7 @@ exports.fetchPitData = async team => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -498,7 +498,7 @@ exports.addScouterToMatch = async (team_scouting, match) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
     body: JSON.stringify({
       match,
@@ -520,7 +520,7 @@ exports.removeScouterFromMatch = async (team_scouting, match) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: token,
+      Authorization: token,
     },
     body: JSON.stringify({
       match: match.toString(),
@@ -541,7 +541,7 @@ exports.fetchCompetitionSchedule = async competition => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(response => {
@@ -650,7 +650,7 @@ exports.fetchTeamSchedule = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   })
     .then(async response => {
@@ -699,7 +699,7 @@ exports.getStrategiesForMatch = async matchNumber => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
@@ -725,7 +725,7 @@ exports.getCompetitionFriendlyName = async () => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
@@ -749,7 +749,7 @@ exports.submitStrategy = async (match, data) => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
     body: JSON.stringify({
       competition: competition,
@@ -795,7 +795,7 @@ exports.getUserStrategy = async matchNumber => {
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      token: await exports.getIDToken(),
+      Authorization: await exports.getIDToken(),
     },
   });
   if (response.status !== 200) {
