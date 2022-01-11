@@ -8,7 +8,6 @@ import {
 } from '@react-native-google-signin/google-signin';
 import ajax from '../ajax';
 import messaging from '@react-native-firebase/messaging';
-
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
@@ -80,7 +79,7 @@ export default class Enrollment extends React.Component {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
         Alert.alert(
-          'You must login with Google to use The Red Alliance!',
+          'You must login to use The Red Alliance!',
           'Please check that you are connected to the internet and try again.',
           [
             {
@@ -105,15 +104,6 @@ export default class Enrollment extends React.Component {
           <Text style={styles.smalltext}>
             Thank you for using The Red Alliance{'\n'}
           </Text>
-          <Button
-            onPress={() => {
-              this.signUserIn();
-            }}
-            title="Sign In Again"
-            color="#8F182C"
-            style={{marginTop: '30px'}}
-            accessibilityLabel="Sign in to The Red Alliance"
-          />
         </View>
       </Swiper>
     );

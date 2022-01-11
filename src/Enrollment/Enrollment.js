@@ -10,15 +10,19 @@ import {
   Alert,
   ToastAndroid,
   Platform,
+  Appearance,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Swiper from 'react-native-swiper';
 import {
   GoogleSignin,
   statusCodes,
+  GoogleSigninButton,
 } from '@react-native-google-signin/google-signin';
 import messaging from '@react-native-firebase/messaging';
 import {Toast} from 'native-base';
+import AppleAuth from './AppleAuth';
+
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
@@ -114,7 +118,7 @@ export default class Enrollment extends React.Component {
       }
     }
   }
-  async signUserIn() {
+  async googleSignIn() {
     let userInfo;
     try {
       userInfo = await GoogleSignin.signIn();
@@ -123,13 +127,12 @@ export default class Enrollment extends React.Component {
         throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
-        this.handleGoodSignIn(userInfo)
+        this.handleGoodSignIn(userInfo);
       }
-
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
         userInfo = await GoogleSignin.signIn();
-        this.signUserIn();
+        this.googleSignIn();
       } else if (e.code === statusCodes.IN_PROGRESS) {
         console.warn('Already signing in...');
       } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -137,31 +140,28 @@ export default class Enrollment extends React.Component {
         const user = await GoogleSignin.getCurrentUser();
         const signedIn = await GoogleSignin.isSignedIn();
         if (user !== null && signedIn) {
-          this.handleGoodSignIn(user)
+          this.handleGoodSignIn(user);
           return;
         }
         Alert.alert(
-          'You must login with Google to use The Red Alliance!',
+          'You must login to use The Red Alliance!',
           'Please check that you are connected to the internet and try again.',
           [
             {
               text: 'OK',
-              onPress: () => {
-                this.signUserIn();
-              },
+              onPress: () => {},
             },
           ],
           {cancelable: false},
         );
       } else {
-        console.error('Could not sign user in', e.code);
+        console.error('Could not sign user in', e);
       }
     }
   }
 
   async requestUserPermission() {
     const authStatus = await messaging().requestPermission({
-      announcement: true,
       badge: true,
       announcement: true,
     });
@@ -183,9 +183,7 @@ export default class Enrollment extends React.Component {
     }
   }
   componentDidMount() {
-    this.requestUserPermission().then(() => {
-      this.signUserIn();
-    });
+    this.requestUserPermission();
   }
   render() {
     const enrollmentStyle = ThemeProvider.enrollmentStyle;
@@ -199,6 +197,22 @@ export default class Enrollment extends React.Component {
           <Text style={styles.smalltext}>
             Scouting Matches for your FRC team{'\n'}
           </Text>
+          <GoogleSigninButton
+            style={{width: 192, height: 48}}
+            size={GoogleSigninButton.Size.Wide}
+            color={
+              Appearance.getColorScheme() === 'dark'
+                ? GoogleSigninButton.Color.Dark
+                : GoogleSigninButton.Color.Light
+            }
+            onPress={() => {
+              this.handleGoodSignIn.bind(this);
+              this.googleSignIn();
+            }}
+            disabled={false}
+          />
+          <Text>{'\n'}</Text>
+          <AppleAuth />
         </View>
         <View style={styles.slide1}>
           <Text style={styles.text2}>Scout qualification matches</Text>
