@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.16.7",
+    "@invertase/react-native-apple-authentication": "^2.1.5",
     "@react-native-async-storage/async-storage": "^1.15.4",
     "@react-native-community/art": "^1.1.2",
     "@react-native-community/masked-view": "^0.1.10",

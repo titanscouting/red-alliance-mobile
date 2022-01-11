@@ -21,7 +21,10 @@ import {
 } from '@react-native-google-signin/google-signin';
 import messaging from '@react-native-firebase/messaging';
 import {Toast} from 'native-base';
-import AppleAuth from './AppleAuth';
+import {
+  appleAuth,
+  AppleButton,
+} from '@invertase/react-native-apple-authentication';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -89,21 +92,19 @@ export default class Enrollment extends React.Component {
       const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
       await AsyncStorage.setItem('tra-google-auth', jsonValue);
       const userTeamData = await ajax.getUserInfo(userInfo.idToken);
+      console.log(userTeamData);
       if (userTeamData.success !== true) {
         if (Platform.OS === 'android') {
-          ToastAndroid.show(
-            'Login was not successful! Contact support.',
-            ToastAndroid.LONG,
-          );
+          ToastAndroid.show(userTeamData.reason, ToastAndroid.LONG);
         } else {
           Toast.show({
-            text: 'Login was not successful! Contact support.',
+            text: userTeamData.reason,
             type: 'error',
             buttonText: 'OK',
             duration: 2000,
           });
         }
-        console.warn('Error validating token, likely RNGoogleNative error.');
+        console.log('Error validating token, likely RNGoogleNative error.');
       }
       this.setState({idToken: userInfo.idToken});
       try {
@@ -118,6 +119,16 @@ export default class Enrollment extends React.Component {
       }
     }
   }
+  async appleSignIn() {
+    console.log('Apple sign in called, calling Google!');
+    // AsyncStorage.setItem('tra-sign-in-method', 'apple');
+    Alert.alert(
+      'Coming soon!',
+      'In the meantime, please use Google Sign In.',
+      [{text: 'OK', onPress: () => {}}],
+      {cancelable: false},
+    );
+  }
   async googleSignIn() {
     let userInfo;
     try {
@@ -127,6 +138,7 @@ export default class Enrollment extends React.Component {
         throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
+        AsyncStorage.setItem('tra-sign-in-method', 'google');
         this.handleGoodSignIn(userInfo);
       }
     } catch (e) {
@@ -211,8 +223,26 @@ export default class Enrollment extends React.Component {
             }}
             disabled={false}
           />
-          <Text>{'\n'}</Text>
-          <AppleAuth />
+          <View>
+            <AppleButton
+              style={{
+                width: 182,
+                height: 38,
+                margin: 10,
+              }}
+              cornerRadius={0}
+              buttonStyle={
+                Appearance.getColorScheme() === 'dark'
+                  ? AppleButton.Style.BLACK
+                  : AppleButton.Style.WHITE
+              }
+              buttonType={AppleButton.Type.SIGN_IN}
+              onPress={() => {
+                this.appleSignIn.bind(this);
+                this.appleSignIn();
+              }}
+            />
+          </View>
         </View>
         <View style={styles.slide1}>
           <Text style={styles.text2}>Scout qualification matches</Text>

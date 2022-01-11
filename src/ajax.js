@@ -14,7 +14,7 @@ exports.apiHost = apiHost;
 exports.warnCouldNotAdd = async () => {
   Alert.alert(
     'Could not add user!',
-    'Please try again later.',
+    'Please check that you are signed in and try again.',
     [{text: 'OK', onPress: () => {}}],
     {cancelable: false},
   );
@@ -98,6 +98,7 @@ exports.firstTimeSignIn = async () => {
   try {
     const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
     await AsyncStorage.setItem('tra-google-auth', jsonValue);
+    await AsyncStorage.setItem('tra-sign-in-method', 'google');
     return userInfo.idToken;
   } catch {
     exports.couldNotLogin();
@@ -125,6 +126,15 @@ exports.getCurrentCompetition = async () => {
 };
 
 exports.getIDToken = async () => {
+  const signInMethod = await AsyncStorage.getItem('tra-sign-in-method');
+  if (signInMethod === 'apple') {
+    console.log('lmao just get an android');
+    return 'lmfao get an android';
+  } else {
+    return await exports.getIDTokenGoogle();
+  }
+};
+exports.getIDTokenGoogle = async () => {
   const now = Date.now();
   let keyData = await AsyncStorage.getItem('tra-google-auth');
   try {

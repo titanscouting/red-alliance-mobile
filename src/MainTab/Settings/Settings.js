@@ -183,6 +183,7 @@ export default class Settings extends React.Component {
                     } catch {}
                     ajax.signOut();
                     this.setState({signOut: true});
+                    AsyncStorage.removeItem('tra-sign-in-method');
                     AsyncStorage.setItem('tra-is-enrolled-user', 'false').then(
                       this.props.navigation.navigate('SignOut'),
                     );

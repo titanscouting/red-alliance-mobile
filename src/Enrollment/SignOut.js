@@ -48,53 +48,7 @@ const styles = StyleSheet.create({
 });
 export default class Enrollment extends React.Component {
   async signUserIn() {
-    let userInfo;
-    try {
-      userInfo = await GoogleSignin.getCurrentUser();
-      if (userInfo === null) {
-        throw {code: statusCodes.SIGN_IN_REQUIRED};
-      }
-      if (userInfo !== null) {
-        const now = Date.now();
-        const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-        await AsyncStorage.setItem('tra-google-auth', jsonValue);
-        const userTeamData = await ajax.getUserInfo(userInfo.idToken);
-        this.setState({idToken: userInfo.idToken});
-        try {
-          if (Number.isFinite(parseInt(userTeamData.team, 10))) {
-            this.setState({team: userTeamData.team});
-            await AsyncStorage.setItem('tra-is-enrolled-user', 'true');
-            messaging().subscribeToTopic(`${this.state.team}_broadcastMessage`);
-            this.props.navigation.navigate('Teams');
-          }
-        } catch (e) {
-          console.log('Error with team assoc data ', e);
-        }
-      }
-    } catch (e) {
-      if (e.code === statusCodes.SIGN_IN_REQUIRED) {
-        userInfo = await GoogleSignin.signIn();
-        this.signUserIn();
-      } else if (e.code === statusCodes.IN_PROGRESS) {
-        console.warn('Already signing in...');
-      } else if (e.code === statusCodes.SIGN_IN_CANCELLED) {
-        Alert.alert(
-          'You must login to use The Red Alliance!',
-          'Please check that you are connected to the internet and try again.',
-          [
-            {
-              text: 'OK',
-              onPress: () => {
-                this.signUserIn();
-              },
-            },
-          ],
-          {cancelable: false},
-        );
-      } else {
-        console.error('Could not sign user in', e.code);
-      }
-    }
+    this.props.navigation.navigate('Enrollment');
   }
   render() {
     return (
@@ -104,6 +58,16 @@ export default class Enrollment extends React.Component {
           <Text style={styles.smalltext}>
             Thank you for using The Red Alliance{'\n'}
           </Text>
+          <Button
+            onPress={() => {
+              this.signUserIn();
+            }}
+            title="Sign In Again"
+            backgroundColor="#000000"
+            color="#ffffff"
+            style={{marginTop: '30px'}}
+            accessibilityLabel="Sign in to The Red Alliance"
+          />
         </View>
       </Swiper>
     );
