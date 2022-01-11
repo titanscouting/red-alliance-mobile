@@ -55,10 +55,6 @@ export default class Settings extends React.Component {
     const rnVersion = Platform.constants.reactNativeVersion;
     const rnVersionString = `${rnVersion.major}.${rnVersion.minor}.${
       rnVersion.patch
-    }${
-      rnVersion.prerelease === (null || undefined)
-        ? ''
-        : '-' + rnVersion.prerelease
     }`;
     return rnVersionString;
   }
