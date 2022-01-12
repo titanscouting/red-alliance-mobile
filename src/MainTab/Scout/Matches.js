@@ -100,8 +100,7 @@ export default class Matches extends React.Component {
   };
 
   popEval = () => {
-    this.state.currentTeamNumber = null;
-    this.forceUpdate();
+    this.setState({currentTeamNumber: null});
   };
 
   saveScouting = async vals => {

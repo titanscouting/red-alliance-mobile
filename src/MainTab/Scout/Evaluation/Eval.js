@@ -38,10 +38,13 @@ export default class Eval extends React.Component {
     teamNumber: PropTypes.number.isRequired,
     isBlue: PropTypes.bool.isRequired,
   };
-
+  _isMounted = true;
   vals = {};
 
   onBack = () => {
+    if (!this._isMounted) {
+      return;
+    }
     Alert.alert(
       'Discard your changes?',
       'If you go back, the fields will not be saved.',
@@ -105,7 +108,11 @@ export default class Eval extends React.Component {
     });
   };
   async listenScouterChange() {
-    this.socket = io('wss://titanscouting.epochml.org');
+    this.socket = io('wss://titanscouting.epochml.org', {
+      extraHeaders: {
+        Authorization: await ajax.getIDToken(),
+      },
+    });
     const competition = await ajax.getCurrentCompetition();
     const userInfo = await ajax.getUserInfo();
     this.setState({
@@ -122,12 +129,15 @@ export default class Eval extends React.Component {
           payload.action === 'remove' &&
           payload.match.toString() === this.props.matchNumber.toString() &&
           payload.team.toString() === this.props.teamNumber.toString() &&
-          this.state.removing !== true
+          this.state.removing !== true &&
+          this._isMounted
         ) {
+          console.log(payload);
           this.setState({removing: true});
+          this.props.onBack();
           Alert.alert(
-            'You have been removed from scouting this match.',
-            'Your changes have not been saved',
+            `You have been removed from this match by ${payload.performedBy}.`,
+            'Your scouting data has not been saved.',
             [
               {
                 text: 'OK',
@@ -141,6 +151,7 @@ export default class Eval extends React.Component {
     );
   }
   componentDidMount() {
+    this._isMounted = true;
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
@@ -149,6 +160,7 @@ export default class Eval extends React.Component {
   }
 
   componentWillUnmount() {
+    this._isMounted = false;
     this.socket.off(this.state.socketChannelName);
     BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
   }

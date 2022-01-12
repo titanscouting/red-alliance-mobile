@@ -51,7 +51,11 @@ export default class Stats extends React.Component {
   }
 
   async listenScouterChange() {
-    this.socket = io('wss://titanscouting.epochml.org');
+    this.socket = io('wss://titanscouting.epochml.org', {
+      extraHeaders: {
+        Authorization: await ajax.getIDToken(),
+      },
+    });
     const userInfo = await ajax.getUserInfo();
     const competition = await ajax.getCurrentCompetition();
     this.socket.on(`${String(userInfo.team)}_${competition}_newPitData`, () => {

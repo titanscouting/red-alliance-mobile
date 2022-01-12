@@ -58,7 +58,11 @@ export default class MatchStrategyTableView extends Component {
     );
   }
   async listenNewStrategy() {
-    this.socket = io('wss://titanscouting.epochml.org');
+    this.socket = io('wss://titanscouting.epochml.org', {
+      extraHeaders: {
+        Authorization: await ajax.getIDToken(),
+      },
+    });
     const userInfo = await ajax.getUserInfo();
     const competition = await ajax.getCurrentCompetition();
     this.setState({userTeam: userInfo.team, competition});

@@ -84,6 +84,17 @@ export default class TeamList extends React.Component {
     );
   };
   async listenScouterChange() {
+    this.socket = io('wss://titanscouting.epochml.org', {
+      extraHeaders: {
+        Authorization: await ajax.getIDToken(),
+      },
+    });
+    this.socket.on('connect', () => {
+      this.onRefresh();
+    });
+    this.socket.on('disconnect', () => {
+      this.onRefresh();
+    });
     const competition = await ajax.getCurrentCompetition();
     this.setState({competition});
     this.socket.on(
@@ -99,13 +110,6 @@ export default class TeamList extends React.Component {
       'hardwareBackPress',
       this.handleBackPress,
     );
-    this.socket = io('wss://titanscouting.epochml.org');
-    this.socket.on('connect', () => {
-      this.onRefresh();
-    });
-    this.socket.on('disconnect', () => {
-      this.onRefresh();
-    });
     this.listenScouterChange();
   }
   componentWillUnmount() {
