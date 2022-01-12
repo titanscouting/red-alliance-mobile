@@ -2095,39 +2095,39 @@ anymatch@^3.0.3:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
-appcenter-analytics@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-4.1.0.tgz#eb3270a6894bcf3d14e1772c4ccf21d7fb88fa85"
-  integrity sha512-pEsz08wer7J3+zjNV78eSB0FY1bjMxmFHukV6PimAoMpIm8E+X7saGP0QQw2cQTUFiexMujHRvZfM259ksg6hg==
+appcenter-analytics@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/appcenter-analytics/-/appcenter-analytics-4.3.0.tgz#1463a7a489e2e54fceabe8e784c4ea39e8dcfd40"
+  integrity sha512-8UUkP0DWuL3SHSgVs3Vf08AW2Go02rLmJ9DDXzL+yLqTVp2CY+OBhePEXmeLdGkdAxc1Tz08juF4uvP1j7gtRw==
   dependencies:
-    appcenter "4.1.0"
+    appcenter "4.3.0"
 
-appcenter-crashes@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-4.1.0.tgz#1d7a1a27c61f6a37d904f3d435de2f30ee0454e5"
-  integrity sha512-erl7387yAPRKa7d8L7KxNd82OAZ+EQwThpsu7tZLQYn3iuIT4P98dNFCnJKO6y64li4dn4B9rCF3s0PN7tPb1A==
+appcenter-crashes@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/appcenter-crashes/-/appcenter-crashes-4.3.0.tgz#e6f6be9ab01d42e909479729c3244d34463698db"
+  integrity sha512-q4wqvIL0HwFdnaATEGsAr+5+CSV9oRSaK/H+2TC6l9MLU9zi9nPmUaYVb+iJINxnFJZMUu0Xghhj8qyNIKA03w==
   dependencies:
-    appcenter "4.1.0"
+    appcenter "4.3.0"
 
-appcenter-link-scripts@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-4.1.0.tgz#ff9d337fb7841c2cbf86cd5f34bd7310e945d0f5"
-  integrity sha512-sTd8H4H9wNwBkUKHasvDGNBln34+dHEFlaT/P6O0gvs6TWU3JxlY8uXpB/IqAi2lSWPs3TMgQ7NGXTjvC6oZig==
+appcenter-link-scripts@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/appcenter-link-scripts/-/appcenter-link-scripts-4.3.0.tgz#633e53434346ad6f309ac69f15ffd098daebc077"
+  integrity sha512-jKyIc+dKve9XY8TTQldC6Drp+MHvUMFbERaQO6rN3JHFJ0jGtQ0rM2s9fB6xfkNFYv7MX6EyNBcljAvbIdMUjw==
   dependencies:
     debug "4.1.1"
     glob "5.0.15"
     minimist "1.2.5"
     mkdirp "0.5.3"
-    plist "3.0.1"
+    plist "^3.0.2"
     which "1.2.11"
     xcode "2.0.0"
 
-appcenter@4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-4.1.0.tgz#d4c9b43adcaac32a328dc8e9f9f0607e0a7d5691"
-  integrity sha512-JUwb/4sMw68CN2AlJEp1G5iVl/Rzv8fg8t9CzeRaEcnOku42h6+vlYbYe3P5YW18kAIA/hCH0uoDaa0kc9qfDA==
+appcenter@4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/appcenter/-/appcenter-4.3.0.tgz#b490844642c3845cea4a4b569659beeee1baebaa"
+  integrity sha512-g0L/fT0zjGxHvHYyvyaBdwMrDleR0Q/F+EUbpESZ0jYQeG5xg965bzjASq+CSs3dN0shWxRkvrx5DTIc73GtGg==
   dependencies:
-    appcenter-link-scripts "4.1.0"
+    appcenter-link-scripts "4.3.0"
 
 appdirsjs@^1.2.4:
   version "1.2.4"
@@ -6752,7 +6752,7 @@ pkginfo@0.x.x:
   resolved "https://registry.yarnpkg.com/pkginfo/-/pkginfo-0.4.1.tgz#b5418ef0439de5425fc4995042dced14fb2a84ff"
   integrity sha1-tUGO8EOd5UJfxJlQQtztFPsqhP8=
 
-plist@3.0.1, plist@^3.0.1:
+plist@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/plist/-/plist-3.0.1.tgz#a9b931d17c304e8912ef0ba3bdd6182baf2e1f8c"
   integrity sha512-GpgvHHocGRyQm74b6FWEZZVRroHKE1I0/BTjAmySaohK+cUn+hZpbqXkc3KWgW3gQYkqcQej35FohcT0FRlkRQ==
@@ -7056,6 +7056,11 @@ react-native-easy-grid@0.2.2:
   integrity sha512-MlYrNIldnEMKn6TVatQN1P64GoVlwGIuz+8ncdfJ0Wq/xtzUkQwlil8Uksyp7MhKfENE09MQnGNcba6Mx3oSAA==
   dependencies:
     lodash "^4.17.15"
+
+react-native-encrypted-storage@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/react-native-encrypted-storage/-/react-native-encrypted-storage-4.0.2.tgz#c7d59b1d3ff2f80d572be3e85aaab3fdee16744a"
+  integrity sha512-vneDkHGDuTvLQjUBztqb2YI8QoH1zxdJonPGTS+g57lfJZff9fAjoLSSb6NgMBebpXFcK3I3sEresGyL+3AArw==
 
 react-native-gesture-handler@^1.10.3:
   version "1.10.3"

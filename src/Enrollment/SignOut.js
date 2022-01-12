@@ -8,6 +8,7 @@ import {
 } from '@react-native-google-signin/google-signin';
 import ajax from '../ajax';
 import messaging from '@react-native-firebase/messaging';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 const styles = StyleSheet.create({
   wrapper: {},
@@ -58,7 +59,7 @@ export default class Enrollment extends React.Component {
       if (userInfo !== null) {
         const now = Date.now();
         const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-        await AsyncStorage.setItem('tra-google-auth', jsonValue);
+        await EncryptedStorage.setItem('tra-google-auth', jsonValue);
         const userTeamData = await ajax.getUserInfo(userInfo.idToken);
         this.setState({idToken: userInfo.idToken});
         try {

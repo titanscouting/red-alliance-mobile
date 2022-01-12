@@ -8,6 +8,7 @@ import {
   GoogleSignin,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
+import EncryptedStorage from 'react-native-encrypted-storage';
 
 exports.apiHost = apiHost;
 
@@ -97,7 +98,7 @@ exports.firstTimeSignIn = async () => {
   }
   try {
     const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-    await AsyncStorage.setItem('tra-google-auth', jsonValue);
+    await EncryptedStorage.setItem('tra-google-auth', jsonValue);
     return userInfo.idToken;
   } catch {
     exports.couldNotLogin();
@@ -126,7 +127,7 @@ exports.getCurrentCompetition = async () => {
 
 exports.getIDToken = async () => {
   const now = Date.now();
-  let keyData = await AsyncStorage.getItem('tra-google-auth');
+  let keyData = await EncryptedStorage.getItem('tra-google-auth');
   try {
     keyData = keyData != null ? JSON.parse(keyData) : null;
     if (keyData !== null && now - keyData.time < 3500000) {
@@ -151,7 +152,7 @@ exports.getIDToken = async () => {
     }
   }
   const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-  await AsyncStorage.setItem('tra-google-auth', jsonValue);
+  await EncryptedStorage.setItem('tra-google-auth', jsonValue);
   return userInfo.idToken;
 };
 
@@ -296,7 +297,7 @@ exports.signOut = async () => {
     try {
       await GoogleSignin.revokeAccess();
       await GoogleSignin.signOut();
-      AsyncStorage.setItem('tra-google-auth', '');
+      EncryptedStorage.setItem('tra-google-auth', '');
       AsyncStorage.setItem('tra-is-enrolled-user', 'false');
     } catch (error) {
       console.error(error);

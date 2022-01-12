@@ -1,6 +1,6 @@
 {
   "name": "RedAlliance",
-  "version": "3.22.0",
+  "version": "3.23.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -24,9 +24,9 @@
     "@react-native-firebase/messaging": "^11.4.1",
     "@react-native-google-signin/google-signin": "^6.0.0",
     "@react-navigation/native": "^5.9.8",
-    "appcenter": "4.1.0",
-    "appcenter-analytics": "4.1.0",
-    "appcenter-crashes": "4.1.0",
+    "appcenter": "4.3.0",
+    "appcenter-analytics": "4.3.0",
+    "appcenter-crashes": "4.3.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "native-base": "^2.13.15",
     "prop-types": "^15.7.2",
@@ -36,6 +36,7 @@
     "react-native-base64": "0.2.1",
     "react-native-dark-mode": "^0.2.2",
     "react-native-device-info": "^8.1.2",
+    "react-native-encrypted-storage": "^4.0.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-global-props": "^1.1.5",
     "react-native-keyboard-aware-scroll-view": "^0.9.3",

@@ -19,6 +19,8 @@ import {
 } from '@react-native-google-signin/google-signin';
 import messaging from '@react-native-firebase/messaging';
 import {Toast} from 'native-base';
+import EncryptedStorage from 'react-native-encrypted-storage';
+
 const styles = StyleSheet.create({
   wrapper: {},
   slide1: {
@@ -83,7 +85,7 @@ export default class Enrollment extends React.Component {
     if (userInfo !== null) {
       const now = Date.now();
       const jsonValue = JSON.stringify({key: userInfo.idToken, time: now});
-      await AsyncStorage.setItem('tra-google-auth', jsonValue);
+      await EncryptedStorage.setItem('tra-google-auth', jsonValue);
       const userTeamData = await ajax.getUserInfo(userInfo.idToken);
       if (userTeamData.success !== true) {
         if (Platform.OS === 'android') {
@@ -123,9 +125,8 @@ export default class Enrollment extends React.Component {
         throw {code: statusCodes.SIGN_IN_REQUIRED};
       }
       if (userInfo !== null) {
-        this.handleGoodSignIn(userInfo)
+        this.handleGoodSignIn(userInfo);
       }
-
     } catch (e) {
       if (e.code === statusCodes.SIGN_IN_REQUIRED) {
         userInfo = await GoogleSignin.signIn();
@@ -137,7 +138,7 @@ export default class Enrollment extends React.Component {
         const user = await GoogleSignin.getCurrentUser();
         const signedIn = await GoogleSignin.isSignedIn();
         if (user !== null && signedIn) {
-          this.handleGoodSignIn(user)
+          this.handleGoodSignIn(user);
           return;
         }
         Alert.alert(

@@ -1,19 +1,10 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React from 'react';
-import {Alert, InteractionManager, Linking} from 'react-native';
+import {Alert, Linking} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import prompt from 'react-native-prompt-android';
 import VersionCheck from 'react-native-version-check';
 import TabControl from './MainTab/TabControl';
 import {Root} from 'native-base';
-import messaging from '@react-native-firebase/messaging';
 import {AppState, StyleSheet, Text, View} from 'react-native';
 import ajax from './ajax';
 
