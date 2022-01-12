@@ -29,7 +29,7 @@ export default class EvalTab extends React.Component {
           )}
           keyExtractor={item => String(item.key)}
           showsVerticalScrollIndicator={false}
-          extraScrollHeight={Platform.OS === 'ios' ? 70 : -53}
+          extraScrollHeight={70}
         />
       );
     }
