@@ -27,6 +27,7 @@ import material from '../../../../native-base-theme/variables/material';
 import ajax from '../../../ajax';
 import Globals from '../../../GlobalDefinitions';
 import EvalTab from './EvalTab';
+import {io} from 'socket.io-client';
 
 export default class Eval extends React.Component {
   static propTypes = {
@@ -103,18 +104,57 @@ export default class Eval extends React.Component {
       );
     });
   };
+  async listenScouterChange() {
+    this.socket = io('wss://titanscouting.epochml.org');
+    const competition = await ajax.getCurrentCompetition();
+    const userInfo = await ajax.getUserInfo();
+    this.setState({
+      socketChannelName: `${String(
+        userInfo.team,
+      )}_${competition}_${this.props.matchNumber.toString()}_scoutChange`,
+    });
+    this.socket.on(
+      `${String(
+        userInfo.team,
+      )}_${competition}_${this.props.matchNumber.toString()}_scoutChange`,
+      payload => {
+        if (
+          payload.action === 'remove' &&
+          payload.match.toString() === this.props.matchNumber.toString() &&
+          payload.team.toString() === this.props.teamNumber.toString() &&
+          this.state.removing !== true
+        ) {
+          this.setState({removing: true});
+          Alert.alert(
+            'You have been removed from scouting this match.',
+            'Your changes have not been saved',
+            [
+              {
+                text: 'OK',
+                onPress: () => {},
+              },
+            ],
+            {cancelable: false},
+          );
+        }
+      },
+    );
+  }
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
       this.handleBackPress,
     );
+    this.listenScouterChange();
   }
 
   componentWillUnmount() {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButton);
+    this.socket.off(this.state.socketChannelName);
+    BackHandler.removeEventListener('hardwareBackPress', this.backHandler);
   }
 
   handleBackPress = () => {
+    this.socket.off(this.state.socketChannelName);
     this.onBack();
     return true;
   };
