@@ -20,6 +20,7 @@ export default class EvalTab extends React.Component {
       return (
         <KeyboardAwareFlatList
           data={this.props.tabConfig}
+          enableAndroid={true}
           renderItem={({item}) => (
             <ListItem style={styles.cell}>
               <Text>{item.name}</Text>

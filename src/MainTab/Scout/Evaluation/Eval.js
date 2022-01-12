@@ -91,6 +91,18 @@ export default class Eval extends React.Component {
   onUpdate = (key, value) => {
     this.vals[key] = value;
   };
+  generateTabs = () => {
+    return this.props.configuration.map((item, index) => {
+      return (
+        <Tab heading={this.getTabTitle(index)}>
+          <EvalTab
+            tabConfig={this.getTabBody(index)}
+            onUpdate={this.onUpdate}
+          />
+        </Tab>
+      );
+    });
+  };
   componentDidMount() {
     this.backHandler = BackHandler.addEventListener(
       'hardwareBackPress',
@@ -156,42 +168,7 @@ export default class Eval extends React.Component {
                 </Button>
               </Right>
             </Header>
-            <Tabs>
-              {/* TODO: Remove hardcoding of three tabs. Use scrollable tabs. https://docs.nativebase.io/Components.html#tabs-scrollable-headref */}
-              <Tab
-                heading={
-                  <TabHeading>
-                    <Text>{this.getTabTitle(0)}</Text>
-                  </TabHeading>
-                }>
-                <EvalTab
-                  tabConfig={this.getTabBody(0)}
-                  onUpdate={this.onUpdate}
-                />
-              </Tab>
-              <Tab
-                heading={
-                  <TabHeading>
-                    <Text>{this.getTabTitle(1)}</Text>
-                  </TabHeading>
-                }>
-                <EvalTab
-                  tabConfig={this.getTabBody(1)}
-                  onUpdate={this.onUpdate}
-                />
-              </Tab>
-              <Tab
-                heading={
-                  <TabHeading>
-                    <Text>{this.getTabTitle(2)}</Text>
-                  </TabHeading>
-                }>
-                <EvalTab
-                  tabConfig={this.getTabBody(2)}
-                  onUpdate={this.onUpdate}
-                />
-              </Tab>
-            </Tabs>
+            <Tabs>{this.generateTabs()}</Tabs>
           </Container>
         </StyleProvider>
       );
