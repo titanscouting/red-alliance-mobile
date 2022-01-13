@@ -164,7 +164,6 @@ export default class Enrollment extends React.Component {
     const authStatus = await messaging().requestPermission({
       announcement: true,
       badge: true,
-      announcement: true,
     });
     const enabled = authStatus === messaging.AuthorizationStatus.AUTHORIZED;
     if (!enabled) {
