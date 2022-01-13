@@ -108,11 +108,7 @@ export default class Eval extends React.Component {
     });
   };
   async listenScouterChange() {
-    this.socket = io('wss://titanscouting.epochml.org', {
-      extraHeaders: {
-        Authorization: await ajax.getIDToken(),
-      },
-    });
+    this.socket = io('wss://titanscouting.epochml.org');
     const competition = await ajax.getCurrentCompetition();
     const userInfo = await ajax.getUserInfo();
     this.setState({
@@ -132,7 +128,6 @@ export default class Eval extends React.Component {
           this.state.removing !== true &&
           this._isMounted
         ) {
-          console.log(payload);
           this.setState({removing: true});
           this.props.onBack();
           Alert.alert(

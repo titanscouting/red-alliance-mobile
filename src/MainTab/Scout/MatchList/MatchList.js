@@ -40,11 +40,7 @@ export default class MatchList extends React.Component {
     }
   };
   async listenScouterChange() {
-    this.socket = io('wss://titanscouting.epochml.org', {
-      extraHeaders: {
-        Authorization: await ajax.getIDToken(),
-      },
-    });
+    this.socket = io('wss://titanscouting.epochml.org');
     this.socket.on('connect', () => {
       this.onRefresh();
     });
