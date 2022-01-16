@@ -34,6 +34,7 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
 ### Running the app
 3. In one terminal window, run `yarn start` to start the code server.
 4. In another terminal window, run `yarn run android` to compile the development version of the app and install it on the emulator/physical device.
+  * Note: there have been issues reported with running this command on Powershell, as the Windows Java install may override the Java included in Android Studio. If there are build errors, try using cmd instead.
 
 ## iOS
 **Requirements**
