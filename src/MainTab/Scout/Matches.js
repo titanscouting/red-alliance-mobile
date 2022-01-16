@@ -125,7 +125,6 @@ export default class Matches extends React.Component {
   render() {
     const matchesStyle = ThemeProvider.matchesStyle;
     if (this.state.currentTeamNumber != null) {
-      this.pullConfiguration();
       return (
         <StyleProvider style={getTheme(material)}>
           <Eval
