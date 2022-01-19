@@ -659,7 +659,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 165;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SARKWFQTF7;
 				INFOPLIST_FILE = RedAlliance/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -669,7 +669,7 @@
 					"$(inherited)",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.titanscouting.redalliance;
+				PRODUCT_BUNDLE_IDENTIFIER = com.redalliance;
 				PRODUCT_NAME = "The Red Alliance";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				TARGETED_DEVICE_FAMILY = 1;
