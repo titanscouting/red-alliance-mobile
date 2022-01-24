@@ -75,6 +75,8 @@
 		6E63E999B2A04785B1C79AEA /* Proxima Nova-Black.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Proxima Nova-Black.ttf"; path = "../assets/fonts/Proxima Nova-Black.ttf"; sourceTree = "<group>"; };
 		70FF4DAC27459AAE00BF10DC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		78D5B23F3BBD0D93FE476E5C /* Pods-RedAllianceTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RedAllianceTests.release.xcconfig"; path = "Target Support Files/Pods-RedAllianceTests/Pods-RedAllianceTests.release.xcconfig"; sourceTree = "<group>"; };
+		899C8EE4279F4AE200978CDC /* RedAlliance.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RedAlliance.entitlements; path = RedAlliance/RedAlliance.entitlements; sourceTree = "<group>"; };
+		899C8EE5279F4AF100978CDC /* RedAllianceRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = RedAllianceRelease.entitlements; path = RedAlliance/RedAllianceRelease.entitlements; sourceTree = "<group>"; };
 		89D5E65B24C2578C00B59BA5 /* AppCenter-Config.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "AppCenter-Config.plist"; path = "RedAlliance/AppCenter-Config.plist"; sourceTree = "<group>"; };
 		8BCF90E597F64B83A2FE9237 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		8CF8C313D57B9AEE9B8FD463 /* libPods-RedAllianceTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-RedAllianceTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -136,6 +138,8 @@
 		13B07FAE1A68108700A75B9A /* RedAlliance */ = {
 			isa = PBXGroup;
 			children = (
+				899C8EE5279F4AF100978CDC /* RedAllianceRelease.entitlements */,
+				899C8EE4279F4AE200978CDC /* RedAlliance.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				70FF4DAC27459AAE00BF10DC /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
@@ -295,6 +299,7 @@
 				TargetAttributes = {
 					00E356ED1AD99517003FC87E = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = SARKWFQTF7;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
@@ -573,9 +578,10 @@
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SARKWFQTF7;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -605,7 +611,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COPY_PHASE_STRIP = NO;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = SARKWFQTF7;
 				INFOPLIST_FILE = RedAllianceTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -628,6 +634,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RedAlliance/RedAlliance.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
@@ -656,6 +663,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = RedAlliance/RedAllianceRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;

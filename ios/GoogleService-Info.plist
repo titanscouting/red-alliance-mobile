@@ -31,7 +31,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:291863698243:ios:744b38983447d8beaa6df6</string>
+	<string>1:291863698243:ios:000af50b66e9691eaa6df6</string>
 	<key>DATABASE_URL</key>
 	<string>https://titan-scouting-api.firebaseio.com</string>
 </dict>
