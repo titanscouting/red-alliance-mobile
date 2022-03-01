@@ -1,6 +1,8 @@
 # The Red Alliance - Mobile App
 
 <a href="https://play.google.com/store/apps/details?id=com.redalliance" target="_blank"><img alt="Get it on Google Play" src="https://imgur.com/YQzmZi9.png" width="153" height="46"></a>
+<a href="https://testflight.apple.com/join/Y1x85eWQ" target="_blank"><img alt="Available on Apple TestFlight" src="https://askyourself.app/assets/testflight.png" width="153" height="46"></a>
+
 
 # Status Badges
 
