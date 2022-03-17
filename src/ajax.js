@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-const apiHost = 'https://titanscouting.epochml.org/';
+const apiHost = 'https://scouting.titanrobotics2022.com/';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
