@@ -94,6 +94,7 @@ export default class MatchList extends React.Component {
             renderItem={({item}) => (
               <MatchCell
                 number={item.number}
+                time={item.time}
                 scouts={item.scouts}
                 onPress={this.props.onItemPress}
                 style={this.props.style}

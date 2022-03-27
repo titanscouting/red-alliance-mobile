@@ -8,6 +8,8 @@ import ThemeProvider from '../ThemeProvider';
 import Eval from './Evaluation/Eval';
 import MatchList from './MatchList/MatchList';
 import TeamList from './TeamsList/TeamList';
+import * as RNLocalize from 'react-native-localize';
+import moment from 'moment-timezone';
 
 export default class Matches extends React.Component {
   _isMounted = false;
@@ -29,7 +31,19 @@ export default class Matches extends React.Component {
   }
 
   refreshMatches = async () => {
-    const matches = await ajax.fetchMatches();
+    const deviceTimeZone = RNLocalize.getTimeZone();
+    let matches = await ajax.fetchMatches();
+    let compSchedule = [];
+    try {
+      compSchedule = await ajax.fetchCompetitionSchedule();
+    } catch {
+      compSchedule = []
+    }
+    compSchedule.sort((a, b) => a.match - b.match) // sort by first match
+    for (const item of compSchedule) {
+      const date = moment(item['time']).tz(deviceTimeZone)
+      matches[item['match']- 1]['time'] = date.format('ddd h:mm a z')
+    }
     this.state.matches = matches;
     await this.pullConfiguration();
     this.forceUpdate();
@@ -110,7 +124,16 @@ export default class Matches extends React.Component {
       vals,
     );
     if (!resp.success) {
-      ajax.warnCouldNotSubmit();
+      // try again
+      ajax.getIDToken(true);
+      const resp2 = await ajax.submitMatchData(
+        this.state.currentTeamNumber,
+        this.state.currentMatchNumber,
+        vals,
+      );
+      if (!resp2.success) {
+        ajax.warnCouldNotSubmit();
+      }
     } else {
       this.setState({
         currentMatchNumber: null,

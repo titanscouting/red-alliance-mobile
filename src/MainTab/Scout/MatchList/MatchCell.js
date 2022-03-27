@@ -8,6 +8,7 @@ import ThemeProvider from '../../ThemeProvider';
 export default class MatchCell extends PureComponent {
   static propTypes = {
     number: PropTypes.number.isRequired,
+    time: PropTypes.string.isRequired,
     scouts: PropTypes.number.isRequired,
     onPress: PropTypes.func.isRequired,
     style: PropTypes.object.isRequired,
@@ -25,6 +26,7 @@ export default class MatchCell extends PureComponent {
             <Text style={ThemeProvider.matchesStyle.cellStyle}>
               {'Match ' + this.props.number}
             </Text>
+            <Text>{this.props.time}</Text>
             <Circle
               color={Globals.colors[Globals.brand.primary]}
               progress={this.props.scouts / 6.0}
