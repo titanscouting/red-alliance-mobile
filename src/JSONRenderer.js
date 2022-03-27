@@ -43,12 +43,36 @@ export default class Analysis extends React.Component {
       this.setState({data: this.props.data});
     }
   }
+  getDepth(object) {
+    var level = 1;
+    for(var key in object) {
+        if (!object.hasOwnProperty(key)) continue;
+
+        if(typeof object[key] == 'object'){
+            var depth = this.getDepth(object[key]) + 1;
+            level = Math.max(depth, level);
+        }
+    }
+    return level;
+  }
   render() {
     const objType = this.objType(this.state.data);
     const biggerText = {fontSize: 16};
     switch (objType) {
       case 'Error':
       case 'Object':
+        const isLast = this.getDepth(this.state.data) == 1
+        let keys = []
+        if (this.getDepth(isLast)) {
+          // get keys to render at final level
+          let orig = this.props.data
+          for (let depth = 0; depth < this.state.path.length; depth++) {
+            orig = orig[this.state.path[depth]]
+            if (depth + 1 == this.state.path.length) {
+              keys = Object.keys(orig)
+            }
+          }
+        }
         return (
           <Container>
             <Content>
@@ -71,7 +95,7 @@ export default class Analysis extends React.Component {
                   } else {
                     return (
                       <ListItem key={index} button={true} onPress={() => {}}>
-                        <Text style={biggerText}>{this.state.data[key]}</Text>
+                        <Text style={biggerText}>{keys[index]}: {this.state.data[key]}</Text>
                       </ListItem>
                     );
                   }
