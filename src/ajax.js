@@ -262,7 +262,25 @@ exports.fetchTeamTestsData = async team => {
   }
   console.log('Could not get team tests data');
 };
-
+exports.fetchTeamMetricsData = async team => {
+  const competition = await exports.getCurrentCompetition();
+  const endpoint = encodeURI(
+    apiHost + `api/fetchMetricsData?competition=${competition}&team=${team}`,
+  );
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: await exports.getIDToken(),
+    },
+  });
+  if (response.status === 200) {
+    const resp = await response.json();
+    return resp;
+  }
+  console.log('Could not get team tests data');
+};
 exports.fetchPitConfiguration = async () => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(

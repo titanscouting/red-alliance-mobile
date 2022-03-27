@@ -20,6 +20,7 @@ import ajax from '../../ajax';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
 import Analysis from './Tabs/Analysis';
+import Metrics from './Tabs/Metrics'
 import {Platform} from 'react-native';
 import {ToastAndroid} from 'react-native';
 
@@ -189,6 +190,14 @@ export default class StatsTeamController extends React.Component {
               </TabHeading>
             }>
             <Analysis team={this.props.team} />
+          </Tab>
+          <Tab
+            heading={
+              <TabHeading>
+                <Text>Rankings</Text>
+              </TabHeading>
+            }>
+            <Metrics team={this.props.team} />
           </Tab>
         </Tabs>
       </Container>
