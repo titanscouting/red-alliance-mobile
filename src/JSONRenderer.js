@@ -43,12 +43,37 @@ export default class Analysis extends React.Component {
       this.setState({data: this.props.data});
     }
   }
+  getDepth(object) {
+    var level = 1;
+    for(var key in object) {
+        if (!object.hasOwnProperty(key)) continue;
+
+        if(typeof object[key] == 'object'){
+            var depth = this.getDepth(object[key]) + 1;
+            level = Math.max(depth, level);
+        }
+    }
+    return level;
+  }
   render() {
     const objType = this.objType(this.state.data);
-    const biggerText = {fontSize: 16};
+    const biggerText = {fontSize: 18};
+    const goBackStyle = {fontSize: 18, fontWeight: "bold", fontStyle: "italic"}
     switch (objType) {
       case 'Error':
       case 'Object':
+        const isLast = this.getDepth(this.state.data) == 1
+        let keys = []
+        if (this.getDepth(isLast)) {
+          // get keys to render at final level
+          let orig = this.props.data
+          for (let depth = 0; depth < this.state.path.length; depth++) {
+            orig = orig[this.state.path[depth]]
+            if (depth + 1 == this.state.path.length) {
+              keys = Object.keys(orig)
+            }
+          }
+        }
         return (
           <Container>
             <Content>
@@ -71,19 +96,21 @@ export default class Analysis extends React.Component {
                   } else {
                     return (
                       <ListItem key={index} button={true} onPress={() => {}}>
-                        <Text style={biggerText}>{this.state.data[key]}</Text>
+                        <Text style={biggerText}>{keys[index]}: {this.state.data[key]}</Text>
                       </ListItem>
                     );
                   }
                 })}
-                <ListItem
+                {
+                  this.state.path.length != 0 ?                 <ListItem
                   key={Object.keys(this.state.data).length}
                   button={true}
                   onPress={() => {
                     this.handleGoBack();
                   }}>
-                  <Text style={biggerText}>Go Back</Text>
-                </ListItem>
+                  <Text style={goBackStyle}>Go Back</Text>
+                </ListItem> : null
+                }
               </List>
             </Content>
           </Container>
@@ -92,7 +119,7 @@ export default class Analysis extends React.Component {
         return (
           <Container>
             <ListItem key={0}>
-              <Text style={biggerText}>No Data</Text>
+              <Text style={goBackStyle}>No Data</Text>
             </ListItem>
             <ListItem
               key={1}
@@ -100,7 +127,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text style={biggerText}>Go Back</Text>
+              <Text style={goBackStyle}>Go Back</Text>
             </ListItem>
           </Container>
         );
@@ -120,7 +147,7 @@ export default class Analysis extends React.Component {
                     onPress={() => {
                       this.handleGoBack();
                     }}>
-                    <Text style={biggerText}>Go Back</Text>
+                    <Text style={goBackStyle}>Go Back</Text>
                   </ListItem>
                 ) : null}
               </List>
@@ -161,7 +188,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text style={biggerText}>Go Back</Text>
+              <Text style={goBackStyle}>Go Back</Text>
             </ListItem>
           </List>
         );
@@ -178,7 +205,7 @@ export default class Analysis extends React.Component {
               onPress={() => {
                 this.handleGoBack();
               }}>
-              <Text style={biggerText}>Go Back</Text>
+              <Text style={goBackStyle}>Go Back</Text>
             </ListItem>
           </List>
         );

@@ -22,7 +22,7 @@ export default class Analysis extends React.Component {
     statsData: null,
   };
   async getAnalysisData() {
-    const data = await ajax.fetchTeamTestsData(this.props.team);
+    const data = await ajax.fetchTeamMetricsData(this.props.team);
     if (!data.success) {
       if (Platform.OS === 'android') {
         ToastAndroid.show(
@@ -38,7 +38,7 @@ export default class Analysis extends React.Component {
         });
       }
     }
-    this.setState({analysisData: this.cleanupData(data.data)});
+    this.setState({analysisData: this.cleanupData(data.metrics)});
   }
   componentDidMount() {
     this.getAnalysisData();

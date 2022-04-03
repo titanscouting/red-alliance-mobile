@@ -125,16 +125,19 @@ exports.getCurrentCompetition = async () => {
   });
 };
 
-exports.getIDToken = async () => {
+exports.getIDToken = async (force) => {
   const now = Date.now();
-  let keyData = await EncryptedStorage.getItem('tra-google-auth');
-  try {
-    keyData = keyData != null ? JSON.parse(keyData) : null;
-    if (keyData !== null && now - keyData.time < 3500000) {
-      return keyData.key;
+
+  if (!force) {
+    let keyData = await EncryptedStorage.getItem('tra-google-auth');
+    try {
+      keyData = keyData != null ? JSON.parse(keyData) : null;
+      if (keyData !== null && now - keyData.time < 3500000) {
+        return keyData.key;
+      }
+    } catch (e) {
+      console.warn('Error pulling stored key');
     }
-  } catch (e) {
-    console.warn('Error pulling stored key');
   }
   let userInfo;
   try {
@@ -259,7 +262,25 @@ exports.fetchTeamTestsData = async team => {
   }
   console.log('Could not get team tests data');
 };
-
+exports.fetchTeamMetricsData = async team => {
+  const competition = await exports.getCurrentCompetition();
+  const endpoint = encodeURI(
+    apiHost + `api/fetchMetricsData?competition=${competition}&team=${team}`,
+  );
+  const response = await fetch(endpoint, {
+    method: 'GET',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      Authorization: await exports.getIDToken(),
+    },
+  });
+  if (response.status === 200) {
+    const resp = await response.json();
+    return resp;
+  }
+  console.log('Could not get team tests data');
+};
 exports.fetchPitConfiguration = async () => {
   const competition = await exports.getCurrentCompetition();
   const endpoint = encodeURI(
@@ -534,7 +555,8 @@ exports.removeScouterFromMatch = async (team_scouting, match) => {
   });
 };
 
-exports.fetchCompetitionSchedule = async competition => {
+exports.fetchCompetitionSchedule = async () => {
+  const competition = await exports.getCurrentCompetition();
   const endpoint =
     apiHost + 'api/fetchCompetitionSchedule?competition=' + competition;
   return await fetch(endpoint, {

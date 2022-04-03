@@ -57,11 +57,16 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: 'normal',
   },
+  textInputStyle: {
+    flex: 1,
+    alignItems: 'stretch',
+    width: 200
+  }
 });
 export default class Enrollment extends React.Component {
   constructor() {
     super();
-    this.state = {team: ''};
+    this.state = {team: '2022'};
   }
   addUser() {
     const team = this.state.team;
@@ -90,12 +95,12 @@ export default class Enrollment extends React.Component {
       if (userTeamData.success !== true) {
         if (Platform.OS === 'android') {
           ToastAndroid.show(
-            'Login was not successful! Contact support.',
+            'Login was not successful! Try registering to a team.',
             ToastAndroid.LONG,
           );
         } else {
           Toast.show({
-            text: 'Login was not successful! Contact support.',
+            text: 'Login was not successful! Try registering to a team.',
             type: 'error',
             buttonText: 'OK',
             duration: 2000,
@@ -208,7 +213,7 @@ export default class Enrollment extends React.Component {
         </View>
         <View style={styles.slide3}>
           <TextInput
-            defaultValue="2022"
+            defaultValue='2022'
             style={enrollmentStyle.textInputStyle}
             onChangeText={text => {
               this.setState.bind(this);
@@ -219,16 +224,15 @@ export default class Enrollment extends React.Component {
           />
           <Text style={styles.text2}>Enter your team number</Text>
           <Text style={styles.smalltext}>
-            Get the data for your team by entering your team number
+            Scout for your team by entering your team number
           </Text>
+          <Text>{'\n'}</Text>
           <Button
             onPress={() => {
               this.addUser.bind(this);
               this.addUser();
             }}
             title="Sign Up"
-            color="#8F182C"
-            style={{marginTop: '30px'}}
             accessibilityLabel="Sign up for The Red Alliance"
           />
         </View>

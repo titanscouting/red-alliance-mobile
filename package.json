@@ -1,6 +1,6 @@
 {
   "name": "RedAlliance",
-  "version": "3.25.1",
+  "version": "3.26.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -28,6 +28,7 @@
     "appcenter-analytics": "4.3.0",
     "appcenter-crashes": "4.3.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
+    "moment-timezone": "^0.5.34",
     "native-base": "^2.13.15",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
@@ -40,6 +41,7 @@
     "react-native-gesture-handler": "^1.10.3",
     "react-native-global-props": "^1.1.5",
     "react-native-keyboard-aware-scroll-view": "^0.9.5",
+    "react-native-localize": "^2.2.1",
     "react-native-onboarding-swiper": "^1.1.4",
     "react-native-progress": "^4.0.3",
     "react-native-prompt-android": "^1.1.0",
