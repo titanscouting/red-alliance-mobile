@@ -108,7 +108,7 @@ export default class Eval extends React.Component {
     });
   };
   async listenScouterChange() {
-    this.socket = io('wss://titanscouting.epochml.org');
+    this.socket = io('wss://scouting.titanrobotics2022.com');
     const competition = await ajax.getCurrentCompetition();
     const userInfo = await ajax.getUserInfo();
     this.setState({
