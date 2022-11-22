@@ -108,7 +108,14 @@ export default class Eval extends React.Component {
     });
   };
   async listenScouterChange() {
-    this.socket = io('wss://scouting.titanrobotics2022.com');
+    this.socket = io("https://scouting.titanrobotics2022.com", {
+      transports: ["websocket", "polling"] // use WebSocket first, if available
+    });
+    this.socket.on("connect_error", () => {
+      // revert to classic upgrade
+      this.socket.io.opts.transports = ["polling", "websocket"];
+      console.log("Could not connect to websocket, reverting to polling!");
+    });
     const competition = await ajax.getCurrentCompetition();
     const userInfo = await ajax.getUserInfo();
     this.setState({
