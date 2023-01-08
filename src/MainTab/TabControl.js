@@ -22,7 +22,6 @@ AsyncStorage.getItem('tra-is-enrolled-user').then(val => {
   skipEnroll = val === 'true';
 });
 AppState.addEventListener('change', state => {
-  console.log(state);
   let interval = null;
   if (state === 'active') {
     interval = setInterval(() => {
@@ -35,7 +34,6 @@ AppState.addEventListener('change', state => {
   } else {
     try {
       clearInterval(interval);
-      console.log('Cleared background listener');
     } catch {
       console.warn(
         'Tried to clear background auth handler but did not exist to clear, or an error occurred clearing it!',

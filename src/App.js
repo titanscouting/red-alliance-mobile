@@ -1,66 +1,9 @@
 import React from 'react';
 import {Alert, Linking} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import prompt from 'react-native-prompt-android';
-import VersionCheck from 'react-native-version-check';
-import TabControl from './MainTab/TabControl';
 import {Root} from 'native-base';
-import {AppState, StyleSheet, Text, View} from 'react-native';
-import ajax from './ajax';
+import TabControl from './MainTab/TabControl';
 
-const updateAlert = urlToOpen => {
-  Alert.alert(
-    'Update Available!',
-    'The Red Alliance app has an available update. Please update to continue.',
-    [
-      {
-        text: 'Admin Override',
-        onPress: () => adminOverride(),
-        style: 'cancel',
-      },
-      {text: 'Update', onPress: () => Linking.openURL(urlToOpen)},
-    ],
-    {cancelable: false},
-  );
-};
-const adminOverride = () => {
-  prompt(
-    'Enter admin password',
-    'Enter admin password to override update requirement.',
-    [
-      {
-        text: 'Cancel',
-        onPress: () => updateAlert(),
-        style: 'cancel',
-      },
-      {
-        text: 'Submit',
-        onPress: password => {
-          if (password !== 'whydontusersupdateapps') {
-            Alert.alert(
-              'Invalid Password',
-              'The admin password was invalid',
-              [{text: 'Back', onPress: () => adminOverride()}],
-              {cancelable: false},
-            );
-          }
-        },
-      },
-    ],
-    {
-      type: 'secure-text',
-      cancelable: false,
-      defaultValue: '',
-    },
-  );
-};
-VersionCheck.needUpdate().then(async res => {
-  try {
-    if (res.isNeeded) {
-      updateAlert(res.storeUrl);
-    }
-  } catch (e) {}
-});
 // Other Web Client ID: 291863698243-t3adrufmitbd3ulgejs8pq255jvvuv9u.apps.googleusercontent.com
 // Web client ID 291863698243-8u79bk1a6odv021fu0km8htvpu6k2uqo.apps.googleusercontent.com
 // ios Client ID: 291863698243-ovppseib28p6usahf60igsp7ia3ovq6l.apps.googleusercontent.com
