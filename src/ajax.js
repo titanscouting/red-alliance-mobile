@@ -125,7 +125,7 @@ exports.getCurrentCompetition = async () => {
   });
 };
 
-exports.getIDToken = async (force) => {
+exports.getIDToken = async force => {
   const now = Date.now();
 
   if (!force) {

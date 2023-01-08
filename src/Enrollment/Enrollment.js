@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   textInputStyle: {
     flex: 1,
     alignItems: 'stretch',
-    width: 200
-  }
+    width: 200,
+  },
 });
 export default class Enrollment extends React.Component {
   constructor() {
@@ -213,7 +213,7 @@ export default class Enrollment extends React.Component {
         </View>
         <View style={styles.slide3}>
           <TextInput
-            defaultValue='2022'
+            defaultValue="2022"
             style={enrollmentStyle.textInputStyle}
             onChangeText={text => {
               this.setState.bind(this);

@@ -37,12 +37,12 @@ export default class Matches extends React.Component {
     try {
       compSchedule = await ajax.fetchCompetitionSchedule();
     } catch {
-      compSchedule = []
+      compSchedule = [];
     }
-    compSchedule.sort((a, b) => a.match - b.match) // sort by first match
+    compSchedule.sort((a, b) => a.match - b.match); // sort by first match
     for (const item of compSchedule) {
-      const date = moment(item['time']).tz(deviceTimeZone)
-      matches[item['match']- 1]['time'] = date.format('ddd h:mm a z')
+      const date = moment(item.time).tz(deviceTimeZone);
+      matches[item.match - 1].time = date.format('ddd h:mm a z');
     }
     this.state.matches = matches;
     await this.pullConfiguration();

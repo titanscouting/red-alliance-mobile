@@ -20,7 +20,7 @@ import ajax from '../../ajax';
 import Matches from './Tabs/Matches';
 import Pit from './Tabs/Pit';
 import Analysis from './Tabs/Analysis';
-import Metrics from './Tabs/Metrics'
+import Metrics from './Tabs/Metrics';
 import {Platform} from 'react-native';
 import {ToastAndroid} from 'react-native';
 
