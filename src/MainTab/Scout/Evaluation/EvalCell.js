@@ -5,6 +5,7 @@ import {StyleSheet, Text} from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 import Globals from '../../../GlobalDefinitions';
 import Stepper from './Stepper';
+import OurTable from './Table';
 
 export default class EvalCell extends React.Component {
   static propTypes = {
@@ -73,6 +74,8 @@ export default class EvalCell extends React.Component {
             </Item>
           </Form>
         );
+      case 'table':
+        return <OurTable options={this.options()} />;
       default:
         // TODO: Switch this to error.
         return <Text>{'Nothing for widget named: ' + this.widget()}</Text>;
