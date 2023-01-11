@@ -23,6 +23,7 @@ export default class Stepper extends React.Component {
 
     leftButtonText: PropTypes.string,
     rightButtonText: PropTypes.string,
+    placeholderText: PropTypes.string,
     buttonsTextColor: PropTypes.string,
     buttonsBackgroundColor: PropTypes.string,
     buttonsContainerWidth: PropTypes.number,
@@ -49,6 +50,7 @@ export default class Stepper extends React.Component {
 
     leftButtonText: '-',
     rightButtonText: '+',
+    placeholderText: 'Not Scouted',
     buttonsTextColor: '#FFFFFF',
     buttonsBackgroundColor: '#357FC0',
 
@@ -179,8 +181,8 @@ export default class Stepper extends React.Component {
   }
 
   _renderLabelContainer() {
-    let {labelBackgroundColor, labelTextColor, size} = this.props;
-    let {value} = this.state === -1 ? 'Not Scouted' : this.state;
+    let {labelBackgroundColor, labelTextColor, size, placeholderText} = this.props;
+    let {value} = this.state === -1 ? placeholderText : this.state;
 
     return (
       <Animatable.View
@@ -193,7 +195,7 @@ export default class Stepper extends React.Component {
           style={[styles.valueStyle, {color: labelTextColor}]}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
-          {value.toString() === '-1' ? 'Not Scouted' : value.toString()}
+          {value.toString() === '-1' ? placeholderText : value.toString()}
         </Text>
       </Animatable.View>
     );
