@@ -64,7 +64,9 @@ export default (variables /* : * */ = variable) => {
       'NativeBase.Text': {
         color: variables.tabBarTextColor,
         fontSize: variables.tabBarTextSize,
-        lineHeight: 16
+        lineHeight: 16,
+        paddingLeft: 0,
+        paddingRight: 0
       }
     },
     backgroundColor:
