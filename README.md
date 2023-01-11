@@ -32,7 +32,7 @@ The app allows scouters for FRC teams to collect data about competiting FRC team
 1. Make sure that the `emulator`, `adb`, `yarn`, and `android-studio` executables are in your PATH folders.
   - The `emulator` executable does not need to be present if you are testing on a physical device. If you are, ensure that it is plugged in to your computer and that [ADB debugging mode is enabled](https://developer.android.com/studio/command-line/adb#Enabling).
 2. Set the `ANDROID_SDK_HOME` environment variable to point to the SDK root directory. 
-  * For Windows, it is generally `C:\Users\USERNAME\AppData\Local\Android\Sdk` (replace "USERNAME" with your Windows username.)
+  * For Windows, it is generally `%LOCALAPPDATA%\Android\Sdk`
 3. Set the `JAVA_HOME` environment variable to the Android Studio JRE (generally `C:\Program Files\Android\Android Studio\jre`).
 4. Ensure that all dependencies are installed by running `yarn`.
 ### Running the app
