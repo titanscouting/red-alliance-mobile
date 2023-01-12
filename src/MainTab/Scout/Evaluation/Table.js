@@ -7,8 +7,17 @@ import { Col, Row, Grid } from 'react-native-easy-grid'
 
 export default class OurTable extends React.Component {
   static propTypes = {
+    idkey: PropTypes.string.isRequired,
     options: PropTypes.object.isRequired,
+    cellUpdate: PropTypes.func.isRequired,
   };
+
+  onStepperChange(row, col, newVal, oldVal) {
+    const {row_labels, col_labels} = this.props.options;
+    const key =  this.props.idkey + '-' + row_labels[row - 1].toLowerCase() + '-' + col_labels[col - 1].toLowerCase();
+    console.log("Updating", key, "to", newVal);
+    this.props.cellUpdate(key, newVal, true);
+  }
 
   makeCell(row, col) {
     const {row_labels, col_labels} = this.props.options;
@@ -18,13 +27,12 @@ export default class OurTable extends React.Component {
       return <Text>{col_labels[col - 1]}</Text>
     } else {
       return <Stepper
-            //style={}
             labelBackgroundColor={Globals.colors[Globals.brand.primary]}
             buttonsBackgroundColor={
               Globals.colors[Globals.brand['primary-dark']]
             }
             placeholderText="?"
-            onChange={()=>{}}
+            onChange={this.onStepperChange.bind(this, row, col)}
           />
     }
   }
