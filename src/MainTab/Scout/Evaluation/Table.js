@@ -11,22 +11,11 @@ export default class OurTable extends React.Component {
   };
 
   makeCell(row, col) {
+    const {row_labels, col_labels} = this.props.options;
     if (col === 0) {
-      if (row==1) {
-        return <Text>Low</Text>;  
-      } else if (row==2) {
-        return <Text>Med</Text>;
-      } else if (row==3) {
-        return <Text>High</Text>; 
-      } else 
-        return <Text></Text>;
+      return <Text>{row_labels[row - 1]}</Text>
     } else if (row === 0) {
-      if (col == 1) {
-        return <Text>Cones</Text>; 
-      } else if (col == 2) {
-        return <Text>Cubes</Text>;
-      } else 
-        return <Text></Text>;
+      return <Text>{col_labels[col - 1]}</Text>
     } else {
       return <Stepper
             //style={}
@@ -41,10 +30,11 @@ export default class OurTable extends React.Component {
   }
 
   render() {
+    const {row_labels, col_labels} = this.props.options;
     return <Grid>
-      {[...Array(3)].map((_, col) => (
+      {[...Array(col_labels.length + 1)].map((_, col) => (
         <Col style={{width: col === 0 ? "auto" : null}} key={col}>
-          {[...Array(4)].map((_, row) => (
+          {[...Array(row_labels.length + 1)].map((_, row) => (
             <Row key={row} style={{padding: 2}}>{this.makeCell(row, col)}</Row>
           ))}
         </Col>
