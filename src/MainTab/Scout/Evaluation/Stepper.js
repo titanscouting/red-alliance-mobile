@@ -181,7 +181,7 @@ export default class Stepper extends React.Component {
   }
 
   _renderLabelContainer() {
-    let {labelBackgroundColor, labelTextColor, size, placeholderText} = this.props;
+    let {labelBackgroundColor, labelTextColor, placeholderText} = this.props;
     let {value} = this.state === -1 ? placeholderText : this.state;
 
     return (
