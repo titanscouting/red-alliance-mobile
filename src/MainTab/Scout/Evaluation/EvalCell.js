@@ -75,7 +75,13 @@ export default class EvalCell extends React.Component {
           </Form>
         );
       case 'table':
-        return <OurTable options={this.options()} />;
+        return (
+          <OurTable
+            idkey={this.key()}
+            options={this.options()}
+            cellUpdate={this.props.cellUpdate}
+          />
+        );
       default:
         // TODO: Switch this to error.
         return <Text>{'Nothing for widget named: ' + this.widget()}</Text>;
