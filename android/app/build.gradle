@@ -141,9 +141,9 @@ android {
         if (System.getProperty("MOBILECENTER_KEYSTORE_PASSWORD")) { //only mobile center exposes this
             versionCode System.getProperty("MOBILECENTER_BUILD_VERSION")
         } else {
-            versionCode 178
+            versionCode 179
         }
-        versionName "3.26.2"
+        versionName "3.27.0"
         multiDexEnabled true
     }
     splits {
