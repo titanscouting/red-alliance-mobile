@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>291863698243-tlnq2ahg1kbav1alv0n5flhdqhjgkcpp.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.291863698243-tlnq2ahg1kbav1alv0n5flhdqhjgkcpp</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>291863698243-0dsmvs8uetpd9odms7aqn63iknroi4op.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyB3NIp92alyCxBg8ueQhb-7R77VRAZK0IE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>291863698243</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.titanscout.redalliance</string>
+	<key>PROJECT_ID</key>
+	<string>titan-scouting-api</string>
+	<key>STORAGE_BUCKET</key>
+	<string>titan-scouting-api.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:291863698243:ios:000af50b66e9691eaa6df6</string>
+	<key>DATABASE_URL</key>
+	<string>https://titan-scouting-api.firebaseio.com</string>
+</dict>
+</plist>

@@ -31,6 +31,7 @@
     "appcenter-crashes": "4.3.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "expo": "~48.0.6",
+    "expo-dev-client": "~2.1.5",
     "moment-timezone": "^0.5.34",
     "native-base": "^2.13.15",
     "prop-types": "^15.7.2",

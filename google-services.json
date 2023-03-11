@@ -1,0 +1,71 @@
+{
+  "project_info": {
+    "project_number": "291863698243",
+    "firebase_url": "https://titan-scouting-api.firebaseio.com",
+    "project_id": "titan-scouting-api",
+    "storage_bucket": "titan-scouting-api.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:291863698243:android:ad1ce275432800e1aa6df6",
+        "android_client_info": {
+          "package_name": "com.redalliance"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "291863698243-0dsmvs8uetpd9odms7aqn63iknroi4op.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redalliance",
+            "certificate_hash": "2a7cb50c275e38a9178b6c515e5fb3f7b93da45a"
+          }
+        },
+        {
+          "client_id": "291863698243-hcu5augt5cvt4jhaoiv4qgbtgl7i2g22.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redalliance",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "291863698243-vd4tu335tv9mqm68bcgteeaep5orjkfm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.redalliance",
+            "certificate_hash": "2ca3dfe621e5874df1389913a93be671f56f2f75"
+          }
+        },
+        {
+          "client_id": "291863698243-obu2fpbfpr7ul9db9lm7rmc1e4r3oeag.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwyTbMdg-T1vcCZ8hyuj2_9FKq2vDyIfw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "291863698243-4bp5d86k6mo5dk5ief9ve9rq6d7l1fob.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "291863698243-3nt50bms4e2vr721vlvgb505aaj5ihhu.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.redalliance"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
