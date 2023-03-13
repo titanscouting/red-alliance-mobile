@@ -1,10 +1,10 @@
 {
   "name": "RedAlliance",
   "version": "3.27.0",
-  "main": "node_modules/expo/AppEntry.js",
+  "main": "./index.js",
   "private": true,
   "scripts": {
-    "start": "expo start",
+    "start": "expo start --dev-client --android --tunnel",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
