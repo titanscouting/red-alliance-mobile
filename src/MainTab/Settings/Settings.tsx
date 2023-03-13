@@ -34,7 +34,14 @@ import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import DeviceInfo from 'react-native-device-info';
 import messaging from '@react-native-firebase/messaging';
 
-export default class Settings extends React.Component {
+interface SettingState {
+  darkMode: boolean;
+  currentUserName: string;
+  currentUserEmail: string;
+  currentUserPhoto: string;
+}
+
+export default class Settings extends React.Component<{}, SettingState> {
   constructor() {
     super();
     this.state = {darkMode: false};

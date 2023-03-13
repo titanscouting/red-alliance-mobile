@@ -28,7 +28,7 @@ interface StepperProps {
   onChange?(...args: unknown[]): unknown;
 }
 
-export default class Stepper extends React.Component<StepperProps & View['props']> {
+export default class Stepper extends React.Component<StepperProps & View['props'], {value: number}> {
   static defaultProps = {
     size: 1,
 
