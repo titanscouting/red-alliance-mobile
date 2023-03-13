@@ -24,6 +24,7 @@
     "@react-native-firebase/messaging": "^11.4.1",
     "@react-native-google-signin/google-signin": "^9.0.2",
     "@react-navigation/native": "^5.9.8",
+    "@types/react": "~18.0.27",
     "appcenter": "4.3.0",
     "appcenter-analytics": "4.3.0",
     "appcenter-crashes": "4.3.0",
@@ -54,8 +55,7 @@
     "react-navigation": "^4.4.4",
     "react-navigation-stack": "^2.10.4",
     "react-navigation-tabs": "^2.11.0",
-    "socket.io-client": "^4.2.0",
-    "typescript": "^4.9.5"
+    "socket.io-client": "^4.2.0"
   },
   "eslintIgnore": [
     "node_modules",
@@ -66,13 +66,16 @@
     "@babel/core": "^7.7.7",
     "@babel/runtime": "^7.7.7",
     "@react-native-community/eslint-config": "^0.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.55.0",
+    "@typescript-eslint/parser": "^5.55.0",
     "babel-jest": "^24.9.0",
     "eslint": "^6.8.0",
     "jest": "^24.9.0",
     "metro-react-native-babel-preset": "^0.66.2",
     "react-devtools": "^4.10.1",
     "react-native-cli": "^2.0.1",
-    "react-test-renderer": "17.0.2"
+    "react-test-renderer": "17.0.2",
+    "typescript": "^4.9.5"
   },
   "jest": {
     "preset": "react-native"

@@ -7,7 +7,7 @@ import {
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-interface StepperProps extends View['props'] {
+interface StepperProps {
   size?: number;
   value?: number;
   minValue?: number;
@@ -16,7 +16,6 @@ interface StepperProps extends View['props'] {
   autoRepeat?: boolean;
   leftButtonText?: string;
   rightButtonText?: string;
-  placeholderText?: string;
   buttonsTextColor?: string;
   buttonsBackgroundColor?: string;
   buttonsContainerWidth?: number;
@@ -28,7 +27,7 @@ interface StepperProps extends View['props'] {
   onChange?(...args: unknown[]): unknown;
 }
 
-export default class Stepper extends React.Component<StepperProps> {
+export default class Stepper extends React.Component<StepperProps & View['props']> {
   static defaultProps = {
     size: 1,
 
@@ -41,7 +40,6 @@ export default class Stepper extends React.Component<StepperProps> {
 
     leftButtonText: '-',
     rightButtonText: '+',
-    placeholderText: 'Not Scouted',
     buttonsTextColor: '#FFFFFF',
     buttonsBackgroundColor: '#357FC0',
 
@@ -172,8 +170,8 @@ export default class Stepper extends React.Component<StepperProps> {
   }
 
   _renderLabelContainer() {
-    let {labelBackgroundColor, labelTextColor, placeholderText} = this.props;
-    let {value} = this.state === -1 ? placeholderText : this.state;
+    let {labelBackgroundColor, labelTextColor, size} = this.props;
+    let {value} = this.state === -1 ? 'Not Scouted' : this.state;
 
     return (
       <Animatable.View
@@ -186,7 +184,7 @@ export default class Stepper extends React.Component<StepperProps> {
           style={[styles.valueStyle, {color: labelTextColor}]}
           adjustsFontSizeToFit={true}
           numberOfLines={1}>
-          {value.toString() === '-1' ? placeholderText : value.toString()}
+          {value.toString() === '-1' ? 'Not Scouted' : value.toString()}
         </Text>
       </Animatable.View>
     );
