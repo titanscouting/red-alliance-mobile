@@ -1,5 +1,4 @@
 import {Form, Item, Textarea} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {StyleSheet, Text} from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
@@ -7,12 +6,12 @@ import Globals from '../../../GlobalDefinitions';
 import Stepper from './Stepper';
 import OurTable from './Table';
 
-export default class EvalCell extends React.Component {
-  static propTypes = {
-    config: PropTypes.object.isRequired,
-    cellUpdate: PropTypes.func.isRequired,
-  };
+interface EvalCellProps {
+  config: object;
+  cellUpdate(...args: unknown[]): unknown;
+}
 
+export default class EvalCell extends React.Component<EvalCellProps> {
   key = () => this.props.config.key;
   name = () => this.props.config.name;
   widget = () => this.props.config.widget;

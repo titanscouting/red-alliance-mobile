@@ -1,18 +1,17 @@
 import {Container, StyleProvider} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {ActivityIndicator, BackHandler} from 'react-native';
 import getTheme from '../../../../../native-base-theme/components';
 import material from '../../../../../native-base-theme/variables/material';
 import EvalTab from './EvalTab';
 
-export default class Eval extends React.Component {
-  static propTypes = {
-    configuration: PropTypes.array.isRequired,
-    defaultData: PropTypes.object,
-    makeAware: PropTypes.func.isRequired,
-  };
+interface EvalProps {
+  configuration: unknown[];
+  defaultData?: object;
+  makeAware(...args: unknown[]): unknown;
+}
 
+export default class Eval extends React.Component<EvalProps> {
   hasMadeAware = false;
 
   doNothing = () => {};

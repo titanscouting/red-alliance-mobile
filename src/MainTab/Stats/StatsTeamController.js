@@ -13,7 +13,6 @@ import {
   Title,
   Toast,
 } from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Alert, BackHandler, StyleSheet} from 'react-native';
 import ajax from '../../ajax';
@@ -24,13 +23,13 @@ import Metrics from './Tabs/Metrics';
 import {Platform} from 'react-native';
 import {ToastAndroid} from 'react-native';
 
-export default class StatsTeamController extends React.Component {
-  static propTypes = {
-    team: PropTypes.number.isRequired,
-    onBack: PropTypes.func.isRequired,
-    nickname: PropTypes.string,
-  };
+interface StatsTeamControllerProps {
+  team: number;
+  onBack(...args: unknown[]): unknown;
+  nickname?: string;
+}
 
+export default class StatsTeamController extends React.Component<StatsTeamControllerProps> {
   state = {
     refreshing: false,
     madeChanges: false,

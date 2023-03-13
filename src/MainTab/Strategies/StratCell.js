@@ -1,17 +1,16 @@
 import {ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import Globals from '../../GlobalDefinitions';
 
-export default class StratCell extends React.Component {
-  static propTypes = {
-    match: PropTypes.number.isRequired,
-    teams: PropTypes.array.isRequired,
-    handlePress: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface StratCellProps {
+  match: number;
+  teams: unknown[];
+  handlePress(...args: unknown[]): unknown;
+  style: object;
+}
 
+export default class StratCell extends React.Component<StratCellProps> {
   _isMounted = false;
 
   componentDidMount() {

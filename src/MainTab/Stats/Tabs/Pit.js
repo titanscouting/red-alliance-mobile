@@ -1,17 +1,16 @@
 import {Container} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {ActivityIndicator, FlatList, RefreshControl} from 'react-native';
 import ajax from '../../../ajax';
 import Eval from './Evaluation/Eval';
 
-export default class Pit extends React.Component {
-  static propTypes = {
-    team: PropTypes.number.isRequired,
-    onBack: PropTypes.func.isRequired,
-    acknowledgeChanges: PropTypes.func.isRequired,
-  };
+interface PitProps {
+  team: number;
+  onBack(...args: unknown[]): unknown;
+  acknowledgeChanges(...args: unknown[]): unknown;
+}
 
+export default class Pit extends React.Component<PitProps> {
   componentDidMount() {
     this.refreshTeam();
   }

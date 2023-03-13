@@ -11,7 +11,6 @@ import {
   Subtitle,
   Title,
 } from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -26,16 +25,16 @@ import ajax from '../../../ajax';
 import TeamCell from './TeamCell';
 import {io} from 'socket.io-client';
 
-export default class TeamList extends React.Component {
-  static propTypes = {
-    teams: PropTypes.array.isRequired,
-    refreshTeams: PropTypes.func.isRequired,
-    onItemPress: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
-    matchNumber: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface TeamListProps {
+  teams: unknown[];
+  refreshTeams(...args: unknown[]): unknown;
+  onItemPress(...args: unknown[]): unknown;
+  onBack(...args: unknown[]): unknown;
+  matchNumber: number;
+  style: object;
+}
 
+export default class TeamList extends React.Component<TeamListProps> {
   state = {
     refreshing: false,
   };

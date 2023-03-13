@@ -1,43 +1,34 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
-  ViewPropTypes,
 } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-export default class Stepper extends React.Component {
-  static propTypes = {
-    ...ViewPropTypes,
-    size: PropTypes.number,
+interface StepperProps extends View['props'] {
+  size?: number;
+  value?: number;
+  minValue?: number;
+  maxValue?: number;
+  stepValue?: number;
+  autoRepeat?: boolean;
+  leftButtonText?: string;
+  rightButtonText?: string;
+  placeholderText?: string;
+  buttonsTextColor?: string;
+  buttonsBackgroundColor?: string;
+  buttonsContainerWidth?: number;
+  labelTextColor?: string;
+  labelBackgroundColor?: string;
+  cornorRadius?: number;
+  borderWidth?: number;
+  borderColor?: string;
+  onChange?(...args: unknown[]): unknown;
+}
 
-    value: PropTypes.number,
-    minValue: PropTypes.number,
-    maxValue: PropTypes.number,
-    stepValue: PropTypes.number,
-
-    autoRepeat: PropTypes.bool,
-
-    leftButtonText: PropTypes.string,
-    rightButtonText: PropTypes.string,
-    placeholderText: PropTypes.string,
-    buttonsTextColor: PropTypes.string,
-    buttonsBackgroundColor: PropTypes.string,
-    buttonsContainerWidth: PropTypes.number,
-
-    labelTextColor: PropTypes.string,
-    labelBackgroundColor: PropTypes.string,
-
-    cornorRadius: PropTypes.number,
-    borderWidth: PropTypes.number,
-    borderColor: PropTypes.string,
-
-    onChange: PropTypes.func,
-  };
-
+export default class Stepper extends React.Component<StepperProps> {
   static defaultProps = {
     size: 1,
 

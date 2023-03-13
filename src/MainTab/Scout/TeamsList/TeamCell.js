@@ -1,19 +1,18 @@
 import {ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Text, TouchableWithoutFeedback, View} from 'react-native';
 import Globals from '../../../GlobalDefinitions';
 
-export default class TeamCell extends React.Component {
-  static propTypes = {
-    number: PropTypes.number.isRequired,
-    isBlue: PropTypes.bool.isRequired,
-    scouterDescription: PropTypes.string,
-    onPress: PropTypes.func.isRequired,
-    showRefresh: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface TeamCellProps {
+  number: number;
+  isBlue: boolean;
+  scouterDescription?: string;
+  onPress(...args: unknown[]): unknown;
+  showRefresh(...args: unknown[]): unknown;
+  style: object;
+}
 
+export default class TeamCell extends React.Component<TeamCellProps> {
   _isMounted = false;
 
   componentDidMount() {

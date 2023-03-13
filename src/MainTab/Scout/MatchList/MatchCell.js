@@ -1,19 +1,19 @@
 import {ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {PureComponent} from 'react';
 import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import {Circle} from 'react-native-progress';
 import Globals from '../../../GlobalDefinitions';
 import ThemeProvider from '../../ThemeProvider';
-export default class MatchCell extends PureComponent {
-  static propTypes = {
-    number: PropTypes.number.isRequired,
-    time: PropTypes.string.isRequired,
-    scouts: PropTypes.number.isRequired,
-    onPress: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
-  };
 
+interface MatchCellProps {
+  number: number;
+  time: string;
+  scouts: number;
+  onPress(...args: unknown[]): unknown;
+  style: object;
+}
+
+export default class MatchCell extends PureComponent<MatchCellProps> {
   handlePress = () => {
     this.props.onPress(this.props.number);
   };

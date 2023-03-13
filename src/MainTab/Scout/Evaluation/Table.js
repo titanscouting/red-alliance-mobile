@@ -1,17 +1,16 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Text} from 'react-native';
 import Globals from '../../../GlobalDefinitions';
 import Stepper from './Stepper';
 import {Col, Row, Grid} from 'react-native-easy-grid';
 
-export default class OurTable extends React.Component {
-  static propTypes = {
-    idkey: PropTypes.string.isRequired,
-    options: PropTypes.object.isRequired,
-    cellUpdate: PropTypes.func.isRequired,
-  };
+interface OurTableProps {
+  idkey: string;
+  options: object;
+  cellUpdate(...args: unknown[]): unknown;
+}
 
+export default class OurTable extends React.Component<OurTableProps> {
   onStepperChange(row, col, newVal, oldVal) {
     const {row_labels, col_labels} = this.props.options;
     const key =

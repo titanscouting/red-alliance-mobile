@@ -1,17 +1,16 @@
 import {ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {StyleSheet, Text, View, Platform} from 'react-native';
 import {KeyboardAwareFlatList} from 'react-native-keyboard-aware-scroll-view';
 import EvalCell from './EvalCell';
 
-export default class EvalTab extends React.Component {
-  static propTypes = {
-    tabConfig: PropTypes.array.isRequired,
-    onUpdate: PropTypes.func.isRequired,
-    defaultData: PropTypes.object,
-  };
+interface EvalTabProps {
+  tabConfig: unknown[];
+  onUpdate(...args: unknown[]): unknown;
+  defaultData?: object;
+}
 
+export default class EvalTab extends React.Component<EvalTabProps> {
   cellUpdate = (key, value, human) => {
     this.props.onUpdate(key, value, human);
   };

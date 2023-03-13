@@ -13,7 +13,6 @@ import {
   Text,
   Title,
 } from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -29,15 +28,16 @@ import Globals from '../../../GlobalDefinitions';
 import EvalTab from './EvalTab';
 import {io} from 'socket.io-client';
 
-export default class Eval extends React.Component {
-  static propTypes = {
-    configuration: PropTypes.array.isRequired,
-    onSave: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
-    matchNumber: PropTypes.number.isRequired,
-    teamNumber: PropTypes.number.isRequired,
-    isBlue: PropTypes.bool.isRequired,
-  };
+interface EvalProps {
+  configuration: unknown[];
+  onSave(...args: unknown[]): unknown;
+  onBack(...args: unknown[]): unknown;
+  matchNumber: number;
+  teamNumber: number;
+  isBlue: boolean;
+}
+
+export default class Eval extends React.Component<EvalProps> {
   _isMounted = true;
   vals = {};
 

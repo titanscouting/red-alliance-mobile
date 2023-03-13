@@ -1,14 +1,13 @@
 import {Card, CardItem, Content, Text} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 
-export default class SubmittedStrategyCell extends React.Component {
-  static propTypes = {
-    scouter: PropTypes.string.isRequired,
-    strategy: PropTypes.string.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface SubmittedStrategyCellProps {
+  scouter: string;
+  strategy: string;
+  style: object;
+}
 
+export default class SubmittedStrategyCell extends React.Component<SubmittedStrategyCellProps> {
   render() {
     const styles = this.props.style.generic;
     const weightStyles = {

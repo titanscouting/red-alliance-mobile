@@ -1,5 +1,4 @@
 import {Container, Toast} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import ajax from '../../../ajax';
 import {
@@ -11,12 +10,12 @@ import {
 import JSONRenderer from '../../../JSONRenderer';
 import {Platform} from 'react-native';
 
-export default class Analysis extends React.Component {
-  static propTypes = {
-    team: PropTypes.number.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface AnalysisProps {
+  team: number;
+  style: object;
+}
 
+export default class Analysis extends React.Component<AnalysisProps> {
   state = {
     refreshing: false,
     statsData: null,

@@ -1,17 +1,17 @@
 import {ListItem, Text} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {StyleSheet, TouchableWithoutFeedback, View} from 'react-native';
 import ajax from '../../ajax';
 import Globals from '../../GlobalDefinitions';
-export default class StatsTeamCell extends React.Component {
-  static propTypes = {
-    team: PropTypes.number.isRequired,
-    onItemPress: PropTypes.func.isRequired,
-    nickname: PropTypes.string,
-    style: PropTypes.object.isRequired,
-  };
 
+interface StatsTeamCellProps {
+  team: number;
+  onItemPress(...args: unknown[]): unknown;
+  nickname?: string;
+  style: object;
+}
+
+export default class StatsTeamCell extends React.Component<StatsTeamCellProps> {
   state = {
     refreshing: false,
     done: false,

@@ -1,12 +1,12 @@
 import {Container, Content, List, ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Text} from 'react-native';
 
-export default class Analysis extends React.Component {
-  static propTypes = {
-    data: PropTypes.object.isRequired,
-  };
+interface AnalysisProps {
+  data: object;
+}
+
+export default class Analysis extends React.Component<AnalysisProps> {
   state = {
     data: this.props.data,
     path: [],

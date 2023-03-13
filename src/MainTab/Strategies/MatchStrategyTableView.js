@@ -14,7 +14,6 @@ import {
   Subtitle,
   Toast,
 } from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {
   BackHandler,
@@ -31,15 +30,15 @@ import MatchStrategyHeader from './MatchStrategyHeader';
 import SubmittedStrategyCell from './SubmittedStrategyCell';
 import {io} from 'socket.io-client';
 
-export default class MatchStrategyTableView extends Component {
-  static propTypes = {
-    match: PropTypes.number.isRequired,
-    teams: PropTypes.array.isRequired,
-    onBack: PropTypes.func.isRequired,
-    nicknames: PropTypes.object,
-    style: PropTypes.object.isRequired,
-  };
+interface MatchStrategyTableViewProps {
+  match: number;
+  teams: unknown[];
+  onBack(...args: unknown[]): unknown;
+  nicknames?: object;
+  style: object;
+}
 
+export default class MatchStrategyTableView extends Component<MatchStrategyTableViewProps> {
   state = {
     strats: null,
     refreshing: true,

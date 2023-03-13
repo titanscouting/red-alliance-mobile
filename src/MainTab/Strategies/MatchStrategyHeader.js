@@ -1,16 +1,15 @@
 import {ListItem} from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {Text, View} from 'react-native';
 import Globals from '../../GlobalDefinitions';
 
-export default class MatchStrategyHeader extends React.Component {
-  static propTypes = {
-    teams: PropTypes.array.isRequired,
-    nicknames: PropTypes.object,
-    style: PropTypes.object.isRequired,
-  };
+interface MatchStrategyHeaderProps {
+  teams: unknown[];
+  nicknames?: object;
+  style: object;
+}
 
+export default class MatchStrategyHeader extends React.Component<MatchStrategyHeaderProps> {
   _isMounted = false;
 
   componentDidMount() {

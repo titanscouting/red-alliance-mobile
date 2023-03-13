@@ -6,7 +6,6 @@ import {
   Subtitle,
   Title,
 } from 'native-base';
-import PropTypes from 'prop-types';
 import React from 'react';
 import {BackHandler, FlatList, RefreshControl} from 'react-native';
 import getTheme from '../../../../native-base-theme/components';
@@ -15,13 +14,14 @@ import MatchCell from './MatchCell';
 import ajax from '../../../ajax';
 import {io} from 'socket.io-client';
 
-export default class MatchList extends React.Component {
-  static propTypes = {
-    matches: PropTypes.array.isRequired,
-    refreshMatches: PropTypes.func.isRequired,
-    onItemPress: PropTypes.func.isRequired,
-    style: PropTypes.object.isRequired,
-  };
+interface MatchListProps {
+  matches: unknown[];
+  refreshMatches(...args: unknown[]): unknown;
+  onItemPress(...args: unknown[]): unknown;
+  style: object;
+}
+
+export default class MatchList extends React.Component<MatchListProps> {
   state = {
     refreshing: false,
   };
