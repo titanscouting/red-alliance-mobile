@@ -16,7 +16,8 @@
     ],
     "ios": {
       "googleServicesFile": "./GoogleService-Info.plist",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.titanscout.redalliance"
     },
     "android": {
       "googleServicesFile": "./google-services.json",
