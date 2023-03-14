@@ -65,4 +65,15 @@ These releases bundle all JS assets with the app, minify all code, and create an
   * To create an APK instead, run `./gradlew assembleRelease`. The APK will be outputted to `android\app\build\outputs\apk`.
 
 ## iOS
-Building iOS releases is not supported at this time.
+1. [Get a mac computer](https://www.apple.com/shop/buy-mac)
+2. Ensure that you are running [Node 16](https://nodejs.org/download/release/v16.19.1/node-v16.19.1.pkg) due to [this issue](https://stackoverflow.com/a/69699772)
+3. Install Xcode from the app store and say yes to any of the prompts
+4. Navigate to the `ios` folder.
+5. Ensure the "Command line tools" option has a value ([pictures](https://stackoverflow.com/a/62438503))
+6. In a terminal Install Pods by running the command `pod install`
+7. Open `.xcworkspace` in xcode by double-clicking on it ([NOT `.xcproject`](https://stackoverflow.com/a/59696931))
+8. Ensure you are signed into the Titan Robotics developer account (Click on top-level "RedAliance" label in the file viewer. In the ribbon, click on "Signing & Capabilities" -> Team -> Add an account)
+9. Click on the play button to build & run!
+10. [Follow the instructions starting here](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app) to publish to TestFlight
+
+Debugging: Read the logs and most often they tell you a command to try and run
