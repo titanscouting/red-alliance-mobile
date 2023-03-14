@@ -1,0 +1,31 @@
+{
+  "cli": {
+    "version": ">= 3.7.2"
+  },
+  "build": {
+    "development": {
+      "distribution": "internal",
+      "android": {
+        "gradleCommand": ":app:assembleDebug"
+      },
+      "ios": {
+        "buildConfiguration": "Debug",
+        "resourceClass": "intel-medium"
+      }
+    },
+    "preview": {
+      "distribution": "internal",
+      "ios": {
+        "resourceClass": "intel-medium"
+      }
+    },
+    "production": {
+      "ios": {
+        "resourceClass": "intel-medium"
+      }
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

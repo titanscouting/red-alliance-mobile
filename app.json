@@ -1,4 +1,13 @@
 {
   "name": "RedAlliance",
-  "displayName": "RedAlliance"
+  "displayName": "RedAlliance",
+  "expo": {
+    "name": "RedAlliance",
+    "slug": "the-red-alliance",
+    "extra": {
+      "eas": {
+        "projectId": "3a1176ef-0dc9-456c-9e65-a110725ad57a"
+      }
+    }
+  }
 }
