@@ -3,6 +3,7 @@ import {Alert, Linking} from 'react-native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import {Root} from 'native-base';
 import TabControl from './MainTab/TabControl';
+import codePush from 'react-native-code-push';
 
 // Other Web Client ID: 291863698243-t3adrufmitbd3ulgejs8pq255jvvuv9u.apps.googleusercontent.com
 // Web client ID 291863698243-8u79bk1a6odv021fu0km8htvpu6k2uqo.apps.googleusercontent.com
@@ -39,7 +40,7 @@ GoogleSignin.hasPlayServices({showPlayServicesUpdateDialog: true}).catch(e => {
   );
 });
 
-export default class App extends React.Component {
+class App extends React.Component {
   render() {
     return (
       <Root>
@@ -48,3 +49,5 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default codePush(App);
