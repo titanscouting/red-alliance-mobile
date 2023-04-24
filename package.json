@@ -28,7 +28,7 @@
     "appcenter-analytics": "4.3.0",
     "appcenter-crashes": "4.3.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
-    "moment-timezone": "^0.5.34",
+    "moment-timezone": "^0.5.35",
     "native-base": "^2.13.15",
     "prop-types": "^15.7.2",
     "react": "17.0.2",
