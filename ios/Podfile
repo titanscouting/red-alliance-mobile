@@ -5,13 +5,16 @@ platform :ios, '12.0'
 
 target 'RedAlliance' do
   # Pods for RedAlliance
-  use_flipper!("Flipper" => "0.99.0", "Flipper-DoubleConversion" => "1.1.7")
+
+  # use_flipper!('Flipper-Folly' => '2.6.7')
   config = use_native_modules!
   use_react_native!(
     :path => config[:reactNativePath],
     # to enable hermes on iOS, change `false` to `true` and then install pods
     :hermes_enabled => true
   )
+  
+  pod 'Flipper-Folly', '~> 2.5.3'
   pod 'FBLazyVector', :path => "../node_modules/react-native/Libraries/FBLazyVector"
   pod 'RCTRequired', :path => "../node_modules/react-native/Libraries/RCTRequired"
   pod 'RCTTypeSafety', :path => "../node_modules/react-native/Libraries/TypeSafety"
@@ -42,6 +45,8 @@ target 'RedAlliance' do
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'Firebase/InAppMessaging'
+
+
 
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
