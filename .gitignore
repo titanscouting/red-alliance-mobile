@@ -61,3 +61,5 @@ buck-out/
 *.hprof
 
 ios/.xcode.env.local
+ios/.xcode.env
+ios/.xcode.local.env
