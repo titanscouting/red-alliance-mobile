@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-/* eslint-disable no-unused-vars */
+
 const apiHost = 'https://scouting.titanrobotics2022.com/';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -593,7 +593,7 @@ exports.fetchTeamsInCompetition = async () => {
       }
     }
   }
-  return teams.sort(function(a, b) {
+  return teams.sort(function (a, b) {
     return a - b;
   });
 };
@@ -611,7 +611,7 @@ exports.fetchMatchesForTeamInCompetition = async (competition, team) => {
       }
     }
   }
-  return matches.sort(function(a, b) {
+  return matches.sort(function (a, b) {
     return a - b;
   });
 };
@@ -701,7 +701,7 @@ exports.fetchTeamSchedule = async () => {
           ],
         });
       }
-      return data.sort(function(a, b) {
+      return data.sort(function (a, b) {
         return a.match - b.match;
       });
     });
