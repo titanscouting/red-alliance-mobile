@@ -1,79 +1,79 @@
-# The Red Alliance - Mobile App
+This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-<a href="https://play.google.com/store/apps/details?id=com.redalliance" target="_blank"><img alt="Get it on Google Play" src="https://imgur.com/YQzmZi9.png" width="153" height="46"></a>
-<br>
-<a href="https://testflight.apple.com/join/Y1x85eWQ" target="_blank"><img alt="Available on Apple TestFlight" src="https://askyourself.app/assets/testflight.png" width="138" height="50"></a>
+# Getting Started
 
+>**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
 
-# Status Badges
+## Step 1: Start the Metro Server
 
-[![Build - Android](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/build-android.yml/badge.svg)](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/build-android.yml)
+First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
 
-[![Linting](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/lint.yml/badge.svg)](https://github.com/titanscouting/red-alliance-mobile/actions/workflows/lint.yml)
+To start Metro, run the following command from the _root_ of your React Native project:
 
-# Overview
-The Red Alliance mobile application is written in JavaScript with [React Native](https://reactnative.dev/). 
+```bash
+# using npm
+npm start
 
-The app allows scouters for FRC teams to collect data about competiting FRC teams. This app is the primary source of data for TRA API and TRA analysis. It features a JSON-configurable scouting GUI for easy customization with match and pit scouting functionality.  
+# OR using Yarn
+yarn start
+```
 
-# Build/Run for Development
+## Step 2: Start your Application
 
-## Android
-**Requirements**
-- [Visual Studio Code](https://code.visualstudio.com/)
-- [Node.js LTS](https://nodejs.org/) 
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
-- [Android Studio](https://developer.android.com/studio)
-  - You do not need to use Android Studio as the IDE, we just need its build tools and emulator support.
-  - Instructions for installing Android Studio on Windows and macOS can be found [here](https://titanscouting.github.io/mobile/android-studio).
+Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
 
+### For Android
 
-### Setup 
-1. Make sure that the `emulator`, `adb`, `yarn`, and `android-studio` executables are in your PATH folders.
-  - The `emulator` executable does not need to be present if you are testing on a physical device. If you are, ensure that it is plugged in to your computer and that [ADB debugging mode is enabled](https://developer.android.com/studio/command-line/adb#Enabling).
-2. Set the `ANDROID_SDK_HOME` environment variable to point to the SDK root directory. 
-  * For Windows, it is generally `%LOCALAPPDATA%\Android\Sdk`
-3. Set the `JAVA_HOME` environment variable to the Android Studio JRE (generally `C:\Program Files\Android\Android Studio\jre`).
-4. Ensure that all dependencies are installed by running `yarn`.
-### Running the app
-5. In one terminal window, run `yarn start` to start the code server.
-6. In another terminal window, run `yarn run android` to compile the development version of the app and install it on the emulator/physical device.
-  * Note: there have been issues reported with running this command on Powershell, as the Windows Java install may override the Java included in Android Studio. If there are build errors, try using cmd instead.
+```bash
+# using npm
+npm run android
 
-## iOS
-**Requirements**
-- [Xcode](https://developer.apple.com/xcode/)
-- [Node.js LTS](https://nodejs.org/)
-- [Yarn](https://classic.yarnpkg.com/en/docs/install)
-- [CocoaPods](https://cocoapods.org/)
-### Setup
-1. Make sure that the CocoaPods executable `pod` are in your PATH folders.
-2. Ensure that all dependencies are installed by running `yarn`.
-3. Navigate to the `ios` folder and run `pod install`.
-### Running the app
-4. In Xcode, open the Xcode **workspace** file `ios/RedAlliance.xcworkspace`. 
-5. Click the play button in the toolbar.
+# OR using Yarn
+yarn android
+```
 
-# Build Production Releases
-These releases bundle all JS assets with the app, minify all code, and create an Android App Bundle (AAB) file. This file can then be uploaded to the Google Play developer console for release to the public. 
+### For iOS
 
-## Android
-1. Navigate to the `android` folder. 
-2. In a terminal window, execute `./gradlew bundleRelease`.
-  * The output can be found in `android\app\build\outputs\aab`.
-  * This step generates an AAB file that can then be uploaded to the Google Play Store to release to devices.
-  * To create an APK instead, run `./gradlew assembleRelease`. The APK will be outputted to `android\app\build\outputs\apk`.
+```bash
+# using npm
+npm run ios
 
-## iOS
-1. [Get a mac computer](https://www.apple.com/shop/buy-mac)
-2. Ensure that you are running [Node 16](https://nodejs.org/download/release/v16.19.1/node-v16.19.1.pkg) due to [this issue](https://stackoverflow.com/a/69699772)
-3. Install Xcode from the app store and say yes to any of the prompts
-4. Navigate to the `ios` folder.
-5. Ensure the "Command line tools" option has a value ([pictures](https://stackoverflow.com/a/62438503))
-6. In a terminal Install Pods by running the command `pod install`
-7. Open `.xcworkspace` in xcode by double-clicking on it ([NOT `.xcproject`](https://stackoverflow.com/a/59696931))
-8. Ensure you are signed into the Titan Robotics developer account (Click on top-level "RedAliance" label in the file viewer. In the ribbon, click on "Signing & Capabilities" -> Team -> Add an account)
-9. Click on the play button to build & run!
-10. [Follow the instructions starting here](https://developer.apple.com/documentation/xcode/distributing-your-app-for-beta-testing-and-releases#Create-an-archive-of-your-app) to publish to TestFlight
+# OR using Yarn
+yarn ios
+```
 
-Debugging: Read the logs and most often they tell you a command to try and run
+If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+
+This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+
+## Step 3: Modifying your App
+
+Now that you have successfully run the app, let's modify it.
+
+1. Open `App.tsx` in your text editor of choice and edit some lines.
+2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+
+   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+
+## Congratulations! :tada:
+
+You've successfully run and modified your React Native App. :partying_face:
+
+### Now what?
+
+- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
+- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+
+# Troubleshooting
+
+If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+
+# Learn More
+
+To learn more about React Native, take a look at the following resources:
+
+- [React Native Website](https://reactnative.dev) - learn more about React Native.
+- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
+- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
+- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
+- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
