@@ -9,7 +9,7 @@
     "start": "react-native start",
     "test": "jest",
     "clean-android": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/",
-    "clean-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios/assets",
+    "clean-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ios/main.jsbundle --assets-dest ios/assets"
   },
   "dependencies": {
     "@babel/preset-typescript": "^7.16.7",
